@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Menu.MenuStartHotelApp
+﻿namespace HotelBooking.Menu
 {
     public class MenuNavigator
     {

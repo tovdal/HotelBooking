@@ -11,10 +11,4 @@
     <PackageReference Include="Autofac" Version="8.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Menu\MenuRooms\" />
-    <Folder Include="Menu\MenuGuests\" />
-    <Folder Include="Menu\MenuBookings\" />
-  </ItemGroup>
-
 </Project>

@@ -1,19 +1,30 @@
-﻿
+﻿using HotelBooking.Menu.MenuBookings;
+using HotelBooking.Menu.MenuGuests;
+using HotelBooking.Menu.MenuRooms;
+
 namespace HotelBooking.Menu.MenuStartHotelApp
 {
     public class MainHotelMenu
     {
         private readonly MenuDisplay _menuDisplay;
-        private readonly IMenuAction[] _actions;
+        private readonly IMainMenuAction[] _actionsMainMenu;
+        private readonly IRoomsMenuAction[] _actionRoomsMenu;
+        private readonly IGuestsMenuAction[] _actionGuestsMenu;
+        private readonly IBookingsMenuAction[] _actionBookingsMenu;
         private readonly MenuNavigator _menuNavigator;
 
-        public MainHotelMenu(MenuDisplay menuDisplay, IMenuAction[] actions)
+        public MainHotelMenu(MenuDisplay menuDisplay, IMainMenuAction[] actions)
         {
             _menuDisplay = menuDisplay;
             _menuNavigator = new MenuNavigator();  // Reusable menu navigator
-            _actions = new IMenuAction[]
+            _actionsMainMenu = new IMainMenuAction[]
             {
                 // Actions 
+                new BookingsMenu(_menuDisplay, _actionBookingsMenu), //0
+                new GuestsMenu(_menuDisplay, _actionGuestsMenu),// 1
+                new RoomsMenu(_menuDisplay, _actionRoomsMenu) // 2
+                 // Invoices
+
             };
         }
 
@@ -25,7 +36,7 @@ namespace HotelBooking.Menu.MenuStartHotelApp
             {
                 Console.Clear();
                 _menuDisplay.PrintMenuText();
-                List<string> menuItems = new List<string>() { "Bookings", "Guests", "Invoices", "Rooms", "Exit" };
+                List<string> menuItems = new List<string>() { "Bookings", "Guests", "Rooms", "Invoices", "Exit" };
 
                 _menuNavigator.Navigate(menuItems, selectedIndex =>
                 {
@@ -41,7 +52,7 @@ namespace HotelBooking.Menu.MenuStartHotelApp
                     }
 
                     Console.Clear();
-                    _actions[selectedIndex].Execute();
+                    _actionsMainMenu[selectedIndex].ExecuteMainMenuAction();
                 });
             }
         }
