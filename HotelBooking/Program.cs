@@ -1,10 +1,16 @@
-﻿namespace HotelBooking
+﻿using HotelBooking.Config;
+using Autofac;
+
+namespace HotelBooking
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var container = ContainerConfig.BuilderContainer();
+
+            var app = container.Resolve<App>();
+            app.Run();
         }
     }
 }
