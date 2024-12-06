@@ -28,9 +28,14 @@ namespace HotelBooking.Menu.MenuGuests
                 _menuDisplay.PrintMenuText();
                 List<string> menuItems = new List<string>()
                 {
-                    "Create a new guest", "Show all registerd guests",
-                    "Update a guest", "All deleted guests",
-                    "Take back a deleted guest", "Back to main menu"
+                    "Create a new guest", 
+                    "Show all active guests",
+                    "Show all guests that have stayed at the hotel",
+                    "Show all deleted guests",
+                    "Update a guest", 
+                    "Delete a guest",
+                    "Take back a deleted guest", 
+                    "Back to main menu"
                 };
                 // Create ,Read, Update, "Soft" Delete
 

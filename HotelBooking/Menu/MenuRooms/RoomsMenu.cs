@@ -29,9 +29,14 @@ namespace HotelBooking.Menu.MenuRooms
                 _menuDisplay.PrintMenuText();
                 List<string> menuItems = new List<string>() 
                 { 
-                    "Create a new room", "Show all rooms", 
-                    "Update a room", "All deleted rooms",
-                    "Take back a deleted room", "Back to main menu" 
+                    "Create a new room",
+                    "Show all available rooms", 
+                    "Show all take rooms",
+                    "Show deleted rooms",
+                    "Update a room",
+                    "Delete a room",
+                    "Take back a deleted room", 
+                    "Back to main menu" 
                 };
                 // Create ,Read, Update, "Soft" Delete
 
