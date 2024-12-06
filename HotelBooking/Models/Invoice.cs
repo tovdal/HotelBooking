@@ -13,8 +13,8 @@ namespace HotelBooking.Models
         public DateTime InvoiceDate { get; set; }
         public PaymentStatus Status { get; set; } = PaymentStatus.Pending;
 
-        public int CustomerId {  get; set; } // Foreign key
-        public Customer Customer { get; set; }
+        public int GuestId {  get; set; } // Foreign key
+        public Guest Guest { get; set; }
 
         public int BookingId { get; set; }// Foreign key
         public Booking Booking { get; set; }

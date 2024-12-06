@@ -1,18 +1,18 @@
 ﻿namespace HotelBooking.Models
 {
-    public class Customer
+    public class Guest
     {
-        public int CustomerId { get; set; }
+        public int GuestId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; } // Maybe what this??
         public string Adress { get; set; }
 
-        public CustomerStatus Status { get; set; } = CustomerStatus.Active;
+        public GuestStatus Status { get; set; } = GuestStatus.Active;
         public List<Booking> Bookings { get; set; } = new List<Booking>();
     }
-    public enum CustomerStatus
+    public enum GuestStatus
     {
         Active,
         Inactive,

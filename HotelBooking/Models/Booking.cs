@@ -6,9 +6,9 @@
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate {  get; set; }
 
-        // Customer
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        // Guest
+        public int GuestId { get; set; }
+        public Guest Guest { get; set; }
 
         // Room
         public int RoomNumberId { get; set; } // Key to room - F-key
