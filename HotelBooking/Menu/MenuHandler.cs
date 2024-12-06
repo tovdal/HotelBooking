@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelBooking.Menu
+﻿namespace HotelBooking.Menu
 {
     public class MenuHandler
     {
@@ -17,29 +11,21 @@ namespace HotelBooking.Menu
             _menuNavigator = menuNavigator;
         }
 
-        public void ExecuteMenuAction(List<string> menuItems, Action<int> actionOnSelect)
+        public void ShowMenu(List<string> menuItems, Action<int> onSelect)
         {
-            bool exit = false;
-
-            while (!exit)
+            _menuNavigator.Navigate(menuItems, selectedIndex =>
             {
-                Console.Clear();
-                _menuDisplay.PrintMenuText();
-                _menuNavigator.Navigate(menuItems, selectedIndex =>
-                {
-                    if (selectedIndex == menuItems.Count - 1)  // Exit option (last item in menu)
-                    {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.ReadKey();
-                        exit = true;  // Exit flag to break the loop
-                        return;
-                    }
 
+                if (selectedIndex == menuItems.Count - 1)  // Exit option (last item in menu)
+                {
                     Console.Clear();
-                    actionOnSelect(selectedIndex);
-                });
-            }
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    return;
+                }
+
+                Console.Clear();
+                onSelect(selectedIndex);
+            });
         }
     }
 }

@@ -6,8 +6,8 @@ namespace HotelBooking.Menu
     {
         public void PrintMenuText()
         {
-            BorderRender.RenderBorder(16, 28, 35, 15);
-            Console.SetCursorPosition(35, 18);
+            BorderRender.RenderBorder(8, 58, 45, 20);
+            Console.SetCursorPosition(65, 10);
             Console.Write("Make a choice in the menu:");
         }
     }
