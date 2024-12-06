@@ -7,53 +7,53 @@ namespace HotelBooking.Menu.MenuRooms
     {
         private readonly MenuDisplay _menuDisplay;
         private readonly IRoomsMenuAction[] _actionsRoomsMenu;
-        private readonly MenuNavigator _menuNavigator;
+        private readonly MenuHandler _menuHandler;
 
-        public RoomsMenu(MenuDisplay menuDisplay, IRoomsMenuAction[] actions)
+        public RoomsMenu(MenuDisplay menuDisplay)
         {
             _menuDisplay = menuDisplay;
-            _menuNavigator = new MenuNavigator();  // Reusable menu navigator
-            _actionsRoomsMenu = new IRoomsMenuAction[]
-            {
-                // Actions 
-            };
+            _menuHandler = new MenuHandler(_menuDisplay, new MenuNavigator());
+            _actionsRoomsMenu = InitializeRoomActions();
         }
 
         public void ExecuteMainMenuAction()
         {
-            bool exit = false;
-
-            while (!exit)
+            _menuDisplay.PrintMenuText();
+            List<string> menuItems = new List<string>()
             {
-                Console.Clear();
-                _menuDisplay.PrintMenuText();
-                List<string> menuItems = new List<string>() 
-                { 
-                    "Create a new room",
-                    "Show all available rooms", 
-                    "Show all take rooms",
-                    "Show deleted rooms",
-                    "Update a room",
-                    "Delete a room",
-                    "Take back a deleted room", 
-                    "Back to main menu" 
-                };
-                // Create ,Read, Update, "Soft" Delete
+                "Create a new room",
+                "Show all available rooms",
+                "Show all taken rooms",
+                "Show deleted rooms",
+                "Update a room",
+                "Delete a room",
+                "Take back a deleted room",
+                "Back to main menu"
+            };
 
-                _menuNavigator.Navigate(menuItems, selectedIndex =>
+            //MenuHandler
+            _menuHandler
+                .ShowMenu(menuItems, selectedIndex =>
+            {
+                if (selectedIndex < _actionsRoomsMenu.Length)
                 {
-                    if (selectedIndex == 5)  // Exit
-                    {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        exit = true;  // Set exit flag to true to break the loop
-                        return;
-                    }
-
-                    Console.Clear();
                     _actionsRoomsMenu[selectedIndex].ExecuteRoomAction();
-                });
-            }
+                }
+            });
+        }
+
+        private IRoomsMenuAction[] InitializeRoomActions()
+        {
+            return new IRoomsMenuAction[]
+            {
+            //new CreateRoomAction(),
+            //new ShowAvailableRoomsAction(),
+            //new ShowTakenRoomsAction(),
+            //new ShowDeletedRoomsAction(),
+            //new UpdateRoomAction(),
+            //new DeleteRoomAction(),
+            //new TakeBackDeletedRoomAction()
+            };
         }
     }
 }

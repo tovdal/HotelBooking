@@ -3,6 +3,5 @@
     public interface IInvoiceMenuAction
     {
         void ExecuteInvoiceAction();
-
     }
 }

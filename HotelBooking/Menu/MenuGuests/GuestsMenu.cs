@@ -6,53 +6,49 @@ namespace HotelBooking.Menu.MenuGuests
     {
         private readonly MenuDisplay _menuDisplay;
         private readonly IGuestsMenuAction[] _actionsGuestsMenu;
-        private readonly MenuNavigator _menuNavigator;
+        private readonly MenuHandler _menuHandler;
 
-        public GuestsMenu(MenuDisplay menuDisplay, IGuestsMenuAction[] actions)
+        public GuestsMenu(MenuDisplay menuDisplay)
         {
             _menuDisplay = menuDisplay;
-            _menuNavigator = new MenuNavigator();  // Reusable menu navigator
-            _actionsGuestsMenu = new IGuestsMenuAction[]
-            {
-                // Actions 
-            };
+            _menuHandler = new MenuHandler(_menuDisplay, new MenuNavigator());
+            _actionsGuestsMenu = InitializeGuestActions();
         }
-
         public void ExecuteMainMenuAction()
         {
-            bool exit = false;
-
-            while (!exit)
+            List<string> menuItems = new List<string>()
             {
-                Console.Clear();
-                _menuDisplay.PrintMenuText();
-                List<string> menuItems = new List<string>()
-                {
-                    "Create a new guest", 
-                    "Show all active guests",
-                    "Show all guests that have stayed at the hotel",
-                    "Show all deleted guests",
-                    "Update a guest", 
-                    "Delete a guest",
-                    "Take back a deleted guest", 
-                    "Back to main menu"
-                };
-                // Create ,Read, Update, "Soft" Delete
+                "Create a new guest",
+                "Show all active guests",
+                "Show all guests that have stayed at the hotel",
+                "Show all deleted guests",
+                "Update a guest",
+                "Delete a guest",
+                "Take back a deleted guest",
+                "Back to main menu"
+            };
 
-                _menuNavigator.Navigate(menuItems, selectedIndex =>
+            // Use the MenuHandler to handle navigation
+            _menuHandler.ShowMenu(menuItems, selectedIndex =>
+            {
+                if (selectedIndex < _actionsGuestsMenu.Length)
                 {
-                    if (selectedIndex == 5)  // Exit
-                    {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        exit = true;  // Set exit flag to true to break the loop
-                        return;
-                    }
-
-                    Console.Clear();
                     _actionsGuestsMenu[selectedIndex].ExecuteGuestAction();
-                });
-            }
+                }
+            });
+        }
+        private IGuestsMenuAction[] InitializeGuestActions()
+        {
+            return new IGuestsMenuAction[]
+            {
+            //new CreateGuestAction(),
+            //new ShowActiveGuestsAction(),
+            //new ShowAllGuestsAction(),
+            //new ShowDeletedGuestsAction(),
+            //new UpdateGuestAction(),
+            //new DeleteGuestAction(),
+            //new RestoreDeletedGuestAction()
+            };
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Menu.MenuBookings;
 using HotelBooking.Menu.MenuGuests;
+using HotelBooking.Menu.MenuInvoice;
 using HotelBooking.Menu.MenuRooms;
 
 namespace HotelBooking.Menu.MenuStartHotelApp
@@ -8,26 +9,15 @@ namespace HotelBooking.Menu.MenuStartHotelApp
     {
         private readonly MenuDisplay _menuDisplay;
         private readonly IMainMenuAction[] _actionsMainMenu;
-        private readonly IRoomsMenuAction[] _actionRoomsMenu;
-        private readonly IGuestsMenuAction[] _actionGuestsMenu;
-        private readonly IBookingsMenuAction[] _actionBookingsMenu;
+        private readonly MenuHandler _mainMenuHandler;
         private readonly MenuNavigator _menuNavigator;
 
-        public MainHotelMenu(MenuDisplay menuDisplay, IMainMenuAction[] actions)
+        public MainHotelMenu(MenuDisplay menuDisplay)
         {
             _menuDisplay = menuDisplay;
-            _menuNavigator = new MenuNavigator();  // Reusable menu navigator
-            _actionsMainMenu = new IMainMenuAction[]
-            {
-                // Actions 
-                new BookingsMenu(_menuDisplay, _actionBookingsMenu), //0
-                new GuestsMenu(_menuDisplay, _actionGuestsMenu),// 1
-                new RoomsMenu(_menuDisplay, _actionRoomsMenu) // 2
-                 // Invoices
-
-            };
+            _menuNavigator = new MenuNavigator();
+            _actionsMainMenu = InitializeMainMenuActions(menuDisplay);
         }
-
         public void ShowMenu()
         {
             bool exit = false;
@@ -36,25 +26,43 @@ namespace HotelBooking.Menu.MenuStartHotelApp
             {
                 Console.Clear();
                 _menuDisplay.PrintMenuText();
-                List<string> menuItems = new List<string>() { "Bookings", "Guests", "Rooms", "Invoices", "Exit" };
 
+                List<string> menuItems = new List<string>()
+                {
+                    "Bookings",
+                    "Guests",
+                    "Rooms",
+                    "Invoices",
+                    "Exit program"
+                };
                 _menuNavigator.Navigate(menuItems, selectedIndex =>
                 {
-                    if (selectedIndex == 4)  // Exit
+                    if (selectedIndex == 4)
                     {
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Closing down system...");
                         Console.WriteLine("Press any key to continue...");
                         Console.ReadKey();
-                        exit = true;  // Set exit flag to true to break the loop
+                        exit = true;
                         return;
                     }
-
-                    Console.Clear();
-                    _actionsMainMenu[selectedIndex].ExecuteMainMenuAction();
+                    else
+                    {
+                        _actionsMainMenu[selectedIndex].ExecuteMainMenuAction();
+                    }
                 });
             }
+        }
+        private IMainMenuAction[] InitializeMainMenuActions(MenuDisplay menuDisplay)
+        {
+            return new IMainMenuAction[]
+            {
+                new BookingsMenu(menuDisplay), //0
+                new GuestsMenu(menuDisplay),// 1
+                new RoomsMenu(menuDisplay), // 2
+                new InvoiceMenu(menuDisplay)//3
+            };
         }
     }
 }

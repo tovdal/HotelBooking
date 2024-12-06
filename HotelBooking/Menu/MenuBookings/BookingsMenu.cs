@@ -6,48 +6,43 @@ namespace HotelBooking.Menu.MenuBookings
     {
         private readonly MenuDisplay _menuDisplay;
         private readonly IBookingsMenuAction[] _actionsBookingsMenu;
-        private readonly MenuNavigator _menuNavigator;
+        private readonly MenuHandler _menuHandler;
 
-        public BookingsMenu(MenuDisplay menuDisplay, IBookingsMenuAction[] actions)
+        public BookingsMenu(MenuDisplay menuDisplay)
         {
             _menuDisplay = menuDisplay;
-            _menuNavigator = new MenuNavigator();  // Reusable menu navigator
-            _actionsBookingsMenu = new IBookingsMenuAction[]
-            {
-                // Actions 
-            };
+            _menuHandler = new MenuHandler(_menuDisplay, new MenuNavigator());
+            _actionsBookingsMenu = InitializeBookingAction();
+
         }
 
         public void ExecuteMainMenuAction()
         {
-            bool exit = false;
-
-            while (!exit)
+            _menuDisplay.PrintMenuText();
+            List<string> menuItems = new List<string>()
             {
-                Console.Clear();
-                _menuDisplay.PrintMenuText();
-                List<string> menuItems = new List<string>()
-                {
-                    "Create a new Booking", "Show all registerd Bookings",
-                    "Update a booking", "All deleted bookings",
-                    "Take back a deleted booking", "Back to main menu"
-                };
-                // Create ,Read, Update, "Soft" Delete
+                "Create a new Booking",
+                "Show all registerd Bookings",
+                "Update a booking",
+                "All deleted bookings",
+                "Take back a deleted booking",
+                "Back to main menu"
+            };
 
-                _menuNavigator.Navigate(menuItems, selectedIndex =>
+            _menuHandler.ShowMenu(menuItems, selectedIndex =>
+            {
+                if (selectedIndex < _actionsBookingsMenu.Length)
                 {
-                    if (selectedIndex == 5)  // Exit
-                    {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        exit = true;  // Set exit flag to true to break the loop
-                        return;
-                    }
-
-                    Console.Clear();
                     _actionsBookingsMenu[selectedIndex].ExecuteBookingAction();
-                });
-            }
+                }
+            });
+        }
+        private IBookingsMenuAction[] InitializeBookingAction()
+        {
+            return new IBookingsMenuAction[]
+            {
+                //
+            };
         }
     }
 }
