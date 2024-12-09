@@ -1,5 +1,7 @@
 ﻿
 using HotelBooking.Menu.MenuStartHotelApp;
+using HotelBooking.Service;
+using HotelBooking.Service.MenuService;
 
 namespace HotelBooking.Menu.MenuRooms
 {

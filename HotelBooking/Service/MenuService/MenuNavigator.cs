@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Menu
+﻿namespace HotelBooking.Service.MenuService
 {
     public class MenuNavigator
     {

@@ -2,6 +2,7 @@
 using HotelBooking.Menu.MenuGuests;
 using HotelBooking.Menu.MenuInvoice;
 using HotelBooking.Menu.MenuRooms;
+using HotelBooking.Service.MenuService;
 
 namespace HotelBooking.Menu.MenuStartHotelApp
 {

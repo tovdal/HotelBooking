@@ -1,4 +1,6 @@
-﻿namespace HotelBooking.Menu
+﻿using HotelBooking.Menu;
+
+namespace HotelBooking.Service.MenuService
 {
     public class MenuHandler
     {
