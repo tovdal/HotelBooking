@@ -15,7 +15,8 @@ namespace HotelBooking.Config
 
             builder.RegisterType<App>();
 
-            builder.RegisterType<DataInitializer>().AsSelf().SingleInstance(); // SingelTon
+            builder.RegisterType<DataInitializer>().AsSelf().SingleInstance();
+            // SingelTon
 
             builder.RegisterType<MainHotelMenu>().AsSelf();
 
