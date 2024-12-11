@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Menu.MenuInvoice
+﻿namespace HotelBooking.Menu.Actions
 {
     public interface IInvoiceMenuAction
     {

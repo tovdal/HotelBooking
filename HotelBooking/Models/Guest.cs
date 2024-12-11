@@ -6,7 +6,7 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Phone { get; set; } // Maybe what this??
+        public string Phone { get; set; } // Maybe want this??
         public string Adress { get; set; }
 
         public GuestStatus Status { get; set; } = GuestStatus.Active;
@@ -15,7 +15,6 @@
     public enum GuestStatus
     {
         Active,
-        Inactive,
-        Deleted
+        Inactive
     }
 }

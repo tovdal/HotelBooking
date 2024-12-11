@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Menu.MenuGuests
+﻿namespace HotelBooking.Menu.Actions
 {
     public interface IGuestsMenuAction
     {

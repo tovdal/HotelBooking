@@ -1,9 +1,9 @@
 ﻿using Autofac;
+using HotelBooking.Data;
+using HotelBooking.Display.Menu;
 using HotelBooking.Menu;
-using HotelBooking.Menu.MenuBookings;
-using HotelBooking.Menu.MenuGuests;
-using HotelBooking.Menu.MenuRooms;
-using HotelBooking.Menu.MenuStartHotelApp;
+using HotelBooking.Menu.Actions;
+using HotelBooking.Menu.Startup;
 
 namespace HotelBooking.Config
 {
@@ -14,6 +14,8 @@ namespace HotelBooking.Config
             var builder = new ContainerBuilder();
 
             builder.RegisterType<App>();
+
+            builder.RegisterType<DataInitializer>().AsSelf().SingleInstance(); // SingelTon
 
             builder.RegisterType<MainHotelMenu>().AsSelf();
 

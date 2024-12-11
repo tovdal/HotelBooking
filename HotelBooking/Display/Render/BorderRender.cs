@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Render
+﻿namespace HotelBooking.Display.Render
 {
     public class BorderRender
     {

@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Menu.MenuStartHotelApp
+﻿namespace HotelBooking.Menu.Actions
 {
     public interface IMainMenuAction
     {

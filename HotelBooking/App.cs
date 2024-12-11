@@ -1,6 +1,4 @@
-﻿
-
-using HotelBooking.Menu.MenuStartHotelApp;
+﻿using HotelBooking.Menu.Startup;
 
 namespace HotelBooking
 {

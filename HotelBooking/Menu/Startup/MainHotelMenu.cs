@@ -1,10 +1,8 @@
-﻿using HotelBooking.Menu.MenuBookings;
-using HotelBooking.Menu.MenuGuests;
-using HotelBooking.Menu.MenuInvoice;
-using HotelBooking.Menu.MenuRooms;
+﻿using HotelBooking.Display.Menu;
+using HotelBooking.Menu.Actions;
 using HotelBooking.Service.MenuService;
 
-namespace HotelBooking.Menu.MenuStartHotelApp
+namespace HotelBooking.Menu.Startup
 {
     public class MainHotelMenu
     {

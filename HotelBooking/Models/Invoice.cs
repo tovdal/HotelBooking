@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelBooking.Models
+﻿namespace HotelBooking.Models
 {
     public class Invoice
     {
@@ -13,7 +7,7 @@ namespace HotelBooking.Models
         public DateTime InvoiceDate { get; set; }
         public PaymentStatus Status { get; set; } = PaymentStatus.Pending;
 
-        public int GuestId {  get; set; } // Foreign key
+        public int GuestId { get; set; } // Foreign key
         public Guest Guest { get; set; }
 
         public int BookingId { get; set; }// Foreign key

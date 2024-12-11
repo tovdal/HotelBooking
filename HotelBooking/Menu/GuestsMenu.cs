@@ -1,8 +1,9 @@
-﻿using HotelBooking.Menu.MenuStartHotelApp;
+﻿using HotelBooking.Display.Menu;
+using HotelBooking.Menu.Actions;
 using HotelBooking.Service;
 using HotelBooking.Service.MenuService;
 
-namespace HotelBooking.Menu.MenuGuests
+namespace HotelBooking.Menu
 {
     public class GuestsMenu : IMainMenuAction
     {
