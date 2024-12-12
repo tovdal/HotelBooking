@@ -1,4 +1,6 @@
-﻿namespace HotelBooking.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HotelBooking.Models
 {
     public class Booking
     {
@@ -11,13 +13,10 @@
         public Guest Guest { get; set; } = null!;
 
         // Room
-        public int RoomNumberId { get; set; } // Key to room - F-key
+        public int RoomId { get; set; }
         public Room Room { get; set; } = null!;
 
-        // Invoice
-        public int InvoiceId { get; set; }
-        public Invoice Invoice { get; set; } = null!;
-
+        public BookingDetails BookingDetails { get; set; } = null!;
 
     }
 }

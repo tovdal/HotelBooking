@@ -8,7 +8,7 @@ namespace HotelBooking.Data
         public HotelBookingDbContext MigrateAndSeedData()
         {
             _dbContext = new HotelBookingDbContext();
-            _dbContext.Rooms = new List<Room>();
+            //_dbContext.Rooms = new List<Room>();
             RoomSeeder();
             GuestSeeder();
 
