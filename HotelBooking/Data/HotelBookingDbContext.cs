@@ -2,7 +2,7 @@
 
 namespace HotelBooking.Data
 {
-    public class ApplicationDbContext_FAKE
+    public class HotelBookingDbContext
     {
         public List<Guest> Guests { get; set; }
         public List<Room> Rooms { get; set; }

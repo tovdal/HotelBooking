@@ -3,11 +3,11 @@ namespace HotelBooking.Data
 {
     public class DataInitializer
     {
-        private ApplicationDbContext_FAKE _dbContext;
+        private HotelBookingDbContext _dbContext;
 
-        public ApplicationDbContext_FAKE MigrateAndSeedData()
+        public HotelBookingDbContext MigrateAndSeedData()
         {
-            _dbContext = new ApplicationDbContext_FAKE();
+            _dbContext = new HotelBookingDbContext();
             _dbContext.Rooms = new List<Room>();
             RoomSeeder();
             GuestSeeder();
@@ -15,7 +15,7 @@ namespace HotelBooking.Data
             return _dbContext;
         }
 
-        private ApplicationDbContext_FAKE RoomSeeder()
+        private HotelBookingDbContext RoomSeeder()
         {
             var room1 = new Room
             {
@@ -78,10 +78,11 @@ namespace HotelBooking.Data
                 IsExtraBedAvailable = true
             };
             _dbContext.Rooms.Add(room5);
+            _dbContext.SaveChanges();
             return _dbContext;
         }
 
-        private ApplicationDbContext_FAKE GuestSeeder()
+        private HotelBookingDbContext GuestSeeder()
         {
             return _dbContext;
         }

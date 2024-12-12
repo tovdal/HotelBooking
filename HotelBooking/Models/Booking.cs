@@ -8,15 +8,15 @@
 
         // Guest
         public int GuestId { get; set; }
-        public Guest Guest { get; set; }
+        public Guest Guest { get; set; } = null!;
 
         // Room
         public int RoomNumberId { get; set; } // Key to room - F-key
-        public Room Room { get; set; }
+        public Room Room { get; set; } = null!;
 
         // Invoice
         public int InvoiceId { get; set; }
-        public Invoice Invoice { get; set; }
+        public Invoice Invoice { get; set; } = null!;
 
 
     }
