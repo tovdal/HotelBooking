@@ -2,7 +2,8 @@
 {
     public class Room
     {
-        public int RoomNumberId { get; set; }
+        public int RoomId { get; set; }
+        public int RoomNumber { get; set; }
         public byte RoomSize { get; set; }
         public TypeOfRoom TypeOfRooms { get; set; }
         public decimal PricePerNight { get; set; }

@@ -19,7 +19,8 @@ namespace HotelBooking.Data
         {
             var room1 = new Room
             {
-                RoomNumberId = 1,
+                RoomId = 1,
+                RoomNumber = 101,
                 RoomSize = 30,
                 TypeOfRooms = TypeOfRoom.Double,
                 PricePerNight = 850,
@@ -31,7 +32,8 @@ namespace HotelBooking.Data
 
             var room2 = new Room
             {
-                RoomNumberId = 2,
+                RoomId = 2,
+                RoomNumber = 102,
                 RoomSize = 20,
                 TypeOfRooms = TypeOfRoom.Singel,
                 PricePerNight = 600,
@@ -43,7 +45,8 @@ namespace HotelBooking.Data
 
             var room3 = new Room
             {
-                RoomNumberId = 3,
+                RoomId = 3,
+                RoomNumber = 201,
                 RoomSize = 25,
                 TypeOfRooms = TypeOfRoom.Singel,
                 PricePerNight = 700,
@@ -54,7 +57,8 @@ namespace HotelBooking.Data
 
             var room4 = new Room
             {
-                RoomNumberId = 4,
+                RoomId = 4,
+                RoomNumber = 202,
                 RoomSize = 22,
                 TypeOfRooms = TypeOfRoom.Double,
                 PricePerNight = 950,
@@ -65,7 +69,8 @@ namespace HotelBooking.Data
 
             var room5 = new Room
             {
-                RoomNumberId = 5,
+                RoomId = 5,
+                RoomNumber = 301,
                 RoomSize = 35,
                 TypeOfRooms = TypeOfRoom.Double,
                 PricePerNight = 1200,

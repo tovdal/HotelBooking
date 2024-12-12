@@ -12,8 +12,11 @@
 
         // Room
         public int RoomNumberId { get; set; } // Key to room - F-key
-        public Room Room { get; set; } 
-        //
+        public Room Room { get; set; }
+
+        // Invoice
+        public int InvoiceId { get; set; }
+        public Invoice Invoice { get; set; }
 
 
     }
