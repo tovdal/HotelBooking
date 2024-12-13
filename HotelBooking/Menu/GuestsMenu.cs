@@ -23,8 +23,10 @@ namespace HotelBooking.Menu
             {
                 "Create a new guest",
                 "Show all active guests",
-                "Show all guests that have stayed at the hotel",
+                "Show all inactive guests",
                 "Show all deleted guests",
+                "Show all guest detailes",
+                "Show a guest detailes",
                 "Update a guest",
                 "Delete a guest",
                 "Take back a deleted guest",

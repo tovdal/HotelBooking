@@ -9,6 +9,6 @@ namespace HotelBooking.DTOs
         public string Email { get; set; } = null!;
         public decimal CostAmount { get; set; }
         public DateTime InvoiceDate { get; set; }
-        public PaymentStatus Status { get; set; } = PaymentStatus.Pending;
+        public bool IsPaid { get; set; }
     }
 }
