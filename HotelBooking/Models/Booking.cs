@@ -12,7 +12,7 @@
         public List<Room> Rooms { get; set; } = new List<Room>();
 
         // Men bra en faktura för allt.
-        public Invoice Invoice { get; set; }
+        public Invoice Invoice { get; set; } = null!;
     }
     public enum StatusOnBooking
     {

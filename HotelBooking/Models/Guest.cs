@@ -8,7 +8,8 @@
         public string Email { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string? Adress { get; set; }
-        public bool IsGuestStatusActive { get; set; } 
+        public bool IsGuestStatusActive { get; set; }
+        public bool IsGuestDeleted { get; set; } = false;
 
         // En kund behöver inte ha en bokning för att vara gäst.
         public List<Booking>? Bookings { get; set; } = new List<Booking>();
