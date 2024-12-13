@@ -1,9 +1,16 @@
-﻿using HotelBooking.Models;
-namespace HotelBooking.CRUD
+﻿using HotelBooking.Service.RoomService;
+
+namespace HotelBooking.Controllers
 {
-    public class CRUDRoom
+    public class RoomController
     {
-        //public void CreateNewRoom(Room newRoom)
+        private readonly RoomRead _roomRead;
+
+        public RoomController(RoomRead roomRead)
+        {
+            _roomRead = roomRead;
+        }
+        //public void CreateNewRoom()
         //{
         //    Guest.Add(newRoom);
         //    // Richard said that this was important or it wont save to database
@@ -11,10 +18,15 @@ namespace HotelBooking.CRUD
         //}
 
         ////Read
-        //public List<Room> GetAvailableRoomsInDatabase()
-        //{
-        //    return
-        //}
+        public void ShowAllRooms()
+        {
+            var rooms = _roomRead.GetAllRoomsInDatabase();
+            foreach (var room in rooms)
+            {
+                Console.WriteLine(room);
+            }
+        }
+
         //public List<Room> GetTakenRoomsInDatabase()
         //{
         //    return
@@ -26,7 +38,7 @@ namespace HotelBooking.CRUD
         //}
 
 
-        // Update
+        //Update
         public void UpdateRoomStatus()
         {
 
