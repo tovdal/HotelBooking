@@ -23,6 +23,7 @@ namespace HotelBooking.Config
             builder.RegisterType<RoomsMenu>().As<IMainMenuAction>();
             builder.RegisterType<GuestsMenu>().As<IMainMenuAction>();
             builder.RegisterType<BookingsMenu>().As<IMainMenuAction>();
+            builder.RegisterType<InvoiceMenu>().As<IMainMenuAction>();
 
 
             builder.RegisterType<MenuDisplay>().AsSelf();

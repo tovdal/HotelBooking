@@ -1,6 +1,5 @@
 ﻿using HotelBooking.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols;
 
 namespace HotelBooking.Data
 {
