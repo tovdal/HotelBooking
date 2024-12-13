@@ -6,15 +6,11 @@
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string Email { get; set; } = null!;
-        public string Phone { get; set; } = null!;// Maybe want this??
+        public string PhoneNumber { get; set; } = null!;
         public string? Adress { get; set; }
+        public bool IsGuestStatusActive { get; set; } 
 
-        public GuestStatus Status { get; set; } = GuestStatus.Active;
-        public List<Booking> Bookings { get; set; } = new List<Booking>();
-    }
-    public enum GuestStatus
-    {
-        Active,
-        Inactive
+        // En kund behöver inte ha en bokning för att vara gäst.
+        public List<Booking>? Bookings { get; set; } = new List<Booking>();
     }
 }

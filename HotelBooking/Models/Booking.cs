@@ -1,22 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace HotelBooking.Models
+﻿namespace HotelBooking.Models
 {
     public class Booking
     {
         public int BookingId { get; set; }
-        public DateTime CheckInDate { get; set; }
-        public DateTime CheckOutDate {  get; set; }
-
-        // Guest
         public int GuestId { get; set; }
-        public Guest Guest { get; set; } = null!;
+        public DateTime CheckInDate { get; set; }
+        public decimal TotalCostOfTheBooking { get; set; }
+        public StatusOnBooking Status { get; set; }
 
-        // Room
-        public int RoomId { get; set; }
-        public Room Room { get; set; } = null!;
+        // Man behöver en eller flera rum för en bokning.
+        public List<Room> Rooms { get; set; } = new List<Room>();
 
-        public BookingDetails BookingDetails { get; set; } = null!;
-
+        // Men bra en faktura för allt.
+        public Invoice Invoice { get; set; }
+    }
+    public enum StatusOnBooking
+    {
+        Active,
+        Inactive
     }
 }
