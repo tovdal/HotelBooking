@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Service.Invoice
+namespace HotelBooking.Service.InvoiceService
 {
     internal class InvoiceDelete
     {

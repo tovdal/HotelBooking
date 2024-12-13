@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Service.Room
+namespace HotelBooking.Service.RoomService
 {
     internal class RoomDelete
     {

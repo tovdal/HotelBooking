@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HotelBooking.Data;
+using HotelBooking.Models;
 
-namespace HotelBooking.Service.Room
+namespace HotelBooking.Service.RoomService
 {
-    internal class RoomRead
+    public class RoomRead
     {
+        private readonly HotelBookingDbContext _dbContext;
+
+        public RoomRead(HotelBookingDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        //Read
+        public List<Room> GetAllRoomsInDatabase()
+        {
+            return _dbContext.Rooms.ToList();
+        }
     }
 }

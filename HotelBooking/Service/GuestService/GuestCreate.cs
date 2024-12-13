@@ -1,15 +1,21 @@
-﻿using HotelBooking.Models;
+﻿using HotelBooking.Data;
+using HotelBooking.Models;
 
-namespace HotelBooking.Service.Guest
+namespace HotelBooking.Service.GuestService
 {
     public class GuestCreate
     {
+        private readonly HotelBookingDbContext _dbContext;
+
+        public GuestCreate(HotelBookingDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         // Create
-        //public void CreateNewGuest(Guest newGuest)
-        //{
-        //    Guest.Add(newGuest);
-        //    Richard said that this was important or it wont save to database
-        //    dbContext.SaveChanges(); // the dbContext not created yet
-        //}
+        public void AddGuest(Guest newGuest)
+        {
+            _dbContext.Add(newGuest);
+            //dbContext.SaveChanges(); // the dbContext not created yet
+        }
     }
 }
