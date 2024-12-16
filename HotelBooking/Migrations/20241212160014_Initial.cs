@@ -12,7 +12,7 @@ namespace HotelBooking.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Guests",
+                name: "Customers",
                 columns: table => new
                 {
                     GuestId = table.Column<int>(type: "int", nullable: false)
@@ -79,8 +79,8 @@ namespace HotelBooking.Migrations
                     table.ForeignKey(
                         name: "FK_Booking_Guests_GuestId",
                         column: x => x.GuestId,
-                        principalTable: "Guests",
-                        principalColumn: "GuestId",
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Booking_Rooms_RoomId",
@@ -119,7 +119,7 @@ namespace HotelBooking.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Booking_GuestId",
                 table: "Booking",
-                column: "GuestId");
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Booking_RoomId",
@@ -152,7 +152,7 @@ namespace HotelBooking.Migrations
                 name: "Invoices");
 
             migrationBuilder.DropTable(
-                name: "Guests");
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Rooms");

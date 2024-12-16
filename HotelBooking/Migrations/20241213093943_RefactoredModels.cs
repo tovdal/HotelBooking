@@ -28,7 +28,7 @@ namespace HotelBooking.Migrations
 
             migrationBuilder.DropColumn(
                 name: "Status",
-                table: "Guests");
+                table: "Customers");
 
             migrationBuilder.DropColumn(
                 name: "CheckOutDate",
@@ -36,7 +36,7 @@ namespace HotelBooking.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "Phone",
-                table: "Guests",
+                table: "Customers",
                 newName: "PhoneNumber");
 
             migrationBuilder.RenameColumn(
@@ -65,8 +65,8 @@ namespace HotelBooking.Migrations
                 defaultValue: false);
 
             migrationBuilder.AddColumn<bool>(
-                name: "IsGuestStatusActive",
-                table: "Guests",
+                name: "IsCustomerStatusActive",
+                table: "Customers",
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
@@ -143,8 +143,8 @@ namespace HotelBooking.Migrations
                 table: "Invoices");
 
             migrationBuilder.DropColumn(
-                name: "IsGuestStatusActive",
-                table: "Guests");
+                name: "IsCustomerStatusActive",
+                table: "Customers");
 
             migrationBuilder.DropColumn(
                 name: "InvoiceId",
@@ -156,7 +156,7 @@ namespace HotelBooking.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "PhoneNumber",
-                table: "Guests",
+                table: "Customers",
                 newName: "Phone");
 
             migrationBuilder.RenameColumn(
@@ -173,7 +173,7 @@ namespace HotelBooking.Migrations
 
             migrationBuilder.AddColumn<int>(
                 name: "Status",
-                table: "Guests",
+                table: "Customers",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);

@@ -6,7 +6,7 @@ namespace HotelBooking.Data
     {
         private HotelBookingDbContext _dbContext;
         private readonly RoomSeeder _roomSeeder;
-        private readonly GuestSeeder _guestSeeder;
+        private readonly CustomerSeeder _customerSeeder;
 
         public HotelBookingDbContext MigrateAndSeedData()
         {
@@ -17,9 +17,9 @@ namespace HotelBooking.Data
                 _roomSeeder.RoomSeeding();
             }
 
-            if(!_dbContext.Guests.Any())
+            if(!_dbContext.Customers.Any())
             {
-                _guestSeeder.GuestSeeding();
+                _customerSeeder.CustomerSeeding();
             }
 
             return _dbContext;

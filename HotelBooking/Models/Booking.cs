@@ -3,7 +3,7 @@
     public class Booking
     {
         public int BookingId { get; set; }
-        public int GuestId { get; set; }
+        public int CustomerId { get; set; }
         public DateTime CheckInDate { get; set; }
         public decimal TotalCostOfTheBooking { get; set; }
         public StatusOnBooking Status { get; set; }

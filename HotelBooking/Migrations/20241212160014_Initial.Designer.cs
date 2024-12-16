@@ -39,7 +39,7 @@ namespace HotelBooking.Migrations
                     b.Property<DateTime>("CheckOutDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("GuestId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<int>("RoomId")
@@ -47,7 +47,7 @@ namespace HotelBooking.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.HasIndex("GuestId");
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("RoomId");
 
@@ -79,13 +79,13 @@ namespace HotelBooking.Migrations
                     b.ToTable("BookingDetails");
                 });
 
-            modelBuilder.Entity("HotelBooking.Models.Guest", b =>
+            modelBuilder.Entity("HotelBooking.Models.Customer", b =>
                 {
-                    b.Property<int>("GuestId")
+                    b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GuestId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
@@ -109,9 +109,9 @@ namespace HotelBooking.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("GuestId");
+                    b.HasKey("CustomerId");
 
-                    b.ToTable("Guests");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("HotelBooking.Models.Invoice", b =>
@@ -169,9 +169,9 @@ namespace HotelBooking.Migrations
 
             modelBuilder.Entity("HotelBooking.Models.Booking", b =>
                 {
-                    b.HasOne("HotelBooking.Models.Guest", "Guest")
+                    b.HasOne("HotelBooking.Models.Customer", "Customer")
                         .WithMany("Bookings")
-                        .HasForeignKey("GuestId")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -181,7 +181,7 @@ namespace HotelBooking.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Guest");
+                    b.Navigation("Customer");
 
                     b.Navigation("Room");
                 });
@@ -211,7 +211,7 @@ namespace HotelBooking.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HotelBooking.Models.Guest", b =>
+            modelBuilder.Entity("HotelBooking.Models.Customer", b =>
                 {
                     b.Navigation("Bookings");
                 });

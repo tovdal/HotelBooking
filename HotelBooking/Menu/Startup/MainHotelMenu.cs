@@ -29,7 +29,7 @@ namespace HotelBooking.Menu.Startup
                 List<string> menuItems = new List<string>()
                 {
                     "Bookings",
-                    "Guests",
+                    "Customers",
                     "Rooms",
                     "Invoices",
                     "Exit program"
@@ -58,7 +58,7 @@ namespace HotelBooking.Menu.Startup
             return new IMainMenuAction[]
             {
                 new BookingsMenu(menuDisplay), //0
-                new GuestsMenu(menuDisplay),// 1
+                new CustomersMenu(menuDisplay),// 1
                 new RoomsMenu(menuDisplay), // 2
                 new InvoiceMenu(menuDisplay)//3
             };

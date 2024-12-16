@@ -2,7 +2,10 @@
 
 namespace HotelBooking.DTOs
 {
-    public class GuestInvoiceInformationDTO
+    public class 
+        
+        
+        InvoiceInformationDTO
     {
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;

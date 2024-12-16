@@ -11,8 +11,8 @@ namespace HotelBooking.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "IsGuestDeleted",
-                table: "Guests",
+                name: "IsCustomerDeleted",
+                table: "Customers",
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
@@ -22,8 +22,8 @@ namespace HotelBooking.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsGuestDeleted",
-                table: "Guests");
+                name: "IsCustomerDeleted",
+                table: "Customers");
         }
     }
 }

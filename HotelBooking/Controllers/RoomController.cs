@@ -12,7 +12,7 @@ namespace HotelBooking.Controllers
         }
         //public void CreateNewRoom()
         //{
-        //    Guest.Add(newRoom);
+        //    Customer.Add(newRoom);
         //    // Richard said that this was important or it wont save to database
         //    dbContext.SaveChanges(); // the dbContext not created yet
         //}
