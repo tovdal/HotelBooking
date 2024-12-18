@@ -4,13 +4,7 @@ namespace HotelBooking.Data.Seeders
 {
     public class CustomerSeeder
     {
-        private readonly ApplicationDbContext _dbContext;
-
-        public CustomerSeeder(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-        public void CustomerSeeding()
+        public void CustomerSeeding(ApplicationDbContext dbContext)
         {
             
             var customer = new List<Customer>
@@ -18,30 +12,30 @@ namespace HotelBooking.Data.Seeders
                 new Customer
                 {
                     FirstName = "Chris",
-                    LastName = "Doe",
-                    Email = "Chris.doe@live.com",
-                    PhoneNumber = "123-456-7890",
-                    Adress = "123 Main St, Sundsvall",
+                    LastName = "Bäck",
+                    Email = "Chris.Bäck@live.com",
+                    PhoneNumber = "073-456-7890",
+                    Adress = "123 Storgatan, Sundsvall",
                     IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 },
                 new Customer
                 {
                     FirstName = "Jennifer",
-                    LastName = "Smith",
-                    Email = "jennifer.smith@yahoo.com",
-                    PhoneNumber = "987-654-3210",
-                    Adress = "456 Elm St, Happaranda",
+                    LastName = "Larsson",
+                    Email = "jennifer.Larsson@yahoo.com",
+                    PhoneNumber = "072-654-3210",
+                    Adress = "456 Vintervägen, Happaranda",
                     IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 },
                 new Customer
                 {
-                    FirstName = "Alice",
+                    FirstName = "Wilma",
                     LastName = "Johnson",
-                    Email = "alice.johnson@outlook.com",
-                    PhoneNumber = "555-123-4567",
-                    Adress = "789 Oak St, Québec",
+                    Email = "Wilma.johnson@outlook.com",
+                    PhoneNumber = "070-123-4567",
+                    Adress = "789 FrenchSteet, Québec",
                     IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 },
@@ -50,7 +44,7 @@ namespace HotelBooking.Data.Seeders
                     FirstName = "Bob",
                     LastName = "Ross",
                     Email = "bob.ross@gmail.com",
-                    PhoneNumber = "555-765-4321",
+                    PhoneNumber = "010-765-4321",
                     Adress = "321 Pine St, Woodsland",
                     IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
@@ -58,16 +52,16 @@ namespace HotelBooking.Data.Seeders
                 new Customer
                 {
                     FirstName = "Raphael",
-                    LastName = "Brown",
-                    Email = "raphael.brown@hotmail.com",
-                    PhoneNumber = "555-234-5678",
-                    Adress = "654 Sand St, Oasis",
+                    LastName = "Andersson",
+                    Email = "raphael.Andersson@hotmail.com",
+                    PhoneNumber = "070-234-5678",
+                    Adress = "1 Sand , Oasis",
                     IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 }
             };
-            _dbContext.Customers.AddRange(customer);
-            _dbContext.SaveChanges();
+            dbContext.Customers.AddRange(customer);
+            dbContext.SaveChanges();
         }
     }
 }

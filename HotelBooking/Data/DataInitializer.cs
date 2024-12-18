@@ -1,37 +1,33 @@
 ﻿using HotelBooking.Data.Seeders;
-using HotelBooking.Models;
 using Microsoft.EntityFrameworkCore;
 namespace HotelBooking.Data
 {
     public class DataInitializer
     {
-        private ApplicationDbContext _dbContext;
+
         private readonly RoomSeeder _roomSeeder;
         private readonly CustomerSeeder _customerSeeder;
 
-        public DataInitializer(ApplicationDbContext dbContext, RoomSeeder roomSeeder, CustomerSeeder customerSeeder)
+        public DataInitializer(RoomSeeder roomSeeder, CustomerSeeder customerSeeder)
         {
-            _dbContext = dbContext;
+
             _roomSeeder = roomSeeder;
             _customerSeeder = customerSeeder;
         }
 
-        public ApplicationDbContext MigrateAndSeedData()
+        public void MigrateAndSeedData(ApplicationDbContext dbContext)
         {
-            _dbContext = new ApplicationDbContext();
-            _dbContext.Database.Migrate();
+            dbContext.Database.Migrate();
 
-            if(!_dbContext.Rooms.Any())
+            if (!dbContext.Rooms.Any())
             {
-                _roomSeeder.RoomSeeding();
+                _roomSeeder.RoomSeeding(dbContext);
             }
 
-            if(!_dbContext.Customers.Any())
+            if (!dbContext.Customers.Any())
             {
-                _customerSeeder.CustomerSeeding();
+                _customerSeeder.CustomerSeeding(dbContext);
             }
-
-            return _dbContext;
         }
     }
 }

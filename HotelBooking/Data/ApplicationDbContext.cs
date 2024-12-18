@@ -17,12 +17,12 @@ namespace HotelBooking.Data
             : base(options)
         {
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("server=localhost;initial catalog=HotelbookingDB;Trusted_Connection=True;TrustServerCertificate=true");
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("server=localhost;initial catalog=HotelbookingDB;Trusted_Connection=True;TrustServerCertificate=true");
+        //    }
+        //}
     }
 }

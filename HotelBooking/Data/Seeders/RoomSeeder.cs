@@ -4,14 +4,7 @@ namespace HotelBooking.Data.Seeders
 {
     public class RoomSeeder
     {
-        private readonly ApplicationDbContext _dbContext;
-
-        public RoomSeeder(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-        public void RoomSeeding()
+        public void RoomSeeding(ApplicationDbContext dbContext)
         {
             var rooms = new List<Room>
             {
@@ -62,8 +55,8 @@ namespace HotelBooking.Data.Seeders
                     IsExtraBedAvailable = true
                 }
             };
-            _dbContext.Rooms.AddRange(rooms);
-            _dbContext.SaveChanges();
+            dbContext.Rooms.AddRange(rooms);
+            dbContext.SaveChanges();
         }
     }
 }
