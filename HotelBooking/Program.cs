@@ -9,7 +9,7 @@ namespace HotelBooking
         {
             var container = ContainerConfig.BuilderContainer();
 
-            var app = container.Resolve<App>();
+            var app = container.Resolve<Application>();
             app.Run();
         }
     }

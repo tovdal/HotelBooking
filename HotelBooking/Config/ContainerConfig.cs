@@ -17,7 +17,7 @@ namespace HotelBooking.Config
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<App>();
+            builder.RegisterType<Application>();
 
             builder.RegisterType<ApplicationDbContext>().SingleInstance();
             // SingelTon
