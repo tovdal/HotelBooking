@@ -5,9 +5,9 @@ namespace HotelBooking.Service.CustomerService
 {
     public class CustomerCreate
     {
-        private readonly HotelBookingDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public CustomerCreate(HotelBookingDbContext dbContext)
+        public CustomerCreate(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }

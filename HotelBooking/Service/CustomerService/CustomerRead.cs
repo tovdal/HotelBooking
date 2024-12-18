@@ -5,9 +5,9 @@ namespace HotelBooking.Service.CustomerService
 {
     public class CustomerRead
     {
-        private readonly HotelBookingDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public CustomerRead(HotelBookingDbContext dbContext)
+        public CustomerRead(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -32,7 +32,7 @@ namespace HotelBooking.Service.CustomerService
         }
         public List<Customer> GetCustomerDetailes(int id) 
         {
-            return _dbContext.Customers.Where(g => g.CustomerId == id).ToList();
+            return _dbContext.Customers.Where(g => g.Id == id).ToList();
         }
     }
 }

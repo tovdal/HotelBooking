@@ -5,9 +5,9 @@ namespace HotelBooking.Service.RoomService
 {
     public class RoomRead
     {
-        private readonly HotelBookingDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public RoomRead(HotelBookingDbContext dbContext)
+        public RoomRead(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
