@@ -1,6 +1,6 @@
 ﻿namespace HotelBooking.Menu.Actions
 {
-    public interface ICustomersMenuAction
+    internal interface ICustomersMenuAction
     {
         void ExecuteCustomerAction();
     }

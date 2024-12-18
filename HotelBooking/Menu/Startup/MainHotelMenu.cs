@@ -1,4 +1,5 @@
-﻿using HotelBooking.Display.Menu;
+﻿using HotelBooking.Controllers.Interfaces;
+using HotelBooking.Display.Menu;
 using HotelBooking.Menu.Actions;
 using HotelBooking.Service.MenuService;
 
@@ -11,11 +12,11 @@ namespace HotelBooking.Menu.Startup
         private readonly MenuHandler _mainMenuHandler;
         private readonly MenuNavigator _menuNavigator;
 
-        public MainHotelMenu(MenuDisplay menuDisplay)
+        public MainHotelMenu(MenuDisplay menuDisplay, ICustomerController customerController)
         {
             _menuDisplay = menuDisplay;
             _menuNavigator = new MenuNavigator();
-            _actionsMainMenu = InitializeMainMenuActions(menuDisplay);
+            _actionsMainMenu = InitializeMainMenuActions(menuDisplay, customerController);
         }
         public void ShowMenu()
         {
@@ -53,12 +54,12 @@ namespace HotelBooking.Menu.Startup
                 });
             }
         }
-        private IMainMenuAction[] InitializeMainMenuActions(MenuDisplay menuDisplay)
+        private IMainMenuAction[] InitializeMainMenuActions(MenuDisplay menuDisplay, ICustomerController customerController)
         {
             return new IMainMenuAction[]
             {
                 new BookingsMenu(menuDisplay), //0
-                new CustomersMenu(menuDisplay),// 1
+                new CustomersMenu(menuDisplay, customerController),// 1
                 new RoomsMenu(menuDisplay), // 2
                 new InvoiceMenu(menuDisplay)//3
             };

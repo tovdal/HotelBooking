@@ -1,8 +1,9 @@
 ﻿using HotelBooking.Service.CustomerService;
+using HotelBooking.Controllers.Interfaces;
 
 namespace HotelBooking.Controllers
 {
-    public class CustomerController
+    public class CustomerController : ICustomerController
     {
         //private readonly CustomerCreate _guestCreate;
         private readonly CustomerRead _customerRead;
@@ -25,10 +26,15 @@ namespace HotelBooking.Controllers
         public void ShowAllCustomers()
         {
             var customers = _customerRead.GetAllCustomersInDatabase();
+           
             foreach (var customer in customers)
             {
-                Console.WriteLine(customer);
+                Console.WriteLine($"Customer ID: {customer.Id}," +
+                    $" Name: {customer.FirstName}, " +
+                    $"{customer.LastName} " +
+                    $"Email: {customer.Email}");
             }
+            Console.ReadKey();
         }
         public void ShowAllActiveCustomers()
         {
@@ -84,7 +90,7 @@ namespace HotelBooking.Controllers
             }
             foreach (var customer in customers)
             {
-                Console.WriteLine($"Customer ID: {customer.CustomerId}");
+                Console.WriteLine($"Customer ID: {customer.Id}");
                 Console.WriteLine($"Name: {customer.FirstName}");
                 Console.WriteLine($"Name: {customer.LastName}");
                 Console.WriteLine($"IsActive: {customer.IsCustomerStatusActive}");
