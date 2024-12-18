@@ -4,9 +4,9 @@ namespace HotelBooking.Data.Seeders
 {
     public class CustomerSeeder
     {
-        private readonly HotelBookingDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public CustomerSeeder(HotelBookingDbContext dbContext)
+        public CustomerSeeder(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }

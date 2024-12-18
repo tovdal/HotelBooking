@@ -1,13 +1,12 @@
 ﻿using HotelBooking.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Data.Seeders
 {
     public class RoomSeeder
     {
-        private readonly HotelBookingDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public RoomSeeder(HotelBookingDbContext dbContext)
+        public RoomSeeder(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -18,7 +17,6 @@ namespace HotelBooking.Data.Seeders
             {
                 new Room
                 {
-                    RoomId = 1,
                     RoomNumber = 101,
                     RoomSize = 30,
                     TypeOfRooms = TypeOfRoom.Double,
@@ -29,7 +27,6 @@ namespace HotelBooking.Data.Seeders
                 },
                 new Room
                 {
-                    RoomId = 2,
                     RoomNumber = 102,
                     RoomSize = 20,
                     TypeOfRooms = TypeOfRoom.Singel,
@@ -39,7 +36,6 @@ namespace HotelBooking.Data.Seeders
                 },
                 new Room
                 {
-                    RoomId = 3,
                     RoomNumber = 201,
                     RoomSize = 25,
                     TypeOfRooms = TypeOfRoom.Singel,
@@ -49,7 +45,6 @@ namespace HotelBooking.Data.Seeders
                 },
                 new Room
                 {
-                    RoomId = 4,
                     RoomNumber = 202,
                     RoomSize = 22,
                     TypeOfRooms = TypeOfRoom.Double,
@@ -59,7 +54,6 @@ namespace HotelBooking.Data.Seeders
                 },
                  new Room
                 {
-                    RoomId = 5,
                     RoomNumber = 301,
                     RoomSize = 35,
                     TypeOfRooms = TypeOfRoom.Double,

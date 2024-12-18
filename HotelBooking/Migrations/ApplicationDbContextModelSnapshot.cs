@@ -4,19 +4,16 @@ using HotelBooking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace HotelBooking.Migrations
 {
-    [DbContext(typeof(HotelBookingDbContext))]
-    [Migration("20241213152749_AddReworkedKeysInModels")]
-    partial class AddReworkedKeysInModels
+    [DbContext(typeof(ApplicationDbContext))]
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,11 +24,11 @@ namespace HotelBooking.Migrations
 
             modelBuilder.Entity("HotelBooking.Models.Booking", b =>
                 {
-                    b.Property<int>("BookingId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CheckInDate")
                         .HasColumnType("datetime2");
@@ -48,7 +45,7 @@ namespace HotelBooking.Migrations
                     b.Property<decimal>("TotalCostOfTheBooking")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("BookingId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
@@ -59,11 +56,11 @@ namespace HotelBooking.Migrations
 
             modelBuilder.Entity("HotelBooking.Models.Customer", b =>
                 {
-                    b.Property<int>("CustomerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
@@ -90,18 +87,18 @@ namespace HotelBooking.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CustomerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("HotelBooking.Models.Invoice", b =>
                 {
-                    b.Property<int>("InvoiceId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("CostAmount")
                         .HasColumnType("decimal(18,2)");
@@ -115,18 +112,18 @@ namespace HotelBooking.Migrations
                     b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
 
-                    b.HasKey("InvoiceId");
+                    b.HasKey("Id");
 
                     b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("HotelBooking.Models.Room", b =>
                 {
-                    b.Property<int>("RoomId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("BookingId")
                         .HasColumnType("int");
@@ -149,7 +146,7 @@ namespace HotelBooking.Migrations
                     b.Property<int>("TypeOfRooms")
                         .HasColumnType("int");
 
-                    b.HasKey("RoomId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BookingId");
 
