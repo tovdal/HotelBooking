@@ -2,7 +2,7 @@
 {
     public class Booking
     {
-        public int BookingId { get; set; }
+        public int Id { get; set; }
         public int CustomerId { get; set; }
         public DateTime CheckInDate { get; set; }
         public decimal TotalCostOfTheBooking { get; set; }

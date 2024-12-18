@@ -2,7 +2,7 @@
 {
     public class Room
     {
-        public int RoomId { get; set; }
+        public int Id { get; set; }
         public int RoomNumber { get; set; }
         public byte RoomSize { get; set; }
         public TypeOfRoom TypeOfRooms { get; set; }
