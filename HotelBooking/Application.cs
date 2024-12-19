@@ -1,36 +1,30 @@
-﻿using HotelBooking.Data;
+﻿using HotelBooking.Config;
+using HotelBooking.Data;
 using HotelBooking.Menu.Startup;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HotelBooking
 {
-    internal class Application
+    public class Application
     {
         private readonly MainHotelMenu _mainHotelMenu;
         private readonly DataInitializer _dataInitializer;
+        private readonly ApplicationDbContext _dbContext;
 
-        public Application(MainHotelMenu mainHotelMenu, DataInitializer dataInitializer)
+        public Application(MainHotelMenu mainHotelMenu, DataInitializer dataInitializer, ApplicationDbContext dbContext)
         {
             _mainHotelMenu = mainHotelMenu;
             _dataInitializer = dataInitializer;
+            _dbContext = dbContext;
         }
 
         public void Run()
         {
-            var builder = new ConfigurationBuilder()
-                .AddJsonFile($"appsettings.json", true, true);
-            var config = builder.Build();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var connectionString = config.GetConnectionString("DefaultConnection");
-            options.UseSqlServer(connectionString);
-
-            using (var dbContext = new ApplicationDbContext(options.Options))
-            {
-                _dataInitializer.MigrateAndSeedData(dbContext);
+                _dataInitializer.MigrateAndSeedData();
                 _mainHotelMenu.ShowMenu();
-            }
+            
         }
     }
 }

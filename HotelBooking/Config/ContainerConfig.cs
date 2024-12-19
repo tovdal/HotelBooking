@@ -8,6 +8,8 @@ using HotelBooking.Menu;
 using HotelBooking.Menu.Actions;
 using HotelBooking.Menu.Startup;
 using HotelBooking.Service.CustomerService;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace HotelBooking.Config
 {
@@ -17,10 +19,12 @@ namespace HotelBooking.Config
         {
             var builder = new ContainerBuilder();
 
+            var dbContextOptions = DBPathConfigurator.GetDbContextOptionsFromConfigJson();
+            builder.RegisterInstance(new ApplicationDbContext(dbContextOptions)).As<ApplicationDbContext>();
+            //Singelton
+
             builder.RegisterType<Application>();
 
-            builder.RegisterType<ApplicationDbContext>().SingleInstance();
-            // SingelTon
             builder.RegisterType<DataInitializer>().AsSelf();
             builder.RegisterType<RoomSeeder>().AsSelf();
             builder.RegisterType<CustomerSeeder>().AsSelf();
