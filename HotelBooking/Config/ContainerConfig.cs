@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using HotelBooking.Controllers;
+using HotelBooking.Controllers.ControllerCustomer;
+using HotelBooking.Controllers.ControllerCustomer.Interface;
 using HotelBooking.Controllers.Interfaces;
 using HotelBooking.Data;
 using HotelBooking.Data.Seeders;
@@ -34,6 +36,8 @@ namespace HotelBooking.Config
             builder.RegisterType<InvoiceMenu>().As<IMainMenuAction>();
 
             builder.RegisterType<CustomerController>().As<ICustomerController>();
+            builder.RegisterType<CustomerCreateController>().As<ICustomerCreaterController>();
+            builder.RegisterType<CustomerReadController>().As<ICustomerReadController>();
 
             builder.RegisterType<CustomerCreate>().AsSelf();
             builder.RegisterType<CustomerRead>().AsSelf();

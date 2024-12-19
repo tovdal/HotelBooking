@@ -2,12 +2,12 @@
 {
     public interface ICustomerController
     {
-        void CreateANewCustomer();
-        void ShowAllCustomers();
-        void ShowAllActiveCustomers();
-        void ShowAllInactiveCustomers();
-        void ShowAllDeletedCustomers();
-        void ShowACustomersDetailes();
+        void CreateCustomer();
+        void ReadAllCustomers();
+        void ReadAllActive();
+        void ReadAllInactive();
+        void ReadAllDeleted();
+        void ReadACustomer();
         void UpdateACustomer();
         void DeleteACustomer();
         void TakeBackDeletedCustomer();
