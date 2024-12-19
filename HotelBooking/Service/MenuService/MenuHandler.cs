@@ -1,4 +1,4 @@
-﻿using HotelBooking.Display.Menu;
+﻿using HotelBooking.Utilities.Display.Menu;
 
 namespace HotelBooking.Service.MenuService
 {

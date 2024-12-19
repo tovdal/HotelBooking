@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Display.Message
+﻿namespace HotelBooking.Utilities.Display.Message
 {
     public class ConsoleMessagePrinter
     {

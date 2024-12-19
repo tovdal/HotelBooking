@@ -1,6 +1,6 @@
-﻿using HotelBooking.Display.Render;
+﻿using HotelBooking.Utilities.Display.Render;
 
-namespace HotelBooking.Display.Menu
+namespace HotelBooking.Utilities.Display.Menu
 {
     public class MenuDisplay
     {

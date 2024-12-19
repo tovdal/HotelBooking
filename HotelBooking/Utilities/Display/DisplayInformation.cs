@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Display
+namespace HotelBooking.Utilities.Display
 {
     public class DisplayInformation
     {

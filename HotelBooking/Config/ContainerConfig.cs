@@ -3,13 +3,11 @@ using HotelBooking.Controllers;
 using HotelBooking.Controllers.Interfaces;
 using HotelBooking.Data;
 using HotelBooking.Data.Seeders;
-using HotelBooking.Display.Menu;
 using HotelBooking.Menu;
 using HotelBooking.Menu.Actions;
 using HotelBooking.Menu.Startup;
 using HotelBooking.Service.CustomerService;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using HotelBooking.Utilities.Display.Menu;
 
 namespace HotelBooking.Config
 {

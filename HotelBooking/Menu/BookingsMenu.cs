@@ -1,6 +1,6 @@
-﻿using HotelBooking.Display.Menu;
-using HotelBooking.Menu.Actions;
+﻿using HotelBooking.Menu.Actions;
 using HotelBooking.Service.MenuService;
+using HotelBooking.Utilities.Display.Menu;
 
 namespace HotelBooking.Menu
 {
