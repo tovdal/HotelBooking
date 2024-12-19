@@ -2,6 +2,8 @@
 using HotelBooking.Controllers.Interfaces;
 using HotelBooking.Models;
 using HotelBooking.Utilities;
+using HotelBooking.Utilities.Display.Message;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Controllers
 {
@@ -23,7 +25,7 @@ namespace HotelBooking.Controllers
         public void CreateANewCustomer()
         {
             bool IsRunning = true;
-            while (true)
+            while (IsRunning)
             {
                 Console.WriteLine("1. Create new course");
 
@@ -63,23 +65,56 @@ namespace HotelBooking.Controllers
 
                 if (userInput?.ToLower() != "y")
                 {
-                    IsRunning = false; 
+                    IsRunning = false;
                 }
             }
-            Console.WriteLine("No more customers to add. Exiting...");
         }
         public void ShowAllCustomers()
         {
-            var customers = _customerRead.GetAllCustomersInDatabase();
-           
+            var customers = _customerRead.GetAllCustomersInDatabase()
+                .Include(c => c.Bookings)
+                .ThenInclude(b => b.Rooms)
+                .ToList();
+
+            if (customers == null || customers.Count == 0)
+            {
+                Console.WriteLine("There are no customers registered.");
+                return;
+            }
+
+            Console.WriteLine("List of Customers:");
+
             foreach (var customer in customers)
             {
-                Console.WriteLine($"Customer ID: {customer.Id}," +
-                    $" Name: {customer.FirstName}, " +
-                    $"{customer.LastName} " +
+                Console.WriteLine($"Customer ID: {customer.Id}, " +
+                    $"Name: {customer.FirstName} {customer.LastName}, " +
                     $"Email: {customer.Email}");
+
+                if (customer.Bookings != null && customer.Bookings.Any())
+                {
+                    foreach (var booking in customer.Bookings)
+                    {
+                        Console.WriteLine($"Booking ID: {booking.Id}, " +
+                            $"Date: {booking.CheckInDate}, " +
+                            $"Total Cost: {booking.TotalCostOfTheBooking}");
+
+                        if (booking.Rooms.Any())
+                        {
+                            foreach (var room in booking.Rooms)
+                            {
+                                Console.WriteLine($"Room ID: {room.Id}");
+                            }
+                        }
+                        Console.WriteLine($"Invoice ID: {booking.Invoice.Id}," +
+                            $" Total Cost: {booking.Invoice.CostAmount}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("  No bookings found.");
+                }
             }
-            Console.ReadKey();
+            ConsoleMessagePrinter.DisplayMessage();
         }
         public void ShowAllActiveCustomers()
         {
@@ -95,34 +130,43 @@ namespace HotelBooking.Controllers
                 // Spector....?
                 foreach (var customer in customers)
                 {
-                    Console.WriteLine($"Customer ID: {customer.Id}," +
+                    Console.WriteLine($"" +
+                    $"Customer ID: {customer.Id}," +
                     $" Name: {customer.FirstName}, " +
                     $"{customer.LastName} " +
-                    $"Email: {customer.Email}"); // richard säger ToString.
+                    $"Email: {customer.Email} " +
+                    $"Phone number: {customer.PhoneNumber} " +
+                    $"Active customer: {customer.IsCustomerStatusActive}" +
+                    $"Customer has booking: {customer.Bookings}"); // richard säger ToString.
                 }
             }
-            Console.ReadKey();
+            ConsoleMessagePrinter.DisplayMessage();
         }
         public void ShowAllInactiveCustomers()
         {
             var customers = _customerRead.GetAllInactiveCustomersInDatabase();
-            if (customers == null )
+            if (customers == null)
             {
                 Console.WriteLine("There is no customers registerd.");
                 return;
             }
             else
             {
-                if (customers.Count > 0)
+                if (!customers.Any())
                 {
                     Console.WriteLine("List of Customers:");
                     // Spector....?
                     foreach (var customer in customers)
                     {
-                        Console.WriteLine($"Customer ID: {customer.Id}," +
-                        $" Name: {customer.FirstName}, " +
-                        $"{customer.LastName} " +
-                        $"Email: {customer.Email}"); // richard säger ToString.
+                        Console.WriteLine($"" +
+                    $"Customer ID: {customer.Id}," +
+                    $" Name: {customer.FirstName}, " +
+                    $"{customer.LastName} " +
+                    $"Email: {customer.Email} " +
+                    $"Phone number: {customer.PhoneNumber} " +
+                    $"Address: {customer.Adress} " +
+                    $"Active customer: {customer.IsCustomerStatusActive}" +
+                    $"Customer has booking: {customer.Bookings}"); // richard säger ToString.
                     }
                 }
                 else
@@ -130,15 +174,23 @@ namespace HotelBooking.Controllers
                     Console.WriteLine("There is no inactive guests");
                 }
             }
-            Console.ReadKey();
+            ConsoleMessagePrinter.DisplayMessage();
         }
         public void ShowAllDeletedCustomers()
         {
             var customers = _customerRead.GetAllDeletedCustomersInDatabase();
             foreach (var customer in customers)
             {
-                Console.WriteLine(customer);
+                Console.WriteLine($"" +
+                $"Customer ID: {customer.Id}," +
+                $" Name: {customer.FirstName}, " +
+                $"{customer.LastName} " +
+                $"Email: {customer.Email} " +
+                $"Phone number: {customer.PhoneNumber} " +
+                $"Address: {customer.Adress} " +
+                $"Active customer: {customer.IsCustomerDeleted}"); // richard säger ToString.
             }
+            ConsoleMessagePrinter.DisplayMessage();
         }
         public void ShowACustomersDetailes()
         {
@@ -153,19 +205,24 @@ namespace HotelBooking.Controllers
 
             var customers = _customerRead.GetCustomerDetailes(customerId);
 
-            if (customers == null || customers.Count == 0)
+            if (customers == null || customers.Any())
             {
                 Console.WriteLine($"No Customer with ID number: {customerId}.");
                 return;
             }
             foreach (var customer in customers)
             {
-                Console.WriteLine($"Customer ID: {customer.Id}");
-                Console.WriteLine($"Name: {customer.FirstName}");
-                Console.WriteLine($"Name: {customer.LastName}");
-                Console.WriteLine($"IsActive: {customer.IsCustomerStatusActive}");
+                Console.WriteLine($"Customer ID: {customer.Id}," +
+                    $" Name: {customer.FirstName}, " +
+                    $"{customer.LastName} " +
+                    $"Email: {customer.Email} " +
+                    $"Phone number: {customer.PhoneNumber} " +
+                    $"Address: {customer.Adress} " +
+                    $"Active customer: {customer.IsCustomerStatusActive}" +
+                    $"Customer has booking: {customer.Bookings}");
                 Console.WriteLine("-------------------------");
             }
+            ConsoleMessagePrinter.DisplayMessage();
         }
         public void UpdateACustomer()
         {

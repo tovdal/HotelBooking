@@ -2,10 +2,9 @@
 {
     public class ConsoleMessagePrinter
     {
-        public static void DisplayMessage(string message)
+        public static void DisplayMessage()
         {
-            Console.WriteLine(message);
-            Console.WriteLine("Tryck på valfri knapp för att fortsätta.");
+            Console.WriteLine("`\nPress any key to continue.");
             Console.ReadKey();
         }
 
