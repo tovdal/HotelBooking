@@ -1,6 +1,7 @@
 ﻿using HotelBooking.Config;
 using HotelBooking.Data;
 using HotelBooking.Models;
+using Microsoft.EntityFrameworkCore;
 namespace HotelBooking.Service.CustomerService
 
 {
@@ -14,29 +15,28 @@ namespace HotelBooking.Service.CustomerService
             Console.WriteLine("DbContext is configured: " + (_dbContext != null));
         }
         //Read
-        public List<Customer> GetAllCustomersInDatabase()
+        public IQueryable<Customer> GetAllCustomersInDatabase()
         {
-            
-                return _dbContext.Customers.ToList();
-
+                return _dbContext.Customers.Include(c => c.Bookings);
         }
-        public List<Customer> GetAllActiveCustomerInDatabase()
+        public IQueryable<Customer> GetAllActiveCustomerInDatabase()
         {
-            return _dbContext.Customers.Where(g => g.IsCustomerStatusActive).ToList();
+            return _dbContext.Customers.Where(g => g.IsCustomerStatusActive);
         }
 
-        public List<Customer> GetAllInactiveCustomersInDatabase()
+        public IQueryable<Customer> GetAllInactiveCustomersInDatabase()
         {
-            return _dbContext.Customers.Where(g => !g.IsCustomerStatusActive).ToList();
+            return _dbContext.Customers.Where(g => !g.IsCustomerStatusActive);
         }
 
-        public List<Customer> GetAllDeletedCustomersInDatabase()
+        public IQueryable<Customer> GetAllDeletedCustomersInDatabase()
         {
-            return _dbContext.Customers.Where(g => g.IsCustomerDeleted).ToList();
+            return _dbContext.Customers.Where(g => g.IsCustomerDeleted)
+                ;
         }
-        public List<Customer> GetCustomerDetailes(int id) 
+        public IQueryable<Customer> GetCustomerDetailes(int id) 
         {
-            return _dbContext.Customers.Where(g => g.Id == id).ToList();
+            return _dbContext.Customers.Where(g => g.Id == id);
         }
     }
 }
