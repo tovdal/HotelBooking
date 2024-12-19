@@ -1,4 +1,5 @@
-﻿using HotelBooking.Data;
+﻿using HotelBooking.Config;
+using HotelBooking.Data;
 using HotelBooking.Models;
 namespace HotelBooking.Service.CustomerService
 
@@ -10,11 +11,14 @@ namespace HotelBooking.Service.CustomerService
         public CustomerRead(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+            Console.WriteLine("DbContext is configured: " + (_dbContext != null));
         }
         //Read
         public List<Customer> GetAllCustomersInDatabase()
         {
-            return _dbContext.Customers.ToList();
+            
+                return _dbContext.Customers.ToList();
+
         }
         public List<Customer> GetAllActiveCustomerInDatabase()
         {
