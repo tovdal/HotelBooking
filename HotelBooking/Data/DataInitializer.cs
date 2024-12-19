@@ -7,26 +7,28 @@ namespace HotelBooking.Data
 
         private readonly RoomSeeder _roomSeeder;
         private readonly CustomerSeeder _customerSeeder;
+        private readonly ApplicationDbContext _dbContext;
 
-        public DataInitializer(RoomSeeder roomSeeder, CustomerSeeder customerSeeder)
+        public DataInitializer(RoomSeeder roomSeeder, CustomerSeeder customerSeeder, ApplicationDbContext dbContext)
         {
 
             _roomSeeder = roomSeeder;
             _customerSeeder = customerSeeder;
+            _dbContext = dbContext;
         }
 
-        public void MigrateAndSeedData(ApplicationDbContext dbContext)
+        public void MigrateAndSeedData()
         {
-            dbContext.Database.Migrate();
+            _dbContext.Database.Migrate();
 
-            if (!dbContext.Rooms.Any())
+            if (!_dbContext.Rooms.Any())
             {
-                _roomSeeder.RoomSeeding(dbContext);
+                _roomSeeder.RoomSeeding(_dbContext);
             }
 
-            if (!dbContext.Customers.Any())
+            if (!_dbContext.Customers.Any())
             {
-                _customerSeeder.CustomerSeeding(dbContext);
+                _customerSeeder.CustomerSeeding(_dbContext);
             }
         }
     }
