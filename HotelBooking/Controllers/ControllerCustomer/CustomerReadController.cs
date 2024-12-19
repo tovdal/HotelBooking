@@ -1,9 +1,9 @@
 ﻿using HotelBooking.Controllers.ControllerCustomer.Interface;
-using HotelBooking.Models;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display;
 using HotelBooking.Utilities.Display.Message;
 using Microsoft.EntityFrameworkCore;
+using Spectre.Console;
 
 namespace HotelBooking.Controllers.ControllerCustomer
 {
@@ -21,65 +21,79 @@ namespace HotelBooking.Controllers.ControllerCustomer
                 .ThenInclude(b => b.Rooms)
                 .ToList();
 
-            if (customers == null || customers.Count == 0)
+            if (customers == null || !customers.Any())
             {
-                Console.WriteLine("There are no customers registered.");
+                AnsiConsole.MarkupLine("[red]There are no customers registered.[/]");
                 return;
             }
 
-            Console.WriteLine("List of Customers:");
+            var table = new Table();
+            table.AddColumn("Customer ID");
+            table.AddColumn("Name");
+            table.AddColumn("Email");
+            table.AddColumn("Phone Number");
+            table.AddColumn("Address");
 
             foreach (var customer in customers)
             {
-                Console.WriteLine($"Customer ID: {customer.Id}, " +
-                    $"Name: {customer.FirstName} {customer.LastName}, " +
-                    $"Email: {customer.Email}");
+                table.AddRow(
+                    customer.Id.ToString(),
+                    $"{customer.FirstName} {customer.LastName}",
+                    customer.Email,
+                    customer.PhoneNumber,
+                    customer.Adress ?? "N/A"
+                );
+                table.AddEmptyRow();
 
                 if (customer.Bookings != null && customer.Bookings.Any())
                 {
                     foreach (var booking in customer.Bookings)
                     {
-                        Console.WriteLine($"Booking ID: {booking.Id}, " +
-                            $"Date: {booking.CheckInDate}, " +
-                            $"Total Cost: {booking.TotalCostOfTheBooking}");
+                        table.AddRow("  ", "Booking ID:", booking.Id.ToString(), "Date:", booking.CheckInDate.ToString(), "Total Cost:", booking.TotalCostOfTheBooking.ToString());
+                        table.AddEmptyRow();
 
-                        if (booking.Rooms.Any())
+                        foreach (var room in booking.Rooms)
                         {
-                            foreach (var room in booking.Rooms)
-                            {
-                                Console.WriteLine($"Room ID: {room.Id}");
-                            }
+                            table.AddRow("  ", "Room ID:", room.Id.ToString());
                         }
-                        Console.WriteLine($"Invoice ID: {booking.Invoice.Id}," +
-                            $" Total Cost: {booking.Invoice.CostAmount}");
+                        table.AddEmptyRow();
+
+                        table.AddRow("  ", "Invoice ID:", booking.Invoice?.Id.ToString() ?? "No invoice", "Total Cost:", booking.Invoice?.CostAmount.ToString() ?? "N/A");
+                        table.AddEmptyRow();
                     }
                 }
                 else
                 {
-                    Console.WriteLine("  No bookings found.");
+                    table.AddRow("  ", "No bookings found.");
+                    table.AddEmptyRow();
                 }
             }
+
+            AnsiConsole.Write(table);
             ConsoleMessagePrinter.DisplayMessage();
+
+
+            // Add Pagination can be found in richards powerpoint 
         }
 
         public void ShowAllActiveCustomers()
         {
             var customers = _customerRead.GetAllActiveCustomerInDatabase();
-            DisplayCustomerInformation.PrintCustomers(customers, "There are no active customers.");
+            DisplayCustomerInformation.PrintCustomersAll(customers, "There are no active customers.");
             ConsoleMessagePrinter.DisplayMessage();
         }
 
         public void ShowAllInactiveCustomers()
         {
             var customers = _customerRead.GetAllInactiveCustomersInDatabase();
-            DisplayCustomerInformation.PrintCustomers(customers, "There are no inactive customers.");
+            DisplayCustomerInformation.PrintCustomersOnly(customers, "There are no inactive customers.");
             ConsoleMessagePrinter.DisplayMessage();
         }
 
         public void ShowAllDeletedCustomers()
         {
             var customers = _customerRead.GetAllDeletedCustomersInDatabase();
-            DisplayCustomerInformation.PrintCustomers(customers, "There are no deleted customers.");
+            DisplayCustomerInformation.PrintCustomersOnly(customers, "There are no deleted customers.");
             ConsoleMessagePrinter.DisplayMessage();
         }
 
@@ -95,7 +109,7 @@ namespace HotelBooking.Controllers.ControllerCustomer
             }
 
             var customer = _customerRead.GetCustomerDetailes(customerId);
-            DisplayCustomerInformation.PrintCustomers(customer, $"No customer found with ID number: {customerId}.");
+            DisplayCustomerInformation.PrintCustomersAll(customer, $"No customer found with ID number: {customerId}.");
             ConsoleMessagePrinter.DisplayMessage();
         }
     }
