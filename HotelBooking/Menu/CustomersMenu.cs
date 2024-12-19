@@ -26,7 +26,6 @@ namespace HotelBooking.Menu
                 "Show all active customers",
                 "Show all inactive customers",
                 "Show all deleted customers",
-                "Show all Customer detailes",
                 "Show a Customer detailes",
                 "Update a Customer",
                 "Delete a Customer",
@@ -40,36 +39,33 @@ namespace HotelBooking.Menu
                 switch (selectedIndex)
                 {
                     case 0:
-                        _customerController.CreateANewCustomer();
+                        _customerController.CreateCustomer();
                         break;
                     case 1:
-                        _customerController.ShowAllCustomers();
+                        _customerController.ReadAllCustomers();
                         break;
                     case 2:
-                        _customerController.ShowAllActiveCustomers();
+                        _customerController.ReadAllActive();
                         break;
                     case 3:
-                        _customerController.ShowAllInactiveCustomers();
+                        _customerController.ReadAllInactive();
                         break;
                     case 4:
-                        _customerController.ShowAllDeletedCustomers();
+                        _customerController.ReadAllDeleted();
                         break;
                     case 5:
-                        _customerController.ShowACustomersDetailes();
+                        _customerController.ReadACustomer();
                         break;
                     case 6:
-                        _customerController.ShowACustomersDetailes();
-                        break;
-                    case 7:
                         _customerController.UpdateACustomer();
                         break;
-                    case 8:
+                    case 7:
                         _customerController.DeleteACustomer();
                         break;
-                    case 9:
+                    case 8:
                         _customerController.TakeBackDeletedCustomer();
                         break;
-                    case 10:
+                    case 9:
                         break;
                 }
             });
