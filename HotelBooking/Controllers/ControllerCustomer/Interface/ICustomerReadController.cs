@@ -2,7 +2,7 @@
 {
     public interface ICustomerReadController
     {
-        void ShowAllCustomers();
+        void ShowAllCustomersBookingsInvoices();
         void ShowAllActiveCustomers();
         void ShowAllInactiveCustomers();
         void ShowAllDeletedCustomers();

@@ -8,7 +8,7 @@ namespace HotelBooking.Utilities.Display
 {
     public class DisplayInformation
     {
-        // Kan man göra ShowAllCustomers i fakedatabasen dynamisk?
+        // Kan man göra ShowAllCustomersBookingsInvoices i fakedatabasen dynamisk?
     }
 
 }

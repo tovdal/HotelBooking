@@ -8,14 +8,19 @@ namespace HotelBooking.Controllers
     {
         private readonly ICustomerCreaterController _customerCreaterController;
         private readonly ICustomerReadController _customerReadController;
+        private readonly ICustomerUpdateController _customerUpdateController;
         private readonly CustomerRead _customerRead;
         //private readonly CustomerUpdate _guestUpdate;
         //private readonly CustomerDelete _guestDelete;
 
-        public CustomerController(ICustomerCreaterController customerCreaterController, ICustomerReadController customerReadController)
+        public CustomerController
+            (ICustomerCreaterController customerCreaterController, 
+            ICustomerReadController customerReadController, 
+            ICustomerUpdateController customerUpdateController)
         {
             _customerCreaterController = customerCreaterController;
             _customerReadController = customerReadController;
+            _customerUpdateController = customerUpdateController;
             //_guestUpdate = guestUpdate;
             //_guestDelete = guestDelete;
         }
@@ -27,7 +32,7 @@ namespace HotelBooking.Controllers
 
         public void ReadAllCustomers()
         {
-            _customerReadController.ShowAllCustomers();
+            _customerReadController.ShowAllCustomersBookingsInvoices();
         }
         public void ReadAllActive()
         {
@@ -49,7 +54,7 @@ namespace HotelBooking.Controllers
         }
         public void UpdateACustomer()
         {
-
+            _customerUpdateController.UpdateACustomerInformation();
         }
         public void DeleteACustomer()
         {

@@ -1,9 +1,8 @@
 ﻿using HotelBooking.Controllers.ControllerCustomer.Interface;
-using HotelBooking.Models;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display;
 using HotelBooking.Utilities.Display.Message;
-using Microsoft.EntityFrameworkCore;
+using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
 namespace HotelBooking.Controllers.ControllerCustomer
@@ -15,7 +14,7 @@ namespace HotelBooking.Controllers.ControllerCustomer
         {
             _customerRead = customerRead;
         }
-        public void ShowAllCustomers()
+        public void ShowAllCustomersBookingsInvoices()
         {
             var customers = _customerRead.GetAllCustomersInDatabase().ToList();
 
@@ -47,16 +46,35 @@ namespace HotelBooking.Controllers.ControllerCustomer
                 {
                     foreach (var booking in customer.Bookings)
                     {
-                        table.AddRow("  ", "Booking ID:", booking.Id.ToString(), "Date:", booking.CheckInDate.ToString(), "Total Cost:", booking.TotalCostOfTheBooking.ToString());
+                        table.AddRow(
+                            "  ", 
+                            "Booking ID:",
+                            booking.Id
+                                .ToString(),
+                            "Date:", 
+                            booking.CheckInDate
+                                .ToString(), 
+                            "Total Cost:",
+                            booking.TotalCostOfTheBooking
+                                .ToString());
                         table.AddEmptyRow();
 
                         foreach (var room in booking.Rooms)
                         {
-                            table.AddRow("  ", "Room ID:", room.Id.ToString());
+                            table.AddRow(
+                                "  ",
+                                "Room ID:",
+                                room.Id
+                                    .ToString());
                         }
                         table.AddEmptyRow();
 
-                        table.AddRow("  ", "Invoice ID:", booking.Invoice?.Id.ToString() ?? "No invoice", "Total Cost:", booking.Invoice?.CostAmount.ToString() ?? "N/A");
+                        table.AddRow("  ", 
+                            "Invoice ID:",
+                            booking.Invoice?.Id
+                                .ToString() ?? "No invoice", 
+                            "Total Cost:", booking.Invoice?.CostAmount
+                                .ToString() ?? "N/A");
                         table.AddEmptyRow();
                     }
                 }
@@ -77,40 +95,41 @@ namespace HotelBooking.Controllers.ControllerCustomer
         public void ShowAllActiveCustomers()
         {
             var customers = _customerRead.GetAllActiveCustomerInDatabase();
-            DisplayCustomerInformation.PrintCustomersAll(customers, "There are no active customers.");
+            DisplayCustomerInformation.PrintCustomersAll
+                (customers, "There are no active customers.");
             ConsoleMessagePrinter.DisplayMessage();
         }
 
         public void ShowAllInactiveCustomers()
         {
             var customers = _customerRead.GetAllInactiveCustomersInDatabase();
-            DisplayCustomerInformation.PrintCustomersOnly(customers, "There are no inactive customers.");
+            DisplayCustomerInformation.PrintCustomersOnlyDetailes
+                (customers, "There are no inactive customers.");
             ConsoleMessagePrinter.DisplayMessage();
         }
 
         public void ShowAllDeletedCustomers()
         {
             var customers = _customerRead.GetAllDeletedCustomersInDatabase();
-            DisplayCustomerInformation.PrintCustomersOnly(customers, "There are no deleted customers.");
+            DisplayCustomerInformation.PrintCustomersOnlyDetailes
+                (customers, "There are no deleted customers.");
             ConsoleMessagePrinter.DisplayMessage();
         }
 
         public void ShowACustomersDetailes()
         {
             var customers = _customerRead.GetAllCustomersInDatabase();
-            DisplayCustomerInformation.PrintCustomersNames(customers, "There are no customers.");
+            DisplayCustomerInformation.PrintCustomersNamesAndID
+                (customers, "There are no customers.");
 
-            Console.WriteLine("Enter the ID of the Customer you want to look at: ");
-            var stringCustomerID = Console.ReadLine();
-
-            if (!int.TryParse(stringCustomerID, out int customerId))
+            if (!ValidatorCustomerId.TryGetCustomerId(out int customerId))
             {
-                Console.WriteLine("Please enter a valid number ID.");
                 return;
             }
 
             var customer = _customerRead.GetCustomerDetailes(customerId);
-            DisplayCustomerInformation.PrintCustomersAll(customer, $"No customer found with ID number: {customerId}.");
+            DisplayCustomerInformation.PrintCustomersAll
+                (customer, $"No customer found with ID number: {customerId}.");
             ConsoleMessagePrinter.DisplayMessage();
         }
     }

@@ -5,7 +5,7 @@ namespace HotelBooking.Utilities.Display
 {
     public class DisplayCustomerInformation
     {
-        public static void PrintCustomersNames(IEnumerable<Customer> customers, string messageIfEmpty)
+        public static void PrintCustomersNamesAndID(IEnumerable<Customer> customers, string messageIfEmpty)
         {
             if (customers == null || !customers.Any())
             {
@@ -28,7 +28,7 @@ namespace HotelBooking.Utilities.Display
 
             AnsiConsole.Write(table);
         }
-        public static void PrintCustomersOnly(IEnumerable<Customer> customers, string messageIfEmpty)
+        public static void PrintCustomersOnlyDetailes(IEnumerable<Customer> customers, string messageIfEmpty)
         {
             if (customers == null || !customers.Any())
             {
