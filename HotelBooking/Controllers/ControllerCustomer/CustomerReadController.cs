@@ -17,10 +17,7 @@ namespace HotelBooking.Controllers.ControllerCustomer
         }
         public void ShowAllCustomers()
         {
-            var customers = _customerRead.GetAllCustomersInDatabase()
-                .Include(c => c.Bookings)
-                .ThenInclude(b => b.Rooms)
-                .ToList();
+            var customers = _customerRead.GetAllCustomersInDatabase().ToList();
 
             if (customers == null || !customers.Any())
             {

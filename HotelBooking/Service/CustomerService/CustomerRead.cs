@@ -17,26 +17,32 @@ namespace HotelBooking.Service.CustomerService
         //Read
         public IQueryable<Customer> GetAllCustomersInDatabase()
         {
-            return _dbContext.Customers.Include(c => c.Bookings);
+            return _dbContext.Customers
+                .Include(c => c.Bookings!)
+                .ThenInclude(b => b.Rooms);
         }
         public IQueryable<Customer> GetAllActiveCustomerInDatabase()
         {
-            return _dbContext.Customers.Where(g => g.IsCustomerStatusActive);
+            return _dbContext.Customers
+                .Where(g => g.IsCustomerStatusActive);
         }
 
         public IQueryable<Customer> GetAllInactiveCustomersInDatabase()
         {
-            return _dbContext.Customers.Where(g => !g.IsCustomerStatusActive);
+            return _dbContext.Customers
+                .Where(g => !g.IsCustomerStatusActive);
         }
 
         public IQueryable<Customer> GetAllDeletedCustomersInDatabase()
         {
-            return _dbContext.Customers.Where(g => g.IsCustomerDeleted)
+            return _dbContext.Customers
+                .Where(g => g.IsCustomerDeleted)
                 ;
         }
         public IQueryable<Customer> GetCustomerDetailes(int id) 
         {
-            return _dbContext.Customers.Where(g => g.Id == id);
+            return _dbContext.Customers
+                .Where(g => g.Id == id);
         }
     }
 }
