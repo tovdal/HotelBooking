@@ -14,9 +14,8 @@ namespace HotelBooking.Data.Seeders
                     FirstName = "Chris",
                     LastName = "Bäck",
                     Email = "Chris.Bäck@live.com",
-                    PhoneNumber = "073-456-7890",
+                    PhoneNumber = "0734567890",
                     Adress = "123 Storgatan, Sundsvall",
-                    IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 },
                 new Customer
@@ -24,9 +23,8 @@ namespace HotelBooking.Data.Seeders
                     FirstName = "Jennifer",
                     LastName = "Larsson",
                     Email = "jennifer.Larsson@yahoo.com",
-                    PhoneNumber = "072-654-3210",
+                    PhoneNumber = "0726543210",
                     Adress = "456 Vintervägen, Happaranda",
-                    IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 },
                 new Customer
@@ -34,9 +32,8 @@ namespace HotelBooking.Data.Seeders
                     FirstName = "Wilma",
                     LastName = "Johnson",
                     Email = "Wilma.johnson@outlook.com",
-                    PhoneNumber = "070-123-4567",
+                    PhoneNumber = "0701234567",
                     Adress = "789 FrenchSteet, Québec",
-                    IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 },
                 new Customer
@@ -44,9 +41,8 @@ namespace HotelBooking.Data.Seeders
                     FirstName = "Bob",
                     LastName = "Ross",
                     Email = "bob.ross@gmail.com",
-                    PhoneNumber = "010-765-4321",
+                    PhoneNumber = "0107654321",
                     Adress = "321 Pine St, Woodsland",
-                    IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 },
                 new Customer
@@ -54,9 +50,8 @@ namespace HotelBooking.Data.Seeders
                     FirstName = "Raphael",
                     LastName = "Andersson",
                     Email = "raphael.Andersson@hotmail.com",
-                    PhoneNumber = "070-234-5678",
+                    PhoneNumber = "0702345678",
                     Adress = "1 Sand , Oasis",
-                    IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 }
             };

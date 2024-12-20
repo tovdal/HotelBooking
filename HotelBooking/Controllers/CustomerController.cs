@@ -33,15 +33,6 @@ namespace HotelBooking.Controllers
         {
             _customerReadController.ShowAllCustomersBookingsInvoices();
         }
-        public void ReadAllActive()
-        {
-            _customerReadController.ShowAllActiveCustomers();
-        }
-        public void ReadAllInactive()
-        {
-            _customerReadController.ShowAllInactiveCustomers();
-        }
-
         public void ReadAllDeleted()
         {
             _customerReadController.ShowAllDeletedCustomers();

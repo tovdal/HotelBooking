@@ -55,7 +55,6 @@ namespace HotelBooking.Controllers.ControllerCustomer
                     Email = customerEmail,
                     PhoneNumber = customerPhoneNumber,
                     Adress = customerAdress,
-                    IsCustomerStatusActive = true,
                     IsCustomerDeleted = false
                 };
 
@@ -71,7 +70,6 @@ namespace HotelBooking.Controllers.ControllerCustomer
                 table.AddRow("Email", customerEmail);
                 table.AddRow("Phone Number", customerPhoneNumber);
                 table.AddRow("Address", string.IsNullOrEmpty(customerAdress) ? "N/A" : customerAdress);
-                table.AddRow("Status", newCustomer.IsCustomerStatusActive ? "Active" : "Inactive");
                 table.AddRow("Deleted", newCustomer.IsCustomerDeleted ? "Yes" : "No");
                 AnsiConsole.Write(table);
 

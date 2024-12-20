@@ -92,22 +92,6 @@ namespace HotelBooking.Controllers.ControllerCustomer
             // Add Pagination can be found in richards powerpoint 
         }
 
-        public void ShowAllActiveCustomers()
-        {
-            var customers = _customerRead.GetAllActiveCustomerInDatabase();
-            DisplayCustomerInformation.PrintCustomersAll
-                (customers, "There are no active customers.");
-            ConsoleMessagePrinter.DisplayMessage();
-        }
-
-        public void ShowAllInactiveCustomers()
-        {
-            var customers = _customerRead.GetAllInactiveCustomersInDatabase();
-            DisplayCustomerInformation.PrintCustomersOnlyDetailes
-                (customers, "There are no inactive customers.");
-            ConsoleMessagePrinter.DisplayMessage();
-        }
-
         public void ShowAllDeletedCustomers()
         {
             var customers = _customerRead.GetAllDeletedCustomersInDatabase();

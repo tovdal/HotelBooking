@@ -4,8 +4,6 @@
     {
         void CreateCustomer();
         void ReadAllCustomers();
-        void ReadAllActive();
-        void ReadAllInactive();
         void ReadAllDeleted();
         void ReadACustomer();
         void UpdateACustomer();

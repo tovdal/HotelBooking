@@ -71,7 +71,6 @@ namespace HotelBooking.Utilities.Display
             table.AddColumn("Email");
             table.AddColumn("Phone Number");
             table.AddColumn("Address");
-            table.AddColumn("Active");
             table.AddColumn("Deleted");
             table.AddColumn("Bookings");
 
@@ -83,7 +82,6 @@ namespace HotelBooking.Utilities.Display
                     customer.Email,
                     customer.PhoneNumber,
                     customer.Adress ?? "N/A",
-                    customer.IsCustomerStatusActive ? "Yes" : "No",
                     customer.IsCustomerDeleted ? "Yes" : "No",
                     customer.Bookings?.Count.ToString() ?? "0"
                 );

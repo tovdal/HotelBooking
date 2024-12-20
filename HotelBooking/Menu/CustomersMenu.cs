@@ -23,8 +23,6 @@ namespace HotelBooking.Menu
             {
                 "Create a new Customer",
                 "Show all customers",
-                "Show all active customers",
-                "Show all inactive customers",
                 "Show all deleted customers",
                 "Show a Customer detailes",
                 "Update a Customer",
@@ -45,27 +43,21 @@ namespace HotelBooking.Menu
                         _customerController.ReadAllCustomers();
                         break;
                     case 2:
-                        _customerController.ReadAllActive();
-                        break;
-                    case 3:
-                        _customerController.ReadAllInactive();
-                        break;
-                    case 4:
                         _customerController.ReadAllDeleted();
                         break;
-                    case 5:
+                    case 3:
                         _customerController.ReadACustomer();
                         break;
-                    case 6:
+                    case 4:
                         _customerController.UpdateACustomer();
                         break;
-                    case 7:
+                    case 5:
                         _customerController.DeleteACustomer();
                         break;
-                    case 8:
+                    case 6:
                         _customerController.TakeBackDeletedCustomer();
                         break;
-                    case 9:
+                    case 7:
                         break;
                 }
             });
