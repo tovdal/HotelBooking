@@ -9,20 +9,19 @@ namespace HotelBooking.Controllers
         private readonly ICustomerCreaterController _customerCreaterController;
         private readonly ICustomerReadController _customerReadController;
         private readonly ICustomerUpdateController _customerUpdateController;
+        private readonly ICustomerDeleteController _customerDeleteController;
         private readonly CustomerRead _customerRead;
-        //private readonly CustomerUpdate _guestUpdate;
-        //private readonly CustomerDelete _guestDelete;
 
         public CustomerController
             (ICustomerCreaterController customerCreaterController, 
-            ICustomerReadController customerReadController, 
-            ICustomerUpdateController customerUpdateController)
+            ICustomerReadController customerReadController,
+            ICustomerUpdateController customerUpdateController,
+            ICustomerDeleteController customerDeleteController)
         {
             _customerCreaterController = customerCreaterController;
             _customerReadController = customerReadController;
             _customerUpdateController = customerUpdateController;
-            //_guestUpdate = guestUpdate;
-            //_guestDelete = guestDelete;
+            _customerDeleteController = customerDeleteController;
         }
 
         public void CreateCustomer()
@@ -58,11 +57,11 @@ namespace HotelBooking.Controllers
         }
         public void DeleteACustomer()
         {
-
+            _customerDeleteController.DeleteCustomer();
         }
         public void TakeBackDeletedCustomer()
         {
-
+            _customerUpdateController.GetBackDeletedCustomer();
         }
     }
 }

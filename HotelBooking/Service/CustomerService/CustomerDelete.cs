@@ -1,12 +1,15 @@
-﻿namespace HotelBooking.Service.CustomerService
+﻿using HotelBooking.Models;
+
+namespace HotelBooking.Service.CustomerService
 {
-    internal class CustomerDelete
+    public class CustomerDelete
     {
+
         //SoftDelete
         //        // Delete
-        public void SoftDeleteCustomer()
-        {
-
-        }
+        //public IQueryable<Customer> SoftDeleteCustomer()
+        //{
+            
+        //}
     }
 }

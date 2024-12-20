@@ -145,18 +145,18 @@ namespace HotelBooking.Controllers.ControllerCustomer
                     continue; 
                 }
                 bool deleteCustomer = AnsiConsole.Confirm
-                    ($"Do you want to delete customer: {customerToUpdate.FirstName} " +
+                    ($"Do you want to take back delete customer: {customerToUpdate.FirstName} " +
                     $"{customerToUpdate.LastName}?");
                 
                 if (deleteCustomer)
                 {
-                    customerToUpdate.IsCustomerDeleted = true;
+                    customerToUpdate.IsCustomerDeleted = false;
                     _dbContext.SaveChanges();
-                    AnsiConsole.MarkupLine("[bold green]Customer successfully deleted![/]");
+                    AnsiConsole.MarkupLine("[bold green]Customer successfully un-deleted![/]");
                 }
                 else
                 {
-                    AnsiConsole.MarkupLine("[bold red]Deletion canceled.[/]");
+                    AnsiConsole.MarkupLine("[bold red]Retake canceled.[/]");
                 }
 
                 Console.Clear();

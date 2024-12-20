@@ -39,6 +39,7 @@ namespace HotelBooking.Config
             builder.RegisterType<CustomerCreateController>().As<ICustomerCreaterController>();
             builder.RegisterType<CustomerReadController>().As<ICustomerReadController>();
             builder.RegisterType<CustomerUpdateController>().As<ICustomerUpdateController>();
+            builder.RegisterType<CustomerDeleteController>().As<ICustomerDeleteController>();
 
 
             builder.RegisterType<CustomerCreate>().AsSelf();

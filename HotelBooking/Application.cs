@@ -1,8 +1,5 @@
-﻿using HotelBooking.Config;
-using HotelBooking.Data;
+﻿using HotelBooking.Data;
 using HotelBooking.Menu.Startup;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace HotelBooking
 {
@@ -22,9 +19,10 @@ namespace HotelBooking
         public void Run()
         {
 
-                _dataInitializer.MigrateAndSeedData();
-                _mainHotelMenu.ShowMenu();
-            
+            _dataInitializer.MigrateAndSeedData();
+
+            _mainHotelMenu.ShowMenu();
+
         }
     }
 }
