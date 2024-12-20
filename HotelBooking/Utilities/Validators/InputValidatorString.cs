@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Utilities
+﻿namespace HotelBooking.Utilities.Validators
 {
     public class InputValidatorString
     {
