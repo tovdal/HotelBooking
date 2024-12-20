@@ -26,7 +26,8 @@ namespace HotelBooking.Controllers.ControllerCustomer
             bool isRunning = true;
             while (isRunning)
             {
-                var customers = _customerRead.GetAllCustomersInDatabase().ToList();
+                var customers = _customerRead.GetAllCustomersInDatabase()
+                    .ToList();
                 DisplayCustomerInformation.PrintCustomersNamesAndID(customers,
                     "There are no customers registered");
 
@@ -45,7 +46,8 @@ namespace HotelBooking.Controllers.ControllerCustomer
                 Console.Clear();
 
                 var customer = _customerRead.GetCustomerDetailes(customerId);
-                DisplayCustomerInformation.PrintCustomersOnlyDetailes(customer, $"No customer found with ID number: {customerId}.");
+                DisplayCustomerInformation.PrintCustomersOnlyDetailes
+                    (customer, $"No customer found with ID number: {customerId}.");
 
                 AnsiConsole.MarkupLine("[bold green]Update the customer[/]");
 
@@ -117,7 +119,8 @@ namespace HotelBooking.Controllers.ControllerCustomer
             bool isRunning = true;
             while (isRunning)
             {
-                var customers = _customerRead.GetAllDeletedCustomersInDatabase().ToList();
+                var customers = _customerRead.GetAllDeletedCustomersInDatabase()
+                    .ToList();
                 DisplayCustomerInformation.PrintCustomersOnlyDetailes
                     (customers, "There are no deleted customers.");
 
@@ -129,17 +132,41 @@ namespace HotelBooking.Controllers.ControllerCustomer
                     isRunning = false;
                     return;
                 }
+
+                if (!ValidatorCustomerId.TryGetCustomerId(out int customerId))
+                {
+                    return;
+                }
+                var customerToUpdate = _customerUpdate.ReturnCustomerWithId(customerId);
+
+                if (customerToUpdate == null || !customerToUpdate.IsCustomerDeleted) 
+                { 
+                    Console.WriteLine($"No deleted customer found with ID number: {customerId}."); 
+                    continue; 
+                }
+                bool deleteCustomer = AnsiConsole.Confirm
+                    ($"Do you want to delete customer: {customerToUpdate.FirstName} " +
+                    $"{customerToUpdate.LastName}?");
+                
+                if (deleteCustomer)
+                {
+                    customerToUpdate.IsCustomerDeleted = true;
+                    _dbContext.SaveChanges();
+                    AnsiConsole.MarkupLine("[bold green]Customer successfully deleted![/]");
+                }
                 else
                 {
-                    if (!ValidatorCustomerId.TryGetCustomerId(out int customerId))
-                    {
-                        return;
-                    }
-                    var customerToUpdate = _customerUpdate.ReturnCustomerWithId(customerId);
+                    AnsiConsole.MarkupLine("[bold red]Deletion canceled.[/]");
                 }
+
+                Console.Clear();
+                bool addAnother = AnsiConsole.Confirm("Do you want to restore another deleted customer?");
+                if (!addAnother)
+                {
+                    isRunning = false;
+                }
+
             }
         }
-
-
     }
 }

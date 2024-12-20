@@ -14,7 +14,6 @@ namespace HotelBooking.Service.CustomerService
             _dbContext = dbContext;
             Console.WriteLine("DbContext is configured: " + (_dbContext != null));
         }
-        //Read
         public IQueryable<Customer> GetAllCustomersInDatabase()
         {
             return _dbContext.Customers
