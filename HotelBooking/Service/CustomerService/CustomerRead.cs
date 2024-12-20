@@ -39,10 +39,15 @@ namespace HotelBooking.Service.CustomerService
                 .Where(g => g.IsCustomerDeleted)
                 ;
         }
-        public IQueryable<Customer> GetCustomerDetailes(int id) 
+        public IQueryable<Customer> GetCustomerDetailes(int id)
         {
             return _dbContext.Customers
                 .Where(g => g.Id == id);
+        }
+        public bool GetCustomersIsDeleted()
+        {
+            return _dbContext.Customers
+                .Any(c => c.IsCustomerDeleted);
         }
     }
 }
