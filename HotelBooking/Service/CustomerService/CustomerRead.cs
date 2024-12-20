@@ -17,7 +17,7 @@ namespace HotelBooking.Service.CustomerService
         //Read
         public IQueryable<Customer> GetAllCustomersInDatabase()
         {
-                return _dbContext.Customers.Include(c => c.Bookings);
+            return _dbContext.Customers.Include(c => c.Bookings);
         }
         public IQueryable<Customer> GetAllActiveCustomerInDatabase()
         {

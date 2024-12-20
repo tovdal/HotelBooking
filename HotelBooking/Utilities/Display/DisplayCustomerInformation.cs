@@ -5,6 +5,29 @@ namespace HotelBooking.Utilities.Display
 {
     public class DisplayCustomerInformation
     {
+        public static void PrintCustomersNames(IEnumerable<Customer> customers, string messageIfEmpty)
+        {
+            if (customers == null || !customers.Any())
+            {
+                AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
+                return;
+            }
+
+            var table = new Table();
+            table.AddColumn("Customer ID");
+            table.AddColumn("Name");
+
+            foreach (var customer in customers)
+            {
+                table.AddRow(
+                    customer.Id.ToString(),
+                    $"{customer.FirstName} {customer.LastName}"
+                );
+                table.AddEmptyRow();
+            }
+
+            AnsiConsole.Write(table);
+        }
         public static void PrintCustomersOnly(IEnumerable<Customer> customers, string messageIfEmpty)
         {
             if (customers == null || !customers.Any())

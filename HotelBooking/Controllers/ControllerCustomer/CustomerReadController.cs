@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerCustomer.Interface;
+using HotelBooking.Models;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display;
 using HotelBooking.Utilities.Display.Message;
@@ -99,6 +100,9 @@ namespace HotelBooking.Controllers.ControllerCustomer
 
         public void ShowACustomersDetailes()
         {
+            var customers = _customerRead.GetAllCustomersInDatabase();
+            DisplayCustomerInformation.PrintCustomersNames(customers, "There are no customers.");
+
             Console.WriteLine("Enter the ID of the Customer you want to look at: ");
             var stringCustomerID = Console.ReadLine();
 
