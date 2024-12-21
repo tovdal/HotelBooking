@@ -1,4 +1,4 @@
-﻿using HotelBooking.Controllers.ControllerCustomer.Interface;
+﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Controllers.Interfaces;
 
 namespace HotelBooking.Controllers

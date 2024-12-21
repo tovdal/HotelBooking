@@ -1,11 +1,11 @@
-﻿using HotelBooking.Controllers.ControllerCustomer.Interface;
+﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
-namespace HotelBooking.Controllers.ControllerCustomer
+namespace HotelBooking.Controllers.ControllerCustomers
 {
     public class CustomerReadController : ICustomerReadController
     {

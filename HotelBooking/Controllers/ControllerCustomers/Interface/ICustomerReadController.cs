@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Controllers.ControllerCustomer.Interface
+﻿namespace HotelBooking.Controllers.ControllerCustomers.Interface
 {
     public interface ICustomerReadController
     {
