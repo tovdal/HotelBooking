@@ -14,7 +14,7 @@ namespace HotelBooking.Controllers.ControllerRooms
         {
             _roomRead = roomRead;
         }
-        public void ShowAllCustomers()
+        public void ShowAllRooms()
         {
             // needs revisiting. takes deleted customers. It should not do that.
             var rooms = _roomRead.GetAllRoomsInDatabase().ToList();
@@ -61,7 +61,7 @@ namespace HotelBooking.Controllers.ControllerRooms
             ConsoleMessagePrinter.DisplayMessage();
         }
 
-        public void ShowACustomersDetailes()
+        public void ShowARoomDetailes()
         {
             var rooms = _roomRead.GetAllAvailableRooms();
             DisplayRoomInformation.PrintRoomOnlyDetailes

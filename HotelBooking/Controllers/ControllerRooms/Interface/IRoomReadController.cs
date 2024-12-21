@@ -2,8 +2,8 @@
 {
     public interface IRoomReadController
     {
-        void ShowAllCustomers();
+        void ShowAllRooms();
         void ShowAllDeletedRooms();
-        void ShowACustomersDetailes();
+        void ShowARoomDetailes();
     }
 }
