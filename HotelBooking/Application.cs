@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Menu.Startup;
+using HotelBooking.Utilities.Display;
 
 namespace HotelBooking
 {
@@ -18,11 +19,9 @@ namespace HotelBooking
 
         public void Run()
         {
-
             _dataInitializer.MigrateAndSeedData();
-
+            ConsoleScreenManager.ScreenSize();
             _mainHotelMenu.ShowMenu();
-
         }
     }
 }
