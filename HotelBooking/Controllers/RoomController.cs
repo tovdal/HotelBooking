@@ -1,57 +1,49 @@
-﻿using HotelBooking.Service.RoomService;
+﻿using HotelBooking.Controllers.ControllerRooms.Interface;
+using HotelBooking.Controllers.Interfaces;
+using HotelBooking.Service.RoomService;
 
 namespace HotelBooking.Controllers
 {
-    public class RoomController
+    public class RoomController : IRoomController
     {
-        private readonly RoomRead _roomRead;
+        private readonly IRoomCreateController _roomCreateController;
+        private readonly IRoomReadController _roomReadController;
 
-        public RoomController(RoomRead roomRead)
+        public RoomController(IRoomCreateController roomCreateController, IRoomReadController roomReadController)
         {
-            _roomRead = roomRead;
+            _roomCreateController = roomCreateController;
+            _roomReadController = roomReadController;
         }
-        //public void CreateNewRoom()
-        //{
-        //    Customer.Add(newRoom);
-        //    // Richard said that this was important or it wont save to database
-        //    dbContext.SaveChanges(); // the dbContext not created yet
-        //}
-
-        ////Read
-        public void ShowAllRooms()
+        public void CreateRoom()
         {
-            var rooms = _roomRead.GetAllRoomsInDatabase();
-            foreach (var room in rooms)
-            {
-                Console.WriteLine(room);
-            }
+           _roomCreateController.CreateANewRoom();
+        }
+        public void ReadAllRooms()
+        {
+            _roomReadController.ShowAllRooms();
         }
 
-        //public List<Room> GetTakenRoomsInDatabase()
-        //{
-        //    return
-        //}
-
-        //public List<Room> GetDeteletRoomsInDatabase()
-        //{
-        //    return
-        //}
-
-
-        //Update
-        public void UpdateRoomStatus()
+        public void ReadAllDeletedRooms()
         {
-
+            _roomReadController.ShowAllDeletedRooms();
         }
-        public void TakeBackSoftDeletedRoom()
+        public void ReadARoomDetailes()
         {
-
+            _roomReadController.ShowARoomDetailes();
+        }
+        public void UpdateARoom()
+        {
+            throw new NotImplementedException();
         }
 
-        // Delete
-        public void SoftDeleteRoom()
+        public void DeleteARoom()
         {
+            throw new NotImplementedException();
+        }
 
+        public void TakeBackDeletedRoom()
+        {
+            throw new NotImplementedException();
         }
     }
 }
