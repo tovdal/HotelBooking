@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Models;
 using Spectre.Console;
 
-namespace HotelBooking.Utilities.Display
+namespace HotelBooking.Utilities.Display.PrintInformation
 {
     public class DisplayCustomerInformation
     {
