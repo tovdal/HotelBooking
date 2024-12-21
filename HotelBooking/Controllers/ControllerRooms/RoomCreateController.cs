@@ -5,10 +5,10 @@ using Spectre.Console;
 
 namespace HotelBooking.Controllers.ControllerRooms
 {
-    public class RoomControllerCreate : IRoomControllerCreate
+    public class RoomCreateController : IRoomCreateController
     {
         private readonly RoomCreate _roomCreate;
-        public RoomControllerCreate(RoomCreate roomCreate)
+        public RoomCreateController(RoomCreate roomCreate)
         {
             _roomCreate = roomCreate;
         }

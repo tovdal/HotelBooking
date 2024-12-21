@@ -1,6 +1,6 @@
 ﻿namespace HotelBooking.Controllers.ControllerRooms.Interface
 {
-    public interface IRoomControllerCreate
+    public interface IRoomCreateController
     {
         void CreateANewRoom();
     }
