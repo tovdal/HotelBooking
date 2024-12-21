@@ -14,11 +14,11 @@ namespace HotelBooking.Service.CustomerService
             _dbContext = dbContext;
             Console.WriteLine("DbContext is configured: " + (_dbContext != null));
         }
-        public IQueryable<Customer> GetAllCustomersInDatabase()
+        public IQueryable<Customer> GetAllActiveCustomers()
         {
             return _dbContext.Customers
-                .Include(c => c.Bookings!)
-                .ThenInclude(b => b.Rooms);
+                .Where(c => !c.IsCustomerDeleted);
+                               
         }
         public IQueryable<Customer> GetAllDeletedCustomersInDatabase()
         {

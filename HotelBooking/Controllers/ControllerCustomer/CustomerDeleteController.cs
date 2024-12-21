@@ -25,7 +25,7 @@ namespace HotelBooking.Controllers.ControllerCustomer
             bool isRunning = true;
             while (isRunning)
             {
-                var customers = _customerRead.GetAllCustomersInDatabase().ToList();
+                var customers = _customerRead.GetAllActiveCustomers().ToList();
                 DisplayCustomerInformation.PrintCustomersNamesAndID(customers,
                     "There are no customers registered");
 

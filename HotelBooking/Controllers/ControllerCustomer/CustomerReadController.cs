@@ -14,9 +14,10 @@ namespace HotelBooking.Controllers.ControllerCustomer
         {
             _customerRead = customerRead;
         }
-        public void ShowAllCustomersBookingsInvoices()
+        public void ShowAllCustomers()
         {
-            var customers = _customerRead.GetAllCustomersInDatabase().ToList();
+            // needs revisiting. takes deleted customers. It should not do that.
+            var customers = _customerRead.GetAllActiveCustomers().ToList();
 
             if (customers == null || !customers.Any())
             {
@@ -24,12 +25,12 @@ namespace HotelBooking.Controllers.ControllerCustomer
                 return;
             }
 
-            var table = new Table();
-            table.AddColumn("Customer ID");
-            table.AddColumn("Name");
-            table.AddColumn("Email");
-            table.AddColumn("Phone Number");
-            table.AddColumn("Address");
+                var table = new Table();
+                table.AddColumn("Customer ID");
+                table.AddColumn("Name");
+                table.AddColumn("Email");
+                table.AddColumn("Phone Number");
+                table.AddColumn("Address");
 
             foreach (var customer in customers)
             {
@@ -41,54 +42,10 @@ namespace HotelBooking.Controllers.ControllerCustomer
                     customer.Adress ?? "N/A"
                 );
                 table.AddEmptyRow();
-
-                if (customer.Bookings != null && customer.Bookings.Any())
-                {
-                    foreach (var booking in customer.Bookings)
-                    {
-                        table.AddRow(
-                            "  ", 
-                            "Booking ID:",
-                            booking.Id
-                                .ToString(),
-                            "Date:", 
-                            booking.CheckInDate
-                                .ToString(), 
-                            "Total Cost:",
-                            booking.TotalCostOfTheBooking
-                                .ToString());
-                        table.AddEmptyRow();
-
-                        foreach (var room in booking.Rooms)
-                        {
-                            table.AddRow(
-                                "  ",
-                                "Room ID:",
-                                room.Id
-                                    .ToString());
-                        }
-                        table.AddEmptyRow();
-
-                        table.AddRow("  ", 
-                            "Invoice ID:",
-                            booking.Invoice?.Id
-                                .ToString() ?? "No invoice", 
-                            "Total Cost:", booking.Invoice?.CostAmount
-                                .ToString() ?? "N/A");
-                        table.AddEmptyRow();
-                    }
-                }
-                else
-                {
-                    table.AddRow("  ", "No bookings found.");
-                    table.AddEmptyRow();
-                }
             }
 
-            AnsiConsole.Write(table);
-            ConsoleMessagePrinter.DisplayMessage();
-
-
+                AnsiConsole.Write(table);
+                ConsoleMessagePrinter.DisplayMessage();
             // Add Pagination can be found in richards powerpoint 
         }
 
@@ -102,7 +59,7 @@ namespace HotelBooking.Controllers.ControllerCustomer
 
         public void ShowACustomersDetailes()
         {
-            var customers = _customerRead.GetAllCustomersInDatabase();
+            var customers = _customerRead.GetAllActiveCustomers();
             DisplayCustomerInformation.PrintCustomersNamesAndID
                 (customers, "There are no customers.");
 
