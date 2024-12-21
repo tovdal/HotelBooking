@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Controllers.Interfaces
 {
-    internal interface IRoomController
+    public interface IRoomController
     {
+        void CreateRoom();
+        void ReadAllRooms();
+        void ReadAllDeletedRooms();
+        void ReadARoomDetailes();
+        void UpdateARoom();
+        void DeleteARoom();
+        void TakeBackDeletedRoom();
     }
 }
