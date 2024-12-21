@@ -2,6 +2,8 @@
 using HotelBooking.Controllers;
 using HotelBooking.Controllers.ControllerCustomers;
 using HotelBooking.Controllers.ControllerCustomers.Interface;
+using HotelBooking.Controllers.ControllerRooms;
+using HotelBooking.Controllers.ControllerRooms.Interface;
 using HotelBooking.Controllers.Interfaces;
 using HotelBooking.Data;
 using HotelBooking.Data.Seeders;
@@ -9,6 +11,7 @@ using HotelBooking.Menu;
 using HotelBooking.Menu.Actions;
 using HotelBooking.Menu.Startup;
 using HotelBooking.Service.CustomerService;
+using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.Menu;
 
 namespace HotelBooking.Config
@@ -41,6 +44,13 @@ namespace HotelBooking.Config
             builder.RegisterType<CustomerUpdateController>().As<ICustomerUpdateController>();
             builder.RegisterType<CustomerDeleteController>().As<ICustomerDeleteController>();
 
+            builder.RegisterType<RoomController>().As<IRoomController>();
+            builder.RegisterType<RoomCreateController>().As<IRoomCreateController>();
+            builder.RegisterType<RoomReadController>().As<IRoomReadController>();
+
+
+            builder.RegisterType<RoomCreate>().AsSelf();
+            builder.RegisterType<RoomRead>().AsSelf();
 
             builder.RegisterType<CustomerCreate>().AsSelf();
             builder.RegisterType<CustomerRead>().AsSelf();

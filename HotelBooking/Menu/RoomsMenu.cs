@@ -1,4 +1,5 @@
-﻿using HotelBooking.Menu.Actions;
+﻿using HotelBooking.Controllers.Interfaces;
+using HotelBooking.Menu.Actions;
 using HotelBooking.Service.MenuService;
 using HotelBooking.Utilities.Display.Menu;
 
@@ -7,54 +8,59 @@ namespace HotelBooking.Menu
     public class RoomsMenu : IMainMenuAction
     {
         private readonly MenuDisplay _menuDisplay;
-        private readonly IRoomsMenuAction[] _actionsRoomsMenu;
         private readonly MenuHandler _menuHandler;
+        private readonly IRoomController _roomController;
 
-        public RoomsMenu(MenuDisplay menuDisplay)
+        public RoomsMenu(MenuDisplay menuDisplay, IRoomController roomController)
         {
             _menuDisplay = menuDisplay;
             _menuHandler = new MenuHandler(_menuDisplay, new MenuNavigator());
-            _actionsRoomsMenu = InitializeRoomActions();
+            _roomController = roomController;
         }
 
         public void ExecuteMainMenuAction()
         {
-            _menuDisplay.PrintMenuText();
             List<string> menuItems = new List<string>()
             {
-                "Create a new room",
-                "Show all available rooms",
-                "Show all taken rooms",
-                "Show deleted rooms",
-                "Update a room",
-                "Delete a room",
-                "Take back a deleted room",
+                "Create a new Room",
+                "Show all Rooms",
+                "Show all deleted Rooms",
+                "Show a Room's detailes",
+                "Update a Room",
+                "Delete a Room",
+                "Take back a deleted Room",
                 "Back to main menu"
             };
 
-            //MenuHandler
-            _menuHandler
-                .ShowMenu(menuItems, selectedIndex =>
+            _menuHandler.ShowMenu(menuItems, selectedIndex =>
             {
-                if (selectedIndex < _actionsRoomsMenu.Length)
+                switch (selectedIndex)
                 {
-                    _actionsRoomsMenu[selectedIndex].ExecuteRoomAction();
+                    case 0:
+                        _roomController.CreateRoom();
+                        break;
+                    case 1:
+                        _roomController.ReadAllRooms();
+                        break;
+                    case 2:
+                        _roomController.ReadAllDeletedRooms();
+                        break;
+                    case 3:
+                        _roomController.ReadARoomDetailes();
+                        break;
+                    case 4:
+                        _roomController.UpdateARoom();
+                        break;
+                    case 5:
+                        _roomController.DeleteARoom();
+                        break;
+                    case 6:
+                        _roomController.TakeBackDeletedRoom();
+                        break;
+                    case 7:
+                        break;
                 }
             });
-        }
-
-        private IRoomsMenuAction[] InitializeRoomActions()
-        {
-            return new IRoomsMenuAction[]
-            {
-            //new CreateRoomAction(),
-            //new ShowAvailableRoomsAction(),
-            //new ShowTakenRoomsAction(),
-            //new ShowDeletedRoomsAction(),
-            //new UpdateRoomAction(),
-            //new DeleteRoomAction(),
-            //new TakeBackDeletedRoomAction()
-            };
         }
     }
 }
