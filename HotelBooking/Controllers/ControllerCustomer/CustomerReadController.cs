@@ -25,12 +25,12 @@ namespace HotelBooking.Controllers.ControllerCustomer
                 return;
             }
 
-                var table = new Table();
-                table.AddColumn("Customer ID");
-                table.AddColumn("Name");
-                table.AddColumn("Email");
-                table.AddColumn("Phone Number");
-                table.AddColumn("Address");
+            var table = new Table();
+            table.AddColumn("Customer ID");
+            table.AddColumn("Name");
+            table.AddColumn("Email");
+            table.AddColumn("Phone Number");
+            table.AddColumn("Address");
 
             foreach (var customer in customers)
             {
@@ -44,8 +44,8 @@ namespace HotelBooking.Controllers.ControllerCustomer
                 table.AddEmptyRow();
             }
 
-                AnsiConsole.Write(table);
-                ConsoleMessagePrinter.DisplayMessage();
+            AnsiConsole.Write(table);
+            ConsoleMessagePrinter.DisplayMessage();
             // Add Pagination can be found in richards powerpoint 
         }
 

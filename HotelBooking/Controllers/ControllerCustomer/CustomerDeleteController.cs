@@ -1,11 +1,9 @@
-﻿using HotelBooking.Service.CustomerService;
-using HotelBooking.Utilities.Display.Message;
+﻿using HotelBooking.Controllers.ControllerCustomer.Interface;
+using HotelBooking.Data;
+using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display;
 using HotelBooking.Utilities.Validators;
-using HotelBooking.Controllers.ControllerCustomer.Interface;
-using Microsoft.EntityFrameworkCore;
 using Spectre.Console;
-using HotelBooking.Data;
 
 namespace HotelBooking.Controllers.ControllerCustomer
 {
@@ -40,7 +38,7 @@ namespace HotelBooking.Controllers.ControllerCustomer
                     Console.WriteLine($"No customer found with ID number: {customerId}.");
                     return;
                 }
-                
+
                 bool selectedCustomerAsDeleted = AnsiConsole.Confirm
                     ($"Do you want to delete customer: {customerToDelete.FirstName} " +
                     $"{customerToDelete.LastName}?");

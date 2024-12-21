@@ -139,15 +139,15 @@ namespace HotelBooking.Controllers.ControllerCustomer
                 }
                 var customerToUpdate = _customerUpdate.ReturnCustomerWithId(customerId);
 
-                if (customerToUpdate == null || !customerToUpdate.IsCustomerDeleted) 
-                { 
-                    Console.WriteLine($"No deleted customer found with ID number: {customerId}."); 
-                    continue; 
+                if (customerToUpdate == null || !customerToUpdate.IsCustomerDeleted)
+                {
+                    Console.WriteLine($"No deleted customer found with ID number: {customerId}.");
+                    continue;
                 }
                 bool deleteCustomer = AnsiConsole.Confirm
                     ($"Do you want to take back delete customer: {customerToUpdate.FirstName} " +
                     $"{customerToUpdate.LastName}?");
-                
+
                 if (deleteCustomer)
                 {
                     customerToUpdate.IsCustomerDeleted = false;

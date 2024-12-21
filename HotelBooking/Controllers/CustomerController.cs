@@ -1,6 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerCustomer.Interface;
 using HotelBooking.Controllers.Interfaces;
-using HotelBooking.Service.CustomerService;
 
 namespace HotelBooking.Controllers
 {
@@ -10,10 +9,9 @@ namespace HotelBooking.Controllers
         private readonly ICustomerReadController _customerReadController;
         private readonly ICustomerUpdateController _customerUpdateController;
         private readonly ICustomerDeleteController _customerDeleteController;
-        private readonly CustomerRead _customerRead;
 
         public CustomerController
-            (ICustomerCreaterController customerCreaterController, 
+            (ICustomerCreaterController customerCreaterController,
             ICustomerReadController customerReadController,
             ICustomerUpdateController customerUpdateController,
             ICustomerDeleteController customerDeleteController)
