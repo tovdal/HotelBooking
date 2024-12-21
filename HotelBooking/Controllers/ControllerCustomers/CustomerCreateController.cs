@@ -58,8 +58,6 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     IsCustomerDeleted = false
                 };
 
-                _customerCreate.AddCustomer(newCustomer);
-
                 Console.Clear();
                 var table = new Table();
                 table.AddColumn("[bold]Field[/]");
@@ -76,6 +74,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 bool confirm = AnsiConsole.Confirm("\n[bold yellow]Are all details correct?[/]");
                 if (confirm)
                 {
+                    _customerCreate.AddCustomer(newCustomer);
                     AnsiConsole.MarkupLine("[bold green]Customer successfully registered![/]");
                 }
                 else

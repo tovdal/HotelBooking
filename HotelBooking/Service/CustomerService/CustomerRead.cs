@@ -12,7 +12,7 @@ namespace HotelBooking.Service.CustomerService
         public CustomerRead(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            Console.WriteLine("DbContext is configured: " + (_dbContext != null));
+            //Console.WriteLine("DbContext is configured: " + (_dbContext != null));
         }
         public IQueryable<Customer> GetAllActiveCustomers()
         {

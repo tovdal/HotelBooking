@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\ControllerRooms\Interface\" />
     <Folder Include="Migrations\" />
     <Folder Include="Service\Interfaces\" />
   </ItemGroup>

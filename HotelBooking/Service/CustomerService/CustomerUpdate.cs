@@ -11,14 +11,9 @@ namespace HotelBooking.Service.CustomerService
         {
             _dbContext = dbContext;
         }
-        // Update
         public Customer ReturnCustomerWithId(int id)
         {
            return _dbContext.Customers.First(c => c.Id == id);
-        }
-        public void TakeBackSoftDeletedCustomer()
-        {
-            
         }
     }
 }

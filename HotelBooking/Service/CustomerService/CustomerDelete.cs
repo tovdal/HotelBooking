@@ -11,5 +11,7 @@ namespace HotelBooking.Service.CustomerService
         //{
             
         //}
+
+        //Ta bort?
     }
 }
