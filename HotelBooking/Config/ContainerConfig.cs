@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using HotelBooking.Controllers;
-using HotelBooking.Controllers.ControllerCustomer;
-using HotelBooking.Controllers.ControllerCustomer.Interface;
+using HotelBooking.Controllers.ControllerCustomers;
+using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Controllers.Interfaces;
 using HotelBooking.Data;
 using HotelBooking.Data.Seeders;

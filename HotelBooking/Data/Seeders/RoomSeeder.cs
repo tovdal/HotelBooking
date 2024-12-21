@@ -15,6 +15,7 @@ namespace HotelBooking.Data.Seeders
                     TypeOfRooms = TypeOfRoom.Double,
                     PricePerNight = 850,
                     IsAvailable = true,
+                    IsRoomDeleted = false,
                     IsExtraBedAvailable = true
 
                 },
@@ -25,6 +26,7 @@ namespace HotelBooking.Data.Seeders
                     TypeOfRooms = TypeOfRoom.Singel,
                     PricePerNight = 600,
                     IsAvailable = true,
+                    IsRoomDeleted = false,
                     IsExtraBedAvailable = false
                 },
                 new Room
@@ -34,6 +36,7 @@ namespace HotelBooking.Data.Seeders
                     TypeOfRooms = TypeOfRoom.Singel,
                     PricePerNight = 700,
                     IsAvailable = true,
+                    IsRoomDeleted = false,
                     IsExtraBedAvailable = false
                 },
                 new Room
@@ -43,6 +46,7 @@ namespace HotelBooking.Data.Seeders
                     TypeOfRooms = TypeOfRoom.Double,
                     PricePerNight = 950,
                     IsAvailable = true,
+                    IsRoomDeleted = false,
                     IsExtraBedAvailable = true
                 },
                  new Room
@@ -52,6 +56,7 @@ namespace HotelBooking.Data.Seeders
                     TypeOfRooms = TypeOfRoom.Double,
                     PricePerNight = 1200,
                     IsAvailable = true,
+                    IsRoomDeleted = false,
                     IsExtraBedAvailable = true
                 }
             };
