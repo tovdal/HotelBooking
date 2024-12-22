@@ -16,6 +16,11 @@ namespace HotelBooking.Service.RoomService
         {
             return _dbContext.Rooms.ToList();
         }
+        public IQueryable<Room> GetAllActiveRooms()
+        {
+            return _dbContext.Rooms
+                .Where(r => !r.IsRoomDeleted);
+        }
 
         public IQueryable<Room> GetAllAvailableRooms()
         {

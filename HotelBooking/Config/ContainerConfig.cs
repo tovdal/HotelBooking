@@ -50,6 +50,7 @@ namespace HotelBooking.Config
             builder.RegisterType<RoomCreateController>().As<IRoomCreateController>();
             builder.RegisterType<RoomReadController>().As<IRoomReadController>();
             builder.RegisterType<RoomUpdateController>().As<IRoomUpdateController>();
+            builder.RegisterType<RoomDeleteController>().As<IRoomDeleteController>();
 
 
             builder.RegisterType<RoomCreate>().AsSelf();
