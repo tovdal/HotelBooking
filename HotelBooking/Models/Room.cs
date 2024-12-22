@@ -9,6 +9,7 @@
         public decimal PricePerNight { get; set; }
         public bool IsAvailable { get; set; }
         public bool IsRoomDeleted { get; set; }
+        public int? ExtraBedsCount { get; set; }
         public bool IsExtraBedAvailable { get; set; } 
     }
     public enum TypeOfRoom
