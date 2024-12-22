@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Data;
 using HotelBooking.Service.CustomerService;
-using HotelBooking.Utilities.Display;
+using HotelBooking.Utilities.Display.PrintInformation;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
@@ -52,29 +52,29 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 AnsiConsole.MarkupLine("[bold green]Update the customer[/]");
 
                 string newFirstName = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter new customer first name: ")
+                    new TextPrompt<string>("Update customer first name: ")
                         .ValidationErrorMessage("[red]Name cannot be empty![/]")
                         .Validate(input => !string.IsNullOrWhiteSpace(input))
                 );
                 string newLastName = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter new customer last name: ")
+                    new TextPrompt<string>("Update customer last name: ")
                         .ValidationErrorMessage("[red]Name cannot be empty![/]")
                         .Validate(input => !string.IsNullOrWhiteSpace(input))
                 );
                 string newEmail = AnsiConsole.Prompt(
-                        new TextPrompt<string>("Enter new customer email: ")
+                        new TextPrompt<string>("Update customer email: ")
                             .ValidationErrorMessage("[red]Please enter a valid email address![/]")
                             .Validate(input => input.Contains("@"))
                     );
 
                 string newPhoneNumber = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter new customer phone number: ")
+                    new TextPrompt<string>("Update customer phone number: ")
                         .ValidationErrorMessage("[red]Phone number must be numeric![/]")
                         .Validate(input => long.TryParse(input, out _))
                 );
 
                 string? newAdress = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter new customer address (optional): ")
+                    new TextPrompt<string>("Update customer address (optional): ")
                         .AllowEmpty()
                 );
 
@@ -103,7 +103,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 }
                 else
                 {
-                    AnsiConsole.MarkupLine("[bold red]Registration canceled.[/]");
+                    AnsiConsole.MarkupLine("[bold red]Update canceled.[/]");
                 }
 
                 bool addAnother = AnsiConsole.Confirm("\nDo you want to change another customer?");
