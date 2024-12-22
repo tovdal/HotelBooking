@@ -23,7 +23,9 @@ namespace HotelBooking.Config
             var builder = new ContainerBuilder();
 
             var dbContextOptions = DBPathConfigurator.GetDbContextOptionsFromConfigJson();
-            builder.RegisterInstance(new ApplicationDbContext(dbContextOptions)).As<ApplicationDbContext>();
+            builder.RegisterInstance(new ApplicationDbContext(dbContextOptions))
+                .As<ApplicationDbContext>()
+                .SingleInstance();
             //Singelton
 
             builder.RegisterType<Application>();
@@ -47,6 +49,8 @@ namespace HotelBooking.Config
             builder.RegisterType<RoomController>().As<IRoomController>();
             builder.RegisterType<RoomCreateController>().As<IRoomCreateController>();
             builder.RegisterType<RoomReadController>().As<IRoomReadController>();
+            builder.RegisterType<RoomUpdateController>().As<IRoomUpdateController>();
+            builder.RegisterType<RoomDeleteController>().As<IRoomDeleteController>();
 
 
             builder.RegisterType<RoomCreate>().AsSelf();

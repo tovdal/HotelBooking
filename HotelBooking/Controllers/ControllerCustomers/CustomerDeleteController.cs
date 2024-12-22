@@ -23,9 +23,10 @@ namespace HotelBooking.Controllers.ControllerCustomers
             bool isRunning = true;
             while (isRunning)
             {
-                var customers = _customerRead.GetAllActiveCustomers().ToList();
-                DisplayCustomerInformation.PrintCustomersNamesAndID(customers,
-                    "There are no customers registered");
+                var customers = _customerRead.GetAllActiveCustomers()
+                    .ToList();
+                DisplayCustomerInformation.PrintCustomersNamesAndID
+                    (customers,"There are no customers registered");
 
                 if (!ValidatorCustomerId.TryGetCustomerId(out int customerId))
                 {
@@ -48,7 +49,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 {
                     customerToDelete.IsCustomerDeleted = true;
                     _dbContext.SaveChanges();
-                    AnsiConsole.MarkupLine("[bold green]Customer successfully deleted![/]");
+                    AnsiConsole.MarkupLine("[bold green]Successfully deleted![/]");
                 }
                 else
                 {

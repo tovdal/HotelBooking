@@ -8,11 +8,19 @@ namespace HotelBooking.Controllers
     {
         private readonly IRoomCreateController _roomCreateController;
         private readonly IRoomReadController _roomReadController;
+        private readonly IRoomUpdateController _roomUpdateController;
+        private readonly IRoomDeleteController _roomDeleteController;
 
-        public RoomController(IRoomCreateController roomCreateController, IRoomReadController roomReadController)
+        public RoomController(
+            IRoomCreateController roomCreateController,
+            IRoomReadController roomReadController, 
+            IRoomUpdateController roomUpdateController,
+            IRoomDeleteController roomDeleteController)
         {
             _roomCreateController = roomCreateController;
             _roomReadController = roomReadController;
+            _roomUpdateController = roomUpdateController;
+            _roomDeleteController = roomDeleteController;
         }
         public void CreateRoom()
         {
@@ -33,17 +41,17 @@ namespace HotelBooking.Controllers
         }
         public void UpdateARoom()
         {
-            throw new NotImplementedException();
+            _roomUpdateController.UpdateARoomInformation();
         }
 
         public void DeleteARoom()
         {
-            throw new NotImplementedException();
+            _roomDeleteController.DeleteRoom();
         }
 
         public void TakeBackDeletedRoom()
         {
-            throw new NotImplementedException();
+            _roomUpdateController.GetBackDeletedRoom();
         }
     }
 }
