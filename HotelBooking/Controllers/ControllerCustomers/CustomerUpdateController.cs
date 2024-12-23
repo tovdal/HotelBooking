@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Data;
+using HotelBooking.Models;
 using HotelBooking.Service.CustomerService;
-using HotelBooking.Utilities.Display.PrintInformation;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Display.PrintInformation;
 using HotelBooking.Utilities.Validators;
@@ -44,40 +44,61 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     return;
                 }
 
-                Console.Clear();
-
-                var customer = _customerRead.GetCustomerDetailes(customerId);
-                DisplayCustomerInformation.PrintCustomersOnlyDetailes
-                    (customer, $"No customer found with ID number: {customerId}.");
-
-                AnsiConsole.MarkupLine("[bold green]Update the customer[/]");
-
                 string newFirstName = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Update customer first name: ")
+                    new TextPrompt<string>("Enter new first name: ")
                         .ValidationErrorMessage("[red]Name cannot be empty![/]")
                         .Validate(input => !string.IsNullOrWhiteSpace(input))
                 );
+
                 string newLastName = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Update customer last name: ")
+                    new TextPrompt<string>("Enter new last name: ")
                         .ValidationErrorMessage("[red]Name cannot be empty![/]")
                         .Validate(input => !string.IsNullOrWhiteSpace(input))
                 );
+
                 string newEmail = AnsiConsole.Prompt(
-                        new TextPrompt<string>("Update customer email: ")
-                            .ValidationErrorMessage("[red]Please enter a valid email address![/]")
-                            .Validate(input => input.Contains("@"))
-                    );
+                    new TextPrompt<string>("Enter new email: ")
+                        .ValidationErrorMessage("[red]Please enter a valid email address![/]")
+                        .Validate(input => input.Contains("@"))
+                );
 
                 string newPhoneNumber = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Update customer phone number: ")
+                    new TextPrompt<string>("Enter new phone number: ")
                         .ValidationErrorMessage("[red]Phone number must be numeric![/]")
                         .Validate(input => long.TryParse(input, out _))
                 );
 
-                string? newAdress = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Update customer address (optional): ")
-                        .AllowEmpty()
+                string street = AnsiConsole.Prompt(
+                    new TextPrompt<string>("Enter street: ")
+                        .ValidationErrorMessage("[red]Street cannot be empty![/]")
+                        .Validate(input => !string.IsNullOrWhiteSpace(input))
                 );
+
+                string city = AnsiConsole.Prompt(
+                    new TextPrompt<string>("Enter city: ")
+                        .ValidationErrorMessage("[red]City cannot be empty![/]")
+                        .Validate(input => !string.IsNullOrWhiteSpace(input))
+                );
+
+                string postalCode = AnsiConsole.Prompt(
+                    new TextPrompt<string>("Enter postal code: ")
+                        .ValidationErrorMessage("[red]Postal code cannot be empty![/]")
+                        .Validate(input => !string.IsNullOrWhiteSpace(input))
+                );
+
+                string country = AnsiConsole.Prompt(
+                    new TextPrompt<string>("Enter country: ")
+                        .ValidationErrorMessage("[red]Country cannot be empty![/]")
+                        .Validate(input => !string.IsNullOrWhiteSpace(input))
+                );
+
+                var newAddress = new Address
+                {
+                    Street = street,
+                    City = city,
+                    PostalCode = postalCode,
+                    Country = country
+                };
 
                 Console.Clear();
                 var table = new Table();
@@ -88,7 +109,10 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 table.AddRow("Last Name", newLastName);
                 table.AddRow("Email", newEmail);
                 table.AddRow("Phone Number", newPhoneNumber);
-                table.AddRow("Address", string.IsNullOrEmpty(newAdress) ? "N/A" : newAdress);
+                table.AddRow("Street", newAddress.Street);
+                table.AddRow("City", newAddress.City);
+                table.AddRow("Postal Code", newAddress.PostalCode);
+                table.AddRow("Country", newAddress.Country);
                 AnsiConsole.Write(table);
 
                 bool confirm = AnsiConsole.Confirm("\n[bold yellow]Are all details correct?[/]");
@@ -98,16 +122,17 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     customerToUpdate.LastName = newLastName;
                     customerToUpdate.Email = newEmail;
                     customerToUpdate.PhoneNumber = newPhoneNumber;
-                    customerToUpdate.Adress = newAdress;
+                    customerToUpdate.Address = newAddress;
+
                     _dbContext.SaveChanges();
-                    AnsiConsole.MarkupLine("[bold green]Customer successfully registered![/]");
+                    AnsiConsole.MarkupLine("[bold green]Customer successfully updated![/]");
                 }
                 else
                 {
                     AnsiConsole.MarkupLine("[bold red]Update canceled.[/]");
                 }
 
-                bool addAnother = AnsiConsole.Confirm("\nDo you want to change another customer?");
+                bool addAnother = AnsiConsole.Confirm("\nDo you want to update another customer?");
                 if (!addAnother)
                 {
                     isRunning = false;
