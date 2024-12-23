@@ -55,6 +55,7 @@ namespace HotelBooking.Config
 
             builder.RegisterType<RoomCreate>().AsSelf();
             builder.RegisterType<RoomRead>().AsSelf();
+            builder.RegisterType<RoomUpdate>().AsSelf();
 
             builder.RegisterType<CustomerCreate>().AsSelf();
             builder.RegisterType<CustomerRead>().AsSelf();
