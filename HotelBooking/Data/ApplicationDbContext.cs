@@ -9,6 +9,7 @@ namespace HotelBooking.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Booking { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<Address> Address { get; set; }
 
         public ApplicationDbContext()
         {
