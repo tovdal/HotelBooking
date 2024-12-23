@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelBooking.Controllers.Interfaces
+﻿namespace HotelBooking.Controllers.Interfaces
 {
-    internal interface IBookingController
+    public interface IBookingController
     {
+        void CreateBooking();
+        void ReadAllBookings();
+        void ReadAllDeleted();
+        void ReadABooking();
+        void UpdateABooking();
+        void DeleteABooking();
+        void TakeBackDeletedBooking();
     }
 }
