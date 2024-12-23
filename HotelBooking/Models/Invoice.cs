@@ -8,12 +8,12 @@
         public DateTime DueDateOnInvoice { get; set; }
         public bool IsPaid { get; set; }
 
+        public int BookingId { get; set; }
+        public Booking Booking { get; set; } = null!;
+
         public Invoice()
         {
-            InvoiceDate = new DateTime();
             InvoiceDate = DateTime.Now;
-
-            DueDateOnInvoice = new DateTime();
             DueDateOnInvoice = DateTime.Now.AddDays(31);
         }
     }
