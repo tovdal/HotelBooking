@@ -43,10 +43,37 @@ namespace HotelBooking.Controllers.ControllerCustomers
                         .Validate(input => long.TryParse(input, out _))
                 );
 
-                string? customerAdress = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter customer's address (optional): ")
-                        .AllowEmpty()
+                string street = AnsiConsole.Prompt(
+                    new TextPrompt<string>("Enter street: ")
+                        .ValidationErrorMessage("[red]Street cannot be empty![/]")
+                        .Validate(input => !string.IsNullOrWhiteSpace(input))
                 );
+
+                string city = AnsiConsole.Prompt(
+                    new TextPrompt<string>("Enter city: ")
+                        .ValidationErrorMessage("[red]City cannot be empty![/]")
+                        .Validate(input => !string.IsNullOrWhiteSpace(input))
+                );
+
+                string postalCode = AnsiConsole.Prompt(
+                    new TextPrompt<string>("Enter postal code: ")
+                        .ValidationErrorMessage("[red]Postal code cannot be empty![/]")
+                        .Validate(input => !string.IsNullOrWhiteSpace(input))
+                );
+
+                string country = AnsiConsole.Prompt(
+                    new TextPrompt<string>("Enter country: ")
+                        .ValidationErrorMessage("[red]Country cannot be empty![/]")
+                        .Validate(input => !string.IsNullOrWhiteSpace(input))
+                );
+
+                var address = new Address
+                {
+                    Street = street,
+                    City = city,
+                    PostalCode = postalCode,
+                    Country = country
+                };
 
                 var newCustomer = new Customer()
                 {
@@ -54,7 +81,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     LastName = customerLastName,
                     Email = customerEmail,
                     PhoneNumber = customerPhoneNumber,
-                    Adress = customerAdress,
+                    Address = address,
                     IsCustomerDeleted = false
                 };
 
@@ -62,12 +89,14 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 var table = new Table();
                 table.AddColumn("[bold]Field[/]");
                 table.AddColumn("[bold]Value[/]");
-                table.AddRow("Customer ID", newCustomer.Id.ToString());
                 table.AddRow("First Name", customerFirstName);
                 table.AddRow("Last Name", customerLastName);
                 table.AddRow("Email", customerEmail);
                 table.AddRow("Phone Number", customerPhoneNumber);
-                table.AddRow("Address", string.IsNullOrEmpty(customerAdress) ? "N/A" : customerAdress);
+                table.AddRow("Street", street);
+                table.AddRow("City", city);
+                table.AddRow("Postal Code", postalCode);
+                table.AddRow("Country", country);
                 table.AddRow("Deleted", newCustomer.IsCustomerDeleted ? "Yes" : "No");
                 AnsiConsole.Write(table);
 
