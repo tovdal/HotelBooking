@@ -6,8 +6,8 @@ namespace HotelBooking.Data.Seeders
     {
         public void CustomerSeeding(ApplicationDbContext dbContext)
         {
-            
-            var customer = new List<Customer>
+
+            var customers = new List<Customer>
             {
                 new Customer
                 {
@@ -15,7 +15,13 @@ namespace HotelBooking.Data.Seeders
                     LastName = "Bäck",
                     Email = "Chris.Bäck@live.com",
                     PhoneNumber = "0734567890",
-                    Adress = "123 Storgatan, Sundsvall",
+                    Address = new Address
+                    {
+                        Street = "123 Storgatan",
+                        City = "Sundsvall",
+                        PostalCode = "85230",
+                        Country = "Sweden"
+                    },
                     IsCustomerDeleted = false
                 },
                 new Customer
@@ -24,7 +30,13 @@ namespace HotelBooking.Data.Seeders
                     LastName = "Larsson",
                     Email = "jennifer.Larsson@yahoo.com",
                     PhoneNumber = "0726543210",
-                    Adress = "456 Vintervägen, Happaranda",
+                    Address = new Address
+                    {
+                        Street = "456 Vintervägen",
+                        City = "Happaranda",
+                        PostalCode = "95331",
+                        Country = "Sweden"
+                    },
                     IsCustomerDeleted = false
                 },
                 new Customer
@@ -33,7 +45,13 @@ namespace HotelBooking.Data.Seeders
                     LastName = "Johnson",
                     Email = "Wilma.johnson@outlook.com",
                     PhoneNumber = "0701234567",
-                    Adress = "789 FrenchSteet, Québec",
+                    Address = new Address
+                    {
+                        Street = "789 FrenchSteet",
+                        City = "Québec",
+                        PostalCode = "G1A 1A1",
+                        Country = "Canada"
+                    },
                     IsCustomerDeleted = false
                 },
                 new Customer
@@ -42,7 +60,13 @@ namespace HotelBooking.Data.Seeders
                     LastName = "Ross",
                     Email = "bob.ross@gmail.com",
                     PhoneNumber = "0107654321",
-                    Adress = "321 Pine St, Woodsland",
+                    Address = new Address
+                    {
+                        Street = "321 Pine St",
+                        City = "Woodsland",
+                        PostalCode = "12345",
+                        Country = "USA"
+                    },
                     IsCustomerDeleted = false
                 },
                 new Customer
@@ -51,11 +75,18 @@ namespace HotelBooking.Data.Seeders
                     LastName = "Andersson",
                     Email = "raphael.Andersson@hotmail.com",
                     PhoneNumber = "0702345678",
-                    Adress = "1 Sand , Oasis",
+                    Address = new Address
+                    {
+                        Street = "1 Sand",
+                        City = "Oasis",
+                        PostalCode = "54321",
+                        Country = "Unknown"
+                    },
                     IsCustomerDeleted = false
                 }
             };
-            dbContext.Customers.AddRange(customer);
+
+            dbContext.Customers.AddRange(customers);
             dbContext.SaveChanges();
         }
     }

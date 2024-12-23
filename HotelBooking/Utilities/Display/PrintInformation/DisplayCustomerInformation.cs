@@ -41,7 +41,9 @@ namespace HotelBooking.Utilities.Display.PrintInformation
             table.AddColumn("Name");
             table.AddColumn("Email");
             table.AddColumn("Phone Number");
-            table.AddColumn("Address");
+            table.AddColumn("Street");
+            table.AddColumn("City");
+            table.AddColumn("Country");
 
             foreach (var customer in customers)
             {
@@ -50,7 +52,9 @@ namespace HotelBooking.Utilities.Display.PrintInformation
                     $"{customer.FirstName} {customer.LastName}",
                     customer.Email,
                     customer.PhoneNumber,
-                    customer.Adress ?? "N/A"
+                    customer.Address?.Street ?? "N/A",
+                    customer.Address?.City ?? "N/A",
+                    customer.Address?.Country ?? "N/A"
                 );
                 table.AddEmptyRow();
             }
@@ -70,7 +74,9 @@ namespace HotelBooking.Utilities.Display.PrintInformation
             table.AddColumn("Name");
             table.AddColumn("Email");
             table.AddColumn("Phone Number");
-            table.AddColumn("Address");
+            table.AddColumn("Street");
+            table.AddColumn("City");
+            table.AddColumn("Country");
             table.AddColumn("Deleted");
             table.AddColumn("Bookings");
 
@@ -81,7 +87,9 @@ namespace HotelBooking.Utilities.Display.PrintInformation
                     $"{customer.FirstName} {customer.LastName}",
                     customer.Email,
                     customer.PhoneNumber,
-                    customer.Adress ?? "N/A",
+                    customer.Address?.Street ?? "N/A",
+                    customer.Address?.City ?? "N/A",
+                    customer.Address?.Country ?? "N/A",
                     customer.IsCustomerDeleted ? "Yes" : "No",
                     customer.Bookings?.Count.ToString() ?? "0"
                 );
