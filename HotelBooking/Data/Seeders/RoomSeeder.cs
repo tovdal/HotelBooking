@@ -12,7 +12,7 @@ namespace HotelBooking.Data.Seeders
                 {
                     RoomNumber = 101,
                     RoomSize = 30,
-                    TypeOfRooms = TypeOfRoom.Double,
+                    TypeOfRoom = TypeOfRoom.Double,
                     PricePerNight = 850,
                     IsAvailable = true,
                     IsRoomDeleted = false,
@@ -23,7 +23,7 @@ namespace HotelBooking.Data.Seeders
                 {
                     RoomNumber = 102,
                     RoomSize = 20,
-                    TypeOfRooms = TypeOfRoom.Singel,
+                    TypeOfRoom = TypeOfRoom.Single,
                     PricePerNight = 600,
                     IsAvailable = true,
                     IsRoomDeleted = false,
@@ -33,7 +33,7 @@ namespace HotelBooking.Data.Seeders
                 {
                     RoomNumber = 201,
                     RoomSize = 25,
-                    TypeOfRooms = TypeOfRoom.Singel,
+                    TypeOfRoom = TypeOfRoom.Single,
                     PricePerNight = 700,
                     IsAvailable = true,
                     IsRoomDeleted = false,
@@ -43,7 +43,7 @@ namespace HotelBooking.Data.Seeders
                 {
                     RoomNumber = 202,
                     RoomSize = 22,
-                    TypeOfRooms = TypeOfRoom.Double,
+                    TypeOfRoom = TypeOfRoom.Double,
                     PricePerNight = 950,
                     IsAvailable = true,
                     IsRoomDeleted = false,
@@ -53,7 +53,7 @@ namespace HotelBooking.Data.Seeders
                 {
                     RoomNumber = 301,
                     RoomSize = 35,
-                    TypeOfRooms = TypeOfRoom.Double,
+                    TypeOfRoom = TypeOfRoom.Double,
                     PricePerNight = 1200,
                     IsAvailable = true,
                     IsRoomDeleted = false,

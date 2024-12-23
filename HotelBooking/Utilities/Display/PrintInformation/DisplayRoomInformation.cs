@@ -47,7 +47,7 @@ namespace HotelBooking.Utilities.Display.PrintInformation
                     room.Id.ToString(),
                     room.RoomNumber.ToString(),
                     room.RoomSize.ToString(),
-                    room.TypeOfRooms.ToString(),
+                    room.TypeOfRoom.ToString(),
                     room.PricePerNight.ToString("C"),
                     room.IsExtraBedAvailable ? "Yes" : "No"
                 );
@@ -78,7 +78,7 @@ namespace HotelBooking.Utilities.Display.PrintInformation
                     room.Id.ToString(),
                     room.RoomNumber.ToString(),
                     room.RoomSize.ToString(),
-                    room.TypeOfRooms.ToString(),
+                    room.TypeOfRoom.ToString(),
                     room.PricePerNight.ToString("C"),
                     room.IsExtraBedAvailable ? "Yes" : "No",
                     room.IsAvailable ? "Yes" : "No"

@@ -101,7 +101,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                 {
                     roomToUpdate.RoomNumber = int.Parse(roomRoomNumber);
                     roomToUpdate.RoomSize = byte.Parse(roomRoomSize);
-                    roomToUpdate.TypeOfRooms = roomTypeOfRoom;
+                    roomToUpdate.TypeOfRoom = roomTypeOfRoom;
                     roomToUpdate.PricePerNight = decimal.Parse(roomPricePerNight);
                     roomToUpdate.IsExtraBedAvailable = roomTypeOfRoom == TypeOfRoom.Double;
                     _dbContext.SaveChanges();

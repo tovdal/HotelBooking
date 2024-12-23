@@ -40,7 +40,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                     room.Id.ToString(),
                     room.RoomNumber.ToString(),
                     room.RoomSize.ToString(),
-                    room.TypeOfRooms.ToString(),
+                    room.TypeOfRoom.ToString(),
                     room.PricePerNight.ToString("C"),
                     room.IsAvailable.ToString(),
                     room.IsExtraBedAvailable.ToString()

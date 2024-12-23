@@ -52,7 +52,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                 {
                     RoomNumber = int.Parse(roomRoomNumber),
                     RoomSize = byte.Parse(roomRoomSize),
-                    TypeOfRooms = roomTypeOfRoom,
+                    TypeOfRoom = roomTypeOfRoom,
                     PricePerNight = decimal.Parse(roomPricePerNight),
                     IsAvailable = true,
                     IsRoomDeleted = false,
