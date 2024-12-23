@@ -11,7 +11,7 @@ namespace HotelBooking.Service.BookingService
         {
             _dbContext = dbContext;
         }
-        public void AddCustomer(Booking newBooking)
+        public void AddBooking(Booking newBooking)
         {
             _dbContext.Add(newBooking);
             _dbContext.SaveChanges();
