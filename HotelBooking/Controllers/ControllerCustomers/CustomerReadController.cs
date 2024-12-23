@@ -1,6 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Service.CustomerService;
-using HotelBooking.Utilities.Display.PrintInformation;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Display.PrintInformation;
 using HotelBooking.Utilities.Validators;
@@ -17,7 +16,6 @@ namespace HotelBooking.Controllers.ControllerCustomers
         }
         public void ShowAllCustomers()
         {
-            // needs revisiting. takes deleted customers. It should not do that.
             var customers = _customerRead.GetAllActiveCustomers().ToList();
 
             if (customers == null || !customers.Any())
@@ -40,7 +38,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     $"{customer.FirstName} {customer.LastName}",
                     customer.Email,
                     customer.PhoneNumber,
-                    customer.Adress ?? "N/A"
+                    customer.Address?.Street ?? "N/A"
                 );
                 table.AddEmptyRow();
             }
