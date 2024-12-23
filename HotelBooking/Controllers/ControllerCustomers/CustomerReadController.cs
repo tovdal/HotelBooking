@@ -29,7 +29,6 @@ namespace HotelBooking.Controllers.ControllerCustomers
             table.AddColumn("Name");
             table.AddColumn("Email");
             table.AddColumn("Phone Number");
-            table.AddColumn("Address");
 
             foreach (var customer in customers)
             {
@@ -37,8 +36,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     customer.Id.ToString(),
                     $"{customer.FirstName} {customer.LastName}",
                     customer.Email,
-                    customer.PhoneNumber,
-                    customer.Address?.Street ?? "N/A"
+                    customer.PhoneNumber
                 );
                 table.AddEmptyRow();
             }
@@ -51,14 +49,17 @@ namespace HotelBooking.Controllers.ControllerCustomers
         public void ShowAllDeletedCustomers()
         {
             var customers = _customerRead.GetAllDeletedCustomersInDatabase();
+
             DisplayCustomerInformation.PrintCustomersOnlyDetailes
                 (customers, "There are no deleted customers.");
+
             ConsoleMessagePrinter.DisplayMessage();
         }
 
         public void ShowACustomersDetailes()
         {
             var customers = _customerRead.GetAllActiveCustomers();
+
             DisplayCustomerInformation.PrintCustomersNamesAndID
                 (customers, "There are no customers.");
 
@@ -68,8 +69,10 @@ namespace HotelBooking.Controllers.ControllerCustomers
             }
 
             var customer = _customerRead.GetCustomerDetailes(customerId);
+
             DisplayCustomerInformation.PrintCustomersAll
                 (customer, $"No customer found with ID number: {customerId}.");
+
             ConsoleMessagePrinter.DisplayMessage();
         }
     }

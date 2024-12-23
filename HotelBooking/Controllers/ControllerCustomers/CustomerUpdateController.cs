@@ -1,6 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Data;
-using HotelBooking.Models;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Display.PrintInformation;
@@ -97,6 +96,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 {
                     return;
                 }
+
                 var customerToUpdate = _customerUpdate.ReturnCustomerWithId(customerId);
 
                 if (customerToUpdate == null || !customerToUpdate.IsCustomerDeleted)
@@ -104,6 +104,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     Console.WriteLine($"No deleted customer found with ID number: {customerId}.");
                     continue;
                 }
+
                 bool deleteCustomer = AnsiConsole.Confirm
                     ($"Do you want to take back delete customer: {customerToUpdate.FirstName} " +
                     $"{customerToUpdate.LastName}?");
