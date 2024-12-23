@@ -4,6 +4,7 @@ using HotelBooking.Models;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Display.PrintInformation;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -44,85 +45,18 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     return;
                 }
 
-                string newFirstName = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter new first name: ")
-                        .ValidationErrorMessage("[red]Name cannot be empty![/]")
-                        .Validate(input => !string.IsNullOrWhiteSpace(input))
-                );
+                var updatedCustomer = CustomerInputHelper.PromptCustomerDetails();
 
-                string newLastName = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter new last name: ")
-                        .ValidationErrorMessage("[red]Name cannot be empty![/]")
-                        .Validate(input => !string.IsNullOrWhiteSpace(input))
-                );
-
-                string newEmail = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter new email: ")
-                        .ValidationErrorMessage("[red]Please enter a valid email address![/]")
-                        .Validate(input => input.Contains("@"))
-                );
-
-                string newPhoneNumber = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter new phone number: ")
-                        .ValidationErrorMessage("[red]Phone number must be numeric![/]")
-                        .Validate(input => long.TryParse(input, out _))
-                );
-
-                string street = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter street: ")
-                        .ValidationErrorMessage("[red]Street cannot be empty![/]")
-                        .Validate(input => !string.IsNullOrWhiteSpace(input))
-                );
-
-                string city = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter city: ")
-                        .ValidationErrorMessage("[red]City cannot be empty![/]")
-                        .Validate(input => !string.IsNullOrWhiteSpace(input))
-                );
-
-                string postalCode = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter postal code: ")
-                        .ValidationErrorMessage("[red]Postal code cannot be empty![/]")
-                        .Validate(input => !string.IsNullOrWhiteSpace(input))
-                );
-
-                string country = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter country: ")
-                        .ValidationErrorMessage("[red]Country cannot be empty![/]")
-                        .Validate(input => !string.IsNullOrWhiteSpace(input))
-                );
-
-                var newAddress = new Address
-                {
-                    Street = street,
-                    City = city,
-                    PostalCode = postalCode,
-                    Country = country
-                };
-
-                Console.Clear();
-                var table = new Table();
-                table.AddColumn("[bold]Field[/]");
-                table.AddColumn("[bold]Value[/]");
-                table.AddRow("Customer ID", customerToUpdate.Id.ToString());
-                table.AddRow("First Name", newFirstName);
-                table.AddRow("Last Name", newLastName);
-                table.AddRow("Email", newEmail);
-                table.AddRow("Phone Number", newPhoneNumber);
-                table.AddRow("Street", newAddress.Street);
-                table.AddRow("City", newAddress.City);
-                table.AddRow("Postal Code", newAddress.PostalCode);
-                table.AddRow("Country", newAddress.Country);
-                AnsiConsole.Write(table);
+                DisplayHelper.DisplayCustomerDetails(updatedCustomer);
 
                 bool confirm = AnsiConsole.Confirm("\n[bold yellow]Are all details correct?[/]");
                 if (confirm)
                 {
-                    customerToUpdate.FirstName = newFirstName;
-                    customerToUpdate.LastName = newLastName;
-                    customerToUpdate.Email = newEmail;
-                    customerToUpdate.PhoneNumber = newPhoneNumber;
-                    customerToUpdate.Address = newAddress;
+                    customerToUpdate.FirstName = updatedCustomer.FirstName;
+                    customerToUpdate.LastName = updatedCustomer.LastName;
+                    customerToUpdate.Email = updatedCustomer.Email;
+                    customerToUpdate.PhoneNumber = updatedCustomer.PhoneNumber;
+                    customerToUpdate.Address = updatedCustomer.Address;
 
                     _dbContext.SaveChanges();
                     AnsiConsole.MarkupLine("[bold green]Customer successfully updated![/]");
