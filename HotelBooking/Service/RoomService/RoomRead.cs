@@ -28,6 +28,13 @@ namespace HotelBooking.Service.RoomService
                 .Where(r => !r.IsAvailable);
 
         }
+        public IQueryable<Room> GetAllAvailablebookingRooms()
+        {
+            return _dbContext.Rooms
+                .Where(r => r.IsAvailable);
+        }
+
+        
         public IQueryable<Room> GetAllTakenRooms()
         {
             return _dbContext.Rooms
