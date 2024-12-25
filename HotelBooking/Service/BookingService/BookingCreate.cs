@@ -34,23 +34,18 @@ namespace HotelBooking.Service.BookingService
                         .Sum(room => room.PricePerNight * 
                         (booking.CheckOutDate - booking.CheckInDate).Days)
                     })
-        .Sum(booking => booking.TotalBookingPrice);
+                    .Sum(booking => booking.TotalBookingPrice);
         }
 
         public bool IsRoomBooked(int roomNumber)
         {
             var room = _dbContext.Rooms
-        .FirstOrDefault(r => r.RoomNumber == roomNumber);
+                .FirstOrDefault(r => r.RoomNumber == roomNumber);
 
-            // If the room doesn't exist, handle accordingly (e.g., throw an exception or return false)
             if (room == null)
             {
-                // Handle the case where the room is not found
-                // For example, you might throw an exception or return false
                 throw new ArgumentException($"Room with number {roomNumber} does not exist.");
             }
-
-            // Check if the room is available
             return room.IsAvailable;
         }
     }
