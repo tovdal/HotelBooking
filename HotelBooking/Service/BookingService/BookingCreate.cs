@@ -20,18 +20,38 @@ namespace HotelBooking.Service.BookingService
 
         public bool BookingExists(int bookingId)
         {
-            return _dbContext.Booking
+            return _dbContext.Bookings
                 .Any(booking => booking.Id == bookingId);
         }
 
-        public bool IsRoomTaken(int roomNumber, DateTime checkInDate, DateTime checkOutDate)
+        public decimal TotalPriceOfBooking()
         {
-            return _dbContext.Set<Booking>()
+            return _dbContext.Bookings
                 .Include(booking => booking.Rooms)
-                .Any(booking =>
-                    booking.Rooms.Any(room => room.RoomNumber == roomNumber) &&
-                    booking.CheckInDate < checkOutDate &&
-                    booking.CheckOutDate > checkInDate);
+                    .Select(booking => new
+                    {
+                        TotalBookingPrice = booking.Rooms
+                        .Sum(room => room.PricePerNight * 
+                        (booking.CheckOutDate - booking.CheckInDate).Days)
+                    })
+        .Sum(booking => booking.TotalBookingPrice);
+        }
+
+        public bool IsRoomBooked(int roomNumber)
+        {
+            var room = _dbContext.Rooms
+        .FirstOrDefault(r => r.RoomNumber == roomNumber);
+
+            // If the room doesn't exist, handle accordingly (e.g., throw an exception or return false)
+            if (room == null)
+            {
+                // Handle the case where the room is not found
+                // For example, you might throw an exception or return false
+                throw new ArgumentException($"Room with number {roomNumber} does not exist.");
+            }
+
+            // Check if the room is available
+            return room.IsAvailable;
         }
     }
 }
