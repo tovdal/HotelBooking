@@ -201,20 +201,20 @@ namespace HotelBooking.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("BookingRoom", b =>
-                {
-                    b.HasOne("HotelBooking.Models.Booking", null)
-                        .WithMany()
-                        .HasForeignKey("BookingsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            //modelBuilder.Entity("BookingRoom", b =>
+            //    {
+            //        b.HasOne("HotelBooking.Models.Booking", null)
+            //            .WithMany()
+            //            .HasForeignKey("BookingsId")
+            //            .OnDelete(DeleteBehavior.Cascade)
+            //            .IsRequired();
 
-                    b.HasOne("HotelBooking.Models.Room", null)
-                        .WithMany()
-                        .HasForeignKey("RoomsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            //        b.HasOne("HotelBooking.Models.Room", null)
+            //            .WithMany()
+            //            .HasForeignKey("RoomsId")
+            //            .OnDelete(DeleteBehavior.Cascade)
+            //            .IsRequired();
+            //    });
 
             modelBuilder.Entity("HotelBooking.Models.Booking", b =>
                 {
