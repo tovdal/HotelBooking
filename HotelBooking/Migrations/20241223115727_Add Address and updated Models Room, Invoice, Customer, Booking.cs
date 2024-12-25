@@ -12,8 +12,8 @@ namespace HotelBooking.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Booking_Invoices_InvoiceId",
-                table: "Booking");
+        name: "FK_Booking_Invoices_InvoiceId",
+        table: "Booking");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Rooms_Booking_BookingId",
@@ -80,30 +80,6 @@ namespace HotelBooking.Migrations
                     table.PrimaryKey("PK_Address", x => x.CustomerAddressId);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "BookingRoom",
-                columns: table => new
-                {
-                    BookingsId = table.Column<int>(type: "int", nullable: false),
-                    RoomsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookingRoom", x => new { x.BookingsId, x.RoomsId });
-                    table.ForeignKey(
-                        name: "FK_BookingRoom_Booking_BookingsId",
-                        column: x => x.BookingsId,
-                        principalTable: "Booking",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookingRoom_Rooms_RoomsId",
-                        column: x => x.RoomsId,
-                        principalTable: "Rooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Invoices_BookingId",
                 table: "Invoices",
@@ -114,11 +90,6 @@ namespace HotelBooking.Migrations
                 name: "IX_Customers_AddressCustomerAddressId",
                 table: "Customers",
                 column: "AddressCustomerAddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookingRoom_RoomsId",
-                table: "BookingRoom",
-                column: "RoomsId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Customers_Address_AddressCustomerAddressId",
@@ -140,8 +111,8 @@ namespace HotelBooking.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Customers_Address_AddressCustomerAddressId",
-                table: "Customers");
+        name: "FK_Customers_Address_AddressCustomerAddressId",
+        table: "Customers");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Invoices_Booking_BookingId",
@@ -149,9 +120,6 @@ namespace HotelBooking.Migrations
 
             migrationBuilder.DropTable(
                 name: "Address");
-
-            migrationBuilder.DropTable(
-                name: "BookingRoom");
 
             migrationBuilder.DropIndex(
                 name: "IX_Invoices_BookingId",
