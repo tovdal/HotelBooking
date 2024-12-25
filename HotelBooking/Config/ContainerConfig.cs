@@ -17,6 +17,8 @@ using HotelBooking.Service.BookingService;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.Menu;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace HotelBooking.Config
 {
@@ -26,11 +28,22 @@ namespace HotelBooking.Config
         {
             var builder = new ContainerBuilder();
 
-            var dbContextOptions = DBPathConfigurator.GetDbContextOptionsFromConfigJson();
-            builder.RegisterInstance(new ApplicationDbContext(dbContextOptions))
-                .As<ApplicationDbContext>()
-                .SingleInstance();
-            //Singelton
+            // Register Configuration
+            builder.Register(context =>
+            {
+                var configBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true);
+                return configBuilder.Build();
+            }).As<IConfiguration>().SingleInstance();
+
+            // Register ApplicationDbContext
+            builder.Register(context =>
+            {
+                var config = context.Resolve<IConfiguration>();
+                var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+                var connectionString = config.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
+                return new ApplicationDbContext(optionsBuilder.Options);
+            }).AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<Application>();
 

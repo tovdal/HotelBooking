@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241223115727_Add Address and updated Models Room, Invoice, Customer, Booking")]
-    partial class AddAddressandupdatedModelsRoomInvoiceCustomerBooking
+    [Migration("20241225140012_AddPendingChanges")]
+    partial class AddPendingChanges
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,7 +96,7 @@ namespace HotelBooking.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("HotelBooking.Models.Customer", b =>

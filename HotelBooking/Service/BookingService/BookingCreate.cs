@@ -1,6 +1,7 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
 using Microsoft.EntityFrameworkCore;
+using Spectre.Console;
 
 namespace HotelBooking.Service.BookingService
 {
@@ -39,14 +40,10 @@ namespace HotelBooking.Service.BookingService
 
         public bool IsRoomBooked(int roomNumber)
         {
-            var room = _dbContext.Rooms
-                .FirstOrDefault(r => r.RoomNumber == roomNumber);
-
-            if (room == null)
-            {
-                throw new ArgumentException($"Room with number {roomNumber} does not exist.");
-            }
-            return room.IsAvailable;
+            return _dbContext.Rooms
+                .Where(r => r.RoomNumber == roomNumber)
+                .Select(r => !r.IsAvailable)
+                .FirstOrDefault();
         }
     }
 }

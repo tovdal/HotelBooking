@@ -18,5 +18,13 @@ namespace HotelBooking.Data
             : base(options)
         {
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("server=localhost;initial catalog=HotelbookingDBTova;Trusted_Connection=True;TrustServerCertificate=true;MultipleActiveResultSets=true");
+        //    }
+        //}
     }
 }
