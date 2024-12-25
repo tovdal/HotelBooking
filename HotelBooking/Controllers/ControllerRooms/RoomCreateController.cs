@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.Interface;
-using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
+using HotelBooking.Utilities.Helpers;
 using Spectre.Console;
 
 namespace HotelBooking.Controllers.ControllerRooms
@@ -19,55 +19,17 @@ namespace HotelBooking.Controllers.ControllerRooms
             {
                 AnsiConsole.MarkupLine("[bold green]1. Create a new room[/]");
 
-                string roomRoomNumber = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter room number: ")
-                        .ValidationErrorMessage("[red]Invalid or duplicate room number![/]")
-                        .Validate(input =>
-                        {
-                            if (!int.TryParse(input, out int roomNumber)) return false;
-                            return !_roomCreate.RoomExists(roomNumber);
-                        })
-                );
-
-                string roomRoomSize = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter the room size: ")
-                        .ValidationErrorMessage("[red]Room size must be a valid positive number![/]")
-                        .Validate(input => !string.IsNullOrWhiteSpace(input) && byte.TryParse(input, out _))
-                );
-
-                string roomTypeInput = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter if the room is a Single or Double: ")
-                        .ValidationErrorMessage("[red]Please enter 'Single' or 'Double'![/]")
-                        .Validate(input => Enum.TryParse<TypeOfRoom>(input, true, out _))
-                );
-                TypeOfRoom roomTypeOfRoom = Enum.Parse<TypeOfRoom>(roomTypeInput, true);
-
-                string roomPricePerNight = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter the room's price per night: ")
-                        .ValidationErrorMessage("[red]Price must be numeric![/]")
-                        .Validate(input => decimal.TryParse(input, out _))
-                );
-
-                var newRoom = new Room()
-                {
-                    RoomNumber = int.Parse(roomRoomNumber),
-                    RoomSize = byte.Parse(roomRoomSize),
-                    TypeOfRoom = roomTypeOfRoom,
-                    PricePerNight = decimal.Parse(roomPricePerNight),
-                    IsAvailable = true,
-                    IsRoomDeleted = false,
-                    IsExtraBedAvailable = roomTypeOfRoom == TypeOfRoom.Double
-                };
+                var newRoom = RoomInputHelper.PromptRoomDetails(_roomCreate);
 
                 Console.Clear();
                 var table = new Table();
                 table.AddColumn("[bold]Field[/]");
                 table.AddColumn("[bold]Value[/]");
                 table.AddRow("Room ID", newRoom.Id.ToString());
-                table.AddRow("Room number", roomRoomNumber);
-                table.AddRow("Room size", roomRoomSize);
-                table.AddRow("Type of room", roomTypeOfRoom.ToString());
-                table.AddRow("Price per night", roomPricePerNight);
+                table.AddRow("Room number", newRoom.RoomNumber.ToString());
+                table.AddRow("Room size", newRoom.RoomSize.ToString());
+                table.AddRow("Type of room", newRoom.TypeOfRoom.ToString());
+                table.AddRow("Price per night", newRoom.PricePerNight.ToString());
                 table.AddRow("Extra bed available", newRoom.IsExtraBedAvailable.ToString());
                 AnsiConsole.Write(table);
 

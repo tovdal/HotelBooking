@@ -52,6 +52,40 @@ namespace HotelBooking.Controllers.ControllerRooms
             ConsoleMessagePrinter.DisplayMessage();
             // Add Pagination can be found in richards powerpoint 
         }
+        public void ShowAllAvailableRooms()
+        {
+            var rooms = _roomRead.GetAllAvailablebookingRooms().ToList();
+
+            if (rooms == null || !rooms.Any())
+            {
+                AnsiConsole.MarkupLine("[red]There are no rooms registered.[/]");
+                return;
+            }
+
+            var table = new Table();
+            table.AddColumn("Room ID");
+            table.AddColumn("Room number");
+            table.AddColumn("Room size");
+            table.AddColumn("Type of room");
+            table.AddColumn("Price per night");
+            table.AddColumn("Available extra bed");
+
+            foreach (var room in rooms)
+            {
+                table.AddRow(
+                    room.Id.ToString(),
+                    room.RoomNumber.ToString(),
+                    room.RoomSize.ToString(),
+                    room.TypeOfRoom.ToString(),
+                    room.PricePerNight.ToString("C"),
+                    room.IsAvailable.ToString(),
+                    room.IsExtraBedAvailable.ToString()
+                );
+                table.AddEmptyRow();
+            }
+
+            AnsiConsole.Write(table);
+        }
 
         public void ShowAllDeletedRooms()
         {
