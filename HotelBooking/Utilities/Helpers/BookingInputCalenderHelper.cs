@@ -53,7 +53,7 @@ namespace HotelBooking.Utilities.Helpers
             };
 
             AnsiConsole.Write(panel);
-            AnsiConsole.MarkupLine("\nUse arrow keys[blue]\u25C4 \u25B2 \u25BA \u25BC[/]to navigate and [green]Enter[/] to select.");
+            AnsiConsole.MarkupLine("\nUse arrow keys [blue]\u25C4\u25B2\u25BA\u25BC[/]to navigate and[green] Enter[/] to select.");
         }
 
         public static DateTime HandleUserInput(DateTime selectedDate, DateTime? checkInDate = null)
@@ -61,6 +61,16 @@ namespace HotelBooking.Utilities.Helpers
             while (true)
             {
                 Console.Clear();
+
+                if (!checkInDate.HasValue)
+                {
+                    AnsiConsole.MarkupLine("[Green]The check-In date.[/]");
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine("[Green]The check-Out date.[/]");
+                }
+
                 DisplayBookingDateCalendar(selectedDate);
 
                 var key = Console.ReadKey(true).Key;
