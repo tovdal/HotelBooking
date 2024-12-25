@@ -78,7 +78,6 @@ namespace HotelBooking.Controllers.ControllerRooms
                     room.RoomSize.ToString(),
                     room.TypeOfRoom.ToString(),
                     room.PricePerNight.ToString("C"),
-                    room.IsAvailable.ToString(),
                     room.IsExtraBedAvailable.ToString()
                 );
                 table.AddEmptyRow();

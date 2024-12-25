@@ -28,14 +28,12 @@ namespace HotelBooking.Config
         {
             var builder = new ContainerBuilder();
 
-            // Register Configuration
             builder.Register(context =>
             {
                 var configBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true);
                 return configBuilder.Build();
             }).As<IConfiguration>().SingleInstance();
 
-            // Register ApplicationDbContext
             builder.Register(context =>
             {
                 var config = context.Resolve<IConfiguration>();
