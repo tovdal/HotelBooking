@@ -12,37 +12,49 @@ namespace HotelBooking.Controllers.ControllerCustomers
         private readonly CustomerRead _customerRead;
         private readonly CustomerUpdate _customerUpdate;
         private readonly ApplicationDbContext _dbContext;
-        public CustomerDeleteController(CustomerRead customerRead, CustomerUpdate customerUpdate, ApplicationDbContext dbContext)
+        private readonly CustomerDelete _customerDelete;
+
+        public CustomerDeleteController(CustomerRead customerRead, CustomerUpdate customerUpdate, CustomerDelete customerDelete, ApplicationDbContext dbContext)
         {
             _customerRead = customerRead;
             _customerUpdate = customerUpdate;
             _dbContext = dbContext;
+            _customerDelete = customerDelete;
         }
+
         public void DeleteCustomer()
         {
             bool isRunning = true;
             while (isRunning)
             {
-                var customers = _customerRead.GetAllActiveCustomers()
-                    .ToList();
+                var customers = _customerRead.GetAllActiveCustomers().ToList();
                 DisplayCustomerInformation.PrintCustomersNamesAndID
-                    (customers,"There are no customers registered");
+                    (customers, "There are no customers registered");
 
                 if (!ValidatorCustomerId.TryGetCustomerId(out int customerId))
                 {
                     return;
                 }
+
                 var customerToDelete = _customerUpdate.ReturnCustomerWithId(customerId);
 
                 if (customerToDelete == null)
                 {
-                    Console.WriteLine($"No customer found with ID number: {customerId}.");
+                    AnsiConsole.MarkupLine($"[bold red]No customer found with ID number: {customerId}[/]");
+                    Console.ReadKey();
                     return;
                 }
 
-                bool selectedCustomerAsDeleted = AnsiConsole.Confirm
-                    ($"Do you want to delete customer: {customerToDelete.FirstName} " +
-                    $"{customerToDelete.LastName}?");
+                if (_customerDelete.HasCustomerBooking(customerId))
+                {
+                    AnsiConsole.MarkupLine("[bold red]The customer has a booking, can't be deleted[/]");
+                    Console.ReadKey();
+                    return;
+                }
+
+                bool selectedCustomerAsDeleted = 
+                    AnsiConsole.Confirm($"Do you want to delete customer: " +
+                    $"{customerToDelete.FirstName} {customerToDelete.LastName}?");
 
                 Console.Clear();
                 if (selectedCustomerAsDeleted)
@@ -56,7 +68,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     AnsiConsole.MarkupLine("[bold red]Deletion canceled.[/]");
                 }
 
-                bool addAnother = AnsiConsole.Confirm("Do you want delete another customer?");
+                bool addAnother = AnsiConsole.Confirm("Do you want to delete another customer?");
                 if (!addAnother)
                 {
                     isRunning = false;
