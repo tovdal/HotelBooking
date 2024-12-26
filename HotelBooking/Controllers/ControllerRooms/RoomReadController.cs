@@ -16,7 +16,7 @@ namespace HotelBooking.Controllers.ControllerRooms
         }
         public void ShowAllRooms()
         {
-            // needs revisiting. takes deleted customers. It should not do that.
+            // needs revisiting. takes deleted customers. It should not do that. or?
             var rooms = _roomRead.GetAllRoomsInDatabase().ToList();
 
             if (rooms == null || !rooms.Any())
@@ -31,8 +31,9 @@ namespace HotelBooking.Controllers.ControllerRooms
             table.AddColumn("Room size");
             table.AddColumn("Type of room");
             table.AddColumn("Price per night");
-            table.AddColumn("Is room available?");
-            table.AddColumn("Available extra bed");
+            table.AddColumn("Is room bookable?");
+            table.AddColumn("Extra beds?");
+            table.AddColumns("Is 'deleted'");
 
             foreach (var room in rooms)
             {
@@ -42,8 +43,9 @@ namespace HotelBooking.Controllers.ControllerRooms
                     room.RoomSize.ToString(),
                     room.TypeOfRoom.ToString(),
                     room.PricePerNight.ToString("C"),
-                    room.IsAvailable.ToString(),
-                    room.IsExtraBedAvailable.ToString()
+                    room.IsAvailable ? "Yes" : "No",
+                    room.IsExtraBedAvailable ? "Yes" : "No",
+                    room.IsRoomDeleted ? "Yes" : "No"
                 );
                 table.AddEmptyRow();
             }
@@ -68,7 +70,7 @@ namespace HotelBooking.Controllers.ControllerRooms
             table.AddColumn("Room size");
             table.AddColumn("Type of room");
             table.AddColumn("Price per night");
-            table.AddColumn("Available extra bed");
+            table.AddColumn("Extra beds?");
 
             foreach (var room in rooms)
             {
@@ -78,7 +80,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                     room.RoomSize.ToString(),
                     room.TypeOfRoom.ToString(),
                     room.PricePerNight.ToString("C"),
-                    room.IsExtraBedAvailable.ToString()
+                    room.IsExtraBedAvailable ? "Yes" : "No"
                 );
                 table.AddEmptyRow();
             }
@@ -96,8 +98,8 @@ namespace HotelBooking.Controllers.ControllerRooms
 
         public void ShowARoomDetailes()
         {
-            var rooms = _roomRead.GetAllAvailableRooms();
-            DisplayRoomInformation.PrintRoomOnlyDetailes
+            var rooms = _roomRead.GetAllActiveRooms();
+            DisplayRoomInformation.PrintRoomRoomNumberAndID
             (rooms, "There are no rooms.");
 
             if (!ValidatorRoomId.TryGetRoomId(out int roomId))
