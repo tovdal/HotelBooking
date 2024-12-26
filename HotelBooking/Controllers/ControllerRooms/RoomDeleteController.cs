@@ -34,14 +34,13 @@ namespace HotelBooking.Controllers.ControllerRooms
                 }
                 var roomToDelete = _roomUpdate.ReturnCustomerWithId(roomId);
                 if (roomToDelete == null)
-                // Repeting allot in the code.
                 {
-                    Console.WriteLine($"No customer found with ID number: {roomId}.");
+                    Console.WriteLine($"No room found with ID number: {roomId}.");
                     return;
                 }
 
                 bool selectedRoomAsDeleted = AnsiConsole.Confirm
-                    ($"Do you want to delete customer: {roomToDelete.Id} " +
+                    ($"Do you want to delete room: {roomToDelete.Id} " +
                     $"{roomToDelete.RoomNumber}");
 
                 Console.Clear();
@@ -49,7 +48,6 @@ namespace HotelBooking.Controllers.ControllerRooms
                 {
                     roomToDelete.IsRoomDeleted = true;
                     _dbContext.SaveChanges();
-                    // Repeting the delete customer
                     AnsiConsole.MarkupLine("[bold green]Successfully deleted![/]");
                 }
                 else
