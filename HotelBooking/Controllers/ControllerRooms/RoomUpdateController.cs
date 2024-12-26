@@ -23,15 +23,16 @@ namespace HotelBooking.Controllers.ControllerRooms
             _roomCreate = roomCreate;
             _dbContext = dbContext;
         }
-        public void GetBackDeletedRoom()
+        public void UpdateARoomInformation()
         {
             bool isRunning = true;
             while (isRunning)
             {
-                var rooms = _roomRead.GetAllAvailableRooms()
+                var rooms = _roomRead.GetAllActiveRooms()
                     .ToList();
-                DisplayRoomInformation.PrintRoomRoomNumberAndID
+                DisplayRoomInformation.PrintRoomOnlyDetailes
                     (rooms, "There are no active rooms");
+                Console.WriteLine("Press only enter to go back");
                 if (!ValidatorRoomId.TryGetRoomId(out int roomId))
                 {
                     return;
@@ -121,7 +122,7 @@ namespace HotelBooking.Controllers.ControllerRooms
             }
         }
 
-        public void UpdateARoomInformation()
+        public void GetBackDeletedRoom()
         {
             bool isRunning = true;
             while (isRunning)
