@@ -69,7 +69,7 @@ namespace HotelBooking.Utilities.Display.PrintInformation
             table.AddColumn("Type of Room");
             table.AddColumn("Price per Night");
             table.AddColumn("Available extra bed");
-            table.AddColumn("Is room Available");
+
 
 
             foreach (var room in rooms)
@@ -80,8 +80,7 @@ namespace HotelBooking.Utilities.Display.PrintInformation
                     room.RoomSize.ToString(),
                     room.TypeOfRoom.ToString(),
                     room.PricePerNight.ToString("C"),
-                    room.IsExtraBedAvailable ? "Yes" : "No",
-                    room.IsAvailable ? "Yes" : "No"
+                    room.IsExtraBedAvailable ? "Yes" : "No"
                 );
                 table.AddEmptyRow();
             }
