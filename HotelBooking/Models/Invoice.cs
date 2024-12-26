@@ -10,11 +10,5 @@
 
         public int BookingId { get; set; }
         public Booking Booking { get; set; } = null!;
-
-        public Invoice()
-        {
-            InvoiceDate = DateTime.Now;
-            DueDateOnInvoice = DateTime.Now.AddDays(31);
-        }
     }
 }
