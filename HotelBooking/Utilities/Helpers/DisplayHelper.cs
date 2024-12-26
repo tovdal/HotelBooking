@@ -29,5 +29,28 @@ namespace HotelBooking.Utilities.Helpers
             table.AddRow("Deleted", customer.IsCustomerDeleted ? "Yes" : "No");
             AnsiConsole.Write(table);
         }
+
+        public static void DisplayBookingDetails(Booking booking)
+        {
+            Console.Clear();
+            var table = new Table();
+            table.AddColumn("[bold]Field[/]");
+            table.AddColumn("[bold]Value[/]");
+            table.AddRow("Customer ID", booking.CustomerId.ToString());
+            table.AddRow("Check-In Date", booking.CheckInDate.ToString("d"));
+            table.AddRow("Check-Out Date", booking.CheckOutDate.ToString("d"));
+            table.AddRow("Total Cost", booking.TotalCostOfTheBooking.ToString("C"));
+            table.AddRow("Status", booking.Status.ToString());
+
+            string rooms = string.Join(", ", booking.Rooms.Select(r => r.RoomNumber));
+            table.AddRow("Rooms", rooms);
+
+            table.AddRow("Invoice Amount", booking.Invoice.CostAmount.ToString("C"));
+            table.AddRow("Invoice Date", booking.Invoice.InvoiceDate.ToString("d"));
+            table.AddRow("Due Date", booking.Invoice.DueDateOnInvoice.ToString("d"));
+            table.AddRow("Is Paid", booking.Invoice.IsPaid ? "Yes" : "No");
+
+            AnsiConsole.Write(table);
+        }
     }
 }
