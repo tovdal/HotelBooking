@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
 using HotelBooking.Controllers.ControllerRooms.Interface;
+using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Helpers;
@@ -14,10 +15,11 @@ namespace HotelBooking.Controllers.ControllerBooking
         private readonly RoomRead _roomRead;
         private readonly IRoomReadController _roomReadController;
 
-        public BookingCreateController(BookingCreate bookingCreate, IRoomReadController roomReadController)
+        public BookingCreateController(BookingCreate bookingCreate, IRoomReadController roomReadController, RoomRead roomRead)
         {
             _bookingCreate = bookingCreate;
             _roomReadController = roomReadController;
+            _roomRead = roomRead;
         }
 
         public void CreateBooking()
@@ -34,8 +36,24 @@ namespace HotelBooking.Controllers.ControllerBooking
                     Console.ReadKey();
                     break;
                 }
-                AnsiConsole.MarkupLine("[bold green]Type in customer ID[/]");
-                ValidatorCustomerId.TryGetCustomerId(out var customerId);
+
+                bool customerValid = false;
+                int customerId = 0;
+
+                while (!customerValid)
+                {
+                    AnsiConsole.MarkupLine("[bold green]Type in customer ID[/]");
+                    if (ValidatorCustomerId.TryGetCustomerId(out customerId))
+                    {
+                        customerValid = true;
+                    }
+                    else
+                    {
+                        AnsiConsole.MarkupLine("[bold red]No customer with that ID! Please try again.[/]");
+                    }
+                }
+
+                AnsiConsole.MarkupLine("[bold green]Customer validated![/]");
 
                 AnsiConsole.MarkupLine("[bold green]Pick check-in date[/]");
                 var selectedCheckInDate = BookingInputCalenderHelper.HandleUserInput(DateTime.Now);
@@ -53,8 +71,29 @@ namespace HotelBooking.Controllers.ControllerBooking
                     break;
                 }
 
+                Console.Clear();
                 AnsiConsole.MarkupLine("[bold green]Available rooms:[/]");
-                _roomReadController.ShowAllRooms();
+                AnsiConsole.MarkupLine("[bold red](Extra beds) Rooms over 25 square meters will automatically get 2 extra beds and under 25 will get 1.[/]");
+
+                var availableRooms = _roomRead.GetAllAvailablebookingRooms()
+                    .Where(r => r.IsAvailable && !r.IsRoomDeleted)
+                    .ToList();
+
+                var table = new Table();
+                table.AddColumn("Room Number");
+                table.AddColumn("Room size");
+                table.AddColumn("Price per Night");
+                table.AddColumn("Extra bed available");
+
+                foreach (var room in availableRooms)
+                {
+                    table.AddRow(room.RoomNumber.ToString(),
+                        $"{room.RoomSize}",
+                        $"{room.PricePerNight:C}",
+                        room.IsExtraBedAvailable.ToString());
+                }
+
+                AnsiConsole.Write(table);
 
                 bool IsAddingRooms = true;
                 while (IsAddingRooms)
@@ -65,9 +104,47 @@ namespace HotelBooking.Controllers.ControllerBooking
                             .Validate(input =>
                             {
                                 if (!int.TryParse(input, out int roomNumber)) return false;
-                                return !_bookingCreate.IsRoomBooked(roomNumber);
+                                return !_bookingCreate.IsRoomBooked(roomNumber)
+                                && !_bookingCreate.GetRoomsToBook()
+                                .Any(r => r.RoomNumber == roomNumber);
                             })
                     );
+
+                    Room room;
+                    try
+                    {
+                        room = _roomRead.GetRoomByRoomNumber(int.Parse(roomRoomNumber));
+                        if (room == null)
+                        {
+                            throw new InvalidOperationException($"No room found with room number {roomRoomNumber}.");
+                        }
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        AnsiConsole.MarkupLine($"[red]{ex.Message}[/]");
+                        continue;
+                    }
+
+                    if (_roomRead.GetRoomByExtraBed(room.RoomNumber))
+                    {
+                        bool extraBed = AnsiConsole.Confirm("Do you want to add an extra bed?");
+                        if (extraBed)
+                        {
+                            if (room.RoomSize >= 25)
+                            {
+                                Console.WriteLine("2 beds added");
+                            }
+                            else
+                            {
+                                Console.WriteLine("1 bed added");
+                            }
+                        }
+                        _bookingCreate.AddRoomToBooking(roomRoomNumber, extraBed);
+                    }
+                    else
+                    {
+                        _bookingCreate.AddRoomToBooking(roomRoomNumber);
+                    }
 
                     IsAddingRooms = AnsiConsole.Confirm("\n[bold yellow]Want to add another room?[/]");
                 }
@@ -78,7 +155,23 @@ namespace HotelBooking.Controllers.ControllerBooking
                 bool confirm = AnsiConsole.Confirm("\n[bold yellow]Are all details correct?[/]");
                 if (confirm)
                 {
-                    //_bookingCreate.AddBooking(newBooking);
+                    var newBooking = new Booking
+                    {
+                        CustomerId = customerId,
+                        CheckInDate = selectedCheckInDate,
+                        CheckOutDate = selectedCheckOutDate,
+                        TotalCostOfTheBooking = totalBookingPrice,
+                        Status = StatusOnBooking.Active,
+                        Rooms = _bookingCreate.GetRoomsToBook(),
+                        Invoice = new Invoice
+                        {
+                            CostAmount = totalBookingPrice,
+                            InvoiceDate = DateTime.Now,
+                            DueDateOnInvoice = selectedCheckOutDate,
+                            IsPaid = false
+                        }
+                    };
+                    _bookingCreate.AddBooking(newBooking);
                     AnsiConsole.MarkupLine("[bold green]Booking successfully registered![/]");
                 }
                 else
