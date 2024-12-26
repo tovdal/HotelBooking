@@ -57,7 +57,8 @@ namespace HotelBooking.Controllers.ControllerBooking
 
                     foreach (var customer in registerdCustomers)
                     {
-                        customerTable.AddRow($"{customer.Id}",
+                        customerTable.AddRow(
+                            $"{customer.Id}",
                             $"{customer.FirstName}",
                             $"{customer.LastName}");
                     }
@@ -129,10 +130,12 @@ namespace HotelBooking.Controllers.ControllerBooking
 
                 foreach (var room in availableRooms)
                 {
-                    roomTable.AddRow(room.RoomNumber.ToString(),
+                    roomTable.AddRow(
+                        room.RoomNumber.ToString(),
                         $"{room.RoomSize}",
                         $"{room.PricePerNight:C}",
-                        room.IsExtraBedAvailable.ToString());
+                        room.IsExtraBedAvailable ? "Yes" : "No"
+                    );
                 }
 
                 AnsiConsole.Write(roomTable);
