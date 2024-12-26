@@ -33,8 +33,6 @@ namespace HotelBooking.Service.RoomService
             return _dbContext.Rooms
                 .Where(r => r.IsAvailable);
         }
-
-        
         public IQueryable<Room> GetAllTakenRooms()
         {
             return _dbContext.Rooms
@@ -55,6 +53,16 @@ namespace HotelBooking.Service.RoomService
             return _dbContext.Rooms
                 .Any(c => c.IsRoomDeleted);
         }
-       
+        public Room GetRoomByRoomNumber(int roomNumber)
+        {
+            return _dbContext.Rooms
+                .First(r => r.RoomNumber == roomNumber);
+
+        }
+        public bool GetRoomByExtraBed(int roomNumber)
+        {
+            return _dbContext.Rooms
+                .Any(r => r.RoomNumber == roomNumber && r.IsExtraBedAvailable);
+        }
     }
 }
