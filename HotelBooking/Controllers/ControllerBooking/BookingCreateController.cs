@@ -62,8 +62,6 @@ public class BookingCreateController : IBookingCreateController
                 break;
             }
 
-            DisplayAvailableRooms.PrintAvailableRooms(_roomRead);
-
             BookingInputRoomHelper.PromptBookRooms(_bookingCreate, _roomRead);
 
             var totalBookingPrice = _bookingCreate.TotalPriceOfBooking
