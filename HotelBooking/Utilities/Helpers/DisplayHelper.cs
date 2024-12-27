@@ -39,7 +39,6 @@ namespace HotelBooking.Utilities.Helpers
             table.AddRow("Customer ID", booking.CustomerId.ToString());
             table.AddRow("Check-In Date", booking.CheckInDate.ToString("d"));
             table.AddRow("Check-Out Date", booking.CheckOutDate.ToString("d"));
-            table.AddRow("Total Cost", booking.TotalCostOfTheBooking.ToString("C"));
             table.AddRow("Status", booking.Status.ToString());
 
             string rooms = string.Join(", ", booking.Rooms.Select(r => r.RoomNumber));

@@ -203,7 +203,6 @@ namespace HotelBooking.Controllers.ControllerBooking
                     CustomerId = customerId,
                     CheckInDate = selectedCheckInDate,
                     CheckOutDate = selectedCheckOutDate,
-                    TotalCostOfTheBooking = totalBookingPrice,
                     Status = StatusOnBooking.Active,
                     Rooms = _bookingCreate.GetRoomsToBook(),
                     Invoice = new Invoice
