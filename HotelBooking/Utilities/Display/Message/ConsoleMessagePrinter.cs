@@ -4,7 +4,7 @@
     {
         public static void DisplayMessage()
         {
-            Console.WriteLine("`\nPress any key to continue.");
+            Console.WriteLine("\nPress any key to continue.");
             Console.ReadKey();
         }
 
