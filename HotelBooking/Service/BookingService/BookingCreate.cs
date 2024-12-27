@@ -43,7 +43,7 @@ namespace HotelBooking.Service.BookingService
 
         public bool IsRoomBooked(int roomNumber)
         {
-            var room = _dbContext.Rooms.First(r => r.RoomNumber == roomNumber);
+            var room = _dbContext.Rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
             if (room == null)
             {
                 return false;

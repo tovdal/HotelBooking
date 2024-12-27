@@ -50,15 +50,12 @@ namespace HotelBooking.Menu
                         _bookingController.ReadABooking();
                         break;
                     case 4:
-                        //_customerController.UpdateACustomer();
                         _bookingController.UpdateABooking();
                         break;
                     case 5:
-                        //_customerController.DeleteACustomer();
                         _bookingController.DeleteABooking();
                         break;
                     case 6:
-                        //_customerController.TakeBackDeletedCustomer();
                         _bookingController.TakeBackDeletedBooking();
                         break;
                     case 7:
