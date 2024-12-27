@@ -19,13 +19,15 @@ namespace HotelBooking.Service.RoomService
         public IQueryable<Room> GetAllActiveRooms()
         {
             return _dbContext.Rooms
-                .Where(r => !r.IsRoomDeleted);
+                .Where(r => !r.IsRoomDeleted)
+                .OrderBy(r => r.RoomNumber);
         }
 
         public IQueryable<Room> GetAllAvailableRooms()
         {
             return _dbContext.Rooms
-                .Where(r => !r.IsAvailable);
+                .Where(r => !r.IsAvailable)
+                .OrderBy(r => r.RoomNumber);
 
         }
         public IQueryable<Room> GetAllAvailablebookingRooms()
@@ -36,7 +38,8 @@ namespace HotelBooking.Service.RoomService
         public IQueryable<Room> GetAllTakenRooms()
         {
             return _dbContext.Rooms
-                .Where(r => r.IsAvailable);
+                .Where(r => r.IsAvailable)
+                .OrderBy(r => r.RoomNumber);
         }
         public IQueryable<Room> GetRoomDetailes(int id)
         {
@@ -46,7 +49,8 @@ namespace HotelBooking.Service.RoomService
         public IQueryable<Room> GetAllDeletedRoomsInDatabase()
         {
             return _dbContext.Rooms
-                .Where(r => r.IsRoomDeleted);
+                .Where(r => r.IsRoomDeleted)
+                .OrderBy(r => r.RoomNumber);
         }
         public bool GetRoomsIsDeleted()
         {
