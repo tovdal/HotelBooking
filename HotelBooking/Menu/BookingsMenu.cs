@@ -42,15 +42,12 @@ namespace HotelBooking.Menu
                         break;
                     case 1:
                         _bookingController.ReadAllBookings();
-                        //_customerController.ReadAllCustomers();
                         break;
                     case 2:
-                        _bookingController.ReadABooking();
-                        //_customerController.ReadAllDeleted();
+                        _bookingController.ReadAllDeleted();
                         break;
                     case 3:
-                        //_customerController.ReadACustomer();
-                        _bookingController.ReadAllDeleted();
+                        _bookingController.ReadABooking();
                         break;
                     case 4:
                         //_customerController.UpdateACustomer();
