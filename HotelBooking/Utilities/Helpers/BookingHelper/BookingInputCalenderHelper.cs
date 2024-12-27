@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace HotelBooking.Utilities.Helpers
+namespace HotelBooking.Utilities.Helpers.BookingHelper
 {
     public class BookingInputCalenderHelper
     {
@@ -15,7 +15,7 @@ namespace HotelBooking.Utilities.Helpers
             DateTime firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);
             int daysInMonth = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
             int startDay = (int)firstDayOfMonth.DayOfWeek;
-            startDay = (startDay == 0) ? 6 : startDay - 1;
+            startDay = startDay == 0 ? 6 : startDay - 1;
 
             for (int i = 0; i < startDay; i++)
             {
@@ -53,10 +53,13 @@ namespace HotelBooking.Utilities.Helpers
             };
 
             AnsiConsole.Write(panel);
-            AnsiConsole.MarkupLine("\nUse arrow keys [blue]\u25C4\u25B2\u25BA\u25BC[/]to navigate and[green] Enter[/] to select.");
+            AnsiConsole.MarkupLine
+                ("\nUse arrow keys [blue]\u25C4\u25B2\u25BA\u25BC" +
+                "[/]to navigate and[green] Enter[/] to select.");
         }
 
-        public static DateTime HandleUserInput(DateTime selectedDate, DateTime? checkInDate = null)
+        public static DateTime HandleUserInput
+            (DateTime selectedDate, DateTime? checkInDate = null)
         {
             while (true)
             {
@@ -92,17 +95,21 @@ namespace HotelBooking.Utilities.Helpers
                     case ConsoleKey.Enter:
                         if (selectedDate < DateTime.Now.Date)
                         {
-                            AnsiConsole.MarkupLine("[red]You cannot book a date in the past.[/]");
+                            AnsiConsole.MarkupLine
+                                ("[red]You cannot book a date in the past.[/]");
                             Console.ReadKey();
                         }
                         else if (checkInDate.HasValue && selectedDate <= checkInDate.Value)
                         {
-                            AnsiConsole.MarkupLine("[red]The check-out date cannot be earlier than the check-in date.[/]");
+                            AnsiConsole.MarkupLine
+                                ("[red]The check-out date cannot be earlier than " +
+                                "the check-in date.[/]");
                             Console.ReadKey();
                         }
                         else
                         {
-                            AnsiConsole.MarkupLine($"\nYou selected: [green]{selectedDate:yyyy-MM-dd}[/]");
+                            AnsiConsole.MarkupLine
+                                ($"\nYou selected: [green]{selectedDate:yyyy-MM-dd}[/]");
                             Console.ReadKey();
                             return selectedDate;
                         }
