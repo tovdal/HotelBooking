@@ -6,7 +6,6 @@
         public int CustomerId { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
-        public decimal TotalCostOfTheBooking { get; set; }
         public StatusOnBooking Status { get; set; }
 
         public Customer Customer { get; set; } = null!;
