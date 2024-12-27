@@ -15,7 +15,7 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
             DateTime firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);
             int daysInMonth = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
             int startDay = (int)firstDayOfMonth.DayOfWeek;
-            startDay = startDay == 0 ? 6 : startDay - 1;
+            startDay = (startDay == 0) ? 6 : startDay - 1;
 
             for (int i = 0; i < startDay; i++)
             {
