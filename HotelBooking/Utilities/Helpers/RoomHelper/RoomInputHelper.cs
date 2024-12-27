@@ -2,7 +2,7 @@
 using HotelBooking.Service.RoomService;
 using Spectre.Console;
 
-namespace HotelBooking.Utilities.Helpers
+namespace HotelBooking.Utilities.Helpers.RoomHelper
 {
     public class RoomInputHelper
     {

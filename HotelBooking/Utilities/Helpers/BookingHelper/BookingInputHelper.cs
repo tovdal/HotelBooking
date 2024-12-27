@@ -24,7 +24,7 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
             {
                 CheckInDate = checkInDate,
                 CheckOutDate = checkOutDate,
-                Status = StatusOnBooking.Active,
+                Status = BookingStatus.Active,
             };
         }
 

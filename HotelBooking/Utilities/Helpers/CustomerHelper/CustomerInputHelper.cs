@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Models;
 using Spectre.Console;
 
-namespace HotelBooking.Utilities.Helpers
+namespace HotelBooking.Utilities.Helpers.CustomerHelper
 {
     public class CustomerInputHelper
     {

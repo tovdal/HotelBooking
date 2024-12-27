@@ -74,7 +74,7 @@ public class BookingCreateController : IBookingCreateController
                 CustomerId = customerId,
                 CheckInDate = selectedCheckInDate,
                 CheckOutDate = selectedCheckOutDate,
-                Status = StatusOnBooking.Active,
+                Status = BookingStatus.Active,
                 Rooms = _bookingCreate.GetRoomsToBook(),
                 Invoice = new Invoice
                 {
