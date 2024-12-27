@@ -70,9 +70,11 @@ namespace HotelBooking.Config
             builder.RegisterType<BookingController>().As<IBookingController>();
             builder.RegisterType<BookingCreateController>().As<IBookingCreateController>();
             builder.RegisterType<BookingReadController>().As<IBookingReadController>();
+            builder.RegisterType<BookingUpdateController>().As<IBookingUpdateController>();
 
             builder.RegisterType<BookingCreate>().AsSelf();
             builder.RegisterType<BookingRead>().AsSelf();
+            builder.RegisterType<BookingUpdate>().AsSelf();
 
             builder.RegisterType<RoomCreate>().AsSelf();
             builder.RegisterType<RoomRead>().AsSelf();

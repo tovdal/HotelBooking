@@ -7,11 +7,14 @@ namespace HotelBooking.Controllers
     {
         private readonly IBookingCreateController _bookingCreateController;
         private readonly IBookingReadController _bookingReadController;
+        private readonly IBookingUpdateController _bookingUpdateController;
 
         public BookingController
             (IBookingCreateController bookingCreateController,
-            IBookingReadController bookingReadController)
+            IBookingReadController bookingReadController,
+            IBookingUpdateController bookingUpdateController)
         {
+            _bookingUpdateController = bookingUpdateController;
             _bookingCreateController = bookingCreateController;
             _bookingReadController = bookingReadController;
         }
@@ -37,7 +40,7 @@ namespace HotelBooking.Controllers
 
         public void UpdateABooking()
         {
-            throw new NotImplementedException();
+            _bookingUpdateController.UpdateBookingInformation();
         }
 
         public void DeleteABooking()
@@ -47,8 +50,7 @@ namespace HotelBooking.Controllers
 
         public void TakeBackDeletedBooking()
         {
-            throw new NotImplementedException();
+            _bookingUpdateController.TakeBackDeletedBooking();
         }
-        
     }
 }
