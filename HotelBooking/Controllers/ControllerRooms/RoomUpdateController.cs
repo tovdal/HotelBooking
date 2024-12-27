@@ -28,20 +28,22 @@ namespace HotelBooking.Controllers.ControllerRooms
             bool isRunning = true;
             while (isRunning)
             {
+                Console.Clear();
+
                 var rooms = _roomRead.GetAllActiveRooms()
                     .ToList();
                 DisplayRoomInformation.PrintRoomOnlyDetailes
                     (rooms, "There are no active rooms");
-                Console.WriteLine("Press only enter to go back");
                 if (!ValidatorRoomId.TryGetRoomId(out int roomId))
                 {
-                    return;
+                    continue;
                 }
 
                 var roomToUpdate = _roomUpdate.ReturnCustomerWithId(roomId);
                 if (roomToUpdate == null)
                 {
-                    Console.WriteLine($"No Room found wiih ID number: {roomId}.");
+                    AnsiConsole.MarkupLine
+                        ($"[bold red]No Room found wiih ID number: {roomId}.[/]");
                     return;
                 }
 
@@ -127,48 +129,51 @@ namespace HotelBooking.Controllers.ControllerRooms
             bool isRunning = true;
             while (isRunning)
             {
-                var rooms = _roomRead.GetAllDeletedRoomsInDatabase()
-                    .ToList();
+                Console.Clear();
+                var deletedRooms = _roomRead.GetAllDeletedRoomsInDatabase().ToList();
                 DisplayRoomInformation.PrintRoomOnlyDetailes
-                    (rooms, "There are no deleted rooms");
+                    (deletedRooms, "There are no deleted rooms");
 
-                var isDeleted = _roomRead.GetRoomsIsDeleted();
-                if (isDeleted)
+                if (!deletedRooms.Any())
                 {
-                    ConsoleMessagePrinter.DisplayMessage();
                     isRunning = false;
                     return;
                 }
 
                 if (!ValidatorRoomId.TryGetRoomId(out var roomId))
                 {
-                    return;
+                    continue;
                 }
+
                 var roomToUpdate = _roomUpdate.ReturnCustomerWithId(roomId);
                 if (roomToUpdate == null || !roomToUpdate.IsRoomDeleted)
                 {
-                    Console.WriteLine($"No deleted room found with ID number: {roomId}.");
+                    AnsiConsole.MarkupLine
+                        ($"[bold red]No deleted room found with ID number: {roomId}.[/]");
+                    Console.ReadKey();
                     continue;
                 }
-                bool deleteRoom = AnsiConsole.Confirm
-                    ($"Do you want to take back deleted room: {roomToUpdate.Id} " +
-                    $"{roomToUpdate.RoomNumber}");
-                if (deleteRoom)
+
+                bool restoreRoom = AnsiConsole.Confirm
+                    ($"Do you want to restore deleted room: {roomToUpdate.RoomNumber}?");
+                if (restoreRoom)
                 {
                     roomToUpdate.IsRoomDeleted = false;
                     _dbContext.SaveChanges();
-                    AnsiConsole.MarkupLine("[bold green]Room successfully un-deleted![/]");
+                    AnsiConsole.MarkupLine("[bold green]Successfully restored![/]");
                 }
                 else
                 {
-                    AnsiConsole.MarkupLine("[bold red]Retake canceled.[/]");
+                    AnsiConsole.MarkupLine("[bold red]Restore canceled.[/]");
                 }
-                Console.Clear();
-                bool addAnother = AnsiConsole.Confirm("Do you want to restore another deleted room?");
-                if (!addAnother)
+
+                bool restoreAnother = AnsiConsole.Confirm
+                    ("Do you want to restore another deleted room?");
+                if (!restoreAnother)
                 {
                     isRunning = false;
                 }
+                Console.Clear();
             }
         }
     }

@@ -78,6 +78,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
             bool isRunning = true;
             while (isRunning)
             {
+                Console.Clear();
                 var customers = _customerRead.GetAllDeletedCustomersInDatabase()
                     .ToList();
                 DisplayCustomerInformation.PrintCustomersOnlyDetailes
@@ -102,6 +103,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 if (customerToUpdate == null || !customerToUpdate.IsCustomerDeleted)
                 {
                     Console.WriteLine($"No deleted customer found with ID number: {customerId}.");
+                    Console.ReadKey();
                     continue;
                 }
 
