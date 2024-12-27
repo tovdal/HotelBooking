@@ -12,7 +12,7 @@ namespace HotelBooking.Service.RoomService
             _dbContext = dbContext;
         }
         //Read
-        public List<Room> GetAllRoomsInDatabase()
+        public List<Room> GetAllRoomsInDb()
         {
             return _dbContext.Rooms.ToList();
         }
@@ -41,7 +41,7 @@ namespace HotelBooking.Service.RoomService
                 .Where(r => r.IsAvailable)
                 .OrderBy(r => r.RoomNumber);
         }
-        public IQueryable<Room> GetRoomDetailes(int id)
+        public IQueryable<Room> GetRoomDetails(int id)
         {
             return _dbContext.Rooms
                 .Where(r => r.Id == id);
