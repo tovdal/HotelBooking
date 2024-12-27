@@ -2,7 +2,7 @@
 using HotelBooking.Data;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.Message;
-using HotelBooking.Utilities.Display.PrintInformation;
+using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;

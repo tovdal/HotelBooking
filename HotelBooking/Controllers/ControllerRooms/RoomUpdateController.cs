@@ -3,7 +3,7 @@ using HotelBooking.Data;
 using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.Message;
-using HotelBooking.Utilities.Display.PrintInformation;
+using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -49,7 +49,7 @@ namespace HotelBooking.Controllers.ControllerRooms
 
                 Console.Clear();
 
-                var room = _roomRead.GetRoomDetailes(roomId);
+                var room = _roomRead.GetRoomDetails(roomId);
                 DisplayRoomInformation.PrintRoomOnlyDetailes
                     (room, $"No Room found with ID number {roomId}");
 

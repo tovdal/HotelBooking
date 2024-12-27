@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.Interface;
 using HotelBooking.Data;
 using HotelBooking.Service.RoomService;
-using HotelBooking.Utilities.Display.PrintInformation;
+using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
