@@ -17,6 +17,6 @@
     public enum StatusOnBooking
     {
         Active,
-        Inactive
+        Deleted
     }
 }
