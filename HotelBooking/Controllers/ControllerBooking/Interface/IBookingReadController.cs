@@ -2,5 +2,10 @@
 {
     public interface IBookingReadController
     {
+        //void ShowAllBookings();
+        void ShowAllActiveBookings();
+        void ShowAllDeletedBookings();
+        void ShowABookingDetails();
+
     }
 }
