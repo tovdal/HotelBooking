@@ -6,34 +6,41 @@ namespace HotelBooking.Controllers
     public class BookingController : IBookingController
     {
         private readonly IBookingCreateController _bookingCreateController;
+        private readonly IBookingReadController _bookingReadController;
 
         public BookingController
-            (IBookingCreateController bookingCreateController)
+            (IBookingCreateController bookingCreateController,
+            IBookingReadController bookingReadController)
         {
             _bookingCreateController = bookingCreateController;
+            _bookingReadController = bookingReadController;
         }
 
         public void CreateBooking()
         {
             _bookingCreateController.CreateBooking();
         }
-
-        public void DeleteABooking()
+        public void ReadAllBookings()
         {
-            throw new NotImplementedException();
+            _bookingReadController.ShowAllActiveBookings();
         }
 
         public void ReadABooking()
         {
-            throw new NotImplementedException();
+            _bookingReadController.ShowABookingDetails();
         }
 
-        public void ReadAllBookings()
+        public void ReadAllDeleted()
+        {
+            _bookingReadController.ShowAllDeletedBookings();
+        }
+
+        public void UpdateABooking()
         {
             throw new NotImplementedException();
         }
 
-        public void ReadAllDeleted()
+        public void DeleteABooking()
         {
             throw new NotImplementedException();
         }
@@ -42,10 +49,6 @@ namespace HotelBooking.Controllers
         {
             throw new NotImplementedException();
         }
-
-        public void UpdateABooking()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
