@@ -11,11 +11,14 @@ namespace HotelBooking.Controllers.ControllerRooms
     {
         private readonly RoomRead _roomRead;
         private readonly RoomUpdate _roomUpdate;
+        private readonly RoomDelete _roomDelete;
         private readonly ApplicationDbContext _dbContext;
-        public RoomDeleteController(RoomRead roomRead, RoomUpdate roomUpdate, ApplicationDbContext applicationDbContext)
+        public RoomDeleteController(RoomRead roomRead, RoomUpdate roomUpdate,
+            RoomDelete roomDelete, ApplicationDbContext applicationDbContext)
         {
             _roomRead = roomRead;
             _roomUpdate = roomUpdate;
+            _roomDelete = roomDelete;
             _dbContext = applicationDbContext;
         }
         public void DeleteRoom()
@@ -36,6 +39,12 @@ namespace HotelBooking.Controllers.ControllerRooms
                 if (roomToDelete == null)
                 {
                     Console.WriteLine($"No room found with ID number: {roomId}.");
+                    return;
+                }
+                if (_roomDelete.HasRoomBooking(roomId))
+                {
+                    AnsiConsole.MarkupLine("[bold red]The room has a booking, can't be deleted[/]");
+                    Console.ReadKey();
                     return;
                 }
 

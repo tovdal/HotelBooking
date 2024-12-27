@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HotelBooking.Data;
 
 namespace HotelBooking.Service.RoomService
 {
-    internal class RoomDelete
+    public class RoomDelete
     {
+        private readonly ApplicationDbContext _dbContext;
+        public RoomDelete(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        public bool HasRoomBooking(int roomId)
+        {
+            return _dbContext.Rooms
+                .Any(r => r.Id == roomId && r.Bookings.Any());
+        }
     }
 }
