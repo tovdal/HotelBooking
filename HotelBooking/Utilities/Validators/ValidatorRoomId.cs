@@ -10,6 +10,7 @@
             if (!int.TryParse(stringID, out roomId))
             {
                 Console.WriteLine("Please enter a valid number ID.");
+                Console.ReadKey();
                 return false;
             }
 
