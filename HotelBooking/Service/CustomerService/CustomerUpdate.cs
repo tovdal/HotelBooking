@@ -13,7 +13,7 @@ namespace HotelBooking.Service.CustomerService
         }
         public Customer ReturnCustomerWithId(int id)
         {
-           return _dbContext.Customers.First(c => c.Id == id);
+           return _dbContext.Customers.FirstOrDefault(c => c.Id == id);
         }
     }
 }

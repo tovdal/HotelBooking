@@ -13,7 +13,7 @@ namespace HotelBooking.Service.RoomService
 
         public Room ReturnCustomerWithId(int id)
         {
-            return _dbContext.Rooms.First(c => c.Id == id);
+            return _dbContext.Rooms.FirstOrDefault(c => c.Id == id);
         }
     }
 }
