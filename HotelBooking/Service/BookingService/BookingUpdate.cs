@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HotelBooking.Data;
 
 namespace HotelBooking.Service.BookingService
 {
-    internal class BookingUpdate
+    public class BookingUpdate
     {
+        private readonly ApplicationDbContext _dbContext;
+        public BookingUpdate(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
     }
 }
