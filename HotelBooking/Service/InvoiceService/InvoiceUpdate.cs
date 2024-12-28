@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HotelBooking.Data;
+using HotelBooking.Models;
 
 namespace HotelBooking.Service.InvoiceService
 {
-    internal class InvoiceUpdate
+    public class InvoiceUpdate
     {
+        private readonly ApplicationDbContext _dbContext;
+
+        public InvoiceUpdate(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public Booking ReturnInvoiceWithId(int id)
+        {
+            return _dbContext.Bookings.FirstOrDefault(i => i.Id == id);
+        }
+
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
     }
 }
