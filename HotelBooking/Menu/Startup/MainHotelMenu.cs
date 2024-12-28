@@ -10,7 +10,6 @@ namespace HotelBooking.Menu.Startup
     {
         private readonly MenuDisplay _menuDisplay;
         private readonly IMainMenuAction[] _actionsMainMenu;
-        private readonly MenuHandler _mainMenuHandler;
         private readonly MenuNavigator _menuNavigator;
 
         public MainHotelMenu(
