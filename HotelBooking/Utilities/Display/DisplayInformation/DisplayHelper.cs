@@ -51,22 +51,5 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
 
             AnsiConsole.Write(table);
         }
-        public static void DisplayRoomDetails(Room room)
-        {
-            Console.Clear();
-            var table = new Table();
-            table.AddColumn("[bold]Field[/]");
-            table.AddColumn("[bold]Value[/]");
-            table.AddRow("Room Number", room.RoomNumber.ToString());
-            table.AddRow("Room Size", room.RoomSize.ToString());
-            table.AddRow("Type of Room", room.TypeOfRoom.ToString());
-            table.AddRow("Price Per Night", room.PricePerNight.ToString("C"));
-            table.AddRow("Is Available", room.IsAvailable ? "Yes" : "No");
-            table.AddRow("Is Room Deleted", room.IsRoomDeleted ? "Yes" : "No");
-            table.AddRow("Extra Beds Count", room.ExtraBedsCount?.ToString() ?? "N/A");
-            table.AddRow("Is Extra Bed Available", room.IsExtraBedAvailable ? "Yes" : "No");
-
-            AnsiConsole.Write(table);
-        }
     }
 }
