@@ -3,7 +3,7 @@ using HotelBooking.Menu.Actions;
 using HotelBooking.Service.MenuService;
 using HotelBooking.Utilities.Display.Menu;
 
-namespace HotelBooking.Menu
+namespace HotelBooking.Menu.Submenus
 {
     public class CustomersMenu : IMainMenuAction
     {
@@ -31,7 +31,6 @@ namespace HotelBooking.Menu
                 "Back to main menu"
             };
 
-            // Use the MenuHandler to handle navigation
             _menuHandler.ShowMenu(menuItems, selectedIndex =>
             {
                 switch (selectedIndex)

@@ -3,7 +3,7 @@ using HotelBooking.Menu.Actions;
 using HotelBooking.Service.MenuService;
 using HotelBooking.Utilities.Display.Menu;
 
-namespace HotelBooking.Menu
+namespace HotelBooking.Menu.Submenus
 {
     public class InvoiceMenu : IMainMenuAction
     {
@@ -24,6 +24,8 @@ namespace HotelBooking.Menu
             List<string> menuItems = new List<string>()
             {
                 "Show all invoices",
+                "Show all not paid invoices",
+                "Show all paid invoices",
                 "Show a invoice's details",
                 "Update a invoice",
                 "Pay a invoice",
@@ -38,15 +40,21 @@ namespace HotelBooking.Menu
                         _invoiceController.ShowAllInvoices();
                         break;
                     case 1:
-                        _invoiceController.ShowAInvoiceDetails();
+                        _invoiceController.ShowAllNotPaidInvoices();
                         break;
                     case 2:
-                        _invoiceController.UpdateAInvoice();
+                        _invoiceController.ShowAllPaidInvoices();
                         break;
                     case 3:
-                        _invoiceController.PayAInvoice();
+                        _invoiceController.ShowAInvoiceDetails();
                         break;
                     case 4:
+                        _invoiceController.UpdateAInvoice();
+                        break;
+                    case 5:
+                        _invoiceController.PayAInvoice();
+                        break;
+                    case 6:
                         break;
                 }
             });

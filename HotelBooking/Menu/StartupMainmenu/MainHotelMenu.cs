@@ -1,10 +1,10 @@
-﻿using HotelBooking.Controllers;
-using HotelBooking.Controllers.Interfaces;
+﻿using HotelBooking.Controllers.Interfaces;
 using HotelBooking.Menu.Actions;
+using HotelBooking.Menu.Submenus;
 using HotelBooking.Service.MenuService;
 using HotelBooking.Utilities.Display.Menu;
 
-namespace HotelBooking.Menu.Startup
+namespace HotelBooking.Menu.StartupMainmenu
 {
     public class MainHotelMenu
     {
@@ -22,7 +22,7 @@ namespace HotelBooking.Menu.Startup
             _menuDisplay = menuDisplay;
             _menuNavigator = new MenuNavigator();
             _actionsMainMenu = InitializeMainMenuActions
-                (menuDisplay, customerController, 
+                (menuDisplay, customerController,
                 roomController, bookingController,
                 invoiceController);
         }

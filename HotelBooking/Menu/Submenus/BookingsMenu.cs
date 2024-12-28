@@ -3,7 +3,7 @@ using HotelBooking.Menu.Actions;
 using HotelBooking.Service.MenuService;
 using HotelBooking.Utilities.Display.Menu;
 
-namespace HotelBooking.Menu;
+namespace HotelBooking.Menu.Submenus;
 
 public class BookingsMenu : IMainMenuAction
 {
