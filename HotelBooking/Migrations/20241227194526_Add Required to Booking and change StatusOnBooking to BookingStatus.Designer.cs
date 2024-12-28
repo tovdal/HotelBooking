@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241227194526_Add Required to Booking and change StatusOnBooking to BookingStatus")]
+    [Migration("20241227194526_Add Required to Booking and change BookingStatus to BookingStatus")]
     partial class AddRequiredtoBookingandchangeStatusOnBookingtoBookingStatus
     {
         /// <inheritdoc />
