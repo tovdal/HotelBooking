@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
 using HotelBooking.Service.RoomService;
-using HotelBooking.Utilities.Display.DsplayInformation;
+using HotelBooking.Utilities.Display.DisplayInformation;
 using Spectre.Console;
 
 namespace HotelBooking.Utilities.Helpers.BookingHelper

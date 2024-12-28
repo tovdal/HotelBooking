@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Service.RoomService;
 using Spectre.Console;
 
-namespace HotelBooking.Utilities.Display.DsplayInformation
+namespace HotelBooking.Utilities.Display.DisplayInformation
 {
     public class DisplayAvailableRooms
     {

@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Models;
 using Spectre.Console;
 
-namespace HotelBooking.Utilities.Display.DsplayInformation;
+namespace HotelBooking.Utilities.Display.DisplayInformation;
 
 public class DisplayBookingInformation
 {
@@ -17,12 +17,22 @@ public class DisplayBookingInformation
             var bookingTable = new Table();
             bookingTable.AddColumn("Booking Id");
             bookingTable.AddColumn("Customer Id");
+            bookingTable.AddColumn("Customer Name");
+            bookingTable.AddColumn("Room/Rooms");
+            bookingTable.AddColumn("Check in date");
 
             foreach (var booking in bookings)
             {
+                var roomNumbers = string
+                .Join(", ", booking.Rooms
+                .Select(r => r.RoomNumber));
+
                 bookingTable.AddRow(
                     booking.Id.ToString(),
-                    booking.CustomerId.ToString()
+                    booking.CustomerId.ToString(),
+                    $"{booking.Customer.FirstName}, {booking.Customer.LastName}",
+                    roomNumbers,
+                    booking.CheckInDate.ToString()
                     );
                 bookingTable.AddEmptyRow();
             }
@@ -111,7 +121,6 @@ public class DisplayBookingInformation
         bookingTable.AddColumn("Check out date");
         bookingTable.AddColumn("Total Cost");
         bookingTable.AddColumn("Is Paid?");
-        bookingTable.AddColumn("Is Deleted");
 
         foreach (var booking in bookings)
         {
@@ -121,8 +130,7 @@ public class DisplayBookingInformation
                 booking.CheckInDate.ToString(),
                 booking.CheckOutDate.ToString(),
                 booking.Invoice.CostAmount.ToString("C"),
-                booking.Invoice.IsPaid ? "Yes" : "No",
-                booking.Status.ToString()
+                booking.Invoice.IsPaid ? "Yes" : "No"
                 );
             bookingTable.AddEmptyRow();
         }

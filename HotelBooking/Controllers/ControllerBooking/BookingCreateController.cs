@@ -5,7 +5,7 @@ using HotelBooking.Service.BookingService;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
-using HotelBooking.Utilities.Display.DsplayInformation;
+using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers.BookingHelper;
 using Spectre.Console;
 

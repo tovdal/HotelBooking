@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
 using HotelBooking.Service.BookingService;
 using HotelBooking.Service.RoomService;
-using HotelBooking.Utilities.Display.DsplayInformation;
+using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers.BookingHelper;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
@@ -80,7 +80,7 @@ namespace HotelBooking.Controllers.ControllerBooking
 
         public void TakeBackDeletedBooking()
         {
-            throw new NotImplementedException();
+            // maybe not have this method. Becasue it will mess with new bookings.
         }
     }
 }

@@ -43,6 +43,7 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             table.AddColumn("Phone Number");
             table.AddColumn("Street");
             table.AddColumn("City");
+            table.AddColumn("Postal Code");
             table.AddColumn("Country");
 
             foreach (var customer in customers)
@@ -52,9 +53,10 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
                     $"{customer.FirstName} {customer.LastName}",
                     customer.Email,
                     customer.PhoneNumber,
-                    customer.Address?.Street ?? "N/A",
-                    customer.Address?.City ?? "N/A",
-                    customer.Address?.Country ?? "N/A"
+                    customer.Address.Street,
+                    customer.Address.City,
+                    customer.Address.PostalCode,
+                    customer.Address.Country
                 );
                 table.AddEmptyRow();
             }
@@ -77,6 +79,7 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             table.AddColumn("Street");
             table.AddColumn("City");
             table.AddColumn("Country");
+            table.AddColumn("Postal Code");
             table.AddColumn("Deleted");
             table.AddColumn("Bookings");
 
@@ -87,11 +90,12 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
                     $"{customer.FirstName} {customer.LastName}",
                     customer.Email,
                     customer.PhoneNumber,
-                    customer.Address?.Street ?? "N/A",
-                    customer.Address?.City ?? "N/A",
-                    customer.Address?.Country ?? "N/A",
+                    customer.Address.Street,
+                    customer.Address.City,
+                    customer.Address.PostalCode,
+                    customer.Address.Country,
                     customer.IsCustomerDeleted ? "Yes" : "No",
-                    customer.Bookings?.Count.ToString() ?? "0"
+                    customer.Bookings?.Count.ToString() ?? "No bookings"
                 );
                 table.AddEmptyRow();
             }

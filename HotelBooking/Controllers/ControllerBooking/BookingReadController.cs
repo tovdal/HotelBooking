@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
 using HotelBooking.Service.BookingService;
-using HotelBooking.Utilities.Display.DsplayInformation;
+using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Validators;
 
@@ -41,7 +41,7 @@ public class BookingReadController : IBookingReadController
             }
             var booking = _bookingRead.GetBookingDetails(bookingId);
             DisplayBookingInformation.PrintBookingAll
-                (booking, $"No booking found with ID number: {bookingId}.");
+                (booking, $"No booking found with Id: {bookingId}.");
             ConsoleMessagePrinter.DisplayMessage();
             isSearching = false;
         }
