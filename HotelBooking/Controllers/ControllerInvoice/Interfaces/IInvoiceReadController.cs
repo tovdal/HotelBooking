@@ -1,6 +1,9 @@
 ﻿namespace HotelBooking.Controllers.ControllerInvoice.Interfaces
 {
-    internal interface IInvoiceReadController
+    public interface IInvoiceReadController
     {
+        void ShowAllInvoices();
+        void ShowAllNotPaid();
+        void ShowAllPaid();
     }
 }
