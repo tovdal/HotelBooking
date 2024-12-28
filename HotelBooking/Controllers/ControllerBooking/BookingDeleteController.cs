@@ -1,0 +1,68 @@
+﻿using HotelBooking.Controllers.ControllerBooking.Interface;
+using HotelBooking.Models;
+using HotelBooking.Service.BookingService;
+using HotelBooking.Utilities.Display.DsplayInformation;
+using HotelBooking.Utilities.Validators;
+using Spectre.Console;
+
+namespace HotelBooking.Controllers.ControllerBooking
+{
+    public class BookingDeleteController : IBookingDeleteController
+    {
+        private readonly BookingRead _bookingRead;
+        private readonly BookingUpdate _bookingUpdate;
+        public BookingDeleteController(BookingRead bookingRead, BookingUpdate bookingUpdate)
+        {
+            _bookingRead = bookingRead;
+            _bookingUpdate = bookingUpdate;
+        }
+        public void DeleteBooking()
+        {
+            bool isRunning = true;
+            while (isRunning)
+            {
+                var bookings = _bookingRead.GetAllActiveBookings()
+                    .ToList();
+                DisplayBookingInformation.PrintBookingIdAndCustomerID
+                    (bookings);
+                if (bookings.Count == 0)
+                {
+                    Console.ReadKey();
+                    return;
+                }
+                if (!ValidatorBookingId.TryGetBookingId(out int bookingId))
+                {
+                    return;
+                }
+                var bookingToDelete = _bookingUpdate.ReturnBookingWithId(bookingId);
+                if (bookingToDelete == null)
+                {
+                    Console.WriteLine($"No booking found with ID number: {bookingId}.");
+                    return;
+                }
+                bool selectedBookingAsDeleted = AnsiConsole.Confirm
+                    ($"Do you want to delete booking: {bookingToDelete.Id} " +
+                    $"{bookingToDelete.CustomerId}");
+
+                Console.Clear();
+                if (selectedBookingAsDeleted)
+                {
+                    bookingToDelete.Status = BookingStatus.Deleted;
+                    _bookingUpdate.SaveChanges();
+                    AnsiConsole.MarkupLine
+                        ("[bold green]Successfully deleted![/]");
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine("[bold red]Deletion canceled.[/]");
+                }
+                bool addAnother = AnsiConsole.Confirm
+                    ("Do you want delete another booking?");
+                if (!addAnother)
+                {
+                    isRunning = false;
+                }
+            }
+        }
+    }
+}
