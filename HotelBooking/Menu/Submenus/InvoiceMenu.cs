@@ -46,7 +46,7 @@ namespace HotelBooking.Menu.Submenus
                         _invoiceController.ShowAllPaidInvoices();
                         break;
                     case 3:
-                        _invoiceController.ShowAInvoiceDetails();
+                        _invoiceController.ShowInvoiceDetails();
                         break;
                     case 4:
                         _invoiceController.UpdateAInvoice();
