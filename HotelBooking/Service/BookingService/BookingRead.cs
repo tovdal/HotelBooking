@@ -1,7 +1,6 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace HotelBooking.Service.BookingService
 {
@@ -15,7 +14,9 @@ namespace HotelBooking.Service.BookingService
 
         public List<Booking> GetAllBookingsInDb()
         {
-            return _dbContext.Bookings.ToList();
+            return _dbContext.Bookings
+                .OrderBy(b => b.Id)
+                .ToList();
         }
 
         public IEnumerable<Booking> GetAllActiveBookings()
