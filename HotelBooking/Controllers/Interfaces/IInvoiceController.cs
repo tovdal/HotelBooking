@@ -3,7 +3,9 @@
     public interface IInvoiceController
     {
         void ShowAllInvoices();
-        void ShowAInvoiceDetails();
+        void ShowAllNotPaidInvoices();
+        void ShowAllPaidInvoices();
+        void ShowInvoiceDetails();
         void UpdateAInvoice();
         void PayAInvoice();
     }
