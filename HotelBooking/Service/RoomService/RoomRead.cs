@@ -14,7 +14,9 @@ namespace HotelBooking.Service.RoomService
         //Read
         public List<Room> GetAllRoomsInDb()
         {
-            return _dbContext.Rooms.ToList();
+            return _dbContext.Rooms
+                .OrderBy(r => r.RoomNumber)
+                .ToList();
         }
         public IQueryable<Room> GetAllActiveRooms()
         {
@@ -33,6 +35,7 @@ namespace HotelBooking.Service.RoomService
         public IQueryable<Room> GetAllAvailablebookingRooms()
         {
             return _dbContext.Rooms
+                .OrderBy(r => r.RoomNumber)
                 .Where(r => r.IsAvailable);
         }
         public IQueryable<Room> GetAllTakenRooms()
@@ -61,7 +64,6 @@ namespace HotelBooking.Service.RoomService
         {
             return _dbContext.Rooms
                 .FirstOrDefault(r => r.RoomNumber == roomNumber);
-
         }
         public bool GetRoomByExtraBed(int roomNumber)
         {
