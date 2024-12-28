@@ -4,17 +4,20 @@ using HotelBooking.Controllers.ControllerBooking;
 using HotelBooking.Controllers.ControllerBooking.Interface;
 using HotelBooking.Controllers.ControllerCustomers;
 using HotelBooking.Controllers.ControllerCustomers.Interface;
+using HotelBooking.Controllers.ControllerInvoice;
+using HotelBooking.Controllers.ControllerInvoice.Interfaces;
 using HotelBooking.Controllers.ControllerRooms;
 using HotelBooking.Controllers.ControllerRooms.Interface;
 using HotelBooking.Controllers.Interfaces;
 using HotelBooking.Data;
 using HotelBooking.Data.Seeders;
-using HotelBooking.Menu;
 using HotelBooking.Menu.Actions;
-using HotelBooking.Menu.Startup;
+using HotelBooking.Menu.StartupMainmenu;
+using HotelBooking.Menu.Submenus;
 using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
 using HotelBooking.Service.CustomerService;
+using HotelBooking.Service.InvoiceService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.Menu;
 using Microsoft.EntityFrameworkCore;
@@ -73,6 +76,10 @@ namespace HotelBooking.Config
             builder.RegisterType<BookingUpdateController>().As<IBookingUpdateController>();
             builder.RegisterType<BookingDeleteController>().As<IBookingDeleteController>();
 
+            builder.RegisterType<InvoiceController>().As<IInvoiceController>();
+            builder.RegisterType<InvoiceReadController>().As<IInvoiceReadController>();
+            builder.RegisterType<InvoiceUpdateController>().As<IInvoiceUpdateController>();
+
             builder.RegisterType<BookingCreate>().AsSelf();
             builder.RegisterType<BookingRead>().AsSelf();
             builder.RegisterType<BookingUpdate>().AsSelf();
@@ -87,6 +94,9 @@ namespace HotelBooking.Config
             builder.RegisterType<CustomerRead>().AsSelf();
             builder.RegisterType<CustomerUpdate>().AsSelf();
             builder.RegisterType<CustomerDelete>().AsSelf();
+
+            builder.RegisterType<InvoiceRead>().AsSelf();
+            builder.RegisterType<InvoiceUpdate>().AsSelf();
 
             builder.RegisterType<MenuDisplay>().AsSelf();
 
