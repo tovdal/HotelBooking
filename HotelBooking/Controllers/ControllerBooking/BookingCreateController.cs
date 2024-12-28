@@ -64,7 +64,7 @@ public class BookingCreateController : IBookingCreateController
                 break;
             }
 
-            BookingInputRoomHelper.PromptBookRooms(_bookingCreate, _roomRead);
+            BookingInputRoomHelper.PromptBookRooms(_bookingCreate, _roomRead, selectedCheckInDate, selectedCheckOutDate);
 
             var totalBookingPrice = _bookingCreate.TotalPriceOfBooking
                 (selectedCheckInDate, selectedCheckOutDate);

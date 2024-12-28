@@ -34,7 +34,7 @@ namespace HotelBooking.Service.RoomService
         {
             return _dbContext.Rooms
                 .OrderBy(r => r.RoomNumber)
-                .Where(r => r.IsAvailable && !r.IsRoomDeleted);
+                .Where(r => r.IsAvailable);
         }
         public IQueryable<Room> GetAllTakenRooms()
         {
