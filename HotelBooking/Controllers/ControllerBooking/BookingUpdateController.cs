@@ -33,7 +33,7 @@ namespace HotelBooking.Controllers.ControllerBooking
                 DisplayBookingInformation.PrintBookingAll
                     (bookings, "There are no active bookings");
 
-                if (!ValidatorBookingId.TryGetBookignId(out int bookingId))
+                if (!ValidatorBookingId.TryGetBookingId(out int bookingId))
                 {
                     continue;
                 }

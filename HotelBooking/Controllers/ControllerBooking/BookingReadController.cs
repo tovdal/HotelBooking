@@ -35,7 +35,7 @@ public class BookingReadController : IBookingReadController
             var bookings = _bookingRead.GetAllActiveBookings().ToList();
             DisplayBookingInformation.PrintBookingIdAndCustomerID(bookings);
 
-            if (!ValidatorBookingId.TryGetBookignId(out int bookingId))
+            if (!ValidatorBookingId.TryGetBookingId(out int bookingId))
             {
                 continue;
             }

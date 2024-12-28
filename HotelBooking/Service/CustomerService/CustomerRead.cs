@@ -2,7 +2,6 @@
 using HotelBooking.Models;
 using Microsoft.EntityFrameworkCore;
 namespace HotelBooking.Service.CustomerService
-
 {
     public class CustomerRead
     {
@@ -12,14 +11,12 @@ namespace HotelBooking.Service.CustomerService
         {
             _dbContext = dbContext;
         }
-
         public IQueryable<Customer> GetAllActiveCustomers()
         {
             return _dbContext.Customers
                 .Where(c => !c.IsCustomerDeleted)
                 .OrderBy(c => c.Id);
         }
-
         public IQueryable<Customer> GetAllCustomersAndAddress()
         {
             return _dbContext.Customers
@@ -27,26 +24,22 @@ namespace HotelBooking.Service.CustomerService
                 .Where(c => !c.IsCustomerDeleted)
                 .OrderBy(c => c.Id);
         }
-
         public bool CustomerExists(int customerId)
         {
             return _dbContext.Customers
                 .Any(c => c.Id == customerId && !c.IsCustomerDeleted);
         }
-
         public IQueryable<Customer> GetAllDeletedCustomersInDatabase()
         {
             return _dbContext.Customers
                 .Where(g => g.IsCustomerDeleted)
                 .OrderBy(c => c.Id);
         }
-
         public IQueryable<Customer> GetCustomerDetailes(int id)
         {
             return _dbContext.Customers
                 .Where(g => g.Id == id);
         }
-
         public bool GetCustomersIsDeleted()
         {
             return _dbContext.Customers

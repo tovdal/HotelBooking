@@ -11,7 +11,6 @@ namespace HotelBooking.Service.RoomService
         {
             _dbContext = dbContext;
         }
-        //Read
         public List<Room> GetAllRoomsInDb()
         {
             return _dbContext.Rooms
@@ -24,7 +23,6 @@ namespace HotelBooking.Service.RoomService
                 .Where(r => !r.IsRoomDeleted)
                 .OrderBy(r => r.RoomNumber);
         }
-
         public IQueryable<Room> GetAllAvailableRooms()
         {
             return _dbContext.Rooms

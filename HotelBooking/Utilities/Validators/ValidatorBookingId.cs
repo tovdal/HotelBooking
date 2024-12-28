@@ -2,7 +2,7 @@
 {
     public class ValidatorBookingId
     {
-        public static bool TryGetBookignId(out int bookingId)
+        public static bool TryGetBookingId(out int bookingId)
         {
             Console.WriteLine("Enter the ID of the Booking: ");
             var stringCustomerID = Console.ReadLine();
