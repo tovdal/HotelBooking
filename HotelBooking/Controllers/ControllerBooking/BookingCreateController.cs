@@ -5,7 +5,6 @@ using HotelBooking.Service.BookingService;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
-using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers.BookingHelper;
 using Spectre.Console;
 
@@ -34,10 +33,12 @@ public class BookingCreateController : IBookingCreateController
         {
             AnsiConsole.MarkupLine("[bold green]1. Register a new booking[/]");
 
-            bool confirmCustomer = AnsiConsole.Confirm("\nIs it a new customer that wishes to make a booking?");
+            bool confirmCustomer = AnsiConsole.Confirm
+                ("\nIs it a new customer that wishes to make a booking?");
             if (confirmCustomer)
             {
-                AnsiConsole.MarkupLine("[bold green]Customer needs to be registered first![/]");
+                AnsiConsole.MarkupLine
+                    ("[bold green]Customer needs to be registered first![/]");
                 Console.ReadKey();
                 break;
             }
@@ -46,7 +47,8 @@ public class BookingCreateController : IBookingCreateController
                 (_customerRead);
 
             AnsiConsole.MarkupLine("[bold green]Pick check-in date[/]");
-            var selectedCheckInDate = BookingInputCalenderHelper.HandleUserInput(DateTime.Now);
+            var selectedCheckInDate = BookingInputCalenderHelper.HandleUserInput
+                (DateTime.Now);
             if (selectedCheckInDate == DateTime.MinValue)
             {
                 AnsiConsole.MarkupLine("[bold red]Check-in date selection canceled.[/]");
@@ -87,7 +89,8 @@ public class BookingCreateController : IBookingCreateController
 
             DisplayHelper.DisplayBookingDetails(newBooking);
 
-            bool confirm = AnsiConsole.Confirm("\n[bold yellow]Are all details correct?[/]");
+            bool confirm = AnsiConsole.Confirm
+                ("\n[bold yellow]Are all details correct?[/]");
             if (confirm)
             {
                 _bookingCreate.AddBooking(newBooking);

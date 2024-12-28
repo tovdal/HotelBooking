@@ -3,6 +3,5 @@
     public interface IBookingUpdateController
     {
         void UpdateBookingInformation();
-        void TakeBackDeletedBooking();
     }
 }

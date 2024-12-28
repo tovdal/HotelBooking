@@ -16,14 +16,16 @@ public class BookingReadController : IBookingReadController
     public void ShowAllActiveBookings()
     {
         var bookings = _bookingRead.GetAllActiveBookings().ToList();
-        DisplayBookingInformation.PrintBookingAndInvoice(bookings);
+        DisplayBookingInformation.PrintBookingAndInvoice
+            (bookings, "There are no bookings registered");
         ConsoleMessagePrinter.DisplayMessage();
 
     }
     public void ShowAllDeletedBookings()
     {
         var bookings = _bookingRead.GetBookingsDeleted();
-        DisplayBookingInformation.PrintBookingDeleted(bookings);
+        DisplayBookingInformation.PrintBookingDeleted
+            (bookings, "There are no deleted bookings");
         ConsoleMessagePrinter.DisplayMessage();
     }
     public void ShowABookingDetails()
@@ -33,7 +35,8 @@ public class BookingReadController : IBookingReadController
         {
             Console.Clear();
             var bookings = _bookingRead.GetAllActiveBookings().ToList();
-            DisplayBookingInformation.PrintBookingIdAndCustomerID(bookings);
+            DisplayBookingInformation.PrintBookingIdAndCustomerID
+                (bookings, "There are no bookings registered");
 
             if (!ValidatorBookingId.TryGetBookingId(out int bookingId))
             {

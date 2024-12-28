@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
 using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
-using HotelBooking.Utilities.Display.DsplayInformation;
+using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -11,7 +11,8 @@ namespace HotelBooking.Controllers.ControllerBooking
     {
         private readonly BookingRead _bookingRead;
         private readonly BookingUpdate _bookingUpdate;
-        public BookingDeleteController(BookingRead bookingRead, BookingUpdate bookingUpdate)
+        public BookingDeleteController(BookingRead bookingRead, 
+            BookingUpdate bookingUpdate)
         {
             _bookingRead = bookingRead;
             _bookingUpdate = bookingUpdate;
@@ -24,7 +25,7 @@ namespace HotelBooking.Controllers.ControllerBooking
                 var bookings = _bookingRead.GetAllActiveBookings()
                     .ToList();
                 DisplayBookingInformation.PrintBookingIdAndCustomerID
-                    (bookings);
+                    (bookings, "There are no bookings registered");
                 if (bookings.Count == 0)
                 {
                     Console.ReadKey();
@@ -40,24 +41,26 @@ namespace HotelBooking.Controllers.ControllerBooking
                     Console.WriteLine($"No booking found with ID number: {bookingId}.");
                     return;
                 }
-                bool selectedBookingAsDeleted = AnsiConsole.Confirm
-                    ($"Do you want to delete booking: {bookingToDelete.Id} " +
-                    $"{bookingToDelete.CustomerId}");
+                bool selectedBookingAsDeleted = AnsiConsole.Confirm(
+                    $"Do you want to delete booking: booking Id: {bookingToDelete.Id},  " +
+                    $"Customer Id: {bookingToDelete.CustomerId}");
 
                 Console.Clear();
                 if (selectedBookingAsDeleted)
                 {
                     bookingToDelete.Status = BookingStatus.Deleted;
+                    foreach (var room in bookingToDelete.Rooms)
+                    {
+                        room.IsAvailable = true;
+                    }
                     _bookingUpdate.SaveChanges();
-                    AnsiConsole.MarkupLine
-                        ("[bold green]Successfully deleted![/]");
+                    AnsiConsole.MarkupLine("[bold green]Successfully deleted![/]");
                 }
                 else
                 {
                     AnsiConsole.MarkupLine("[bold red]Deletion canceled.[/]");
                 }
-                bool addAnother = AnsiConsole.Confirm
-                    ("Do you want delete another booking?");
+                bool addAnother = AnsiConsole.Confirm("Do you want delete another booking?");
                 if (!addAnother)
                 {
                     isRunning = false;
