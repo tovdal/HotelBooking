@@ -6,7 +6,6 @@
         void ShowAllNotPaidInvoices();
         void ShowAllPaidInvoices();
         void ShowInvoiceDetails();
-        void UpdateAInvoice();
         void PayAInvoice();
     }
 }
