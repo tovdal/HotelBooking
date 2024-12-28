@@ -27,7 +27,6 @@ namespace HotelBooking.Menu.Submenus
                 "Show all not paid invoices",
                 "Show all paid invoices",
                 "Show a invoice's details",
-                "Update a invoice",
                 "Pay a invoice",
                 "Back to main menu"
             };
@@ -49,12 +48,9 @@ namespace HotelBooking.Menu.Submenus
                         _invoiceController.ShowInvoiceDetails();
                         break;
                     case 4:
-                        _invoiceController.UpdateAInvoice();
-                        break;
-                    case 5:
                         _invoiceController.PayAInvoice();
                         break;
-                    case 6:
+                    case 5:
                         break;
                 }
             });
