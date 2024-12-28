@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using Microsoft.EntityFrameworkCore;
 namespace HotelBooking.Service.CustomerService
 
 {
@@ -15,6 +16,14 @@ namespace HotelBooking.Service.CustomerService
         public IQueryable<Customer> GetAllActiveCustomers()
         {
             return _dbContext.Customers
+                .Where(c => !c.IsCustomerDeleted)
+                .OrderBy(c => c.Id);
+        }
+
+        public IQueryable<Customer> GetAllCustomersAndAddress()
+        {
+            return _dbContext.Customers
+                .Include(c => c.Address)
                 .Where(c => !c.IsCustomerDeleted)
                 .OrderBy(c => c.Id);
         }
