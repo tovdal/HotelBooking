@@ -13,7 +13,6 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
                 "square meters will automatically get 2 extra beds and under 25 will get 1.[/]");
 
             var availableRooms = _roomRead.GetAllAvailablebookingRooms()
-                .Where(r => r.IsAvailable && !r.IsRoomDeleted)
                 .ToList();
 
             var roomTable = new Table();

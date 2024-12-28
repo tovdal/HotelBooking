@@ -5,11 +5,11 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
 {
     public class DisplayCustomerInformation
     {
-        public static void PrintCustomersNamesAndID(IEnumerable<Customer> customers, string messageIfEmpty)
+        public static void PrintCustomersNamesAndID
+            (IEnumerable<Customer> customers, string messageIfEmpty)
         {
-            if (customers == null || !customers.Any())
+            if (IsCustomerListEmpty(customers, messageIfEmpty))
             {
-                AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
                 return;
             }
 
@@ -28,11 +28,12 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
 
             AnsiConsole.Write(table);
         }
-        public static void PrintCustomersOnlyDetailes(IEnumerable<Customer> customers, string messageIfEmpty)
+
+        public static void PrintCustomersOnlyDetailes
+            (IEnumerable<Customer> customers, string messageIfEmpty)
         {
-            if (customers == null || !customers.Any())
+            if (IsCustomerListEmpty(customers, messageIfEmpty))
             {
-                AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
                 return;
             }
 
@@ -63,11 +64,12 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
 
             AnsiConsole.Write(table);
         }
-        public static void PrintCustomersAll(IEnumerable<Customer> customers, string messageIfEmpty)
+
+        public static void PrintCustomersAll
+            (IEnumerable<Customer> customers, string messageIfEmpty)
         {
-            if (customers == null || !customers.Any())
+            if (IsCustomerListEmpty(customers, messageIfEmpty))
             {
-                AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
                 return;
             }
 
@@ -101,6 +103,17 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             }
 
             AnsiConsole.Write(table);
+        }
+
+        private static bool IsCustomerListEmpty
+            (IEnumerable<Customer> customers, string messageIfEmpty)
+        {
+            if (customers == null || !customers.Any())
+            {
+                AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
+                return true;
+            }
+            return false;
         }
     }
 }

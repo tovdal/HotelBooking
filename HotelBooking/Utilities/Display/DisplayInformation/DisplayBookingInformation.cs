@@ -6,47 +6,46 @@ namespace HotelBooking.Utilities.Display.DisplayInformation;
 public class DisplayBookingInformation
 {
     public static void PrintBookingIdAndCustomerID
-        (IEnumerable<Booking> bookings)
+        (IEnumerable<Booking> bookings, string messageIfEmpty)
     {
+        if (IsBookingListEmpty(bookings, messageIfEmpty))
         {
-            if (bookings == null || !bookings.Any())
-            {
-                AnsiConsole.MarkupLine($"[red]There are no bookings registered[/]");
-                return;
-            }
-            var bookingTable = new Table();
-            bookingTable.AddColumn("Booking Id");
-            bookingTable.AddColumn("Customer Id");
-            bookingTable.AddColumn("Customer Name");
-            bookingTable.AddColumn("Room/Rooms");
-            bookingTable.AddColumn("Check in date");
+            return;
+        }
 
-            foreach (var booking in bookings)
-            {
-                var roomNumbers = string
+        var bookingTable = new Table();
+        bookingTable.AddColumn("Booking Id");
+        bookingTable.AddColumn("Customer Id");
+        bookingTable.AddColumn("Customer Name");
+        bookingTable.AddColumn("Room/Rooms");
+        bookingTable.AddColumn("Check in date");
+
+        foreach (var booking in bookings)
+        {
+            var roomNumbers = string
                 .Join(", ", booking.Rooms
                 .Select(r => r.RoomNumber));
 
-                bookingTable.AddRow(
-                    booking.Id.ToString(),
-                    booking.CustomerId.ToString(),
-                    $"{booking.Customer.FirstName}, {booking.Customer.LastName}",
-                    roomNumbers,
-                    booking.CheckInDate.ToString()
-                    );
-                bookingTable.AddEmptyRow();
-            }
-            AnsiConsole.Write(bookingTable);
+            bookingTable.AddRow(
+                booking.Id.ToString(),
+                booking.CustomerId.ToString(),
+                $"{booking.Customer.FirstName}, {booking.Customer.LastName}",
+                roomNumbers,
+                booking.CheckInDate.ToString()
+            );
+            bookingTable.AddEmptyRow();
         }
+        AnsiConsole.Write(bookingTable);
     }
+
     public static void PrintBookingAll
         (IEnumerable<Booking> bookings, string messageIfEmpty)
     {
-        if (bookings == null || !bookings.Any())
+        if (IsBookingListEmpty(bookings, messageIfEmpty))
         {
-            AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
             return;
         }
+
         var bookingTable = new Table();
         bookingTable.AddColumn("Booking Id");
         bookingTable.AddColumn("Customer Id");
@@ -75,17 +74,19 @@ public class DisplayBookingInformation
         }
         AnsiConsole.Write(bookingTable);
     }
+
     public static void PrintBookingAndInvoice
-        (IEnumerable<Booking> bookings)
+        (IEnumerable<Booking> bookings, string messageIfEmpty)
     {
-        if (bookings == null || !bookings.Any())
+        if (IsBookingListEmpty(bookings, messageIfEmpty))
         {
-            AnsiConsole.MarkupLine($"[red]There are no bookings registered.[/]");
             return;
         }
+
         var bookingTable = new Table();
         bookingTable.AddColumn("Booking Id");
         bookingTable.AddColumn("Customer Id");
+        bookingTable.AddColumn("Room/Rooms");
         bookingTable.AddColumn("Check in date");
         bookingTable.AddColumn("Check out date");
         bookingTable.AddColumn("Total Cost");
@@ -93,27 +94,32 @@ public class DisplayBookingInformation
 
         foreach (var booking in bookings)
         {
+            var roomNumbers = string
+                .Join(", ", booking.Rooms
+                .Select(r => r.RoomNumber));
+
             bookingTable.AddRow(
                 booking.Id.ToString(),
                 booking.CustomerId.ToString(),
+                roomNumbers,
                 booking.CheckInDate.ToString(),
                 booking.CheckOutDate.ToString(),
                 booking.Invoice.CostAmount.ToString("C"),
                 booking.Invoice.IsPaid ? "Yes" : "No"
-
-                );
+            );
             bookingTable.AddEmptyRow();
         }
         AnsiConsole.Write(bookingTable);
     }
+
     public static void PrintBookingDeleted
-        (IEnumerable<Booking> bookings)
+        (IEnumerable<Booking> bookings, string messageIfEmpty)
     {
-        if (bookings == null || !bookings.Any())
+        if (IsBookingListEmpty(bookings, messageIfEmpty))
         {
-            AnsiConsole.MarkupLine($"[red]There are no deleted bookings.[/]");
             return;
         }
+
         var bookingTable = new Table();
         bookingTable.AddColumn("Booking Id");
         bookingTable.AddColumn("Customer Id");
@@ -131,9 +137,20 @@ public class DisplayBookingInformation
                 booking.CheckOutDate.ToString(),
                 booking.Invoice.CostAmount.ToString("C"),
                 booking.Invoice.IsPaid ? "Yes" : "No"
-                );
+            );
             bookingTable.AddEmptyRow();
         }
         AnsiConsole.Write(bookingTable);
+    }
+
+    private static bool IsBookingListEmpty
+        (IEnumerable<Booking> bookings, string messageIfEmpty)
+    {
+        if (bookings == null || !bookings.Any())
+        {
+            AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
+            return true;
+        }
+        return false;
     }
 }

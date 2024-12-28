@@ -29,7 +29,7 @@ namespace HotelBooking.Utilities.Helpers.CustomerHelper
                 new TextPrompt<string>("Enter customer's email: ")
                     .ValidationErrorMessage("[red]Please enter a valid email address![/]")
                     .Validate(input => input.Contains("@"))
-            );
+            ).ToLower();
         }
 
         public static string PromptPhoneNumber()
@@ -65,7 +65,7 @@ namespace HotelBooking.Utilities.Helpers.CustomerHelper
                 new TextPrompt<string>("Enter postal code: ")
                     .ValidationErrorMessage("[red]Postal code cannot be empty![/]")
                     .Validate(input => !string.IsNullOrWhiteSpace(input))
-            );
+            ).ToUpper();
         }
 
         public static string PromptCountry()
@@ -99,6 +99,5 @@ namespace HotelBooking.Utilities.Helpers.CustomerHelper
                 IsCustomerDeleted = false
             };
         }
-
     }
 }
