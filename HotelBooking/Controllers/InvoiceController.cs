@@ -36,11 +36,7 @@ namespace HotelBooking.Controllers
         }
         public void PayAInvoice()
         {
-            throw new NotImplementedException();
-        }
-        public void UpdateAInvoice()
-        {
-            throw new NotImplementedException();
+            _invoiceUpdateController.PayAInvoice();
         }
     }
 }

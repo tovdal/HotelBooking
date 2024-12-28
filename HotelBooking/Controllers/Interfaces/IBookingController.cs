@@ -8,6 +8,5 @@
         void ReadABooking();
         void UpdateABooking();
         void DeleteABooking();
-        void TakeBackDeletedBooking();
     }
 }

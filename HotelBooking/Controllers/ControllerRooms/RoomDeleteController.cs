@@ -1,5 +1,4 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.Interface;
-using HotelBooking.Data;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Validators;
@@ -12,14 +11,12 @@ namespace HotelBooking.Controllers.ControllerRooms
         private readonly RoomRead _roomRead;
         private readonly RoomUpdate _roomUpdate;
         private readonly RoomDelete _roomDelete;
-        private readonly ApplicationDbContext _dbContext;
         public RoomDeleteController(RoomRead roomRead, RoomUpdate roomUpdate,
-            RoomDelete roomDelete, ApplicationDbContext applicationDbContext)
+            RoomDelete roomDelete)
         {
             _roomRead = roomRead;
             _roomUpdate = roomUpdate;
             _roomDelete = roomDelete;
-            _dbContext = applicationDbContext;
         }
         public void DeleteRoom()
         {
@@ -38,12 +35,15 @@ namespace HotelBooking.Controllers.ControllerRooms
                 var roomToDelete = _roomUpdate.ReturnCustomerWithId(roomId);
                 if (roomToDelete == null)
                 {
-                    Console.WriteLine($"No room found with ID number: {roomId}.");
+                    AnsiConsole.MarkupLine
+                        ("$[bold red]No room found with ID number: {roomId}.[/]");
+                    Console.ReadKey();
                     return;
                 }
                 if (_roomDelete.HasRoomBooking(roomId))
                 {
-                    AnsiConsole.MarkupLine("[bold red]The room has a booking, can't be deleted[/]");
+                    AnsiConsole.MarkupLine
+                        ("[bold red]The room has a booking, can't be deleted[/]");
                     Console.ReadKey();
                     return;
                 }
@@ -56,15 +56,17 @@ namespace HotelBooking.Controllers.ControllerRooms
                 if (selectedRoomAsDeleted)
                 {
                     roomToDelete.IsRoomDeleted = true;
-                    _dbContext.SaveChanges();
-                    AnsiConsole.MarkupLine("[bold green]Successfully deleted![/]");
+                    _roomUpdate.SaveChanges();
+                    AnsiConsole.MarkupLine
+                        ("[bold green]Successfully deleted![/]");
                 }
                 else
                 {
                     AnsiConsole.MarkupLine("[bold red]Deletion canceled.[/]");
                 }
 
-                bool addAnother = AnsiConsole.Confirm("Do you want delete another room?");
+                bool addAnother = AnsiConsole.Confirm
+                    ("Do you want delete another room?");
                 if (!addAnother)
                 {
                     isRunning = false;

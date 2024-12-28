@@ -12,12 +12,15 @@ namespace HotelBooking.Controllers.ControllerRooms
         private readonly RoomUpdate _roomUpdate;
         private readonly RoomRead _roomRead;
         private readonly RoomCreate _roomCreate;
+        private readonly RoomDelete _roomDelete;
 
-        public RoomUpdateController(RoomUpdate roomUpdate, RoomRead roomRead, RoomCreate roomCreate)
+        public RoomUpdateController(RoomUpdate roomUpdate, 
+            RoomRead roomRead, RoomCreate roomCreate, RoomDelete roomDelete)
         {
             _roomUpdate = roomUpdate;
             _roomRead = roomRead;
             _roomCreate = roomCreate;
+            _roomDelete = roomDelete;
         }
         public void UpdateARoomInformation()
         {
@@ -39,7 +42,14 @@ namespace HotelBooking.Controllers.ControllerRooms
                 if (roomToUpdate == null)
                 {
                     AnsiConsole.MarkupLine
-                        ($"[bold red]No Room found wiih ID number: {roomId}.[/]");
+                        ($"[bold red]No Room found with ID number: {roomId}.[/]");
+                    return;
+                }
+                if (_roomDelete.HasRoomBooking(roomId))
+                {
+                    AnsiConsole.MarkupLine
+                        ("[bold red]The room has a booking, can't be updated[/]");
+                    Console.ReadKey();
                     return;
                 }
 

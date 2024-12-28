@@ -1,6 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.Interface;
 using HotelBooking.Controllers.Interfaces;
-using HotelBooking.Service.RoomService;
 
 namespace HotelBooking.Controllers
 {
@@ -13,7 +12,7 @@ namespace HotelBooking.Controllers
 
         public RoomController(
             IRoomCreateController roomCreateController,
-            IRoomReadController roomReadController, 
+            IRoomReadController roomReadController,
             IRoomUpdateController roomUpdateController,
             IRoomDeleteController roomDeleteController)
         {
@@ -24,7 +23,7 @@ namespace HotelBooking.Controllers
         }
         public void CreateRoom()
         {
-           _roomCreateController.CreateANewRoom();
+            _roomCreateController.CreateANewRoom();
         }
         public void ReadAllRooms()
         {
@@ -35,10 +34,12 @@ namespace HotelBooking.Controllers
         {
             _roomReadController.ShowAllDeletedRooms();
         }
+
         public void ReadARoomDetailes()
         {
             _roomReadController.ShowARoomDetailes();
         }
+
         public void UpdateARoom()
         {
             _roomUpdateController.UpdateARoomInformation();
