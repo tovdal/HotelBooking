@@ -17,6 +17,7 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             invoiceTable.AddColumn("Invoice Id");
             invoiceTable.AddColumn("Booking Id");
             invoiceTable.AddColumn("Customer Name");
+            invoiceTable.AddColumn("Paid or Not Paid");
 
 
             foreach (var invoice in invoices)
@@ -25,7 +26,8 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
                     invoice.Id.ToString(),
                     invoice.BookingId.ToString(),
                     $"{invoice.Booking.Customer.FirstName}, " +
-                    $"{invoice.Booking.Customer.LastName}"
+                    $"{invoice.Booking.Customer.LastName}",
+                    invoice.IsPaid ? "Paid" : "Not Paid"
                 );
                 invoiceTable.AddEmptyRow();
             }
