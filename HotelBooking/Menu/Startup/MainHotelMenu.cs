@@ -14,14 +14,17 @@ namespace HotelBooking.Menu.Startup
 
         public MainHotelMenu(
             MenuDisplay menuDisplay,
-            ICustomerController customerController, 
+            ICustomerController customerController,
             IRoomController roomController,
-            IBookingController bookingController)
+            IBookingController bookingController,
+            IInvoiceController invoiceController)
         {
             _menuDisplay = menuDisplay;
             _menuNavigator = new MenuNavigator();
             _actionsMainMenu = InitializeMainMenuActions
-                (menuDisplay, customerController, roomController, bookingController);
+                (menuDisplay, customerController, 
+                roomController, bookingController,
+                invoiceController);
         }
         public void ShowMenu()
         {
@@ -59,14 +62,19 @@ namespace HotelBooking.Menu.Startup
                 });
             }
         }
-        private IMainMenuAction[] InitializeMainMenuActions(MenuDisplay menuDisplay, ICustomerController customerController, IRoomController roomController, IBookingController bookingController)
+        private IMainMenuAction[] InitializeMainMenuActions(
+            MenuDisplay menuDisplay,
+            ICustomerController customerController,
+            IRoomController roomController,
+            IBookingController bookingController,
+            IInvoiceController invoiceController)
         {
             return new IMainMenuAction[]
             {
-                new BookingsMenu(menuDisplay, bookingController), //0
-                new CustomersMenu(menuDisplay, customerController),// 1
-                new RoomsMenu(menuDisplay, roomController), // 2
-                new InvoiceMenu(menuDisplay)//3
+                new BookingsMenu(menuDisplay, bookingController),
+                new CustomersMenu(menuDisplay, customerController),
+                new RoomsMenu(menuDisplay, roomController),
+                new InvoiceMenu(menuDisplay, invoiceController)
             };
         }
     }

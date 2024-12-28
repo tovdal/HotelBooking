@@ -1,5 +1,5 @@
-﻿using HotelBooking.Menu.Actions;
-using HotelBooking.Service;
+﻿using HotelBooking.Controllers.Interfaces;
+using HotelBooking.Menu.Actions;
 using HotelBooking.Service.MenuService;
 using HotelBooking.Utilities.Display.Menu;
 
@@ -8,14 +8,14 @@ namespace HotelBooking.Menu
     public class InvoiceMenu : IMainMenuAction
     {
         private readonly MenuDisplay _menuDisplay;
-        private readonly IInvoiceMenuAction[] _actionsInvoiceMenu;
         private readonly MenuHandler _menuHandler;
+        private readonly IInvoiceController _invoiceController;
 
-        public InvoiceMenu(MenuDisplay menuDisplay)
+        public InvoiceMenu(MenuDisplay menuDisplay, IInvoiceController invoiceController)
         {
             _menuDisplay = menuDisplay;
             _menuHandler = new MenuHandler(_menuDisplay, new MenuNavigator());
-            _actionsInvoiceMenu = InitializeInvoiceAction();
+            _invoiceController = invoiceController;
 
         }
         public void ExecuteMainMenuAction()
@@ -23,29 +23,33 @@ namespace HotelBooking.Menu
             _menuDisplay.PrintMenuText();
             List<string> menuItems = new List<string>()
             {
-                "Create a new invoice",
                 "Show all invoices",
-                "Show all deleted invoices",
+                "Show a invoice's details",
                 "Update a invoice",
-                "Delete a invoice",
-                "Take back a deleted booking",
+                "Pay a invoice",
                 "Back to main menu"
             };
 
             _menuHandler.ShowMenu(menuItems, selectedIndex =>
             {
-                if (selectedIndex < _actionsInvoiceMenu.Length)
+                switch (selectedIndex)
                 {
-                    _actionsInvoiceMenu[selectedIndex].ExecuteInvoiceAction();
+                    case 0:
+                        _invoiceController.ShowAllInvoices();
+                        break;
+                    case 1:
+                        _invoiceController.ShowAInvoiceDetails();
+                        break;
+                    case 2:
+                        _invoiceController.UpdateAInvoice();
+                        break;
+                    case 3:
+                        _invoiceController.PayAInvoice();
+                        break;
+                    case 4:
+                        break;
                 }
             });
-        }
-        private IInvoiceMenuAction[] InitializeInvoiceAction()
-        {
-            return new IInvoiceMenuAction[]
-            {
-                //
-            };
         }
     }
 }
