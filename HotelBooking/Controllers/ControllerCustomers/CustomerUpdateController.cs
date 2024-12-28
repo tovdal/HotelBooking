@@ -15,7 +15,8 @@ namespace HotelBooking.Controllers.ControllerCustomers
         private readonly CustomerRead _customerRead;
         private readonly ApplicationDbContext _dbContext;
 
-        public CustomerUpdateController(CustomerUpdate customerUpdate, CustomerRead customerRead, ApplicationDbContext dbContext)
+        public CustomerUpdateController(CustomerUpdate customerUpdate,
+            CustomerRead customerRead, ApplicationDbContext dbContext)
         {
             _customerUpdate = customerUpdate;
             _customerRead = customerRead;
@@ -36,7 +37,8 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 {
                     return;
                 }
-                var customerToUpdate = _customerUpdate.ReturnCustomerWithId(customerId);
+                var customerToUpdate = _customerUpdate.ReturnCustomerWithId
+                    (customerId);
 
                 if (customerToUpdate == null)
                 {
@@ -48,7 +50,8 @@ namespace HotelBooking.Controllers.ControllerCustomers
 
                 DisplayHelper.DisplayCustomerDetails(updatedCustomer);
 
-                bool confirm = AnsiConsole.Confirm("\n[bold yellow]Are all details correct?[/]");
+                bool confirm = AnsiConsole.Confirm
+                    ("\n[bold yellow]Are all details correct?[/]");
                 if (confirm)
                 {
                     customerToUpdate.FirstName = updatedCustomer.FirstName;
@@ -58,14 +61,16 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     customerToUpdate.Address = updatedCustomer.Address;
 
                     _dbContext.SaveChanges();
-                    AnsiConsole.MarkupLine("[bold green]Customer successfully updated![/]");
+                    AnsiConsole.MarkupLine
+                        ("[bold green]Customer successfully updated![/]");
                 }
                 else
                 {
                     AnsiConsole.MarkupLine("[bold red]Update canceled.[/]");
                 }
 
-                bool addAnother = AnsiConsole.Confirm("\nDo you want to update another customer?");
+                bool addAnother = AnsiConsole.Confirm
+                    ("\nDo you want to update another customer?");
                 if (!addAnother)
                 {
                     isRunning = false;
@@ -102,20 +107,23 @@ namespace HotelBooking.Controllers.ControllerCustomers
 
                 if (customerToUpdate == null || !customerToUpdate.IsCustomerDeleted)
                 {
-                    Console.WriteLine($"No deleted customer found with ID number: {customerId}.");
+                    Console.WriteLine($"No deleted customer found with ID number: " +
+                        $"{customerId}.");
                     Console.ReadKey();
                     continue;
                 }
 
                 bool deleteCustomer = AnsiConsole.Confirm
-                    ($"Do you want to take back delete customer: {customerToUpdate.FirstName} " +
+                    ($"Do you want to take back delete customer: " +
+                    $"{customerToUpdate.FirstName} " +
                     $"{customerToUpdate.LastName}?");
 
                 if (deleteCustomer)
                 {
                     customerToUpdate.IsCustomerDeleted = false;
                     _dbContext.SaveChanges();
-                    AnsiConsole.MarkupLine("[bold green]Customer successfully un-deleted![/]");
+                    AnsiConsole.MarkupLine("[bold green]Customer successfully " +
+                        "un-deleted![/]");
                 }
                 else
                 {
@@ -123,7 +131,8 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 }
 
                 Console.Clear();
-                bool addAnother = AnsiConsole.Confirm("Do you want to restore another deleted customer?");
+                bool addAnother = AnsiConsole.Confirm("Do you want to restore " +
+                    "another deleted customer?");
                 if (!addAnother)
                 {
                     isRunning = false;
