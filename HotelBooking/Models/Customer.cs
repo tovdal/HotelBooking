@@ -7,7 +7,8 @@
         public string LastName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
-        public Address? Address { get; set; }
+        public int AddressId { get; set; }
+        public Address Address { get; set; } = null!;
         public bool IsCustomerDeleted { get; set; } = false;
 
         public List<Booking> Bookings { get; set; } = new List<Booking>();
