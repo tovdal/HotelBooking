@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.Interface;
 using HotelBooking.Service.RoomService;
-using HotelBooking.Utilities.Helpers;
+using HotelBooking.Utilities.Helpers.RoomHelper;
 using Spectre.Console;
 
 namespace HotelBooking.Controllers.ControllerRooms
@@ -33,7 +33,8 @@ namespace HotelBooking.Controllers.ControllerRooms
                 table.AddRow("Extra bed available", newRoom.IsExtraBedAvailable.ToString());
                 AnsiConsole.Write(table);
 
-                bool confirm = AnsiConsole.Confirm("\n[bold yellow]Are all details correct?[/]");
+                bool confirm = AnsiConsole.Confirm
+                    ("\n[bold yellow]Are all details correct?[/]");
                 if (confirm)
                 {
                     _roomCreate.AddRoom(newRoom);

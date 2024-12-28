@@ -60,13 +60,22 @@ namespace HotelBooking.Service.RoomService
         public Room GetRoomByRoomNumber(int roomNumber)
         {
             return _dbContext.Rooms
-                .First(r => r.RoomNumber == roomNumber);
+                .FirstOrDefault(r => r.RoomNumber == roomNumber);
 
         }
         public bool GetRoomByExtraBed(int roomNumber)
         {
             return _dbContext.Rooms
                 .Any(r => r.RoomNumber == roomNumber && r.IsExtraBedAvailable);
+        }
+        public bool IsRoomBooked
+            (int roomNumber, DateTime checkInDate, DateTime checkOutDate)
+        {
+            return _dbContext.Bookings
+                .Any(b => b.Rooms
+                .Any(r => r.RoomNumber == roomNumber) 
+                && b.CheckInDate < checkOutDate 
+                && b.CheckOutDate > checkInDate);
         }
     }
 }

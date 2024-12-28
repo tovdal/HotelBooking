@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.DisplayInformation;
-using HotelBooking.Utilities.Helpers;
+using HotelBooking.Utilities.Helpers.CustomerHelper;
 using Spectre.Console;
 
 namespace HotelBooking.Controllers.ControllerCustomers

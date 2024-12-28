@@ -1,8 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.Interface;
-using HotelBooking.Data;
 using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
-using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
@@ -14,14 +12,12 @@ namespace HotelBooking.Controllers.ControllerRooms
         private readonly RoomUpdate _roomUpdate;
         private readonly RoomRead _roomRead;
         private readonly RoomCreate _roomCreate;
-        private readonly ApplicationDbContext _dbContext;
 
-        public RoomUpdateController(RoomUpdate roomUpdate, RoomRead roomRead, RoomCreate roomCreate, ApplicationDbContext dbContext)
+        public RoomUpdateController(RoomUpdate roomUpdate, RoomRead roomRead, RoomCreate roomCreate)
         {
             _roomUpdate = roomUpdate;
             _roomRead = roomRead;
             _roomCreate = roomCreate;
-            _dbContext = dbContext;
         }
         public void UpdateARoomInformation()
         {
@@ -107,7 +103,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                     roomToUpdate.TypeOfRoom = roomTypeOfRoom;
                     roomToUpdate.PricePerNight = decimal.Parse(roomPricePerNight);
                     roomToUpdate.IsExtraBedAvailable = roomTypeOfRoom == TypeOfRoom.Double;
-                    _dbContext.SaveChanges();
+                    _roomUpdate.SaveChanges();
                     AnsiConsole.MarkupLine("[bold green]Room successfully registered![/]");
                 }
                 else
@@ -159,7 +155,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                 if (restoreRoom)
                 {
                     roomToUpdate.IsRoomDeleted = false;
-                    _dbContext.SaveChanges();
+                    _roomUpdate.SaveChanges();
                     AnsiConsole.MarkupLine("[bold green]Successfully restored![/]");
                 }
                 else

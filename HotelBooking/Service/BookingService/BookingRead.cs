@@ -21,7 +21,7 @@ namespace HotelBooking.Service.BookingService
         public IEnumerable<Booking> GetAllActiveBookings()
         {
             return _dbContext.Bookings
-                .Where(b => b.Status == StatusOnBooking.Active)
+                .Where(b => b.Status == BookingStatus.Active)
                 .Include(b => b.Invoice)
                 .Include(b => b.Rooms)
                 .Include(b => b.Customer)
@@ -38,7 +38,7 @@ namespace HotelBooking.Service.BookingService
         public IEnumerable<Booking> GetBookingsDeleted()
         {
             return _dbContext.Bookings
-                .Where(b => b.Status == StatusOnBooking.Deleted);
+                .Where(b => b.Status == BookingStatus.Deleted);
         }
     }
 }

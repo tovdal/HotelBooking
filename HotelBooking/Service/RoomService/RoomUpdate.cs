@@ -15,5 +15,9 @@ namespace HotelBooking.Service.RoomService
         {
             return _dbContext.Rooms.FirstOrDefault(c => c.Id == id);
         }
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
     }
 }
