@@ -63,14 +63,6 @@ namespace HotelBooking.Service.RoomService
             return _dbContext.Rooms
                 .FirstOrDefault(r => r.RoomNumber == roomNumber);
         }
-        public List<Room> GetAvailableRoomsForPeriod(DateTime checkInDate, DateTime checkOutDate)
-        {
-            return _dbContext.Rooms
-                .Where(r => r.IsAvailable && !r.IsRoomDeleted && !_dbContext.Bookings
-                    .Any(b => b.Rooms
-                    .Any(br => br.RoomNumber == r.RoomNumber) && b.CheckInDate < checkOutDate && b.CheckOutDate > checkInDate))
-                .ToList();
-        }
         public bool GetRoomByExtraBed(int roomNumber)
         {
             return _dbContext.Rooms
