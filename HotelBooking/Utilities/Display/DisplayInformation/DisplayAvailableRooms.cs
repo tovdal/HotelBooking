@@ -1,19 +1,24 @@
 ﻿using HotelBooking.Service.RoomService;
+using HotelBooking.Utilities.Helpers;
 using Spectre.Console;
 
 namespace HotelBooking.Utilities.Display.DisplayInformation
 {
-    public class DisplayAvailableRooms
+    public static class DisplayAvailableRooms
     {
-        public static void PrintAvailableRooms(RoomRead _roomRead)
+        public static void PrintAvailableRooms(RoomRead _roomRead, 
+            UpdateRooms updateRooms, DateTime checkInDate, DateTime checkOutDate)
         {
             Console.Clear();
+            updateRooms.UpdateRoomAvailability();
+
             AnsiConsole.MarkupLine("[bold green]Available rooms:[/]");
             AnsiConsole.MarkupLine("[bold red](Extra beds) Rooms over 25 " +
                 "square meters will automatically get 2 extra beds and under 25 will get 1.[/]");
 
-            var availableRooms = _roomRead.GetAllAvailablebookingRooms()
-                .Where(r => r.IsAvailable && !r.IsRoomDeleted)
+            var availableRooms = _roomRead.GetAllAvailablebookingRooms
+                (checkInDate, checkOutDate)
+                .Where(r => !r.IsRoomDeleted)
                 .ToList();
 
             var roomTable = new Table();
