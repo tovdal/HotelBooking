@@ -5,6 +5,7 @@ using HotelBooking.Service.BookingService;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Helpers.BookingHelper;
 using Spectre.Console;
 
@@ -16,15 +17,18 @@ public class BookingCreateController : IBookingCreateController
     private readonly RoomRead _roomRead;
     private readonly CustomerRead _customerRead;
     private readonly IRoomReadController _roomReadController;
+    private readonly UpdateRooms _updateRooms;
 
     public BookingCreateController(BookingCreate bookingCreate,
-        IRoomReadController roomReadController, 
-        RoomRead roomRead, CustomerRead customerRead)
+        IRoomReadController roomReadController,
+        RoomRead roomRead, CustomerRead customerRead,
+        UpdateRooms updateRooms)
     {
         _bookingCreate = bookingCreate;
         _roomReadController = roomReadController;
         _roomRead = roomRead;
         _customerRead = customerRead;
+        _updateRooms = updateRooms;
     }
 
     public void CreateBooking()
@@ -32,6 +36,8 @@ public class BookingCreateController : IBookingCreateController
         bool IsRunning = true;
         while (IsRunning)
         {
+            _updateRooms.UpdateRoomAvailability();
+
             AnsiConsole.MarkupLine("[bold green]1. Register a new booking[/]");
 
             bool confirmCustomer = AnsiConsole.Confirm
@@ -65,9 +71,9 @@ public class BookingCreateController : IBookingCreateController
                 break;
             }
 
-
             BookingInputRoomHelper.PromptBookRooms
-                (_bookingCreate, _roomRead, selectedCheckInDate, selectedCheckOutDate);
+                (_bookingCreate, _roomRead, selectedCheckInDate, 
+                selectedCheckOutDate, _updateRooms);
 
             var totalBookingPrice = _bookingCreate.TotalPriceOfBooking
                 (selectedCheckInDate, selectedCheckOutDate);
@@ -112,6 +118,7 @@ public class BookingCreateController : IBookingCreateController
             {
                 _bookingCreate.AddBooking(newBooking);
                 AnsiConsole.MarkupLine("[bold green]Booking successfully registered![/]");
+                _bookingCreate.ClearRoomsToBook();
             }
             else
             {
