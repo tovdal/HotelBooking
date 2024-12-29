@@ -1,6 +1,5 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
-using Spectre.Console;
 
 namespace HotelBooking.Service.BookingService
 {
@@ -67,6 +66,7 @@ namespace HotelBooking.Service.BookingService
                 }
             }
             _roomsToBook.Add(room);
+            _dbContext.SaveChanges();
         }
     }
 }

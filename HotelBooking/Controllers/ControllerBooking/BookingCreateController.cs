@@ -65,14 +65,6 @@ public class BookingCreateController : IBookingCreateController
                 break;
             }
 
-            var availableRooms = _roomRead.GetAvailableRoomsForPeriod
-                (selectedCheckInDate, selectedCheckOutDate);
-            if (!availableRooms.Any())
-            {
-                AnsiConsole.MarkupLine
-                    ("[bold red]No rooms available for the selected dates.[/]");
-                break;
-            }
 
             BookingInputRoomHelper.PromptBookRooms
                 (_bookingCreate, _roomRead, selectedCheckInDate, selectedCheckOutDate);
