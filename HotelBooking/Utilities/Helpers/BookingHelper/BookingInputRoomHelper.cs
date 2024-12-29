@@ -8,7 +8,8 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
 {
     public class BookingInputRoomHelper
     {
-        public static void PromptBookRooms(BookingCreate _bookingCreate, RoomRead _roomRead)
+        public static void PromptBookRooms(BookingCreate _bookingCreate, 
+            RoomRead _roomRead, DateTime checkInDate, DateTime checkOutDate)
         {
             bool IsAddingRooms = true;
             while (IsAddingRooms)
@@ -35,9 +36,11 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
                     Console.ReadKey();
                     continue;
                 }
-                if(_bookingCreate.IsRoomBooked(room.RoomNumber))
+
+                if (_roomRead.IsRoomBooked(room.RoomNumber, checkInDate, checkOutDate))
                 {
-                    AnsiConsole.MarkupLine("[bold red]Room is already booked![/]");
+                    AnsiConsole.MarkupLine
+                        ("[bold red]Room is already booked for the selected dates![/]");
                     Console.ReadKey();
                     continue;
                 }
@@ -52,7 +55,8 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
                     _bookingCreate.AddRoomToBooking(roomRoomNumber);
                 }
 
-                IsAddingRooms = AnsiConsole.Confirm("\n[bold yellow]Want to add another room?[/]");
+                IsAddingRooms = AnsiConsole.Confirm
+                    ("\n[bold yellow]Want to add another room?[/]");
             }
         }
     }

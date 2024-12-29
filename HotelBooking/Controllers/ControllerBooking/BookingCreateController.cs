@@ -18,7 +18,8 @@ public class BookingCreateController : IBookingCreateController
     private readonly IRoomReadController _roomReadController;
 
     public BookingCreateController(BookingCreate bookingCreate,
-        IRoomReadController roomReadController, RoomRead roomRead, CustomerRead customerRead)
+        IRoomReadController roomReadController, 
+        RoomRead roomRead, CustomerRead customerRead)
     {
         _bookingCreate = bookingCreate;
         _roomReadController = roomReadController;
@@ -64,12 +65,36 @@ public class BookingCreateController : IBookingCreateController
                 break;
             }
 
-            BookingInputRoomHelper.PromptBookRooms(_bookingCreate, _roomRead, selectedCheckInDate, selectedCheckOutDate);
+            var availableRooms = _roomRead.GetAvailableRoomsForPeriod
+                (selectedCheckInDate, selectedCheckOutDate);
+            if (!availableRooms.Any())
+            {
+                AnsiConsole.MarkupLine
+                    ("[bold red]No rooms available for the selected dates.[/]");
+                break;
+            }
+
+            BookingInputRoomHelper.PromptBookRooms
+                (_bookingCreate, _roomRead, selectedCheckInDate, selectedCheckOutDate);
 
             var totalBookingPrice = _bookingCreate.TotalPriceOfBooking
                 (selectedCheckInDate, selectedCheckOutDate);
 
             Console.WriteLine($"The total price of all bookings is: {totalBookingPrice:C}");
+
+            DateTime dueDateOnInvoice;
+            if (selectedCheckInDate.Date == DateTime.Now.Date)
+            {
+                dueDateOnInvoice = DateTime.Now.Date.AddHours(23).AddMinutes(59);
+            }
+            else if ((selectedCheckInDate - DateTime.Now).Days <= 10)
+            {
+                dueDateOnInvoice = DateTime.Now;
+            }
+            else
+            {
+                dueDateOnInvoice = selectedCheckInDate.AddDays(-10);
+            }
 
             var newBooking = new Booking
             {
@@ -82,7 +107,7 @@ public class BookingCreateController : IBookingCreateController
                 {
                     CostAmount = totalBookingPrice,
                     InvoiceDate = DateTime.Now,
-                    DueDateOnInvoice = DateTime.Now.AddDays(10),
+                    DueDateOnInvoice = dueDateOnInvoice,
                     IsPaid = false
                 }
             };
