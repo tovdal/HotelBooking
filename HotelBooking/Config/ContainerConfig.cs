@@ -20,6 +20,7 @@ using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.Menu;
+using HotelBooking.Utilities.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -97,6 +98,8 @@ namespace HotelBooking.Config
 
             builder.RegisterType<InvoiceRead>().AsSelf();
             builder.RegisterType<InvoiceUpdate>().AsSelf();
+
+            builder.RegisterType<UpdateRooms>().AsSelf();
 
             builder.RegisterType<MenuDisplay>().AsSelf();
 
