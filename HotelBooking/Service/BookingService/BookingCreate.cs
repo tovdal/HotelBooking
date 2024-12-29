@@ -1,5 +1,7 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using HotelBooking.Utilities.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Service.BookingService
 {
@@ -15,7 +17,7 @@ namespace HotelBooking.Service.BookingService
 
         public void AddBooking(Booking newBooking)
         {
-            newBooking.Rooms = _roomsToBook;
+            newBooking.Rooms = new List<Room>(_roomsToBook);
             foreach (var room in _roomsToBook)
             {
                 room.IsAvailable = false;
@@ -40,14 +42,16 @@ namespace HotelBooking.Service.BookingService
             return _roomsToBook.Sum(r => r.PricePerNight * totalDays);
         }
 
-        public bool IsRoomBooked(int roomNumber)
+        public bool IsRoomBooked(int roomNumber, DateTime checkInDate, DateTime checkOutDate)
         {
-            var room = _dbContext.Rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
+            var room = _dbContext.Rooms.Include(r => r.Bookings)
+                                       .FirstOrDefault(r => r.RoomNumber == roomNumber);
             if (room == null)
             {
                 return false;
             }
-            return !room.IsAvailable;
+
+            return !RoomAvailabilityHelper.IsAvailableDuring(room, checkInDate, checkOutDate);
         }
 
         public void AddRoomToBooking(string roomNumber, bool extraBed = false)
@@ -66,7 +70,11 @@ namespace HotelBooking.Service.BookingService
                 }
             }
             _roomsToBook.Add(room);
-            _dbContext.SaveChanges();
+        }
+
+        public void ClearRoomsToBook()
+        {
+            _roomsToBook.Clear();
         }
     }
 }
