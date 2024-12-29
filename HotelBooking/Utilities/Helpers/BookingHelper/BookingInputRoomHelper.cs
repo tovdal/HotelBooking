@@ -8,14 +8,16 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
 {
     public class BookingInputRoomHelper
     {
-        public static void PromptBookRooms(BookingCreate _bookingCreate, 
-            RoomRead _roomRead, DateTime checkInDate, DateTime checkOutDate)
+        public static void PromptBookRooms(BookingCreate _bookingCreate,
+            RoomRead _roomRead, DateTime checkInDate,
+            DateTime checkOutDate, UpdateRooms updateRooms)
         {
             bool IsAddingRooms = true;
             while (IsAddingRooms)
             {
                 Console.Clear();
-                DisplayAvailableRooms.PrintAvailableRooms(_roomRead);
+                DisplayAvailableRooms.PrintAvailableRooms
+                    (_roomRead, updateRooms, checkInDate, checkOutDate);
 
                 string roomRoomNumber = AnsiConsole.Prompt(
                     new TextPrompt<string>("Enter room number you want to book: ")
