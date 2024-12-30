@@ -18,7 +18,7 @@ namespace HotelBooking.Controllers.ControllerInvoice
             var invoices = _invoiceRead.GetAllActiveInvoices();
 
             DisplayInvoiceInformation.PrintInvoiceAll
-                (invoices, "There are no invoices");
+                (invoices, "There are no invoices.");
 
             ConsoleMessagePrinter.DisplayMessage();
         }
@@ -53,7 +53,7 @@ namespace HotelBooking.Controllers.ControllerInvoice
                 DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID
                     (invoices, "No invoices registered");
 
-                if (!ValidatorBookingId.TryGetBookingId(out int invoiceId))
+                if (!ValidatorBooking.TryGetBookingId(out int invoiceId))
                 {
                     continue;
                 }
