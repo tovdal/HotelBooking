@@ -12,9 +12,9 @@ namespace HotelBooking.Service.InvoiceService
             _dbContext = dbContext;
         }
 
-        public Booking ReturnInvoiceWithId(int id)
+        public Invoice ReturnInvoiceWithId(int id)
         {
-            return _dbContext.Bookings.FirstOrDefault(i => i.Id == id);
+            return _dbContext.Invoices.FirstOrDefault(i => i.Id == id);
         }
 
         public void SaveChanges()
