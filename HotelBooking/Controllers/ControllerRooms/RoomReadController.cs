@@ -37,7 +37,7 @@ public class RoomReadController : IRoomReadController
         DisplayRoomInformation.PrintRoomRoomNumberAndID
         (rooms, "There are no rooms.");
 
-        if (!ValidatorRoomId.TryGetRoomId(out int roomId))
+        if (!ValidatorRoom.TryGetRoomId(out int roomId))
         {
             return;
         }
