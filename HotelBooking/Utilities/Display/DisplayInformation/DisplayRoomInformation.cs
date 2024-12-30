@@ -142,7 +142,6 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             if (rooms == null || !rooms.Any())
             {
                 AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
-                Console.ReadKey();
                 return true;
             }
             return false;

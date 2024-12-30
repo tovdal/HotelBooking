@@ -168,7 +168,6 @@ public class DisplayBookingInformation
         if (bookings == null || !bookings.Any())
         {
             AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
-            Console.ReadKey();
             return true;
         }
         return false;
