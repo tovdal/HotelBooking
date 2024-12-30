@@ -23,29 +23,24 @@ namespace HotelBooking.Controllers.ControllerRooms
             bool isRunning = true;
             while (isRunning)
             {
+                Console.Clear();
+
                 var rooms = _roomRead.GetAllActiveRooms()
                     .ToList();
                 DisplayRoomInformation.PrintRoomRoomNumberAndID
                     (rooms, "There are no rooms registered");
 
-                if (!ValidatorRoomId.TryGetRoomId(out int roomId))
+                if (!ValidatorRoom.TryGetRoomId(out int roomId))
                 {
-                    return;
+                    continue;
                 }
+
                 var roomToDelete = _roomUpdate.ReturnCustomerWithId(roomId);
-                if (roomToDelete == null)
+
+                if (!ValidatorRoom.ValidateRoomForUpdate(roomToDelete,
+                    roomId, _roomDelete))
                 {
-                    AnsiConsole.MarkupLine
-                        ("$[bold red]No room found with ID number: {roomId}.[/]");
-                    Console.ReadKey();
-                    return;
-                }
-                if (_roomDelete.HasRoomBooking(roomId))
-                {
-                    AnsiConsole.MarkupLine
-                        ("[bold red]The room has a booking, can't be deleted[/]");
-                    Console.ReadKey();
-                    return;
+                    continue;
                 }
 
                 bool selectedRoomAsDeleted = AnsiConsole.Confirm
