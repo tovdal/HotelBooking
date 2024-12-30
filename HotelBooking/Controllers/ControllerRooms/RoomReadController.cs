@@ -21,7 +21,6 @@ public class RoomReadController : IRoomReadController
             (rooms, "There are no rooms registered.");
 
         ConsoleMessagePrinter.DisplayMessage();
-        // Add Pagination can be found in richards powerpoint 
     }
 
     public void ShowAllDeletedRooms()
