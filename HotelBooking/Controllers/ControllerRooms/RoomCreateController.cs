@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.Interface;
 using HotelBooking.Service.RoomService;
+using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers.RoomHelper;
 using Spectre.Console;
 
@@ -21,16 +22,7 @@ namespace HotelBooking.Controllers.ControllerRooms
 
                 var newRoom = RoomInputHelper.PromptRoomDetails(_roomCreate);
 
-                Console.Clear();
-                var table = new Table();
-                table.AddColumn("[bold]Field[/]");
-                table.AddColumn("[bold]Value[/]");
-                table.AddRow("Room number", newRoom.RoomNumber.ToString());
-                table.AddRow("Room size", newRoom.RoomSize.ToString());
-                table.AddRow("Type of room", newRoom.TypeOfRoom.ToString());
-                table.AddRow("Price per night", newRoom.PricePerNight.ToString());
-                table.AddRow("Extra bed available", newRoom.IsExtraBedAvailable.ToString());
-                AnsiConsole.Write(table);
+                DisplayRoomInformation.DisplayRoomDetails(newRoom);
 
                 bool confirm = AnsiConsole.Confirm
                     ("\n[bold yellow]Are all details correct?[/]");
