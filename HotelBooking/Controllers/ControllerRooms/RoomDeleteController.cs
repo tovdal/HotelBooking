@@ -28,10 +28,12 @@ namespace HotelBooking.Controllers.ControllerRooms
                 var rooms = _roomRead.GetAllActiveRooms()
                     .ToList();
                 DisplayRoomInformation.PrintRoomRoomNumberAndID
-                    (rooms, "There are no rooms registered");
+                    (rooms, "There are no rooms registered. " +
+                    "(Press enter to return to menu)");
 
                 if (!ValidatorRoom.TryGetRoomId(out int roomId))
                 {
+                    isRunning = false;
                     continue;
                 }
 

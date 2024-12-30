@@ -8,7 +8,7 @@ namespace HotelBooking.Utilities.Validators
     {
         public static bool TryGetRoomId(out int roomId)
         {
-            Console.WriteLine("Enter the ID of the room: ");
+            Console.Write("Enter the ID of the Room: ");
             var stringID = Console.ReadLine();
 
             if (!int.TryParse(stringID, out roomId))
@@ -28,12 +28,13 @@ namespace HotelBooking.Utilities.Validators
             {
                 AnsiConsole.MarkupLine
                     ($"[bold red]No Room found with ID number: {roomId}.[/]");
+                Console.ReadKey();
                 return false;
             }
             if (roomDelete.HasRoomBooking(roomId))
             {
                 AnsiConsole.MarkupLine
-                    ("[bold red]The room has a booking, can't be updated[/]");
+                    ("[bold red]The room has a booking, can't be changed[/]");
                 Console.ReadKey();
                 return false;
             }
@@ -54,7 +55,7 @@ namespace HotelBooking.Utilities.Validators
         {
             if (!deletedRooms.Any())
             {
-                AnsiConsole.MarkupLine("[bold red]There are no deleted rooms.[/]");
+                AnsiConsole.MarkupLine("[bold red].[/]");
                 Console.ReadKey();
                 return false;
             }

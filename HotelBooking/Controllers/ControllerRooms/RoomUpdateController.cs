@@ -33,10 +33,11 @@ namespace HotelBooking.Controllers.ControllerRooms
                 var rooms = _roomRead.GetAllActiveRooms()
                     .ToList();
                 DisplayRoomInformation.PrintRoomOnlyDetails
-                    (rooms, "There are no active rooms");
+                    (rooms, "There are no active rooms. (Press enter to return to menu)");
 
                 if (!ValidatorRoom.TryGetRoomId(out int roomId))
                 {
+                    isRunning = false;
                     continue;
                 }
 
@@ -91,7 +92,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                 Console.Clear();
                 var deletedRooms = _roomRead.GetAllDeletedRoomsInDatabase().ToList();
                 DisplayRoomInformation.PrintRoomOnlyDetails
-                    (deletedRooms, "There are no deleted rooms");
+                    (deletedRooms, "There are no deleted rooms. (Press enter to return to menu)");
 
                 if (!ValidatorRoom.ValidateDeletedRooms(deletedRooms))
                 {
