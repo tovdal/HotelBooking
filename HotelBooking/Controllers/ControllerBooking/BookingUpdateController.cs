@@ -48,8 +48,6 @@ public class BookingUpdateController : IBookingUpdateController
 
             var updatedBooking = BookingInputHelper.PromptBookingDetails();
 
-
-
             if (!BookingInputHelper.AreRoomsAvailable
                 (_roomRead, updatedBooking.CheckInDate, 
                 updatedBooking.CheckOutDate, bookingToUpdate.Rooms))

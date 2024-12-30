@@ -1,5 +1,4 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
-using HotelBooking.Data;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
@@ -13,15 +12,12 @@ namespace HotelBooking.Controllers.ControllerCustomers
     {
         private readonly CustomerUpdate _customerUpdate;
         private readonly CustomerRead _customerRead;
-        private readonly ApplicationDbContext _dbContext;
 
         public CustomerUpdateController(CustomerUpdate customerUpdate,
-            CustomerRead customerRead, ApplicationDbContext dbContext)
+            CustomerRead customerRead)
         {
             _customerUpdate = customerUpdate;
             _customerRead = customerRead;
-            _dbContext = dbContext;
-
         }
         public void UpdateACustomerInformation()
         {
@@ -37,6 +33,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 {
                     return;
                 }
+
                 var customerToUpdate = _customerUpdate.ReturnCustomerWithId
                     (customerId);
 
@@ -60,7 +57,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     customerToUpdate.PhoneNumber = updatedCustomer.PhoneNumber;
                     customerToUpdate.Address = updatedCustomer.Address;
 
-                    _dbContext.SaveChanges();
+                    _customerUpdate.SaveChanges();
                     AnsiConsole.MarkupLine
                         ("[bold green]Customer successfully updated![/]");
                 }
@@ -121,7 +118,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 if (deleteCustomer)
                 {
                     customerToUpdate.IsCustomerDeleted = false;
-                    _dbContext.SaveChanges();
+                    _customerUpdate.SaveChanges();
                     AnsiConsole.MarkupLine("[bold green]Customer successfully " +
                         "un-deleted![/]");
                 }
