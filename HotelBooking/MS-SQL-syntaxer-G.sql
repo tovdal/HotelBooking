@@ -6,7 +6,7 @@ USE HotelbookingDBTova;
 SELECT
 	*
 FROM
-Customers
+Customers;
 
 ---- WHERE ----
 USE HotelbookingDBTova;
@@ -26,4 +26,4 @@ SELECT
 FROM
 	Rooms As r
 ORDER BY
-	r.PricePerNight DESC
+	r.PricePerNight DESC;
