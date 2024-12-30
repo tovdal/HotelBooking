@@ -1,5 +1,4 @@
-﻿using HotelBooking.Models;
-using HotelBooking.Service.BookingService;
+﻿using HotelBooking.Service.BookingService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using Spectre.Console;
@@ -10,14 +9,14 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
     {
         public static void PromptBookRooms(BookingCreate _bookingCreate,
             RoomRead _roomRead, DateTime checkInDate,
-            DateTime checkOutDate, UpdateRooms updateRooms)
+            DateTime checkOutDate, RoomUpdate _roomUpdate)
         {
             bool IsAddingRooms = true;
             while (IsAddingRooms)
             {
                 Console.Clear();
-                DisplayAvailableRooms.PrintAvailableRooms
-                    (_roomRead, updateRooms, checkInDate, checkOutDate);
+                DisplayRoomAvailability.PrintAvailableRooms
+                    (_roomRead, _roomUpdate, checkInDate, checkOutDate);
 
                 string roomRoomNumber = AnsiConsole.Prompt(
                     new TextPrompt<string>($"Enter room number you want to book for date:" +

@@ -5,7 +5,6 @@ using HotelBooking.Service.BookingService;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
-using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Helpers.BookingHelper;
 using Spectre.Console;
 
@@ -17,18 +16,18 @@ public class BookingCreateController : IBookingCreateController
     private readonly RoomRead _roomRead;
     private readonly CustomerRead _customerRead;
     private readonly IRoomReadController _roomReadController;
-    private readonly UpdateRooms _updateRooms;
+    private readonly RoomUpdate _roomUpdate;
 
     public BookingCreateController(BookingCreate bookingCreate,
         IRoomReadController roomReadController,
         RoomRead roomRead, CustomerRead customerRead,
-        UpdateRooms updateRooms)
+        RoomUpdate roomUpdate)
     {
         _bookingCreate = bookingCreate;
         _roomReadController = roomReadController;
         _roomRead = roomRead;
         _customerRead = customerRead;
-        _updateRooms = updateRooms;
+        _roomUpdate = roomUpdate;
     }
 
     public void CreateBooking()
@@ -36,7 +35,7 @@ public class BookingCreateController : IBookingCreateController
         bool IsRunning = true;
         while (IsRunning)
         {
-            _updateRooms.UpdateRoomAvailability();
+            _roomUpdate.UpdateRoomAvailability();
 
             AnsiConsole.MarkupLine("[bold green]1. Register a new booking[/]");
 
@@ -72,8 +71,8 @@ public class BookingCreateController : IBookingCreateController
             }
 
             BookingInputRoomHelper.PromptBookRooms
-                (_bookingCreate, _roomRead, selectedCheckInDate, 
-                selectedCheckOutDate, _updateRooms);
+                (_bookingCreate, _roomRead, selectedCheckInDate,
+                selectedCheckOutDate, _roomUpdate);
 
             var totalBookingPrice = _bookingCreate.TotalPriceOfBooking
                 (selectedCheckInDate, selectedCheckOutDate);

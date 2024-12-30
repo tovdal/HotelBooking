@@ -1,6 +1,6 @@
 using HotelBooking.Models;
 
-namespace HotelBooking.Utilities.Helpers
+namespace HotelBooking.Utilities.Helpers.RoomHelper
 {
     public static class RoomAvailabilityHelper
     {

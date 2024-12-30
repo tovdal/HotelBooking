@@ -1,8 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerInvoice.Interfaces;
-using HotelBooking.Models;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Utilities.Display.DisplayInformation;
-using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -25,7 +23,8 @@ namespace HotelBooking.Controllers.ControllerInvoice
             {
                 Console.Clear();
                 var invoices = _invoiceRead.GetAllActiveInvoices();
-                DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID(invoices);
+                DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID
+                    (invoices, "No invoices registered");
 
                 if (!ValidatorBookingId.TryGetBookingId(out int invoiceId))
                 {

@@ -31,7 +31,7 @@ namespace HotelBooking.Controllers.ControllerRooms
 
                 var rooms = _roomRead.GetAllActiveRooms()
                     .ToList();
-                DisplayRoomInformation.PrintRoomOnlyDetailes
+                DisplayRoomInformation.PrintRoomOnlyDetails
                     (rooms, "There are no active rooms");
                 if (!ValidatorRoomId.TryGetRoomId(out int roomId))
                 {
@@ -56,7 +56,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                 Console.Clear();
 
                 var room = _roomRead.GetRoomDetails(roomId);
-                DisplayRoomInformation.PrintRoomOnlyDetailes
+                DisplayRoomInformation.PrintRoomOnlyDetails
                     (room, $"No Room found with ID number {roomId}");
 
                 //This is repeating CreateANewRoom
@@ -137,7 +137,7 @@ namespace HotelBooking.Controllers.ControllerRooms
             {
                 Console.Clear();
                 var deletedRooms = _roomRead.GetAllDeletedRoomsInDatabase().ToList();
-                DisplayRoomInformation.PrintRoomOnlyDetailes
+                DisplayRoomInformation.PrintRoomOnlyDetails
                     (deletedRooms, "There are no deleted rooms");
 
                 if (!deletedRooms.Any())

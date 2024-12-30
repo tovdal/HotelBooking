@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Menu.StartupMainmenu;
+using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display;
-using HotelBooking.Utilities.Helpers;
 
 namespace HotelBooking
 {
@@ -9,19 +9,19 @@ namespace HotelBooking
     {
         private readonly MainHotelMenu _mainHotelMenu;
         private readonly DataInitializer _dataInitializer;
-        private readonly UpdateRooms _updateRooms;
+        private readonly RoomUpdate _roomUpdate;
 
-        public Application(MainHotelMenu mainHotelMenu, DataInitializer dataInitializer, UpdateRooms updateRooms)
+        public Application(MainHotelMenu mainHotelMenu, DataInitializer dataInitializer, RoomUpdate roomUpdate)
         {
             _mainHotelMenu = mainHotelMenu;
             _dataInitializer = dataInitializer;
-            _updateRooms = updateRooms;
+            _roomUpdate = roomUpdate;
         }
 
         public void Run()
         {
             _dataInitializer.MigrateAndSeedData();
-            _updateRooms.UpdateRoomAvailability();
+            _roomUpdate.UpdateRoomAvailability();
             ConsoleScreenManager.ScreenSize();
             _mainHotelMenu.ShowMenu();
         }

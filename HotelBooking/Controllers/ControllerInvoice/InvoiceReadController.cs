@@ -1,6 +1,4 @@
 ﻿using HotelBooking.Controllers.ControllerInvoice.Interfaces;
-using HotelBooking.Models;
-using HotelBooking.Service.BookingService;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
@@ -28,7 +26,7 @@ namespace HotelBooking.Controllers.ControllerInvoice
         {
             var invoices = _invoiceRead.GetAllNotPaidInvoices();
 
-            DisplayInvoiceInformation.PrintInvoiceAll(invoices, 
+            DisplayInvoiceInformation.PrintInvoiceAll(invoices,
                 "There are no invoices");
 
             ConsoleMessagePrinter.DisplayMessage();
@@ -52,7 +50,8 @@ namespace HotelBooking.Controllers.ControllerInvoice
                 Console.Clear();
                 var invoices = _invoiceRead.GetAllActiveInvoices();
 
-                DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID(invoices);
+                DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID
+                    (invoices, "No invoices registered");
 
                 if (!ValidatorBookingId.TryGetBookingId(out int invoiceId))
                 {
