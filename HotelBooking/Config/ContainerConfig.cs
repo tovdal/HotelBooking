@@ -10,6 +10,8 @@ using HotelBooking.Controllers.ControllerInvoice;
 using HotelBooking.Controllers.ControllerInvoice.Interfaces;
 using HotelBooking.Controllers.ControllerRooms;
 using HotelBooking.Controllers.ControllerRooms.Interface;
+using HotelBooking.Controllers.ControllerRooms.RoomUpdateFolder;
+using HotelBooking.Controllers.ControllerRooms.RoomUpdateFolder.Interface;
 using HotelBooking.Controllers.Interfaces;
 using HotelBooking.Data;
 using HotelBooking.Data.Seeders;
@@ -71,6 +73,8 @@ namespace HotelBooking.Config
             builder.RegisterType<RoomCreateController>().As<IRoomCreateController>();
             builder.RegisterType<RoomReadController>().As<IRoomReadController>();
             builder.RegisterType<RoomUpdateController>().As<IRoomUpdateController>();
+            builder.RegisterType<RoomUpdateRoom>().As<IRoomUpdateRoom>();
+            builder.RegisterType<RoomUpdateRestore>().As<IRoomUpdateRestore>();
             builder.RegisterType<RoomDeleteController>().As<IRoomDeleteController>();
 
             builder.RegisterType<BookingController>().As<IBookingController>();
