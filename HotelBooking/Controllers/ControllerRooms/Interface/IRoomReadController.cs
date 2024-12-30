@@ -4,7 +4,6 @@
     {
         void ShowAllRooms();
         void ShowAllDeletedRooms();
-        void ShowAllAvailableRooms();
         void ShowARoomDetailes();
     }
 }
