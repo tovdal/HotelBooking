@@ -42,22 +42,9 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
             (checkInDate, checkInDate);
         }
 
-        public static DateTime PromptInvoiceDate(DateTime selectedCheckInDate)
+        public static DateTime PromptInvoiceDate()
         {
-            DateTime dueDateOnInvoice;
-            if (selectedCheckInDate.Date == DateTime.Now.Date)
-            {
-                dueDateOnInvoice = DateTime.Now.Date.AddHours(23).AddMinutes(59);
-            }
-            else if ((selectedCheckInDate - DateTime.Now).Days <= 10)
-            {
-                dueDateOnInvoice = DateTime.Now;
-            }
-            else
-            {
-                dueDateOnInvoice = selectedCheckInDate.AddDays(-10);
-            }
-            return dueDateOnInvoice;
+            return DateTime.Now.AddDays(10);
         }
 
         public static Booking PromptCustomerDetails(int customerId,
@@ -71,18 +58,17 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
                 CheckOutDate = selectedCheckOutDate,
                 Status = BookingStatus.Active,
                 Rooms = bookingCreate.GetRoomsToBook(),
-                Invoice = PromptInvoice(totalBookingPrice, selectedCheckInDate)
+                Invoice = PromptInvoice(totalBookingPrice)
             };
         }
 
-        public static Invoice PromptInvoice(decimal totalBookingPrice,
-            DateTime selectedCheckInDate)
+        public static Invoice PromptInvoice(decimal totalBookingPrice)
         {
             return new Invoice
             {
                 CostAmount = totalBookingPrice,
                 InvoiceDate = DateTime.Now,
-                DueDateOnInvoice = PromptInvoiceDate(selectedCheckInDate),
+                DueDateOnInvoice = PromptInvoiceDate(),
                 IsPaid = false
             };
         }
