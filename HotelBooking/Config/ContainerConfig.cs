@@ -99,8 +99,6 @@ namespace HotelBooking.Config
             builder.RegisterType<InvoiceRead>().AsSelf();
             builder.RegisterType<InvoiceUpdate>().AsSelf();
 
-            builder.RegisterType<UpdateRooms>().AsSelf();
-
             builder.RegisterType<MenuDisplay>().AsSelf();
 
             return builder.Build();

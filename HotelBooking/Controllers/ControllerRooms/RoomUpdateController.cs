@@ -48,6 +48,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                 }
 
                 var room = _roomRead.GetRoomDetails(roomId);
+
                 DisplayRoomInformation.PrintRoomOnlyDetails
                     (room, $"No Room found with ID number {roomId}");
 
@@ -95,10 +96,10 @@ namespace HotelBooking.Controllers.ControllerRooms
                 if (!ValidatorRoom.ValidateDeletedRooms(deletedRooms))
                 {
                     isRunning = false;
-                    return;
+                    continue;
                 }
 
-                if (!ValidatorRoomId.TryGetRoomId(out var roomId))
+                if (!ValidatorRoom.TryGetRoomId(out var roomId))
                 {
                     continue;
                 }

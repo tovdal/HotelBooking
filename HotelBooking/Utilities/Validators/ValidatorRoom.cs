@@ -1,5 +1,4 @@
-﻿
-using HotelBooking.Models;
+﻿using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
 using Spectre.Console;
 
@@ -44,7 +43,8 @@ namespace HotelBooking.Utilities.Validators
         {
             if (roomToUpdate == null || !roomToUpdate.IsRoomDeleted)
             {
-                AnsiConsole.MarkupLine($"[bold red]No deleted room found with ID number: {roomId}.[/]");
+                AnsiConsole.MarkupLine
+                    ($"[bold red]No deleted room found with ID number: {roomId}.[/]");
                 Console.ReadKey();
                 return false;
             }
@@ -55,6 +55,7 @@ namespace HotelBooking.Utilities.Validators
             if (!deletedRooms.Any())
             {
                 AnsiConsole.MarkupLine("[bold red]There are no deleted rooms.[/]");
+                Console.ReadKey();
                 return false;
             }
             return true;

@@ -1,6 +1,7 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
 using HotelBooking.Utilities.Helpers;
+using HotelBooking.Utilities.Helpers.RoomHelper;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Service.BookingService

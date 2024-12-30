@@ -60,7 +60,7 @@ namespace HotelBooking.Service.RoomService
         public bool GetRoomsIsDeleted()
         {
             return _dbContext.Rooms
-                .Any(c => c.IsRoomDeleted);
+                .Any(r => r.IsRoomDeleted);
         }
         public Room GetRoomByRoomNumber(int roomNumber)
         {
@@ -83,7 +83,8 @@ namespace HotelBooking.Service.RoomService
         }
         public bool IsRoomDeleted(int roomNumber)
         {
-            return _dbContext.Rooms.Any(r => r.IsRoomDeleted);
+            return _dbContext.Rooms
+                .Any(r => r.RoomNumber == roomNumber && r.IsRoomDeleted);
         }
     }
 }

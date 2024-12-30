@@ -15,5 +15,9 @@ namespace HotelBooking.Service.CustomerService
         {
            return _dbContext.Customers.FirstOrDefault(c => c.Id == id);
         }
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
     }
 }
