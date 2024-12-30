@@ -65,17 +65,19 @@ namespace HotelBooking.Config
             builder.RegisterType<CustomerCreateController>().As<ICustomerCreaterController>();
             builder.RegisterType<CustomerReadController>().As<ICustomerReadController>();
             builder.RegisterType<CustomerUpdateController>().As<ICustomerUpdateController>();
+            builder.RegisterType<CustomerDeleteController>().As<ICustomerDeleteController>();
+
             builder.RegisterType<CustomerUpdateCustomer>().As<ICustomerUpdateCustomer>();
             builder.RegisterType<CustomerUpdateRestore>().As<ICustomerUpdateRestore>();
-            builder.RegisterType<CustomerDeleteController>().As<ICustomerDeleteController>();
 
             builder.RegisterType<RoomController>().As<IRoomController>();
             builder.RegisterType<RoomCreateController>().As<IRoomCreateController>();
             builder.RegisterType<RoomReadController>().As<IRoomReadController>();
             builder.RegisterType<RoomUpdateController>().As<IRoomUpdateController>();
+            builder.RegisterType<RoomDeleteController>().As<IRoomDeleteController>();
+
             builder.RegisterType<RoomUpdateRoom>().As<IRoomUpdateRoom>();
             builder.RegisterType<RoomUpdateRestore>().As<IRoomUpdateRestore>();
-            builder.RegisterType<RoomDeleteController>().As<IRoomDeleteController>();
 
             builder.RegisterType<BookingController>().As<IBookingController>();
             builder.RegisterType<BookingCreateController>().As<IBookingCreateController>();

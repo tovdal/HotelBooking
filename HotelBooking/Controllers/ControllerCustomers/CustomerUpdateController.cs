@@ -9,8 +9,8 @@ namespace HotelBooking.Controllers.ControllerCustomers
         private readonly ICustomerUpdateCustomer _customerUpdateCustomer;
         private readonly ICustomerUpdateRestore _customerUpdateRestoreCustomer;
 
-        public CustomerUpdateController(CustomerUpdateCustomer customerUpdateCustomer,
-            CustomerUpdateRestore customerUpdateRestore)
+        public CustomerUpdateController(ICustomerUpdateCustomer customerUpdateCustomer,
+            ICustomerUpdateRestore customerUpdateRestore)
         {
             _customerUpdateCustomer = customerUpdateCustomer;
             _customerUpdateRestoreCustomer = customerUpdateRestore;
