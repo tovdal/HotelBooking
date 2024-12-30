@@ -18,9 +18,9 @@ namespace HotelBooking.Utilities.Helpers.RoomHelper
         public static byte PromptRoomSize()
         {
             return AnsiConsole.Prompt(
-                new TextPrompt<byte>("Enter the room size: ")
-                    .ValidationErrorMessage("[red]Room size must be a valid positive number![/]")
-                    .Validate(input => input > 0)
+                new TextPrompt<byte>("Enter the room size (15 to 45 square meters): ")
+                    .ValidationErrorMessage("[red]Room size must be between 15 and 45![/]")
+                    .Validate(input => input >= 15 && input <= 45)
             );
         }
 
@@ -31,6 +31,8 @@ namespace HotelBooking.Utilities.Helpers.RoomHelper
                     .Title("Enter if the room is a [green]Single[/] or [green]Double[/]: ")
                     .AddChoices(Enum.GetNames<TypeOfRoom>())
             );
+
+            AnsiConsole.MarkupLine($"Selected room type: [green]{roomTypeString}[/]");
 
             return Enum.Parse<TypeOfRoom>(roomTypeString);
         }
