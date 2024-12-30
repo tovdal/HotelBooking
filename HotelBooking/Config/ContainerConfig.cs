@@ -3,6 +3,8 @@ using HotelBooking.Controllers;
 using HotelBooking.Controllers.ControllerBooking;
 using HotelBooking.Controllers.ControllerBooking.Interface;
 using HotelBooking.Controllers.ControllerCustomers;
+using HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder;
+using HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder.Interface;
 using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Controllers.ControllerInvoice;
 using HotelBooking.Controllers.ControllerInvoice.Interfaces;
@@ -14,13 +16,11 @@ using HotelBooking.Data.Seeders;
 using HotelBooking.Menu.Actions;
 using HotelBooking.Menu.StartupMainmenu;
 using HotelBooking.Menu.Submenus;
-using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.Menu;
-using HotelBooking.Utilities.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -63,6 +63,8 @@ namespace HotelBooking.Config
             builder.RegisterType<CustomerCreateController>().As<ICustomerCreaterController>();
             builder.RegisterType<CustomerReadController>().As<ICustomerReadController>();
             builder.RegisterType<CustomerUpdateController>().As<ICustomerUpdateController>();
+            builder.RegisterType<CustomerUpdateCustomer>().As<ICustomerUpdateCustomer>();
+            builder.RegisterType<CustomerUpdateRestore>().As<ICustomerUpdateRestore>();
             builder.RegisterType<CustomerDeleteController>().As<ICustomerDeleteController>();
 
             builder.RegisterType<RoomController>().As<IRoomController>();
