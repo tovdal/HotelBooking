@@ -5,6 +5,20 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
 {
     public class DisplayRoomInformation
     {
+        public static void DisplayRoomDetails(Room newRoom)
+        {
+            Console.Clear();
+            var table = new Table();
+            table.AddColumn("[bold]Field[/]");
+            table.AddColumn("[bold]Value[/]");
+            table.AddRow("Room number", newRoom.RoomNumber.ToString());
+            table.AddRow("Room size", newRoom.RoomSize.ToString());
+            table.AddRow("Type of room", newRoom.TypeOfRoom.ToString());
+            table.AddRow("Price per night", newRoom.PricePerNight.ToString());
+            table.AddRow("Extra bed available", newRoom.IsExtraBedAvailable.ToString());
+            AnsiConsole.Write(table);
+        }
+
         public static void PrintRoomRoomNumberAndID
             (IEnumerable<Room> rooms, string messageIfEmpty)
         {
@@ -128,6 +142,7 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             if (rooms == null || !rooms.Any())
             {
                 AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
+                Console.ReadKey();
                 return true;
             }
             return false;

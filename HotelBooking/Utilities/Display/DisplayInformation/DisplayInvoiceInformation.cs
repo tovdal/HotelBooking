@@ -76,6 +76,7 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             if (invoices == null || !invoices.Any())
             {
                 AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
+                Console.ReadKey();
                 return true;
             }
             return false;
