@@ -43,7 +43,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
             DisplayCustomerInformation.PrintCustomersNamesAndID
                 (customers, "There are no customers.");
 
-            if (!ValidatorCustomerId.TryGetCustomerId(out int customerId))
+            if (!ValidatorCustomer.TryGetCustomerId(out int customerId))
             {
                 return;
             }

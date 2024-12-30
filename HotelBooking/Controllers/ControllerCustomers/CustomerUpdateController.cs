@@ -1,7 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.DisplayInformation;
-using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Helpers.CustomerHelper;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
@@ -12,12 +11,15 @@ namespace HotelBooking.Controllers.ControllerCustomers
     {
         private readonly CustomerUpdate _customerUpdate;
         private readonly CustomerRead _customerRead;
+        private readonly CustomerDelete _customerDelete;
 
         public CustomerUpdateController(CustomerUpdate customerUpdate,
-            CustomerRead customerRead)
+            CustomerRead customerRead,
+            CustomerDelete customerDelete)
         {
             _customerUpdate = customerUpdate;
             _customerRead = customerRead;
+            _customerDelete = customerDelete;
         }
         public void UpdateACustomerInformation()
         {
@@ -29,18 +31,18 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 DisplayCustomerInformation.PrintCustomersOnlyDetailes(customers,
                     "There are no customers registered");
 
-                if (!ValidatorCustomerId.TryGetCustomerId(out int customerId))
+                if (!ValidatorCustomer.TryGetCustomerId(out int customerId))
                 {
-                    return;
+                    continue;
                 }
 
                 var customerToUpdate = _customerUpdate.ReturnCustomerWithId
                     (customerId);
 
-                if (customerToUpdate == null)
+                if (!ValidatorCustomer.ValidateCustomerForUpdate
+                    (customerToUpdate, customerId, _customerDelete))
                 {
-                    Console.WriteLine($"No customer found with ID number: {customerId}.");
-                    return;
+                    continue;
                 }
 
                 var updatedCustomer = CustomerInputHelper.PromptCustomerDetails();
@@ -81,50 +83,42 @@ namespace HotelBooking.Controllers.ControllerCustomers
             while (isRunning)
             {
                 Console.Clear();
-                var customers = _customerRead.GetAllDeletedCustomersInDatabase()
-                    .ToList();
+                var deletedCustomers = _customerRead.GetAllDeletedCustomersInDatabase()
+                .ToList();
                 DisplayCustomerInformation.PrintCustomersOnlyDetailes
-                    (customers, "There are no deleted customers.");
+                    (deletedCustomers, "There are no deleted customers.");
 
-                var isDeleted = _customerRead.GetCustomersIsDeleted();
-
-                if (!isDeleted)
+                if (!ValidatorCustomer.ValidateDeletedCustomers(deletedCustomers))
                 {
-                    ConsoleMessagePrinter.DisplayMessage();
                     isRunning = false;
-                    return;
-                }
-
-                if (!ValidatorCustomerId.TryGetCustomerId(out int customerId))
-                {
-                    return;
-                }
-
-                var customerToUpdate = _customerUpdate.ReturnCustomerWithId(customerId);
-
-                if (customerToUpdate == null || !customerToUpdate.IsCustomerDeleted)
-                {
-                    Console.WriteLine($"No deleted customer found with ID number: " +
-                        $"{customerId}.");
-                    Console.ReadKey();
                     continue;
                 }
 
-                bool deleteCustomer = AnsiConsole.Confirm
-                    ($"Do you want to take back delete customer: " +
-                    $"{customerToUpdate.FirstName} " +
-                    $"{customerToUpdate.LastName}?");
+                if (!ValidatorCustomer.TryGetCustomerId(out int customerId))
+                {
+                    continue;
+                }
 
-                if (deleteCustomer)
+                var customerToUpdate = _customerUpdate.ReturnCustomerWithId(customerId);
+                if (!ValidatorCustomer.ValidateDeletedCustomerForRestore
+                    (customerToUpdate, customerId))
+                {
+                    continue;
+                }
+
+                bool restoreCustomer = AnsiConsole.Confirm($"Do you want to " +
+                    $"restore deleted customer: {customerToUpdate.FirstName} " +
+                    $"{customerToUpdate.LastName}?");
+                if (restoreCustomer)
                 {
                     customerToUpdate.IsCustomerDeleted = false;
                     _customerUpdate.SaveChanges();
                     AnsiConsole.MarkupLine("[bold green]Customer successfully " +
-                        "un-deleted![/]");
+                        "restored![/]");
                 }
                 else
                 {
-                    AnsiConsole.MarkupLine("[bold red]Retake canceled.[/]");
+                    AnsiConsole.MarkupLine("[bold red]Restore canceled.[/]");
                 }
 
                 Console.Clear();
@@ -134,7 +128,6 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 {
                     isRunning = false;
                 }
-
             }
         }
     }
