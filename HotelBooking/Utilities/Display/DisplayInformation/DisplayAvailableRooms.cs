@@ -6,20 +6,24 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
 {
     public static class DisplayAvailableRooms
     {
-        public static void PrintAvailableRooms(RoomRead _roomRead, 
+        public static void PrintAvailableRooms(RoomRead _roomRead,
             UpdateRooms updateRooms, DateTime checkInDate, DateTime checkOutDate)
         {
             Console.Clear();
             updateRooms.UpdateRoomAvailability();
 
             AnsiConsole.MarkupLine("[bold green]Available rooms:[/]");
-            AnsiConsole.MarkupLine("[bold red](Extra beds) Rooms over 25 " +
-                "square meters will automatically get 2 extra beds and under 25 will get 1.[/]");
-
+            
             var availableRooms = _roomRead.GetAllAvailablebookingRooms
                 (checkInDate, checkOutDate)
-                .Where(r => !r.IsRoomDeleted)
+                .Where(r => r.IsAvailable && !r.IsRoomDeleted)
                 .ToList();
+
+            if (availableRooms.Count == 0)
+            {
+                AnsiConsole.MarkupLine("[bold red]No available rooms for the selected dates![/]");
+                return;
+            }
 
             var roomTable = new Table();
             roomTable.AddColumn("Room Number");
@@ -36,6 +40,8 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
                     room.IsExtraBedAvailable ? "Yes" : "No"
                 );
             }
+            AnsiConsole.MarkupLine("[bold red](Extra beds) Rooms over 25 " +
+                "square meters will automatically get 2 extra beds and under 25 will get 1.[/]");
 
             AnsiConsole.Write(roomTable);
         }
