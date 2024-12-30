@@ -38,7 +38,7 @@ public class BookingReadController : IBookingReadController
             DisplayBookingInformation.PrintBookingIdAndCustomerID
                 (bookings, "There are no bookings registered");
 
-            if (!ValidatorBookingId.TryGetBookingId(out int bookingId))
+            if (!ValidatorBooking.TryGetBookingId(out int bookingId))
             {
                 continue;
             }

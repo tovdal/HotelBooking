@@ -31,43 +31,46 @@ public class BookingUpdateController : IBookingUpdateController
             Console.Clear();
             var bookings = _bookingRead.GetAllActiveBookings().ToList();
             DisplayBookingInformation.PrintBookingAll
-                (bookings, "There are no active bookings");
+                (bookings, "There are no active bookings. (Press enter to return to menu)");
 
-            if (!ValidatorBookingId.TryGetBookingId(out int bookingId))
+            if (!ValidatorBooking.TryGetBookingId(out int bookingId))
             {
+                isRunning = false;
                 continue;
             }
 
             var bookingToUpdate = _bookingUpdate.ReturnBookingWithId(bookingId);
-            if (bookingToUpdate == null)
+            if (!ValidatorBooking.ValidateBookingForUpdate(bookingToUpdate, bookingId))
             {
-                AnsiConsole.MarkupLine
-                    ($"[bold red]No booking found with ID number: {bookingId}.[/]");
                 continue;
             }
 
             var updatedBooking = BookingInputHelper.PromptBookingDetails();
 
-            if (!BookingInputHelper.AreRoomsAvailable
-                (_roomRead, updatedBooking.CheckInDate, 
+            if (!ValidatorBooking.AreRoomsAvailable(_roomRead, updatedBooking.CheckInDate,
                 updatedBooking.CheckOutDate, bookingToUpdate.Rooms))
             {
                 AnsiConsole.MarkupLine
-                    ("[bold red]Update canceled due to room availability conflict.[/]");
-                Console.ReadKey();
+                   ("[bold red]Update canceled due to room availability conflict.[/]");
                 break;
             }
+            bool confirm = AnsiConsole.Confirm
+                   ("\n[bold yellow]Are all details correct?[/]");
+            if (confirm)
+            {
+                bookingToUpdate.CheckInDate = updatedBooking.CheckInDate;
+                bookingToUpdate.CheckOutDate = updatedBooking.CheckOutDate;
+                bookingToUpdate.Status = updatedBooking.Status;
 
-            bookingToUpdate.CheckInDate = updatedBooking.CheckInDate;
-            bookingToUpdate.CheckOutDate = updatedBooking.CheckOutDate;
-            bookingToUpdate.Status = updatedBooking.Status;
+                _bookingUpdate.SaveChanges();
+                AnsiConsole.MarkupLine("[bold green]Booking successfully updated![/]");
+            }
+            else
+            {
+                AnsiConsole.MarkupLine("[bold red]Update canceled.[/]");
+            }
 
-            _bookingUpdate.SaveChanges();
-            AnsiConsole.MarkupLine
-                ("[bold green]Booking successfully updated![/]");
-
-            bool addAnother = AnsiConsole.Confirm
-                ("\nDo you want to update another booking?");
+            bool addAnother = AnsiConsole.Confirm("\nDo you want to update another booking?");
             if (!addAnother)
             {
                 isRunning = false;

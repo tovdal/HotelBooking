@@ -27,22 +27,27 @@ namespace HotelBooking.Controllers.ControllerBooking
                 var bookings = _bookingRead.GetAllActiveBookings()
                     .ToList();
                 DisplayBookingInformation.PrintBookingIdAndCustomerID
-                    (bookings, "There are no bookings registered");
-                if (bookings.Count == 0)
+                    (bookings, "There are no active bookings. (Press enter to " +
+                    "return to menu)");
+
+                if (!ValidatorBooking.ValidateBookingsList(bookings))
                 {
-                    Console.ReadKey();
-                    return;
+                    isRunning = false;
+                    continue;
                 }
-                if (!ValidatorBookingId.TryGetBookingId(out int bookingId))
+
+                if (!ValidatorBooking.TryGetBookingId(out int bookingId))
                 {
-                    return;
+                    continue;
                 }
+
                 var bookingToDelete = _bookingUpdate.ReturnBookingWithId(bookingId);
-                if (bookingToDelete == null)
+
+                if (!ValidatorBooking.ValidateBookingForUpdate(bookingToDelete, bookingId))
                 {
-                    Console.WriteLine($"No booking found with ID number: {bookingId}.");
-                    return;
+                    continue;
                 }
+
                 bool selectedBookingAsDeleted = AnsiConsole.Confirm(
                     $"Do you want to delete booking: booking Id: {bookingToDelete.Id},  " +
                     $"Customer Id: {bookingToDelete.CustomerId}");

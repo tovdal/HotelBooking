@@ -1,6 +1,4 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
-using HotelBooking.Controllers.ControllerRooms.Interface;
-using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.RoomService;
@@ -15,16 +13,12 @@ public class BookingCreateController : IBookingCreateController
     private readonly BookingCreate _bookingCreate;
     private readonly RoomRead _roomRead;
     private readonly CustomerRead _customerRead;
-    private readonly IRoomReadController _roomReadController;
     private readonly RoomUpdate _roomUpdate;
 
     public BookingCreateController(BookingCreate bookingCreate,
-        IRoomReadController roomReadController,
-        RoomRead roomRead, CustomerRead customerRead,
-        RoomUpdate roomUpdate)
+        RoomRead roomRead, CustomerRead customerRead,RoomUpdate roomUpdate)
     {
         _bookingCreate = bookingCreate;
-        _roomReadController = roomReadController;
         _roomRead = roomRead;
         _customerRead = customerRead;
         _roomUpdate = roomUpdate;
@@ -57,7 +51,6 @@ public class BookingCreateController : IBookingCreateController
                 (DateTime.Now);
             if (selectedCheckInDate == DateTime.MinValue)
             {
-                AnsiConsole.MarkupLine("[bold red]Check-in date selection canceled.[/]");
                 break;
             }
 
@@ -66,48 +59,17 @@ public class BookingCreateController : IBookingCreateController
                 .HandleUserInput(selectedCheckInDate, selectedCheckInDate);
             if (selectedCheckOutDate == DateTime.MinValue)
             {
-                AnsiConsole.MarkupLine("[bold red]Check-out date selection canceled.[/]");
                 break;
             }
 
             BookingInputRoomHelper.PromptBookRooms
-                (_bookingCreate, _roomRead, selectedCheckInDate,
-                selectedCheckOutDate, _roomUpdate);
+                (_bookingCreate, _roomRead, selectedCheckInDate,selectedCheckOutDate, _roomUpdate);
 
-            var totalBookingPrice = _bookingCreate.TotalPriceOfBooking
-                (selectedCheckInDate, selectedCheckOutDate);
+            var totalBookingPrice = _bookingCreate.TotalPriceOfBooking(selectedCheckInDate, selectedCheckOutDate);
 
-            Console.WriteLine($"The total price of all bookings is: {totalBookingPrice:C}");
-
-            DateTime dueDateOnInvoice;
-            if (selectedCheckInDate.Date == DateTime.Now.Date)
-            {
-                dueDateOnInvoice = DateTime.Now.Date.AddHours(23).AddMinutes(59);
-            }
-            else if ((selectedCheckInDate - DateTime.Now).Days <= 10)
-            {
-                dueDateOnInvoice = DateTime.Now;
-            }
-            else
-            {
-                dueDateOnInvoice = selectedCheckInDate.AddDays(-10);
-            }
-
-            var newBooking = new Booking
-            {
-                CustomerId = customerId,
-                CheckInDate = selectedCheckInDate,
-                CheckOutDate = selectedCheckOutDate,
-                Status = BookingStatus.Active,
-                Rooms = _bookingCreate.GetRoomsToBook(),
-                Invoice = new Invoice
-                {
-                    CostAmount = totalBookingPrice,
-                    InvoiceDate = DateTime.Now,
-                    DueDateOnInvoice = dueDateOnInvoice,
-                    IsPaid = false
-                }
-            };
+            var newBooking = BookingInputHelper.PromptCustomerDetails(customerId,
+                selectedCheckInDate, selectedCheckOutDate, _bookingCreate,
+                totalBookingPrice);
 
             DisplayBookingInformation.DisplayBookingDetails(newBooking);
 
