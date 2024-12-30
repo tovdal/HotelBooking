@@ -125,18 +125,15 @@ public class DisplayBookingInformation
         bookingTable.AddColumn("Customer Id");
         bookingTable.AddColumn("Check in date");
         bookingTable.AddColumn("Check out date");
-        bookingTable.AddColumn("Total Cost");
-        bookingTable.AddColumn("Is Paid?");
 
         foreach (var booking in bookings)
         {
+            
             bookingTable.AddRow(
                 booking.Id.ToString(),
                 booking.CustomerId.ToString(),
                 booking.CheckInDate.ToString(),
-                booking.CheckOutDate.ToString(),
-                booking.Invoice.CostAmount.ToString("C"),
-                booking.Invoice.IsPaid ? "Yes" : "No"
+                booking.CheckOutDate.ToString()
             );
             bookingTable.AddEmptyRow();
         }
