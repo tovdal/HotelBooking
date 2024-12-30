@@ -9,7 +9,7 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             RoomUpdate _roomUpdate, DateTime checkInDate, DateTime checkOutDate)
         {
             Console.Clear();
-            _roomUpdate.UpdateRoomAvailability();
+            _roomUpdate.UpdateRoomAndBookingAvailability();
 
             AnsiConsole.MarkupLine("[bold green]Available rooms:[/]");
 

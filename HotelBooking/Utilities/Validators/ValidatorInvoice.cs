@@ -19,7 +19,7 @@ namespace HotelBooking.Utilities.Validators
 
             return true;
         }
-        public static bool ValidateInvoiceForUpdate(Booking invoiceToPay,
+        public static bool ValidateInvoiceForUpdate(Invoice invoiceToPay,
                int invoiceId)
         {
             if (invoiceToPay == null)

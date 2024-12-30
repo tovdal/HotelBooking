@@ -17,7 +17,7 @@ namespace HotelBooking.Controllers.ControllerInvoice
         {
             var invoices = _invoiceRead.GetAllActiveInvoices();
 
-            DisplayInvoiceInformation.PrintInvoiceAll
+            DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID
                 (invoices, "There are no invoices.");
 
             ConsoleMessagePrinter.DisplayMessage();

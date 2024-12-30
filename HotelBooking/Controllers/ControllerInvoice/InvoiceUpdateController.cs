@@ -46,7 +46,7 @@ public class InvoiceUpdateController : IInvoiceUpdateController
                 ("\n[bold yellow]Are all details correct?[/]");
             if (confirm)
             {
-                invoiceToPay.Invoice.IsPaid = true;
+                invoiceToPay.IsPaid = true;
                 _invoiceUpdate.SaveChanges();
                 AnsiConsole.MarkupLine
                     ($"[green]Invoice with Id: " +

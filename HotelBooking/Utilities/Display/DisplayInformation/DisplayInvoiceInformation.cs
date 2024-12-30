@@ -17,6 +17,7 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             invoiceTable.AddColumn("Invoice Id");
             invoiceTable.AddColumn("Booking Id");
             invoiceTable.AddColumn("Customer Name");
+            invoiceTable.AddColumn("Due Date");
             invoiceTable.AddColumn("Paid or Not Paid");
 
 
@@ -27,6 +28,7 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
                     invoice.BookingId.ToString(),
                     $"{invoice.Booking.Customer.FirstName}, " +
                     $"{invoice.Booking.Customer.LastName}",
+                    invoice.DueDateOnInvoice.ToString(),
                     invoice.IsPaid ? "Paid" : "Not Paid"
                 );
                 invoiceTable.AddEmptyRow();
@@ -46,8 +48,8 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
             invoiceTable.AddColumn("Booking Id");
             invoiceTable.AddColumn("Customer Name");
             invoiceTable.AddColumn("Room/Rooms");
+            invoiceTable.AddColumn("Due Date");
             invoiceTable.AddColumn("Check in date");
-            invoiceTable.AddColumn("Check out date");
             invoiceTable.AddColumn("Paid or Not Paid");
 
             foreach (var invoice in invoices)
@@ -62,8 +64,8 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
                     $"{invoice.Booking.Customer.FirstName}, " +
                     $"{invoice.Booking.Customer.LastName}",
                     roomNumbers,
+                    invoice.DueDateOnInvoice.ToString(),
                     invoice.Booking.CheckInDate.ToString(),
-                    invoice.Booking.CheckOutDate.ToString(),
                     invoice.IsPaid ? "Paid" : "Not Paid"
                 );
                 invoiceTable.AddEmptyRow();

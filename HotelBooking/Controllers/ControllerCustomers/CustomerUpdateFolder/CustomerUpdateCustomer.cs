@@ -27,6 +27,7 @@ namespace HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder
             bool isRunning = true;
             while (isRunning)
             {
+                Console.Clear();
                 var customers = _customerRead.GetAllCustomersAndAddress()
                     .ToList();
                 DisplayCustomerInformation.PrintCustomersOnlyDetailes(customers,

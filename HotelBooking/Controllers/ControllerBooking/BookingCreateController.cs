@@ -29,7 +29,7 @@ public class BookingCreateController : IBookingCreateController
         bool IsRunning = true;
         while (IsRunning)
         {
-            _roomUpdate.UpdateRoomAvailability();
+            _roomUpdate.UpdateRoomAndBookingAvailability();
 
             AnsiConsole.MarkupLine("[bold green]1. Register a new booking[/]");
 

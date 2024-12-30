@@ -21,7 +21,7 @@ namespace HotelBooking
         public void Run()
         {
             _dataInitializer.MigrateAndSeedData();
-            _roomUpdate.UpdateRoomAvailability();
+            _roomUpdate.UpdateRoomAndBookingAvailability();
             ConsoleScreenManager.ScreenSize();
             _mainHotelMenu.ShowMenu();
         }
