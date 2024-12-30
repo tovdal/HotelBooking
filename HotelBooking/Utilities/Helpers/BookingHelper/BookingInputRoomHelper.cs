@@ -20,7 +20,8 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
                     (_roomRead, updateRooms, checkInDate, checkOutDate);
 
                 string roomRoomNumber = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Enter room number you want to book: ")
+                    new TextPrompt<string>($"Enter room number you want to book for date:" +
+                    $" {checkInDate:yyyy-MM-dd} - {checkOutDate:yyyy-MM-dd} : ")
                         .ValidationErrorMessage("[red]Invalid room![/]")
                         .Validate(input =>
                         {
@@ -35,6 +36,13 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
                 if (room == null)
                 {
                     AnsiConsole.MarkupLine("[bold red]No room found with that number[/]");
+                    Console.ReadKey();
+                    continue;
+                }
+                if (_roomRead.IsRoomDeleted(room.RoomNumber))
+                {
+                    AnsiConsole.MarkupLine
+                        ("[bold red]Room is deleted, pick another![/]");
                     Console.ReadKey();
                     continue;
                 }

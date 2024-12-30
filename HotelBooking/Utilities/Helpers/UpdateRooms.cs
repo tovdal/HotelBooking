@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Data;
+using HotelBooking.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Utilities.Helpers
@@ -17,7 +18,9 @@ namespace HotelBooking.Utilities.Helpers
             foreach (var room in rooms)
             {
                 room.IsAvailable = room.Bookings
-                    .All(b => b.CheckOutDate <= DateTime.Now || b.CheckInDate >= DateTime.Now);
+                    .All(b => b.Status == BookingStatus.Deleted 
+                    || b.CheckOutDate <= DateTime.Now 
+                    || b.CheckInDate >= DateTime.Now);
             }
 
             _dbContext.SaveChanges();
