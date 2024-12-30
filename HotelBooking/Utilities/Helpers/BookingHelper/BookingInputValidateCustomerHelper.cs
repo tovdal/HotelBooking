@@ -39,7 +39,7 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
                 AnsiConsole.Write(customerTable);
 
                 AnsiConsole.MarkupLine("[bold green]Type in customer ID[/]");
-                if (ValidatorCustomerId.TryGetCustomerId(out customerId))
+                if (ValidatorCustomer.TryGetCustomerId(out customerId))
                 {
                     if (_customerRead.CustomerExists(customerId))
                     {
