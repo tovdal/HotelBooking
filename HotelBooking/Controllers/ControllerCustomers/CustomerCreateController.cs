@@ -22,7 +22,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
 
                 var newCustomer = CustomerInputHelper.PromptCustomerDetails();
 
-                DisplayHelper.DisplayCustomerDetails(newCustomer);
+                DisplayCustomerInformation.DisplayCustomerDetails(newCustomer);
 
                 bool confirm = AnsiConsole.Confirm("\n[bold yellow]Are all details correct?[/]");
                 if (confirm)

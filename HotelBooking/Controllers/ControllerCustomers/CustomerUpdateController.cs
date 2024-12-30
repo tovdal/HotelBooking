@@ -48,7 +48,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
 
                 var updatedCustomer = CustomerInputHelper.PromptCustomerDetails();
 
-                DisplayHelper.DisplayCustomerDetails(updatedCustomer);
+                DisplayCustomerInformation.DisplayCustomerDetails(updatedCustomer);
 
                 bool confirm = AnsiConsole.Confirm
                     ("\n[bold yellow]Are all details correct?[/]");

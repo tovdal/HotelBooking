@@ -110,7 +110,7 @@ public class BookingCreateController : IBookingCreateController
                 }
             };
 
-            DisplayHelper.DisplayBookingDetails(newBooking);
+            DisplayBookingInformation.DisplayBookingDetails(newBooking);
 
             bool confirm = AnsiConsole.Confirm
                 ("\n[bold yellow]Are all details correct?[/]");
