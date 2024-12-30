@@ -4,7 +4,7 @@
     {
         public static void ScreenSize()
         {
-            Console.SetWindowSize(150, 50);
+            Console.SetWindowSize(145, 45);
         }
     }
 }

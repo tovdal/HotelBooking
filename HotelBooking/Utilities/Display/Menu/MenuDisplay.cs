@@ -6,9 +6,10 @@ namespace HotelBooking.Utilities.Display.Menu
     {
         public void PrintMenuText()
         {
-            BorderRender.RenderBorder(8, 58, 45, 20);
-            Console.SetCursorPosition(65, 10);
-            Console.Write("Make a choice in the menu:");
+            HotelStartupScreenText.RenderStartUpScreenText();
+            BorderRender.RenderBorder(15, 52, 45, 20);
+            Console.SetCursorPosition(61, 20);
+            Console.Write("Make a choice in the menu");
         }
     }
 }
