@@ -30,11 +30,15 @@ namespace HotelBooking.Service.RoomService
                 .OrderBy(r => r.RoomNumber);
 
         }
-        public IQueryable<Room> GetAllAvailablebookingRooms()
+        public IQueryable<Room> GetAllAvailablebookingRooms
+            (DateTime checkInDate, DateTime checkOutDate)
         {
             return _dbContext.Rooms
-                .OrderBy(r => r.RoomNumber)
-                .Where(r => r.IsAvailable);
+                .Where(r => !r.IsRoomDeleted && r.IsAvailable && r.Bookings
+                    .All(b => b.Status == BookingStatus.Deleted 
+                    || b.CheckOutDate <= checkInDate 
+                    || b.CheckInDate >= checkOutDate))
+                .OrderBy(r => r.RoomNumber);
         }
         public IQueryable<Room> GetAllTakenRooms()
         {
@@ -72,10 +76,14 @@ namespace HotelBooking.Service.RoomService
             (int roomNumber, DateTime checkInDate, DateTime checkOutDate)
         {
             return _dbContext.Bookings
-                .Any(b => b.Rooms
-                .Any(r => r.RoomNumber == roomNumber) 
-                && b.CheckInDate < checkOutDate 
-                && b.CheckOutDate > checkInDate);
+                .Any(b => b.Rooms.Any(r => r.RoomNumber == roomNumber)
+                          && b.Status != BookingStatus.Deleted
+                          && b.CheckInDate < checkOutDate
+                          && b.CheckOutDate > checkInDate);
+        }
+        public bool IsRoomDeleted(int roomNumber)
+        {
+            return _dbContext.Rooms.Any(r => r.IsRoomDeleted);
         }
     }
 }
