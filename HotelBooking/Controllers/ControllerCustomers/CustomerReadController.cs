@@ -18,32 +18,10 @@ namespace HotelBooking.Controllers.ControllerCustomers
         {
             var customers = _customerRead.GetAllActiveCustomers().ToList();
 
-            if (customers == null || !customers.Any())
-            {
-                AnsiConsole.MarkupLine("[red]There are no customers registered.[/]");
-                return;
-            }
+            DisplayCustomerInformation.PrintCustomerShowAll
+                 (customers, "There are no customers registered");
 
-            var table = new Table();
-            table.AddColumn("Customer ID");
-            table.AddColumn("Name");
-            table.AddColumn("Email");
-            table.AddColumn("Phone Number");
-
-            foreach (var customer in customers)
-            {
-                table.AddRow(
-                    customer.Id.ToString(),
-                    $"{customer.FirstName} {customer.LastName}",
-                    customer.Email,
-                    customer.PhoneNumber
-                );
-                table.AddEmptyRow();
-            }
-
-            AnsiConsole.Write(table);
             ConsoleMessagePrinter.DisplayMessage();
-            // Add Pagination can be found in richards powerpoint 
         }
 
         public void ShowAllDeletedCustomers()

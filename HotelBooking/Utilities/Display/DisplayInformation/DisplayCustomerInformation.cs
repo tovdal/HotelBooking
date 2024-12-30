@@ -4,7 +4,7 @@ using Spectre.Console;
 namespace HotelBooking.Utilities.Display.DisplayInformation
 {
     public class DisplayCustomerInformation
-    {
+    { 
         public static void PrintCustomersNamesAndID
             (IEnumerable<Customer> customers, string messageIfEmpty)
         {
@@ -98,6 +98,32 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
                     customer.Address.Country,
                     customer.IsCustomerDeleted ? "Yes" : "No",
                     customer.Bookings?.Count.ToString() ?? "No bookings"
+                );
+                table.AddEmptyRow();
+            }
+
+            AnsiConsole.Write(table);
+        }
+        public static void PrintCustomerShowAll(IEnumerable<Customer> customers, string messageIfEmpty)
+        {
+            if (IsCustomerListEmpty(customers, messageIfEmpty))
+            {
+                return;
+            }
+
+            var table = new Table();
+            table.AddColumn("Customer ID");
+            table.AddColumn("Name");
+            table.AddColumn("Email");
+            table.AddColumn("Phone Number");
+
+            foreach (var customer in customers)
+            {
+                table.AddRow(
+                    customer.Id.ToString(),
+                    $"{customer.FirstName} {customer.LastName}",
+                    customer.Email,
+                    customer.PhoneNumber
                 );
                 table.AddEmptyRow();
             }
