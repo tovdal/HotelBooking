@@ -129,7 +129,8 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
 
             AnsiConsole.Write(table);
         }
-        public static void PrintCustomerShowAll(IEnumerable<Customer> customers, string messageIfEmpty)
+        public static void PrintCustomerShowAll
+            (IEnumerable<Customer> customers, string messageIfEmpty)
         {
             if (IsCustomerListEmpty(customers, messageIfEmpty))
             {

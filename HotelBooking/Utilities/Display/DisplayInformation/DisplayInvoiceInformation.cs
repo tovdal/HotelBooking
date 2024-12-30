@@ -6,13 +6,13 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
     public class DisplayInvoiceInformation
     {
         public static void PrintInvoiceIdAndCustomerID
-            (IEnumerable<Invoice> invoices)
+            (IEnumerable<Invoice> invoices, string messageIfEmpty)
         {
-            if (invoices == null || !invoices.Any())
+            if (IsInvoiceListEmpty(invoices, messageIfEmpty))
             {
-                AnsiConsole.MarkupLine($"[red]There are no invoices[/]");
                 return;
             }
+
             var invoiceTable = new Table();
             invoiceTable.AddColumn("Invoice Id");
             invoiceTable.AddColumn("Booking Id");
@@ -36,11 +36,11 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
         public static void PrintInvoiceAll
         (IEnumerable<Invoice> invoices, string messageIfEmpty)
         {
-            if (invoices == null || !invoices.Any())
+            if (IsInvoiceListEmpty(invoices, messageIfEmpty))
             {
-                AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
                 return;
             }
+
             var invoiceTable = new Table();
             invoiceTable.AddColumn("Invoice Id");
             invoiceTable.AddColumn("Booking Id");
@@ -69,6 +69,16 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
                 invoiceTable.AddEmptyRow();
             }
             AnsiConsole.Write(invoiceTable);
+        }
+        private static bool IsInvoiceListEmpty
+            (IEnumerable<Invoice> invoices, string messageIfEmpty)
+        {
+            if (invoices == null || !invoices.Any())
+            {
+                AnsiConsole.MarkupLine($"[red]{messageIfEmpty}[/]");
+                return true;
+            }
+            return false;
         }
     }
 }
