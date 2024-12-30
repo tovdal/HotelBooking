@@ -1,12 +1,13 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder;
+using HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder.Interface;
 using HotelBooking.Controllers.ControllerCustomers.Interface;
 
 namespace HotelBooking.Controllers.ControllerCustomers
 {
     public class CustomerUpdateController : ICustomerUpdateController
     {
-        private readonly CustomerUpdateCustomer _customerUpdateCustomer;
-        private readonly CustomerUpdateRestore _customerUpdateRestoreCustomer;
+        private readonly ICustomerUpdateCustomer _customerUpdateCustomer;
+        private readonly ICustomerUpdateRestore _customerUpdateRestoreCustomer;
 
         public CustomerUpdateController(CustomerUpdateCustomer customerUpdateCustomer,
             CustomerUpdateRestore customerUpdateRestore)
