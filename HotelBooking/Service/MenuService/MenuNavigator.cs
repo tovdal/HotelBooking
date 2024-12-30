@@ -11,7 +11,7 @@
             {
                 for (int i = 0; i < menuItems.Count; i++)
                 {
-                    Console.SetCursorPosition(65, 12 + i);
+                    Console.SetCursorPosition(62, 22 + i);
                     if (i == _currentSelect)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;

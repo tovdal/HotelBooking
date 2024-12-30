@@ -20,7 +20,6 @@ namespace HotelBooking.Menu.Submenus
         }
         public void ExecuteMainMenuAction()
         {
-            _menuDisplay.PrintMenuText();
             List<string> menuItems = new List<string>()
             {
                 "Show all invoices",

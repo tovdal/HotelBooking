@@ -37,11 +37,11 @@ namespace HotelBooking.Menu.StartupMainmenu
 
                 List<string> menuItems = new List<string>()
                 {
-                    "Bookings",
-                    "Customers",
-                    "Rooms",
-                    "Invoices",
-                    "Exit program"
+                    "  Bookings Menu  ",
+                    "  Customers Menu  ",
+                    "  Rooms Menu  ",
+                    "  Invoices Menu  ",
+                    "  Exit program  "
                 };
                 _menuNavigator.Navigate(menuItems, selectedIndex =>
                 {
