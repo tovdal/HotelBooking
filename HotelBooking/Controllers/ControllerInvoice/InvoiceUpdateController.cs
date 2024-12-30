@@ -41,8 +41,9 @@ namespace HotelBooking.Controllers.ControllerInvoice
                 }
 
                 var invoice = _invoiceRead.GetInvoiceDetails(invoiceId);
-                DisplayInvoiceInformation.PrintInvoiceAll(invoices,
-                    $"No invoices found with Id: {invoiceId}.");
+
+                DisplayInvoiceInformation.PrintInvoiceAll
+                    (invoice, $"No invoices found with Id: {invoiceId}.");
 
                 bool confirm = AnsiConsole.Confirm
                     ("\n[bold yellow]Are all details correct?[/]");

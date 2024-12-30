@@ -18,23 +18,29 @@ namespace HotelBooking.Controllers.ControllerInvoice
         public void ShowAllInvoices()
         {
             var invoices = _invoiceRead.GetAllActiveInvoices();
+
             DisplayInvoiceInformation.PrintInvoiceAll
                 (invoices, "There are no invoices");
+
             ConsoleMessagePrinter.DisplayMessage();
         }
         public void ShowAllNotPaid()
         {
             var invoices = _invoiceRead.GetAllNotPaidInvoices();
+
             DisplayInvoiceInformation.PrintInvoiceAll(invoices, 
                 "There are no invoices");
+
             ConsoleMessagePrinter.DisplayMessage();
 
         }
         public void ShowAllPaid()
         {
             var invoices = _invoiceRead.GetAllPaidInvoices();
+
             DisplayInvoiceInformation.PrintInvoiceAll
                 (invoices, "There are no paid invoices");
+
             ConsoleMessagePrinter.DisplayMessage();
         }
 
@@ -45,15 +51,19 @@ namespace HotelBooking.Controllers.ControllerInvoice
             {
                 Console.Clear();
                 var invoices = _invoiceRead.GetAllActiveInvoices();
+
                 DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID(invoices);
 
                 if (!ValidatorBookingId.TryGetBookingId(out int invoiceId))
                 {
                     continue;
                 }
+
                 var invoice = _invoiceRead.GetInvoiceDetails(invoiceId);
-                DisplayInvoiceInformation.PrintInvoiceAll(invoices,
-                    $"No invoices found with Id: {invoiceId}.");
+
+                DisplayInvoiceInformation.PrintInvoiceAll
+                    (invoice, $"No invoices found with Id: {invoiceId}.");
+
                 ConsoleMessagePrinter.DisplayMessage();
                 isSearching = false;
             }

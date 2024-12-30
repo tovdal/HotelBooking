@@ -25,7 +25,6 @@ namespace HotelBooking.Controllers.ControllerRooms
                 var table = new Table();
                 table.AddColumn("[bold]Field[/]");
                 table.AddColumn("[bold]Value[/]");
-                table.AddRow("Room ID", newRoom.Id.ToString());
                 table.AddRow("Room number", newRoom.RoomNumber.ToString());
                 table.AddRow("Room size", newRoom.RoomSize.ToString());
                 table.AddRow("Type of room", newRoom.TypeOfRoom.ToString());
