@@ -60,6 +60,8 @@ namespace HotelBooking.Controllers.ControllerCustomers
         {
             var customers = _customerRead.GetAllActiveCustomers();
 
+            AnsiConsole.MarkupLine($"[green]Show a customers details[/]");
+
             DisplayCustomerInformation.PrintCustomersNamesAndID
                 (customers, "There are no customers.");
 
