@@ -2,6 +2,7 @@
 using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
+using HotelBooking.Utilities.Helpers.RoomHelper;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -14,7 +15,7 @@ namespace HotelBooking.Controllers.ControllerRooms
         private readonly RoomCreate _roomCreate;
         private readonly RoomDelete _roomDelete;
 
-        public RoomUpdateController(RoomUpdate roomUpdate, 
+        public RoomUpdateController(RoomUpdate roomUpdate,
             RoomRead roomRead, RoomCreate roomCreate, RoomDelete roomDelete)
         {
             _roomUpdate = roomUpdate;
@@ -33,88 +34,39 @@ namespace HotelBooking.Controllers.ControllerRooms
                     .ToList();
                 DisplayRoomInformation.PrintRoomOnlyDetails
                     (rooms, "There are no active rooms");
-                if (!ValidatorRoomId.TryGetRoomId(out int roomId))
+
+                if (!ValidatorRoom.TryGetRoomId(out int roomId))
                 {
                     continue;
                 }
 
                 var roomToUpdate = _roomUpdate.ReturnCustomerWithId(roomId);
-                if (roomToUpdate == null)
-                {
-                    AnsiConsole.MarkupLine
-                        ($"[bold red]No Room found with ID number: {roomId}.[/]");
-                    return;
-                }
-                if (_roomDelete.HasRoomBooking(roomId))
-                {
-                    AnsiConsole.MarkupLine
-                        ("[bold red]The room has a booking, can't be updated[/]");
-                    Console.ReadKey();
-                    return;
-                }
 
-                Console.Clear();
+                if (!ValidatorRoom.ValidateRoomForUpdate(roomToUpdate, roomId, _roomDelete))
+                {
+                    continue;
+                }
 
                 var room = _roomRead.GetRoomDetails(roomId);
                 DisplayRoomInformation.PrintRoomOnlyDetails
                     (room, $"No Room found with ID number {roomId}");
 
-                //This is repeating CreateANewRoom
+                var updatedRoom = RoomInputHelper.PromptRoomDetails(_roomCreate);
 
-                AnsiConsole.MarkupLine("[bold green]1. Update a new room[/]");
+                DisplayRoomInformation.DisplayRoomDetails(updatedRoom);
 
-                string roomRoomNumber = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Update room number: ")
-                        .ValidationErrorMessage("[red]Invalid or duplicate room number![/]")
-                        .Validate(input =>
-                        {
-                            if (!int.TryParse(input, out int roomNumber)) return false;
-                            return !_roomCreate.RoomExists(roomNumber);
-                        })
-                );
-
-                string roomRoomSize = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Update the room size: ")
-                        .ValidationErrorMessage("[red]Room size must be a valid positive number![/]")
-                        .Validate(input => !string.IsNullOrWhiteSpace(input) && byte.TryParse(input, out _))
-                );
-
-                string roomTypeInput = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Update if the room is a Single or Double: ")
-                        .ValidationErrorMessage("[red]Please enter 'Single' or 'Double'![/]")
-                        .Validate(input => Enum.TryParse<TypeOfRoom>(input, true, out _))
-                );
-                TypeOfRoom roomTypeOfRoom = Enum.Parse<TypeOfRoom>(roomTypeInput, true);
-
-                string roomPricePerNight = AnsiConsole.Prompt(
-                    new TextPrompt<string>("Update the room's price per night: ")
-                        .ValidationErrorMessage("[red]Price must be numeric![/]")
-                        .Validate(input => decimal.TryParse(input, out _))
-                );
-
-
-                Console.Clear();
-                var table = new Table();
-                table.AddColumn("[bold]Field[/]");
-                table.AddColumn("[bold]Value[/]");
-                table.AddRow("Room ID", roomToUpdate.Id.ToString());
-                table.AddRow("Room number", roomRoomNumber);
-                table.AddRow("Room size", roomRoomSize);
-                table.AddRow("Type of room", roomTypeOfRoom.ToString());
-                table.AddRow("Price per night", roomPricePerNight);
-                table.AddRow("Extra bed available", roomToUpdate.IsExtraBedAvailable.ToString());
-                AnsiConsole.Write(table);
 
                 bool confirm = AnsiConsole.Confirm("\n[bold yellow]Are all details correct?[/]");
                 if (confirm)
                 {
-                    roomToUpdate.RoomNumber = int.Parse(roomRoomNumber);
-                    roomToUpdate.RoomSize = byte.Parse(roomRoomSize);
-                    roomToUpdate.TypeOfRoom = roomTypeOfRoom;
-                    roomToUpdate.PricePerNight = decimal.Parse(roomPricePerNight);
-                    roomToUpdate.IsExtraBedAvailable = roomTypeOfRoom == TypeOfRoom.Double;
+                    roomToUpdate.RoomNumber = updatedRoom.RoomNumber;
+                    roomToUpdate.RoomSize = updatedRoom.RoomSize;
+                    roomToUpdate.TypeOfRoom = updatedRoom.TypeOfRoom;
+                    roomToUpdate.PricePerNight = updatedRoom.PricePerNight;
+                    roomToUpdate.IsExtraBedAvailable = updatedRoom.TypeOfRoom == TypeOfRoom.Double;
                     _roomUpdate.SaveChanges();
-                    AnsiConsole.MarkupLine("[bold green]Room successfully registered![/]");
+                    AnsiConsole.MarkupLine
+                        ("[bold green]Room successfully registered![/]");
                 }
                 else
                 {
@@ -140,7 +92,7 @@ namespace HotelBooking.Controllers.ControllerRooms
                 DisplayRoomInformation.PrintRoomOnlyDetails
                     (deletedRooms, "There are no deleted rooms");
 
-                if (!deletedRooms.Any())
+                if (!ValidatorRoom.ValidateDeletedRooms(deletedRooms))
                 {
                     isRunning = false;
                     return;
@@ -152,11 +104,8 @@ namespace HotelBooking.Controllers.ControllerRooms
                 }
 
                 var roomToUpdate = _roomUpdate.ReturnCustomerWithId(roomId);
-                if (roomToUpdate == null || !roomToUpdate.IsRoomDeleted)
+                if (!ValidatorRoom.ValidateDeletedRoomForRestore(roomToUpdate, roomId))
                 {
-                    AnsiConsole.MarkupLine
-                        ($"[bold red]No deleted room found with ID number: {roomId}.[/]");
-                    Console.ReadKey();
                     continue;
                 }
 
