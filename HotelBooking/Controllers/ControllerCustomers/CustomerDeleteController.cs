@@ -1,5 +1,4 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
-using HotelBooking.Data;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Validators;
@@ -11,14 +10,13 @@ namespace HotelBooking.Controllers.ControllerCustomers
     {
         private readonly CustomerRead _customerRead;
         private readonly CustomerUpdate _customerUpdate;
-        private readonly ApplicationDbContext _dbContext;
         private readonly CustomerDelete _customerDelete;
 
-        public CustomerDeleteController(CustomerRead customerRead, CustomerUpdate customerUpdate, CustomerDelete customerDelete, ApplicationDbContext dbContext)
+        public CustomerDeleteController(CustomerRead customerRead,
+            CustomerUpdate customerUpdate, CustomerDelete customerDelete)
         {
             _customerRead = customerRead;
             _customerUpdate = customerUpdate;
-            _dbContext = dbContext;
             _customerDelete = customerDelete;
         }
 
@@ -27,32 +25,28 @@ namespace HotelBooking.Controllers.ControllerCustomers
             bool isRunning = true;
             while (isRunning)
             {
-                var customers = _customerRead.GetAllActiveCustomers().ToList();
+                Console.Clear();
+
+                var customers = _customerRead.GetAllActiveCustomers()
+                    .ToList();
                 DisplayCustomerInformation.PrintCustomersNamesAndID
                     (customers, "There are no customers registered");
 
                 if (!ValidatorCustomer.TryGetCustomerId(out int customerId))
                 {
-                    return;
+                    isRunning = false;
+                    continue;
                 }
 
                 var customerToDelete = _customerUpdate.ReturnCustomerWithId(customerId);
 
-                if (customerToDelete == null)
+                if (!ValidatorCustomer.ValidateCustomerForUpdate
+                    (customerToDelete, customerId, _customerDelete))
                 {
-                    AnsiConsole.MarkupLine($"[bold red]No customer found with ID number: {customerId}[/]");
-                    Console.ReadKey();
-                    return;
+                    continue;
                 }
 
-                if (_customerDelete.HasCustomerBooking(customerId))
-                {
-                    AnsiConsole.MarkupLine("[bold red]The customer has a booking, can't be deleted[/]");
-                    Console.ReadKey();
-                    return;
-                }
-
-                bool selectedCustomerAsDeleted = 
+                bool selectedCustomerAsDeleted =
                     AnsiConsole.Confirm($"Do you want to delete customer: " +
                     $"{customerToDelete.FirstName} {customerToDelete.LastName}?");
 
@@ -60,7 +54,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 if (selectedCustomerAsDeleted)
                 {
                     customerToDelete.IsCustomerDeleted = true;
-                    _dbContext.SaveChanges();
+                    _customerUpdate.SaveChanges();
                     AnsiConsole.MarkupLine("[bold green]Successfully deleted![/]");
                 }
                 else
@@ -68,7 +62,8 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     AnsiConsole.MarkupLine("[bold red]Deletion canceled.[/]");
                 }
 
-                bool addAnother = AnsiConsole.Confirm("Do you want to delete another customer?");
+                bool addAnother = AnsiConsole.Confirm
+                    ("Do you want to delete another customer?");
                 if (!addAnother)
                 {
                     isRunning = false;

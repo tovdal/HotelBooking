@@ -8,7 +8,7 @@ namespace HotelBooking.Utilities.Validators
     {
         public static bool TryGetCustomerId(out int customerId)
         {
-            Console.WriteLine("Enter the ID of the Customer: ");
+            Console.Write("Enter the ID of the Customer: ");
             var stringCustomerID = Console.ReadLine();
 
             if (!int.TryParse(stringCustomerID, out customerId))
@@ -35,7 +35,7 @@ namespace HotelBooking.Utilities.Validators
             if (customerDelete.HasCustomerBooking(customerId))
             {
                 AnsiConsole.MarkupLine
-                    ("[bold red]The Customer has a booking, can't be updated[/]");
+                    ("[bold red]The Customer has a booking, can't be changed[/]");
                 Console.ReadKey();
                 return false;
             }
@@ -58,7 +58,7 @@ namespace HotelBooking.Utilities.Validators
         {
             if (!deletedCustomers.Any())
             {
-                AnsiConsole.MarkupLine("[bold red]There are no deleted customers.[/]");
+                AnsiConsole.MarkupLine("[bold red].[/]");
                 Console.ReadKey();
                 return false;
             }

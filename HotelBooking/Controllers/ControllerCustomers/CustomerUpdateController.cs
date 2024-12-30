@@ -29,10 +29,11 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 var customers = _customerRead.GetAllCustomersAndAddress()
                     .ToList();
                 DisplayCustomerInformation.PrintCustomersOnlyDetailes(customers,
-                    "There are no customers registered");
+                    "There are no customers registered. (Press enter to return to menu)");
 
                 if (!ValidatorCustomer.TryGetCustomerId(out int customerId))
                 {
+                    isRunning = false;
                     continue;
                 }
 
@@ -86,7 +87,8 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 var deletedCustomers = _customerRead.GetAllDeletedCustomersInDatabase()
                 .ToList();
                 DisplayCustomerInformation.PrintCustomersOnlyDetailes
-                    (deletedCustomers, "There are no deleted customers.");
+                    (deletedCustomers, "There are no deleted customers. " +
+                    "(Press enter to return to menu)");
 
                 if (!ValidatorCustomer.ValidateDeletedCustomers(deletedCustomers))
                 {
