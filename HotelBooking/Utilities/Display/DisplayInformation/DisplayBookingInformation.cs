@@ -26,6 +26,17 @@ public class DisplayBookingInformation
 
         AnsiConsole.Write(table);
     }
+    public static void DisplayBookingDetailsOnly(Booking booking)
+    {
+        Console.Clear();
+        var table = new Table();
+        table.AddColumn("[bold]Field[/]");
+        table.AddColumn("[bold]Value[/]");
+        table.AddRow("Check-In Date", booking.CheckInDate.ToString("d"));
+        table.AddRow("Check-Out Date", booking.CheckOutDate.ToString("d"));
+
+        AnsiConsole.Write(table);
+    }
 
     public static void PrintBookingIdAndCustomerID
         (IEnumerable<Booking> bookings, string messageIfEmpty)
