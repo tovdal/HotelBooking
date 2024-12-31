@@ -1,9 +1,11 @@
 ﻿using HotelBooking.Controllers.ControllerInvoice.Interfaces;
+using HotelBooking.Models;
 using HotelBooking.Service.InvoiceService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
+using Spectre.Console;
 
 namespace HotelBooking.Controllers.ControllerInvoice
 {
@@ -16,7 +18,7 @@ namespace HotelBooking.Controllers.ControllerInvoice
         }
         public void ShowAllInvoices()
         {
-            var invoices = _invoiceRead.GetAllActiveInvoices();
+            var invoices = _invoiceRead.GetAllInvoices();
 
             DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID
                 (invoices, "There are no invoices.");
@@ -51,8 +53,10 @@ namespace HotelBooking.Controllers.ControllerInvoice
                 Console.Clear();
                 var invoices = _invoiceRead.GetAllActiveInvoices().ToList();
 
+                AnsiConsole.MarkupLine($"[green]Show a invoices details[/]");
+
                 DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID
-                    (invoices, "No invoices registered ." +
+                    (invoices, "No invoices registered." +
                     " (Press enter to return to menu)");
 
                 if (ListHelper.CheckIfListIsEmpty(invoices))
@@ -60,15 +64,29 @@ namespace HotelBooking.Controllers.ControllerInvoice
                     isSearching = false;
                     return;
                 }
-                if (!ValidatorBooking.TryGetBookingId(out int invoiceId))
+
+                if (!ValidatorInvoice.TryGetInvoiceId(out int invoiceId))
                 {
                     continue;
                 }
 
-                var invoice = _invoiceRead.GetInvoiceDetails(invoiceId);
+                var invoice = invoices.FirstOrDefault(i => i.Id == invoiceId);
+                if (invoice == null)
+                {
+                    AnsiConsole.MarkupLine($"[bold red]No invoice found with ID number: {invoiceId}.[/]");
+                    Console.ReadKey();
+                    continue;
+                }
 
-                DisplayInvoiceInformation.PrintInvoiceAll
-                    (invoice, $"No invoices found with Id: {invoiceId}.");
+                if (!ValidatorInvoice.IsInvoiceDeleted(invoice, invoiceId))
+                {
+                    isSearching = false;
+                    return;
+                }
+
+                var invoiceDetails = _invoiceRead.GetInvoiceDetails(invoiceId);
+
+                DisplayInvoiceInformation.PrintInvoiceAll(invoiceDetails, $"No invoices found with Id: {invoiceId}.");
 
                 ConsoleMessagePrinter.DisplayMessage();
                 isSearching = false;

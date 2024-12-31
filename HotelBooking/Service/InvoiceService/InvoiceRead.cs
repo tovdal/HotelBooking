@@ -17,8 +17,19 @@ namespace HotelBooking.Service.InvoiceService
             return _dbContext.Invoices
                 .Include(i => i.Booking)
                 .Include(i => i.Booking.Rooms)
+                .Where(i => i.Booking.Status == BookingStatus.Active)
                 .Include(i => i.Booking.Customer)
                 .Where(i => !i.IsPaid)
+                .OrderBy(i => i.Id)
+                .ToList();
+        }
+        public IEnumerable<Invoice> GetAllInvoices()
+        {
+            return _dbContext.Invoices
+                .Include(i => i.Booking)
+                .Include(i => i.Booking.Rooms)
+                .Where(i => i.Booking.Status == BookingStatus.Active)
+                .Include(i => i.Booking.Customer)
                 .OrderBy(i => i.Id)
                 .ToList();
         }
@@ -38,6 +49,7 @@ namespace HotelBooking.Service.InvoiceService
             return _dbContext.Invoices
                 .Where(i => i.IsPaid == false)
                 .Include(i => i.Booking)
+                .Where(i => i.Booking.Status == BookingStatus.Active)
                 .Include(i => i.Booking.Rooms)
                 .Include(i => i.Booking.Customer)
                 .OrderBy(i => i.Id)

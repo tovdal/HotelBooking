@@ -31,5 +31,24 @@ namespace HotelBooking.Utilities.Validators
             }
             return true;
         }
+
+        public static bool IsInvoiceDeleted(Invoice invoice, int invoiceId)
+        {
+            if (invoice.Booking == null || invoice.Booking.Customer == null)
+            {
+                AnsiConsole.MarkupLine($"[bold red]No booking or customer found for invoice ID: {invoiceId}.[/]");
+                Console.ReadKey();
+                return false;
+            }
+
+            if (invoice.Booking.Customer.IsCustomerDeleted)
+            {
+                AnsiConsole.MarkupLine($"[bold red]Customer with ID number: {invoice.Booking.Customer.Id} is deleted.[/]");
+                Console.ReadKey();
+                return false;
+            }
+
+            return true;
+        }
     }
 }
