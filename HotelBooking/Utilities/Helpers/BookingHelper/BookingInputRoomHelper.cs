@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Service.BookingService;
 using HotelBooking.Service.BookingService.Interfaces;
-using HotelBooking.Service.RoomService;
+using HotelBooking.Service.RoomService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using Spectre.Console;
 

@@ -1,5 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.Interface;
-using HotelBooking.Service.RoomService;
+using HotelBooking.Service.RoomService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;

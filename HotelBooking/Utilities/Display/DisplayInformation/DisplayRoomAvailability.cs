@@ -1,4 +1,4 @@
-﻿using HotelBooking.Service.RoomService;
+﻿using HotelBooking.Service.RoomService.Interfaces;
 using Spectre.Console;
 
 namespace HotelBooking.Utilities.Display.DisplayInformation

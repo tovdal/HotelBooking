@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Data;
+using HotelBooking.Service.RoomService.Interfaces;
 
 namespace HotelBooking.Service.RoomService
 {

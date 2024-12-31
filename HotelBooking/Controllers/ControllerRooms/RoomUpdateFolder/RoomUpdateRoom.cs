@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.RoomUpdateFolder.Interface;
 using HotelBooking.Models;
-using HotelBooking.Service.RoomService;
+using HotelBooking.Service.RoomService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Helpers.RoomHelper;

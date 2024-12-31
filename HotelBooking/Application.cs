@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Menu.StartupMainmenu;
-using HotelBooking.Service.RoomService;
+using HotelBooking.Service.RoomService.Interfaces;
 using HotelBooking.Utilities.Display;
 
 namespace HotelBooking

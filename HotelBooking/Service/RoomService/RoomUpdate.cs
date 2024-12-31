@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using HotelBooking.Service.RoomService.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Spectre.Console;
 

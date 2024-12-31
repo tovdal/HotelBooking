@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Models;
 
-namespace HotelBooking.Service.RoomService
+namespace HotelBooking.Service.RoomService.Interfaces
 {
     public interface IRoomRead
     {

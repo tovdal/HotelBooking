@@ -25,6 +25,7 @@ using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Service.InvoiceService.Interfaces;
 using HotelBooking.Service.RoomService;
+using HotelBooking.Service.RoomService.Interfaces;
 using HotelBooking.Utilities.Display.Menu;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
