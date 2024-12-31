@@ -4,6 +4,8 @@ using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
+using HotelBooking.Models;
+using HotelBooking.Service.BookingService;
 
 namespace HotelBooking.Controllers.ControllerCustomers
 {
@@ -36,24 +38,44 @@ namespace HotelBooking.Controllers.ControllerCustomers
 
         public void ShowACustomersDetailes()
         {
-            var customers = _customerRead.GetAllActiveCustomers();
-
-            AnsiConsole.MarkupLine($"[green]Show a customers details[/]");
-
-            DisplayCustomerInformation.PrintCustomersNamesAndID
-                (customers, "There are no customers.");
-
-            if (!ValidatorCustomer.TryGetCustomerId(out int customerId))
+            bool isSearching = true;
+            while (isSearching)
             {
-                return;
+                Console.Clear();
+                var customers = _customerRead.GetAllActiveCustomers();
+
+                AnsiConsole.MarkupLine($"[green]Show a customer's details[/]");
+
+                DisplayCustomerInformation.PrintCustomersNamesAndID
+                    (customers, "There are no customers.");
+
+                if (!ValidatorCustomer.TryGetCustomerId(out int customerId))
+                {
+                    continue;
+                }
+
+                var customer = _customerRead.GetCustomerDetailes(customerId).FirstOrDefault();
+                if (customer == null)
+                {
+                    AnsiConsole.MarkupLine
+                        ($"[bold red]No customer found with ID number: {customerId}.[/]");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                if (!ValidatorCustomer.IsCustomerDeleted(customer, customerId))
+                {
+                    isSearching = false;
+                    return;
+                }
+
+                DisplayCustomerInformation.PrintCustomersAll
+                    (new List<Customer> { customer }, 
+                    $"No customer found with ID number: {customerId}.");
+
+                ConsoleMessagePrinter.DisplayMessage();
+                isSearching = false;
             }
-
-            var customer = _customerRead.GetCustomerDetailes(customerId);
-
-            DisplayCustomerInformation.PrintCustomersAll
-                (customer, $"No customer found with ID number: {customerId}.");
-
-            ConsoleMessagePrinter.DisplayMessage();
         }
     }
 }

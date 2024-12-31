@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Models;
+using HotelBooking.Service.BookingService;
 using HotelBooking.Service.RoomService;
 using Spectre.Console;
 
@@ -57,6 +58,17 @@ namespace HotelBooking.Utilities.Validators
                     Console.ReadKey();
                     return false;
                 }
+            }
+            return true;
+        }
+        public static bool IsBookingDeleted(Booking booking, int bookingId)
+        {
+            if (booking.Status == BookingStatus.Deleted)
+            {
+                AnsiConsole.MarkupLine
+                    ($"[bold red]Booking with ID number: {bookingId} is deleted.[/]");
+                Console.ReadKey();
+                return false;
             }
             return true;
         }

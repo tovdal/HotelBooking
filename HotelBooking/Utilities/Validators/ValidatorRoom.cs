@@ -61,5 +61,16 @@ namespace HotelBooking.Utilities.Validators
             }
             return true;
         }
+        public static bool IsRoomDeleted(Room room, int roomId)
+        {
+            if (room.IsRoomDeleted)
+            {
+                AnsiConsole.MarkupLine
+                    ($"[bold red]Room with ID number: {roomId} is deleted.[/]");
+                Console.ReadKey();
+                return false;
+            }
+            return true;
+        }
     }
 }

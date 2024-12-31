@@ -1,8 +1,10 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.Interface;
+using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Validators;
+using Spectre.Console;
 
 namespace HotelBooking.Controllers.ControllerRooms;
 
@@ -33,18 +35,36 @@ public class RoomReadController : IRoomReadController
 
     public void ShowARoomDetailes()
     {
-        var rooms = _roomRead.GetAllActiveRooms();
-        DisplayRoomInformation.PrintRoomRoomNumberAndID
-        (rooms, "There are no rooms.");
-
-        if (!ValidatorRoom.TryGetRoomId(out int roomId))
+        bool isSearching = true;
+        while (isSearching)
         {
-            return;
-        }
+            var rooms = _roomRead.GetAllActiveRooms();
+            DisplayRoomInformation.PrintRoomRoomNumberAndID
+            (rooms, "There are no rooms.");
 
-        var room = _roomRead.GetRoomDetails(roomId);
-        DisplayRoomInformation.PrintRoomOnlyDetails
-            (room, $"No room found with ID number: {roomId}.");
-        ConsoleMessagePrinter.DisplayMessage();
+            if (!ValidatorRoom.TryGetRoomId(out int roomId))
+            {
+                continue;
+            }
+            var room = _roomRead.GetRoomDetails(roomId).FirstOrDefault();
+            if (room == null)
+            {
+                AnsiConsole.MarkupLine
+                    ($"[bold red]No room found with ID number: {roomId}.[/]");
+                Console.ReadKey();
+                continue;
+            }
+            if (!ValidatorRoom.IsRoomDeleted(room, roomId))
+            {
+                isSearching = false;
+                return;
+            }
+
+            DisplayRoomInformation.PrintRoomOnlyDetails
+                (new List<Room> { room }, 
+                $"No room found with ID number: {roomId}.");
+            ConsoleMessagePrinter.DisplayMessage();
+            isSearching = false;
+        }
     }
 }
