@@ -31,7 +31,8 @@ public class BookingUpdateController : IBookingUpdateController
             Console.Clear();
             var bookings = _bookingRead.GetAllActiveBookings().ToList();
             DisplayBookingInformation.PrintBookingAll
-                (bookings, "There are no active bookings. (Press enter to return to menu)");
+                (bookings, "There are no active bookings. " +
+                "(Press enter to return to menu)");
 
             if (!ValidatorBooking.TryGetBookingId(out int bookingId))
             {
@@ -45,10 +46,14 @@ public class BookingUpdateController : IBookingUpdateController
                 continue;
             }
 
+            BookingInputAddOrRemoveRooms.PromptAddOrRemoveRooms
+                (bookingToUpdate, _roomRead);
+
             var updatedBooking = BookingInputHelper.PromptBookingDetails();
 
-            if (!ValidatorBooking.AreRoomsAvailable(_roomRead, updatedBooking.CheckInDate,
-                updatedBooking.CheckOutDate, bookingToUpdate.Rooms))
+            if (!ValidatorBooking.AreRoomsAvailable(_roomRead, 
+                updatedBooking.CheckInDate, updatedBooking.CheckOutDate,
+                bookingToUpdate.Rooms))
             {
                 AnsiConsole.MarkupLine
                    ("[bold red]Update canceled due to room availability conflict.[/]");
@@ -70,7 +75,8 @@ public class BookingUpdateController : IBookingUpdateController
                 AnsiConsole.MarkupLine("[bold red]Update canceled.[/]");
             }
 
-            bool addAnother = AnsiConsole.Confirm("\nDo you want to update another booking?");
+            bool addAnother = AnsiConsole.Confirm
+                ("\nDo you want to update another booking?");
             if (!addAnother)
             {
                 isRunning = false;
