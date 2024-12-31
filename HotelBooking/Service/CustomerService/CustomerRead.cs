@@ -14,6 +14,7 @@ namespace HotelBooking.Service.CustomerService
         public IQueryable<Customer> GetAllActiveCustomers()
         {
             return _dbContext.Customers
+                .Include(c => c.Address)
                 .Where(c => !c.IsCustomerDeleted)
                 .OrderBy(c => c.Id);
         }
@@ -27,22 +28,26 @@ namespace HotelBooking.Service.CustomerService
         public bool CustomerExists(int customerId)
         {
             return _dbContext.Customers
+                .Include(c => c.Address)
                 .Any(c => c.Id == customerId && !c.IsCustomerDeleted);
         }
         public IQueryable<Customer> GetAllDeletedCustomersInDatabase()
         {
             return _dbContext.Customers
+                .Include(c => c.Address)
                 .Where(g => g.IsCustomerDeleted)
                 .OrderBy(c => c.Id);
         }
         public IQueryable<Customer> GetCustomerDetailes(int id)
         {
             return _dbContext.Customers
+                .Include(c => c.Address)
                 .Where(g => g.Id == id);
         }
         public bool GetCustomersIsDeleted()
         {
             return _dbContext.Customers
+                .Include(c => c.Address)
                 .Any(c => c.IsCustomerDeleted);
         }
     }
