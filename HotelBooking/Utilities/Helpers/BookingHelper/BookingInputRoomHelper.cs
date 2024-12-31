@@ -9,8 +9,8 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
     public class BookingInputRoomHelper
     {
         public static void PromptBookRooms(IBookingCreate _bookingCreate,
-            RoomRead _roomRead, DateTime checkInDate,
-            DateTime checkOutDate, RoomUpdate _roomUpdate)
+            IRoomRead _roomRead, DateTime checkInDate,
+            DateTime checkOutDate, IRoomUpdate _roomUpdate)
         {
             bool IsAddingRooms = true;
             while (IsAddingRooms)

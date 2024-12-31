@@ -9,10 +9,10 @@ namespace HotelBooking.Controllers.ControllerRooms.RoomUpdateFolder;
 
 public class RoomUpdateRestore : IRoomUpdateRestore
 {
-    private readonly RoomUpdate _roomUpdate;
-    private readonly RoomRead _roomRead;
+    private readonly IRoomUpdate _roomUpdate;
+    private readonly IRoomRead _roomRead;
 
-    public RoomUpdateRestore(RoomUpdate roomUpdate, RoomRead roomRead)
+    public RoomUpdateRestore(IRoomUpdate roomUpdate, IRoomRead roomRead)
     {
         _roomUpdate = roomUpdate;
         _roomRead = roomRead;

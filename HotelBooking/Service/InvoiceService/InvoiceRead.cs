@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using HotelBooking.Service.InvoiceService.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Service.InvoiceService

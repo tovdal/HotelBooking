@@ -13,11 +13,11 @@ public class BookingUpdateController : IBookingUpdateController
 {
     private readonly IBookingRead _bookingRead;
     private readonly IBookingUpdate _bookingUpdate;
-    private readonly RoomRead _roomRead;
+    private readonly IRoomRead _roomRead;
 
     public BookingUpdateController
         (IBookingRead bookingRead, IBookingUpdate bookingUpdate,
-        RoomRead roomRead)
+        IRoomRead roomRead)
     {
         _bookingRead = bookingRead;
         _bookingUpdate = bookingUpdate;

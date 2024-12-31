@@ -23,6 +23,7 @@ using HotelBooking.Service.BookingService.Interfaces;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Service.InvoiceService;
+using HotelBooking.Service.InvoiceService.Interfaces;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.Menu;
 using Microsoft.EntityFrameworkCore;
@@ -96,10 +97,10 @@ namespace HotelBooking.Config
             builder.RegisterType<BookingUpdate>().As<IBookingUpdate>();
             builder.RegisterType<BookingDelete>().As<IBookingDelete>();
 
-            builder.RegisterType<RoomCreate>().AsSelf();
-            builder.RegisterType<RoomRead>().AsSelf();
-            builder.RegisterType<RoomUpdate>().AsSelf();
-            builder.RegisterType<RoomDelete>().AsSelf();
+            builder.RegisterType<RoomCreate>().As<IRoomCreate>();
+            builder.RegisterType<RoomRead>().As<IRoomRead>();
+            builder.RegisterType<RoomUpdate>().As<IRoomUpdate>();
+            builder.RegisterType<RoomDelete>().As<IRoomDelete>();
 
             builder.RegisterType<CustomerCreate>().As<ICustomerCreate>();
             builder.RegisterType<CustomerRead>().As<ICustomerRead>();

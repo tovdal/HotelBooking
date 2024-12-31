@@ -22,7 +22,7 @@ namespace HotelBooking.Utilities.Validators
             return true;
         }
         public static bool ValidateRoomForUpdate(Room roomToUpdate, 
-            int roomId, RoomDelete roomDelete)
+            int roomId, IRoomDelete roomDelete)
         {
             if (roomToUpdate == null)
             {

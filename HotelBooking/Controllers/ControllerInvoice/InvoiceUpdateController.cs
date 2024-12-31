@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerInvoice.Interfaces;
 using HotelBooking.Models;
-using HotelBooking.Service.InvoiceService;
+using HotelBooking.Service.InvoiceService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;

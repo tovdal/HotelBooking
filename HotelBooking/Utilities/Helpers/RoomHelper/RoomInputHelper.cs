@@ -6,7 +6,7 @@ namespace HotelBooking.Utilities.Helpers.RoomHelper
 {
     public class RoomInputHelper
     {
-        public static int PromptRoomNumber(RoomCreate roomCreate)
+        public static int PromptRoomNumber(IRoomCreate roomCreate)
         {
             return AnsiConsole.Prompt(
                 new TextPrompt<int>("Enter room number: ")
@@ -46,7 +46,7 @@ namespace HotelBooking.Utilities.Helpers.RoomHelper
             );
         }
 
-        public static Room PromptRoomDetails(RoomCreate roomCreate)
+        public static Room PromptRoomDetails(IRoomCreate roomCreate)
         {
             var roomNumber = PromptRoomNumber(roomCreate);
             var roomSize = PromptRoomSize();

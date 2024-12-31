@@ -5,7 +5,7 @@ using Spectre.Console;
 
 namespace HotelBooking.Service.RoomService
 {
-    public class RoomUpdate
+    public class RoomUpdate : IRoomUpdate
     {
         private readonly ApplicationDbContext _dbContext;
         public RoomUpdate(ApplicationDbContext dbContext)

@@ -8,7 +8,8 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper;
 
 public static class BookingInputAddOrRemoveRooms
 {
-    public static void PromptAddOrRemoveRooms(Booking bookingToUpdate, RoomRead roomRead)
+    public static void PromptAddOrRemoveRooms(Booking bookingToUpdate, 
+        IRoomRead roomRead)
     {
         bool confirmAddRooms = AnsiConsole.Confirm
               ("\n[]Do you want to add or remove rooms?[/]");

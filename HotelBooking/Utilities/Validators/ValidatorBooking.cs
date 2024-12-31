@@ -44,7 +44,7 @@ namespace HotelBooking.Utilities.Validators
         }
 
         public static bool AreRoomsAvailable
-            (RoomRead roomRead, DateTime checkInDate, DateTime checkOutDate,
+            (IRoomRead roomRead, DateTime checkInDate, DateTime checkOutDate,
             List<Room> rooms)
         {
             foreach (var room in rooms)

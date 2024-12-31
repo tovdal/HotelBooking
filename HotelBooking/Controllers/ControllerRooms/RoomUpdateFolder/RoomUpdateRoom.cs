@@ -11,13 +11,13 @@ namespace HotelBooking.Controllers.ControllerRooms.RoomUpdateFolder;
 
 public class RoomUpdateRoom : IRoomUpdateRoom
 {
-    private readonly RoomUpdate _roomUpdate;
-    private readonly RoomRead _roomRead;
-    private readonly RoomCreate _roomCreate;
-    private readonly RoomDelete _roomDelete;
+    private readonly IRoomUpdate _roomUpdate;
+    private readonly IRoomRead _roomRead;
+    private readonly IRoomCreate _roomCreate;
+    private readonly IRoomDelete _roomDelete;
 
-    public RoomUpdateRoom(RoomUpdate roomUpdate,
-        RoomRead roomRead, RoomCreate roomCreate, RoomDelete roomDelete)
+    public RoomUpdateRoom(IRoomUpdate roomUpdate,
+        IRoomRead roomRead, IRoomCreate roomCreate, IRoomDelete roomDelete)
     {
         _roomUpdate = roomUpdate;
         _roomRead = roomRead;

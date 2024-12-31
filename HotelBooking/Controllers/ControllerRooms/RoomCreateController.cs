@@ -8,8 +8,8 @@ namespace HotelBooking.Controllers.ControllerRooms
 {
     public class RoomCreateController : IRoomCreateController
     {
-        private readonly RoomCreate _roomCreate;
-        public RoomCreateController(RoomCreate roomCreate)
+        private readonly IRoomCreate _roomCreate;
+        public RoomCreateController(IRoomCreate roomCreate)
         {
             _roomCreate = roomCreate;
         }

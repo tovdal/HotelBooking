@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using HotelBooking.Service.InvoiceService.Interfaces;
 
 namespace HotelBooking.Service.InvoiceService
 {

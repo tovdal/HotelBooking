@@ -11,8 +11,8 @@ namespace HotelBooking.Controllers.ControllerRooms;
 
 public class RoomReadController : IRoomReadController
 {
-    private readonly RoomRead _roomRead;
-    public RoomReadController(RoomRead roomRead)
+    private readonly IRoomRead _roomRead;
+    public RoomReadController(IRoomRead roomRead)
     {
         _roomRead = roomRead;
     }

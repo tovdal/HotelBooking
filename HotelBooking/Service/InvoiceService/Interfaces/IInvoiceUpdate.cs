@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Models;
 
-namespace HotelBooking.Service.InvoiceService
+namespace HotelBooking.Service.InvoiceService.Interfaces
 {
     public interface IInvoiceUpdate
     {

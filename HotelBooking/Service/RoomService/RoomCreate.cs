@@ -3,7 +3,7 @@ using HotelBooking.Models;
 
 namespace HotelBooking.Service.RoomService
 {
-    public class RoomCreate
+    public class RoomCreate : IRoomCreate
     {
         private readonly ApplicationDbContext _dbContext;
         public RoomCreate(ApplicationDbContext dbContext)

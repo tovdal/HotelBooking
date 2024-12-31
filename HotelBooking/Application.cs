@@ -9,9 +9,10 @@ namespace HotelBooking
     {
         private readonly MainHotelMenu _mainHotelMenu;
         private readonly DataInitializer _dataInitializer;
-        private readonly RoomUpdate _roomUpdate;
+        private readonly IRoomUpdate _roomUpdate;
 
-        public Application(MainHotelMenu mainHotelMenu, DataInitializer dataInitializer, RoomUpdate roomUpdate)
+        public Application(MainHotelMenu mainHotelMenu, 
+            DataInitializer dataInitializer, IRoomUpdate roomUpdate)
         {
             _mainHotelMenu = mainHotelMenu;
             _dataInitializer = dataInitializer;

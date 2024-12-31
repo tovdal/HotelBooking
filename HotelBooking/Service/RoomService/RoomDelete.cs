@@ -2,7 +2,7 @@
 
 namespace HotelBooking.Service.RoomService
 {
-    public class RoomDelete
+    public class RoomDelete : IRoomDelete
     {
         private readonly ApplicationDbContext _dbContext;
         public RoomDelete(ApplicationDbContext dbContext)

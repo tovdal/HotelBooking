@@ -3,7 +3,7 @@ using HotelBooking.Models;
 
 namespace HotelBooking.Service.RoomService
 {
-    public class RoomRead
+    public class RoomRead : IRoomRead
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -40,12 +40,6 @@ namespace HotelBooking.Service.RoomService
                     || b.CheckInDate >= checkOutDate))
                 .OrderBy(r => r.RoomNumber);
         }
-        public IQueryable<Room> GetAllTakenRooms()
-        {
-            return _dbContext.Rooms
-                .Where(r => r.IsAvailable)
-                .OrderBy(r => r.RoomNumber);
-        }
         public IQueryable<Room> GetRoomDetails(int id)
         {
             return _dbContext.Rooms
@@ -56,11 +50,6 @@ namespace HotelBooking.Service.RoomService
             return _dbContext.Rooms
                 .Where(r => r.IsRoomDeleted)
                 .OrderBy(r => r.RoomNumber);
-        }
-        public bool GetRoomsIsDeleted()
-        {
-            return _dbContext.Rooms
-                .Any(r => r.IsRoomDeleted);
         }
         public Room GetRoomByRoomNumber(int roomNumber)
         {

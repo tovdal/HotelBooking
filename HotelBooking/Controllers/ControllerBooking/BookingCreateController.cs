@@ -11,12 +11,12 @@ namespace HotelBooking.Controllers.ControllerBooking;
 public class BookingCreateController : IBookingCreateController
 {
     private readonly IBookingCreate _bookingCreate;
-    private readonly RoomRead _roomRead;
+    private readonly IRoomRead _roomRead;
     private readonly ICustomerRead _customerRead;
-    private readonly RoomUpdate _roomUpdate;
+    private readonly IRoomUpdate _roomUpdate;
 
     public BookingCreateController(IBookingCreate bookingCreate,
-        RoomRead roomRead, ICustomerRead customerRead, RoomUpdate roomUpdate)
+        IRoomRead roomRead, ICustomerRead customerRead, IRoomUpdate roomUpdate)
     {
         _bookingCreate = bookingCreate;
         _roomRead = roomRead;

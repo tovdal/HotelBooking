@@ -8,11 +8,11 @@ namespace HotelBooking.Controllers.ControllerRooms
 {
     public class RoomDeleteController : IRoomDeleteController
     {
-        private readonly RoomRead _roomRead;
-        private readonly RoomUpdate _roomUpdate;
-        private readonly RoomDelete _roomDelete;
-        public RoomDeleteController(RoomRead roomRead, RoomUpdate roomUpdate,
-            RoomDelete roomDelete)
+        private readonly IRoomRead _roomRead;
+        private readonly IRoomUpdate _roomUpdate;
+        private readonly IRoomDelete _roomDelete;
+        public RoomDeleteController(IRoomRead roomRead, IRoomUpdate roomUpdate,
+            IRoomDelete roomDelete)
         {
             _roomRead = roomRead;
             _roomUpdate = roomUpdate;

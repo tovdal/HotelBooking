@@ -5,8 +5,8 @@ namespace HotelBooking.Utilities.Display.DisplayInformation
 {
     public static class DisplayRoomAvailability
     {
-        public static void PrintAvailableRooms(RoomRead _roomRead,
-            RoomUpdate _roomUpdate, DateTime checkInDate, DateTime checkOutDate)
+        public static void PrintAvailableRooms(IRoomRead _roomRead,
+            IRoomUpdate _roomUpdate, DateTime checkInDate, DateTime checkOutDate)
         {
             Console.Clear();
             _roomUpdate.UpdateRoomAndBookingAvailability();
