@@ -1,9 +1,10 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using HotelBooking.Service.BookingService.Interfaces;
 
 namespace HotelBooking.Service.BookingService
 {
-    public class BookingUpdate
+    public class BookingUpdate : IBookingUpdate
     {
         private readonly ApplicationDbContext _dbContext;
 

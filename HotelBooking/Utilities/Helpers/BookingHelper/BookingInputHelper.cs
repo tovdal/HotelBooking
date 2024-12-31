@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
+using HotelBooking.Service.BookingService.Interfaces;
 using Spectre.Console;
 
 namespace HotelBooking.Utilities.Helpers.BookingHelper
@@ -49,7 +50,7 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
 
         public static Booking PromptCustomerDetails(int customerId,
             DateTime selectedCheckInDate, DateTime selectedCheckOutDate,
-            BookingCreate bookingCreate, decimal totalBookingPrice)
+            IBookingCreate bookingCreate, decimal totalBookingPrice)
         {
             return new Booking
             {

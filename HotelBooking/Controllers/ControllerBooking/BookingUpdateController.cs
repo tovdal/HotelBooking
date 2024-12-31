@@ -1,6 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
-using HotelBooking.Models;
-using HotelBooking.Service.BookingService;
+using HotelBooking.Service.BookingService.Interfaces;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers;
@@ -12,12 +11,12 @@ namespace HotelBooking.Controllers.ControllerBooking;
 
 public class BookingUpdateController : IBookingUpdateController
 {
-    private readonly BookingRead _bookingRead;
-    private readonly BookingUpdate _bookingUpdate;
+    private readonly IBookingRead _bookingRead;
+    private readonly IBookingUpdate _bookingUpdate;
     private readonly RoomRead _roomRead;
 
     public BookingUpdateController
-        (BookingRead bookingRead, BookingUpdate bookingUpdate,
+        (IBookingRead bookingRead, IBookingUpdate bookingUpdate,
         RoomRead roomRead)
     {
         _bookingRead = bookingRead;
@@ -58,7 +57,7 @@ public class BookingUpdateController : IBookingUpdateController
 
             var updatedBooking = BookingInputHelper.PromptBookingDetails();
 
-            if (!ValidatorBooking.AreRoomsAvailable(_roomRead, 
+            if (!ValidatorBooking.AreRoomsAvailable(_roomRead,
                 updatedBooking.CheckInDate, updatedBooking.CheckOutDate,
                 bookingToUpdate.Rooms))
             {

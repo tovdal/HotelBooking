@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Service.BookingService;
+using HotelBooking.Service.BookingService.Interfaces;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using Spectre.Console;
@@ -7,7 +8,7 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
 {
     public class BookingInputRoomHelper
     {
-        public static void PromptBookRooms(BookingCreate _bookingCreate,
+        public static void PromptBookRooms(IBookingCreate _bookingCreate,
             RoomRead _roomRead, DateTime checkInDate,
             DateTime checkOutDate, RoomUpdate _roomUpdate)
         {

@@ -19,6 +19,7 @@ using HotelBooking.Menu.Actions;
 using HotelBooking.Menu.StartupMainmenu;
 using HotelBooking.Menu.Submenus;
 using HotelBooking.Service.BookingService;
+using HotelBooking.Service.BookingService.Interfaces;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Service.RoomService;
@@ -89,10 +90,10 @@ namespace HotelBooking.Config
             builder.RegisterType<InvoiceReadController>().As<IInvoiceReadController>();
             builder.RegisterType<InvoiceUpdateController>().As<IInvoiceUpdateController>();
 
-            builder.RegisterType<BookingCreate>().AsSelf();
-            builder.RegisterType<BookingRead>().AsSelf();
-            builder.RegisterType<BookingUpdate>().AsSelf();
-            builder.RegisterType<BookingDelete>().AsSelf();
+            builder.RegisterType<BookingCreate>().As<IBookingCreate>();
+            builder.RegisterType<BookingRead>().As<IBookingRead>();
+            builder.RegisterType<BookingUpdate>().As<IBookingUpdate>();
+            builder.RegisterType<BookingDelete>().As<IBookingDelete>();
 
             builder.RegisterType<RoomCreate>().AsSelf();
             builder.RegisterType<RoomRead>().AsSelf();

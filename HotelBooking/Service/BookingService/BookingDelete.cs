@@ -1,10 +1,11 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using HotelBooking.Service.BookingService.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Service.BookingService
 {
-    public class BookingDelete
+    public class BookingDelete : IBookingDelete
     {
         private readonly ApplicationDbContext _dbContext;
         public BookingDelete(ApplicationDbContext dbContext)

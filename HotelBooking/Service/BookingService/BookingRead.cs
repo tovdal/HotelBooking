@@ -1,10 +1,11 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using HotelBooking.Service.BookingService.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Service.BookingService
 {
-    public class BookingRead
+    public class BookingRead : IBookingRead
     {
         private readonly ApplicationDbContext _dbContext;
         public BookingRead(ApplicationDbContext dbContext)

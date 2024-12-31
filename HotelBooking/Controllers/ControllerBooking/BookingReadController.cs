@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
 using HotelBooking.Models;
-using HotelBooking.Service.BookingService;
+using HotelBooking.Service.BookingService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
 using HotelBooking.Utilities.Helpers;
@@ -11,8 +11,8 @@ namespace HotelBooking.Controllers.ControllerBooking;
 
 public class BookingReadController : IBookingReadController
 {
-    private readonly BookingRead _bookingRead;
-    public BookingReadController(BookingRead bookingRead)
+    private readonly IBookingRead _bookingRead;
+    public BookingReadController(IBookingRead bookingRead)
     {
         _bookingRead = bookingRead;
     }
@@ -69,7 +69,7 @@ public class BookingReadController : IBookingReadController
             }
 
             DisplayBookingInformation.PrintBookingAll
-                (new List<Booking> { booking }, 
+                (new List<Booking> { booking },
                 $"No booking found with Id: {bookingId}.");
             ConsoleMessagePrinter.DisplayMessage();
             isSearching = false;

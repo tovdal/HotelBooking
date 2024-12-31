@@ -1,5 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
-using HotelBooking.Service.BookingService;
+using HotelBooking.Service.BookingService.Interfaces;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
@@ -10,13 +10,13 @@ namespace HotelBooking.Controllers.ControllerBooking;
 
 public class BookingCreateController : IBookingCreateController
 {
-    private readonly BookingCreate _bookingCreate;
+    private readonly IBookingCreate _bookingCreate;
     private readonly RoomRead _roomRead;
     private readonly CustomerRead _customerRead;
     private readonly RoomUpdate _roomUpdate;
 
-    public BookingCreateController(BookingCreate bookingCreate,
-        RoomRead roomRead, CustomerRead customerRead,RoomUpdate roomUpdate)
+    public BookingCreateController(IBookingCreate bookingCreate,
+        RoomRead roomRead, CustomerRead customerRead, RoomUpdate roomUpdate)
     {
         _bookingCreate = bookingCreate;
         _roomRead = roomRead;
@@ -63,7 +63,7 @@ public class BookingCreateController : IBookingCreateController
             }
 
             BookingInputRoomHelper.PromptBookRooms
-                (_bookingCreate, _roomRead, selectedCheckInDate,selectedCheckOutDate, _roomUpdate);
+                (_bookingCreate, _roomRead, selectedCheckInDate, selectedCheckOutDate, _roomUpdate);
 
             var totalBookingPrice = _bookingCreate.TotalPriceOfBooking(selectedCheckInDate, selectedCheckOutDate);
 

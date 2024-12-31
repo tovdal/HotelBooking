@@ -1,12 +1,12 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
-using HotelBooking.Utilities.Helpers;
+using HotelBooking.Service.BookingService.Interfaces;
 using HotelBooking.Utilities.Helpers.RoomHelper;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Service.BookingService
 {
-    public class BookingCreate
+    public class BookingCreate : IBookingCreate
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly List<Room> _roomsToBook = new List<Room>();
