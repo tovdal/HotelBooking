@@ -17,7 +17,6 @@ namespace HotelBooking
             var connectionString = config.GetConnectionString("DefaultConnection");
             options.UseSqlServer(connectionString);
 
-
             var container = ContainerConfig.BuilderContainer();
 
             var app = container.Resolve<Application>();

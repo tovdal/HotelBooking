@@ -1,5 +1,4 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder.Interface;
-using HotelBooking.Models;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers;

@@ -1,5 +1,4 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.RoomUpdateFolder.Interface;
-using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers;
@@ -13,7 +12,7 @@ public class RoomUpdateRestore : IRoomUpdateRestore
     private readonly RoomUpdate _roomUpdate;
     private readonly RoomRead _roomRead;
 
-    public RoomUpdateRestore(RoomUpdate roomUpdate,RoomRead roomRead)
+    public RoomUpdateRestore(RoomUpdate roomUpdate, RoomRead roomRead)
     {
         _roomUpdate = roomUpdate;
         _roomRead = roomRead;

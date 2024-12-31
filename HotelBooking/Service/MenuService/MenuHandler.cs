@@ -18,7 +18,7 @@ namespace HotelBooking.Service.MenuService
             _menuNavigator.Navigate(menuItems, selectedIndex =>
             {
 
-                if (selectedIndex == menuItems.Count - 1)  // Exit option (last item in menu)
+                if (selectedIndex == menuItems.Count - 1)
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;

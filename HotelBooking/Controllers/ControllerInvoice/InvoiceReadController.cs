@@ -1,5 +1,4 @@
 ﻿using HotelBooking.Controllers.ControllerInvoice.Interfaces;
-using HotelBooking.Models;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
