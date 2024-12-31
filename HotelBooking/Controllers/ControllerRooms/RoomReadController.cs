@@ -39,6 +39,7 @@ public class RoomReadController : IRoomReadController
         bool isSearching = true;
         while (isSearching)
         {
+            Console.Clear();
             var rooms = _roomRead.GetAllActiveRooms().ToList();
             DisplayRoomInformation.PrintRoomRoomNumberAndID
             (rooms, "There are no rooms. . (Press enter to return to menu)");
