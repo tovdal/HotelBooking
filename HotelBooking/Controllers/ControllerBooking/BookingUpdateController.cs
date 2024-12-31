@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
+using HotelBooking.Models;
 using HotelBooking.Service.BookingService.Interfaces;
 using HotelBooking.Service.RoomService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
@@ -51,9 +52,11 @@ public class BookingUpdateController : IBookingUpdateController
             {
                 continue;
             }
-
-            BookingInputAddOrRemoveRooms.PromptAddOrRemoveRooms
-                (bookingToUpdate, _roomRead);
+            if (!ValidatorBooking.IsBookingDeleted(bookingToUpdate, bookingId))
+            {
+                isRunning = false;
+                return;
+            }
 
             var updatedBooking = BookingInputHelper.PromptBookingDetails();
 
@@ -65,6 +68,8 @@ public class BookingUpdateController : IBookingUpdateController
                    ("[bold red]Update canceled due to room availability conflict.[/]");
                 break;
             }
+
+            DisplayBookingInformation.DisplayBookingDetailsOnly(updatedBooking);
             bool confirm = AnsiConsole.Confirm
                    ("\n[bold yellow]Are all details correct?[/]");
             if (confirm)
