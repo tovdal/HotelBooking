@@ -24,7 +24,7 @@ namespace HotelBooking.Menu.Submenus
                 "Create a new Customer",
                 "Show all customers",
                 "Show all deleted customers",
-                "Show a Customer detailes",
+                "Show a Customer details",
                 "Update a Customer",
                 "Delete a Customer",
                 "Take back a deleted Customer",

@@ -26,7 +26,7 @@ public class BookingsMenu : IMainMenuAction
             "Create a new Booking",
             "Show all Bookings",
             "Show all deleted Bookings",
-            "Show a Booking detailes",
+            "Show a Booking details",
             "Update a Booking",
             "Delete a Booking",
             "Back to main menu"

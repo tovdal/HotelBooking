@@ -54,27 +54,27 @@ namespace HotelBooking.Data.Seeders
                     {
                         FirstName = "Chris",
                         LastName = "Bäck",
-                        Email = "Chris.Bäck@live.com",
+                        Email = "chris.bäck@live.com",
                         PhoneNumber = "0734567890",
-                        AddressId = addresses[0].Id,
+                        Address = addresses[0],
                         IsCustomerDeleted = false
                     },
                     new Customer
                     {
                         FirstName = "Jennifer",
                         LastName = "Larsson",
-                        Email = "jennifer.Larsson@yahoo.com",
+                        Email = "jennifer.larsson@yahoo.com",
                         PhoneNumber = "0726543210",
-                        AddressId = addresses[1].Id,
+                        Address = addresses[1],
                         IsCustomerDeleted = false
                     },
                     new Customer
                     {
                         FirstName = "Wilma",
                         LastName = "Johnson",
-                        Email = "Wilma.johnson@outlook.com",
+                        Email = "wilma.johnson@outlook.com",
                         PhoneNumber = "0701234567",
-                        AddressId = addresses[2].Id,
+                        Address = addresses[2],
                         IsCustomerDeleted = false
                     },
                     new Customer
@@ -83,16 +83,16 @@ namespace HotelBooking.Data.Seeders
                         LastName = "Ross",
                         Email = "bob.ross@gmail.com",
                         PhoneNumber = "0107654321",
-                        AddressId = addresses[3].Id,
+                        Address = addresses[3],
                         IsCustomerDeleted = false
                     },
                     new Customer
                     {
                         FirstName = "Raphael",
                         LastName = "Andersson",
-                        Email = "raphael.Andersson@hotmail.com",
+                        Email = "raphael.andersson@hotmail.com",
                         PhoneNumber = "0702345678",
-                        AddressId = addresses[4].Id,
+                        Address = addresses[4],
                         IsCustomerDeleted = false
                     }
                 };

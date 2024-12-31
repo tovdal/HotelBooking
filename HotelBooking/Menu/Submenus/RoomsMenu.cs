@@ -25,7 +25,7 @@ namespace HotelBooking.Menu.Submenus
                 "Create a new Room",
                 "Show all Rooms",
                 "Show all deleted Rooms",
-                "Show a Room's detailes",
+                "Show a Room's details",
                 "Update a Room",
                 "Delete a Room",
                 "Take back a deleted Room",

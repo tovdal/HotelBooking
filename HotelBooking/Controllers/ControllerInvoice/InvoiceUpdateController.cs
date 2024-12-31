@@ -25,7 +25,7 @@ public class InvoiceUpdateController : IInvoiceUpdateController
             Console.Clear();
             var invoices = _invoiceRead.GetAllActiveInvoices().ToList();
             DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID
-                (invoices, "No invoices registered. " +
+                (invoices, "No invoices that are not paid. " +
                 "(Press enter to return to menu)");
 
             if (ListHelper.CheckIfListIsEmpty(invoices))
