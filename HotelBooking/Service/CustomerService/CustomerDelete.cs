@@ -1,8 +1,9 @@
 ﻿using HotelBooking.Data;
+using HotelBooking.Service.CustomerService.Interfaces;
 
 namespace HotelBooking.Service.CustomerService
 {
-    public class CustomerDelete
+    public class CustomerDelete : ICustomerDelete
     {
         private readonly ApplicationDbContext _dbContext;
         public CustomerDelete(ApplicationDbContext dbContext)

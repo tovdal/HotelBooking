@@ -1,5 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder.Interface;
-using HotelBooking.Service.CustomerService;
+using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
@@ -9,11 +9,11 @@ namespace HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder
 {
     public class CustomerUpdateRestore : ICustomerUpdateRestore
     {
-        private readonly CustomerUpdate _customerUpdate;
-        private readonly CustomerRead _customerRead;
+        private readonly ICustomerUpdate _customerUpdate;
+        private readonly ICustomerRead _customerRead;
 
-        public CustomerUpdateRestore(CustomerUpdate customerUpdate,
-            CustomerRead customerRead)
+        public CustomerUpdateRestore(ICustomerUpdate customerUpdate,
+            ICustomerRead customerRead)
         {
             _customerUpdate = customerUpdate;
             _customerRead = customerRead;

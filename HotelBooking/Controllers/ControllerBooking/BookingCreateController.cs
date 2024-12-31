@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
 using HotelBooking.Service.BookingService.Interfaces;
-using HotelBooking.Service.CustomerService;
+using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers.BookingHelper;
@@ -12,11 +12,11 @@ public class BookingCreateController : IBookingCreateController
 {
     private readonly IBookingCreate _bookingCreate;
     private readonly RoomRead _roomRead;
-    private readonly CustomerRead _customerRead;
+    private readonly ICustomerRead _customerRead;
     private readonly RoomUpdate _roomUpdate;
 
     public BookingCreateController(IBookingCreate bookingCreate,
-        RoomRead roomRead, CustomerRead customerRead, RoomUpdate roomUpdate)
+        RoomRead roomRead, ICustomerRead customerRead, RoomUpdate roomUpdate)
     {
         _bookingCreate = bookingCreate;
         _roomRead = roomRead;

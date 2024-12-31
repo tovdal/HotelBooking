@@ -1,19 +1,18 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
-using HotelBooking.Service.CustomerService;
-using HotelBooking.Utilities.Display.Message;
+using HotelBooking.Models;
+using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
+using HotelBooking.Utilities.Display.Message;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
-using HotelBooking.Models;
-using HotelBooking.Service.BookingService;
-using HotelBooking.Utilities.Helpers;
 
 namespace HotelBooking.Controllers.ControllerCustomers
 {
     public class CustomerReadController : ICustomerReadController
     {
-        private readonly CustomerRead _customerRead;
-        public CustomerReadController(CustomerRead customerRead)
+        private readonly ICustomerRead _customerRead;
+        public CustomerReadController(ICustomerRead customerRead)
         {
             _customerRead = customerRead;
         }
@@ -77,7 +76,7 @@ namespace HotelBooking.Controllers.ControllerCustomers
                 }
 
                 DisplayCustomerInformation.PrintCustomersAll
-                    (new List<Customer> { customer }, 
+                    (new List<Customer> { customer },
                     $"No customer found with ID number: {customerId}.");
 
                 ConsoleMessagePrinter.DisplayMessage();

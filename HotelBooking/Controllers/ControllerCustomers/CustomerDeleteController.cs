@@ -1,5 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
-using HotelBooking.Service.CustomerService;
+using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
@@ -8,12 +8,12 @@ namespace HotelBooking.Controllers.ControllerCustomers
 {
     public class CustomerDeleteController : ICustomerDeleteController
     {
-        private readonly CustomerRead _customerRead;
-        private readonly CustomerUpdate _customerUpdate;
-        private readonly CustomerDelete _customerDelete;
+        private readonly ICustomerRead _customerRead;
+        private readonly ICustomerUpdate _customerUpdate;
+        private readonly ICustomerDelete _customerDelete;
 
-        public CustomerDeleteController(CustomerRead customerRead,
-            CustomerUpdate customerUpdate, CustomerDelete customerDelete)
+        public CustomerDeleteController(ICustomerRead customerRead,
+            ICustomerUpdate customerUpdate, ICustomerDelete customerDelete)
         {
             _customerRead = customerRead;
             _customerUpdate = customerUpdate;

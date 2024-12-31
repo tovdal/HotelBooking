@@ -1,5 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.Interface;
-using HotelBooking.Service.CustomerService;
+using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers.CustomerHelper;
 using Spectre.Console;
@@ -8,8 +8,8 @@ namespace HotelBooking.Controllers.ControllerCustomers
 {
     public class CustomerCreateController : ICustomerCreaterController
     {
-        private readonly CustomerCreate _customerCreate;
-        public CustomerCreateController(CustomerCreate customerCreate)
+        private readonly ICustomerCreate _customerCreate;
+        public CustomerCreateController(ICustomerCreate customerCreate)
         {
             _customerCreate = customerCreate;
         }

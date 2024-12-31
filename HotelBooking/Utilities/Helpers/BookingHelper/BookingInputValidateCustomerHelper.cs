@@ -1,4 +1,4 @@
-﻿using HotelBooking.Service.CustomerService;
+﻿using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -6,7 +6,7 @@ namespace HotelBooking.Utilities.Helpers.BookingHelper
 {
     public class BookingInputValidateCustomerHelper
     {
-        public static int ValidateBookingCustomer(CustomerRead _customerRead)
+        public static int ValidateBookingCustomer(ICustomerRead _customerRead)
         {
             bool customerValid = false;
             int customerId = 0;

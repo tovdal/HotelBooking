@@ -1,5 +1,5 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder.Interface;
-using HotelBooking.Service.CustomerService;
+using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Helpers.CustomerHelper;
@@ -10,13 +10,13 @@ namespace HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder
 {
     public class CustomerUpdateCustomer : ICustomerUpdateCustomer
     {
-        private readonly CustomerUpdate _customerUpdate;
-        private readonly CustomerRead _customerRead;
-        private readonly CustomerDelete _customerDelete;
+        private readonly ICustomerUpdate _customerUpdate;
+        private readonly ICustomerRead _customerRead;
+        private readonly ICustomerDelete _customerDelete;
 
-        public CustomerUpdateCustomer(CustomerUpdate customerUpdate,
-            CustomerRead customerRead,
-            CustomerDelete customerDelete)
+        public CustomerUpdateCustomer(ICustomerUpdate customerUpdate,
+            ICustomerRead customerRead,
+            ICustomerDelete customerDelete)
         {
             _customerUpdate = customerUpdate;
             _customerRead = customerRead;
@@ -29,7 +29,7 @@ namespace HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder
             while (isRunning)
             {
                 Console.Clear();
-                var customers = _customerRead.GetAllCustomersAndAddress()
+                var customers = _customerRead.GetAllActiveCustomers()
                     .ToList();
                 DisplayCustomerInformation.PrintCustomersOnlyDetailes(customers,
                     "There are no customers registered. (Press enter to return to menu)");

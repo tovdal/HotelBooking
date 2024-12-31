@@ -21,6 +21,7 @@ using HotelBooking.Menu.Submenus;
 using HotelBooking.Service.BookingService;
 using HotelBooking.Service.BookingService.Interfaces;
 using HotelBooking.Service.CustomerService;
+using HotelBooking.Service.CustomerService.Interfaces;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.Menu;
@@ -100,10 +101,10 @@ namespace HotelBooking.Config
             builder.RegisterType<RoomUpdate>().AsSelf();
             builder.RegisterType<RoomDelete>().AsSelf();
 
-            builder.RegisterType<CustomerCreate>().AsSelf();
-            builder.RegisterType<CustomerRead>().AsSelf();
-            builder.RegisterType<CustomerUpdate>().AsSelf();
-            builder.RegisterType<CustomerDelete>().AsSelf();
+            builder.RegisterType<CustomerCreate>().As<ICustomerCreate>();
+            builder.RegisterType<CustomerRead>().As<ICustomerRead>();
+            builder.RegisterType<CustomerUpdate>().As<ICustomerUpdate>();
+            builder.RegisterType<CustomerDelete>().As<ICustomerDelete>();
 
             builder.RegisterType<InvoiceRead>().AsSelf();
             builder.RegisterType<InvoiceUpdate>().AsSelf();

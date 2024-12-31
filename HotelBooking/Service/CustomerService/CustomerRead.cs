@@ -1,9 +1,10 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using HotelBooking.Service.CustomerService.Interfaces;
 using Microsoft.EntityFrameworkCore;
 namespace HotelBooking.Service.CustomerService
 {
-    public class CustomerRead
+    public class CustomerRead : ICustomerRead
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -12,13 +13,6 @@ namespace HotelBooking.Service.CustomerService
             _dbContext = dbContext;
         }
         public IQueryable<Customer> GetAllActiveCustomers()
-        {
-            return _dbContext.Customers
-                .Include(c => c.Address)
-                .Where(c => !c.IsCustomerDeleted)
-                .OrderBy(c => c.Id);
-        }
-        public IQueryable<Customer> GetAllCustomersAndAddress()
         {
             return _dbContext.Customers
                 .Include(c => c.Address)
@@ -43,12 +37,6 @@ namespace HotelBooking.Service.CustomerService
             return _dbContext.Customers
                 .Include(c => c.Address)
                 .Where(g => g.Id == id);
-        }
-        public bool GetCustomersIsDeleted()
-        {
-            return _dbContext.Customers
-                .Include(c => c.Address)
-                .Any(c => c.IsCustomerDeleted);
         }
     }
 }

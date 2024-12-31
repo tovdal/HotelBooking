@@ -1,9 +1,10 @@
 ﻿using HotelBooking.Data;
 using HotelBooking.Models;
+using HotelBooking.Service.CustomerService.Interfaces;
 
 namespace HotelBooking.Service.CustomerService
 {
-    public class CustomerCreate
+    public class CustomerCreate : ICustomerCreate
     {
         private readonly ApplicationDbContext _dbContext;
 

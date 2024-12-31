@@ -1,5 +1,5 @@
 ﻿using HotelBooking.Models;
-using HotelBooking.Service.CustomerService;
+using HotelBooking.Service.CustomerService.Interfaces;
 using Spectre.Console;
 
 namespace HotelBooking.Utilities.Validators
@@ -23,7 +23,7 @@ namespace HotelBooking.Utilities.Validators
         }
 
         public static bool ValidateCustomerForUpdate(Customer customerToUpdate,
-               int customerId, CustomerDelete customerDelete)
+               int customerId, ICustomerDelete customerDelete)
         {
             if (customerToUpdate == null)
             {
