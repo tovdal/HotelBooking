@@ -3,7 +3,7 @@ using HotelBooking.Models;
 
 namespace HotelBooking.Service.InvoiceService
 {
-    public class InvoiceUpdate
+    public class InvoiceUpdate : IInvoiceUpdate
     {
         private readonly ApplicationDbContext _dbContext;
 

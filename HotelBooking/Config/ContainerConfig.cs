@@ -106,8 +106,8 @@ namespace HotelBooking.Config
             builder.RegisterType<CustomerUpdate>().As<ICustomerUpdate>();
             builder.RegisterType<CustomerDelete>().As<ICustomerDelete>();
 
-            builder.RegisterType<InvoiceRead>().AsSelf();
-            builder.RegisterType<InvoiceUpdate>().AsSelf();
+            builder.RegisterType<InvoiceRead>().As<IInvoiceRead>();
+            builder.RegisterType<InvoiceUpdate>().As<IInvoiceUpdate>();
 
             builder.RegisterType<MenuDisplay>().AsSelf();
 

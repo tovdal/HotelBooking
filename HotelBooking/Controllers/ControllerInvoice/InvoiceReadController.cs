@@ -9,8 +9,8 @@ namespace HotelBooking.Controllers.ControllerInvoice
 {
     public class InvoiceReadController : IInvoiceReadController
     {
-        private readonly InvoiceRead _invoiceRead;
-        public InvoiceReadController(InvoiceRead invoiceRead)
+        private readonly IInvoiceRead _invoiceRead;
+        public InvoiceReadController(IInvoiceRead invoiceRead)
         {
             _invoiceRead = invoiceRead;
         }
