@@ -1,7 +1,9 @@
 ﻿using HotelBooking.Controllers.ControllerBooking.Interface;
+using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Helpers.BookingHelper;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
@@ -34,6 +36,11 @@ public class BookingUpdateController : IBookingUpdateController
                 (bookings, "There are no active bookings. " +
                 "(Press enter to return to menu)");
 
+            if (ListHelper.CheckIfListIsEmpty(bookings))
+            {
+                isRunning = false;
+                return;
+            }
             if (!ValidatorBooking.TryGetBookingId(out int bookingId))
             {
                 isRunning = false;

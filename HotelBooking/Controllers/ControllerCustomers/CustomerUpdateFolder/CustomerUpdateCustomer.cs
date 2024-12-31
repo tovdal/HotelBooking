@@ -1,6 +1,7 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder.Interface;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.DisplayInformation;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Helpers.CustomerHelper;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
@@ -33,6 +34,11 @@ namespace HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder
                 DisplayCustomerInformation.PrintCustomersOnlyDetailes(customers,
                     "There are no customers registered. (Press enter to return to menu)");
 
+                if(ListHelper.CheckIfListIsEmpty(customers))
+                {
+                    isRunning = false;
+                    return;
+                }
                 if (!ValidatorCustomer.TryGetCustomerId(out int customerId))
                 {
                     isRunning = false;

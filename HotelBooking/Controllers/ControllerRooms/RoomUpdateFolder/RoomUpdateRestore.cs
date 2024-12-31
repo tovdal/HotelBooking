@@ -1,6 +1,8 @@
 ﻿using HotelBooking.Controllers.ControllerRooms.RoomUpdateFolder.Interface;
+using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -26,6 +28,11 @@ public class RoomUpdateRestore : IRoomUpdateRestore
             DisplayRoomInformation.PrintRoomOnlyDetails
                 (deletedRooms, "There are no deleted rooms. (Press enter to return to menu)");
 
+            if (ListHelper.CheckIfListIsEmpty(deletedRooms))
+            {
+                isRunning = false;
+                return;
+            }
             if (!ValidatorRoom.ValidateDeletedRooms(deletedRooms))
             {
                 isRunning = false;

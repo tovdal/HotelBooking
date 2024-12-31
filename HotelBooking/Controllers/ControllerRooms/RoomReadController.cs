@@ -3,6 +3,7 @@ using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -38,10 +39,15 @@ public class RoomReadController : IRoomReadController
         bool isSearching = true;
         while (isSearching)
         {
-            var rooms = _roomRead.GetAllActiveRooms();
+            var rooms = _roomRead.GetAllActiveRooms().ToList();
             DisplayRoomInformation.PrintRoomRoomNumberAndID
-            (rooms, "There are no rooms.");
+            (rooms, "There are no rooms. . (Press enter to return to menu)");
 
+            if (ListHelper.CheckIfListIsEmpty(rooms))
+            {
+                isSearching = false;
+                return;
+            }
             if (!ValidatorRoom.TryGetRoomId(out int roomId))
             {
                 continue;

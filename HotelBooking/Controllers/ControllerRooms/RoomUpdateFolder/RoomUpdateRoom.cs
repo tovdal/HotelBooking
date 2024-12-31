@@ -2,6 +2,7 @@
 using HotelBooking.Models;
 using HotelBooking.Service.RoomService;
 using HotelBooking.Utilities.Display.DisplayInformation;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Helpers.RoomHelper;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
@@ -35,6 +36,11 @@ public class RoomUpdateRoom : IRoomUpdateRoom
             DisplayRoomInformation.PrintRoomOnlyDetails
                 (rooms, "There are no active rooms. (Press enter to return to menu)");
 
+            if (ListHelper.CheckIfListIsEmpty(rooms))
+            {
+                isRunning = false;
+                return;
+            }
             if (!ValidatorRoom.TryGetRoomId(out int roomId))
             {
                 isRunning = false;

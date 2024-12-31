@@ -3,6 +3,7 @@ using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -38,13 +39,22 @@ public class BookingReadController : IBookingReadController
             Console.Clear();
             var bookings = _bookingRead.GetAllActiveBookings().ToList();
             DisplayBookingInformation.PrintBookingIdAndCustomerID
-                (bookings, "There are no bookings registered");
+                (bookings, "There are no bookings registered. " +
+                "(Press enter to return to menu)");
 
+            if (ListHelper.CheckIfListIsEmpty(bookings))
+            {
+                isSearching = false;
+                return;
+            }
             if (!ValidatorBooking.TryGetBookingId(out int bookingId))
             {
-                continue;
+                isSearching = false;
+                return;
             }
+
             var booking = _bookingRead.GetBookingDetails(bookingId).FirstOrDefault();
+
             if (booking == null)
             {
                 AnsiConsole.MarkupLine($"[bold red]No booking found with ID number:" +

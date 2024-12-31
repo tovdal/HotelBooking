@@ -1,6 +1,8 @@
 ﻿using HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder.Interface;
+using HotelBooking.Models;
 using HotelBooking.Service.CustomerService;
 using HotelBooking.Utilities.Display.DisplayInformation;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 
@@ -29,6 +31,11 @@ namespace HotelBooking.Controllers.ControllerCustomers.CustomerUpdateFolder
                     (deletedCustomers, "There are no deleted customers. " +
                     "(Press enter to return to menu)");
 
+                if (ListHelper.CheckIfListIsEmpty(deletedCustomers))
+                {
+                    isRunning = false;
+                    return;
+                }
                 if (!ValidatorCustomer.ValidateDeletedCustomers(deletedCustomers))
                 {
                     isRunning = false;

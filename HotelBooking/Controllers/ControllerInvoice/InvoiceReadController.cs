@@ -3,6 +3,7 @@ using HotelBooking.Models;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Utilities.Display.DisplayInformation;
 using HotelBooking.Utilities.Display.Message;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
 
 namespace HotelBooking.Controllers.ControllerInvoice
@@ -49,11 +50,17 @@ namespace HotelBooking.Controllers.ControllerInvoice
             while (isSearching)
             {
                 Console.Clear();
-                var invoices = _invoiceRead.GetAllActiveInvoices();
+                var invoices = _invoiceRead.GetAllActiveInvoices().ToList();
 
                 DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID
-                    (invoices, "No invoices registered");
+                    (invoices, "No invoices registered ." +
+                    " (Press enter to return to menu)");
 
+                if (ListHelper.CheckIfListIsEmpty(invoices))
+                {
+                    isSearching = false;
+                    return;
+                }
                 if (!ValidatorBooking.TryGetBookingId(out int invoiceId))
                 {
                     continue;

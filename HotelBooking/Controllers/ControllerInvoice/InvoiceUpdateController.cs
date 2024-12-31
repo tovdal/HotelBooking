@@ -1,6 +1,8 @@
 ﻿using HotelBooking.Controllers.ControllerInvoice.Interfaces;
+using HotelBooking.Models;
 using HotelBooking.Service.InvoiceService;
 using HotelBooking.Utilities.Display.DisplayInformation;
+using HotelBooking.Utilities.Helpers;
 using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 namespace HotelBooking.Controllers.ControllerInvoice;
@@ -21,26 +23,32 @@ public class InvoiceUpdateController : IInvoiceUpdateController
         while (isRunning)
         {
             Console.Clear();
-            var invoices = _invoiceRead.GetAllActiveInvoices();
+            var invoices = _invoiceRead.GetAllActiveInvoices().ToList();
             DisplayInvoiceInformation.PrintInvoiceIdAndCustomerID
-                (invoices, "No invoices registered. (Press enter to return to menu)");
+                (invoices, "No invoices registered. " +
+                "(Press enter to return to menu)");
 
+            if (ListHelper.CheckIfListIsEmpty(invoices))
+            {
+                isRunning = false;
+                return;
+            }
             if (!ValidatorInvoice.TryGetInvoiceId(out int invoiceId))
             {
                 isRunning = false;
-                continue;
+                return;
             }
-
             var invoiceToPay = _invoiceUpdate.ReturnInvoiceWithId(invoiceId);
             if (!ValidatorInvoice.ValidateInvoiceForUpdate(invoiceToPay, invoiceId))
             {
                 continue;
             }
 
-            var invoice = _invoiceRead.GetInvoiceDetails(invoiceId);
+            var invoice = _invoiceRead.GetInvoiceDetails(invoiceId).FirstOrDefault();
 
             DisplayInvoiceInformation.PrintInvoiceAll
-                (invoice, $"No invoices found with Id: {invoiceId}.");
+                (new List<Invoice> { invoice }, 
+                $"No invoices found with Id: {invoiceId}.");
 
             bool confirm = AnsiConsole.Confirm
                 ("\n[bold yellow]Are all details correct?[/]");

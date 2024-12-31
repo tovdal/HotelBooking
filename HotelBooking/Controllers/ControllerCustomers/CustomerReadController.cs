@@ -6,6 +6,7 @@ using HotelBooking.Utilities.Validators;
 using Spectre.Console;
 using HotelBooking.Models;
 using HotelBooking.Service.BookingService;
+using HotelBooking.Utilities.Helpers;
 
 namespace HotelBooking.Controllers.ControllerCustomers
 {
@@ -42,19 +43,26 @@ namespace HotelBooking.Controllers.ControllerCustomers
             while (isSearching)
             {
                 Console.Clear();
-                var customers = _customerRead.GetAllActiveCustomers();
+                var customers = _customerRead.GetAllActiveCustomers().ToList();
 
                 AnsiConsole.MarkupLine($"[green]Show a customer's details[/]");
 
                 DisplayCustomerInformation.PrintCustomersNamesAndID
-                    (customers, "There are no customers.");
+                    (customers, "There are no customers." +
+                    "(Press enter to return to menu)");
 
+                if (ListHelper.CheckIfListIsEmpty(customers))
+                {
+                    isSearching = false;
+                    return;
+                }
                 if (!ValidatorCustomer.TryGetCustomerId(out int customerId))
                 {
                     continue;
                 }
 
                 var customer = _customerRead.GetCustomerDetailes(customerId).FirstOrDefault();
+
                 if (customer == null)
                 {
                     AnsiConsole.MarkupLine
@@ -62,7 +70,6 @@ namespace HotelBooking.Controllers.ControllerCustomers
                     Console.ReadKey();
                     continue;
                 }
-
                 if (!ValidatorCustomer.IsCustomerDeleted(customer, customerId))
                 {
                     isSearching = false;
