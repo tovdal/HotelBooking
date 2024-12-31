@@ -23,6 +23,7 @@ namespace HotelBooking.Service.InvoiceService
                 .Include(i => i.Booking)
                 .Include(i => i.Booking.Rooms)
                 .Include(i => i.Booking.Customer)
+                .Where(i => !i.IsPaid)
                 .OrderBy(i => i.Id)
                 .ToList();
         }
