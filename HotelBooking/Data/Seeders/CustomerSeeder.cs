@@ -90,7 +90,7 @@ namespace HotelBooking.Data.Seeders
                     {
                         FirstName = "Raphael",
                         LastName = "Andersson",
-                        Email = "raphael.andersson@hotmail.com",
+                        Email = "raphael.anderson@hotmail.com",
                         PhoneNumber = "0702345678",
                         Address = addresses[4],
                         IsCustomerDeleted = false
