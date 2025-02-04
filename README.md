@@ -46,11 +46,10 @@ The project is organized into several key components:
 
 ## Installation
 1. Clone the repository:
-   
 2. Open the solution in Visual Studio 2022.
-3. Set up the database using SQL Server Management Studio:
-   - Create a new database for the application.
-   - Run the provided SQL scripts to set up the necessary tables and initial data.
+
+## Database Setup
+The application uses a code-first approach for the database. When you run the application for the first time, the database will be created automatically.
 
 ## Running the Application
 1. Build the solution in Visual Studio.
@@ -72,4 +71,9 @@ This project is licensed under the MIT License.
 ## Acknowledgements
 - [Spectre.Console](https://spectreconsole.net/) for the console UI library.
 - [Autofac](https://autofac.org/) for the dependency injection framework.
+
+
+
+   
+
 
