@@ -3,8 +3,6 @@
 ## Overview
 The Hotel Booking Application is a .NET 9-based system designed to manage hotel room bookings. It provides functionalities to view, add, update, and delete room, booking, customer, and invoice information. The application is built using C# 13.0 and follows a modular architecture with clear separation of concerns.
 
-![Hotel Booking Application](./images/hotel-booking-app.png)
-
 ## Features
 - **Room Management**: View all rooms, view deleted rooms, and view details of a specific room.
 - **Booking Management**: View all active bookings, view deleted bookings, and view details of a specific booking.
