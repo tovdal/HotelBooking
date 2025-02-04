@@ -1,42 +1,26 @@
 # Hotel Booking Application
 
 ## Overview
-The Hotel Booking Application is a .NET 9-based system designed to manage hotel room bookings. It provides functionalities to view, add, update, and delete room and booking information. The application is built using C# 13.0 and follows a modular architecture with clear separation of concerns.
+The Hotel Booking Application is a .NET 9-based system designed to manage hotel room bookings. It provides functionalities to view, add, update, and delete room, booking, customer, and invoice information. The application is built using C# 13.0 and follows a modular architecture with clear separation of concerns.
+
+![Hotel Booking Application](./images/hotel-booking-app.png)
 
 ## Features
 - **Room Management**: View all rooms, view deleted rooms, and view details of a specific room.
 - **Booking Management**: View all active bookings, view deleted bookings, and view details of a specific booking.
-- **Validation**: Input validation for room and booking details.
+- **Customer Management**: View all customers, add new customers, and update customer details.
+- **Invoice Management**: View all invoices, generate new invoices, and update invoice details.
+- **Validation**: Input validation for room, booking, customer, and invoice details.
 - **Display**: User-friendly display of information using Spectre.Console.
 
-## Project Structure
-The project is organized into several key components:
+## Architecture
+The application is organized into several key components:
 
 - **Controllers**: Handle the business logic and user interactions.
-  - `RoomReadController`: Manages room-related operations.
-  - `BookingReadController`: Manages booking-related operations.
-
 - **Interfaces**: Define the contracts for services and controllers.
-  - `IRoomRead`: Interface for room data operations.
-  - `IBookingRead`: Interface for booking data operations.
-  - `IRoomReadController`: Interface for room controller operations.
-  - `IBookingReadController`: Interface for booking controller operations.
-
 - **Models**: Represent the data structures used in the application.
-  - `Room`: Represents a hotel room.
-  - `Booking`: Represents a booking.
-
 - **Services**: Provide data access and business logic.
-  - `RoomService`: Handles room data operations.
-  - `BookingService`: Handles booking data operations.
-
 - **Utilities**: Helper classes for validation, display, and other common tasks.
-  - `DisplayRoomInformation`: Utility for displaying room information.
-  - `DisplayBookingInformation`: Utility for displaying booking information.
-  - `ConsoleMessagePrinter`: Utility for printing messages to the console.
-  - `ListHelper`: Utility for list operations.
-  - `ValidatorRoom`: Utility for room validation.
-  - `ValidatorBooking`: Utility for booking validation.
 
 ## Prerequisites
 - .NET 9 SDK
@@ -56,11 +40,11 @@ The application uses a code-first approach for the database. When you run the ap
 2. Run the application from Visual Studio.
 
 ## Usage
-- Use the console interface to navigate through the options for managing rooms and bookings.
-- Follow the prompts to view, add, update, or delete room and booking information.
+- Use the console interface to navigate through the options for managing rooms, bookings, customers, and invoices.
+- Follow the prompts to view, add, update, or delete room, booking, customer, and invoice information.
 
 ## Dependency Injection
-The application uses Autofac for dependency injection. The dependencies are configured in the `Startup` class.
+The application uses Autofac for dependency injection. The dependencies are configured in the `Program` class or the main entry point of the application.
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
@@ -72,8 +56,5 @@ This project is licensed under the MIT License.
 - [Spectre.Console](https://spectreconsole.net/) for the console UI library.
 - [Autofac](https://autofac.org/) for the dependency injection framework.
 
-
-
-   
 
 
